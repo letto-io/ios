@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		855E4C171C7B55480072B837 /* RecoverPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855E4C161C7B55480072B837 /* RecoverPasswordViewController.swift */; };
 		85DD1E6B1C7B268000F2C64D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DD1E6A1C7B268000F2C64D /* AppDelegate.swift */; };
 		85DD1E6D1C7B268000F2C64D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DD1E6C1C7B268000F2C64D /* ViewController.swift */; };
 		85DD1E701C7B268000F2C64D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85DD1E6E1C7B268000F2C64D /* Main.storyboard */; };
@@ -14,6 +15,10 @@
 		85DD1E751C7B268000F2C64D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85DD1E731C7B268000F2C64D /* LaunchScreen.storyboard */; };
 		85DD1E801C7B268000F2C64D /* MirageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DD1E7F1C7B268000F2C64D /* MirageTests.swift */; };
 		85DD1E8B1C7B268000F2C64D /* MirageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DD1E8A1C7B268000F2C64D /* MirageUITests.swift */; };
+		85DD1E991C7B482200F2C64D /* models in Resources */ = {isa = PBXBuildFile; fileRef = 85DD1E981C7B482200F2C64D /* models */; };
+		85DD1E9B1C7B482800F2C64D /* viewcontrollers in Resources */ = {isa = PBXBuildFile; fileRef = 85DD1E9A1C7B482800F2C64D /* viewcontrollers */; };
+		85DD1EA11C7B48AD00F2C64D /* views in Resources */ = {isa = PBXBuildFile; fileRef = 85DD1EA01C7B48AD00F2C64D /* views */; };
+		85E9712F1C7DF2DB004E7513 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E9712E1C7DF2DB004E7513 /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		855E4C161C7B55480072B837 /* RecoverPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecoverPasswordViewController.swift; path = Mirage/viewcontrollers/RecoverPasswordViewController.swift; sourceTree = "<group>"; };
 		85DD1E671C7B268000F2C64D /* Mirage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mirage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85DD1E6A1C7B268000F2C64D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85DD1E6C1C7B268000F2C64D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +53,10 @@
 		85DD1E861C7B268000F2C64D /* MirageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MirageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		85DD1E8A1C7B268000F2C64D /* MirageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirageUITests.swift; sourceTree = "<group>"; };
 		85DD1E8C1C7B268000F2C64D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85DD1E981C7B482200F2C64D /* models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = models; sourceTree = "<group>"; };
+		85DD1E9A1C7B482800F2C64D /* viewcontrollers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = viewcontrollers; sourceTree = "<group>"; };
+		85DD1EA01C7B48AD00F2C64D /* views */ = {isa = PBXFileReference; lastKnownFileType = folder; path = views; sourceTree = "<group>"; };
+		85E9712E1C7DF2DB004E7513 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = Mirage/viewcontrollers/RegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +87,8 @@
 		85DD1E5E1C7B267F00F2C64D = {
 			isa = PBXGroup;
 			children = (
+				85E9712E1C7DF2DB004E7513 /* RegisterViewController.swift */,
+				855E4C161C7B55480072B837 /* RecoverPasswordViewController.swift */,
 				85DD1E691C7B268000F2C64D /* Mirage */,
 				85DD1E7E1C7B268000F2C64D /* MirageTests */,
 				85DD1E891C7B268000F2C64D /* MirageUITests */,
@@ -97,6 +109,9 @@
 		85DD1E691C7B268000F2C64D /* Mirage */ = {
 			isa = PBXGroup;
 			children = (
+				85DD1EA01C7B48AD00F2C64D /* views */,
+				85DD1E9A1C7B482800F2C64D /* viewcontrollers */,
+				85DD1E981C7B482200F2C64D /* models */,
 				85DD1E6A1C7B268000F2C64D /* AppDelegate.swift */,
 				85DD1E6C1C7B268000F2C64D /* ViewController.swift */,
 				85DD1E6E1C7B268000F2C64D /* Main.storyboard */,
@@ -193,6 +208,7 @@
 				TargetAttributes = {
 					85DD1E661C7B267F00F2C64D = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 7BG9GK9Z62;
 					};
 					85DD1E7A1C7B268000F2C64D = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -230,7 +246,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				85DD1E751C7B268000F2C64D /* LaunchScreen.storyboard in Resources */,
+				85DD1E9B1C7B482800F2C64D /* viewcontrollers in Resources */,
 				85DD1E721C7B268000F2C64D /* Assets.xcassets in Resources */,
+				85DD1E991C7B482200F2C64D /* models in Resources */,
+				85DD1EA11C7B48AD00F2C64D /* views in Resources */,
 				85DD1E701C7B268000F2C64D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,8 +275,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				855E4C171C7B55480072B837 /* RecoverPasswordViewController.swift in Sources */,
 				85DD1E6D1C7B268000F2C64D /* ViewController.swift in Sources */,
 				85DD1E6B1C7B268000F2C64D /* AppDelegate.swift in Sources */,
+				85E9712F1C7DF2DB004E7513 /* RegisterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,10 +418,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Mirage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.sienaidea.Mirage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -408,10 +432,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Mirage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.sienaidea.Mirage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -482,6 +509,7 @@
 				85DD1E911C7B268000F2C64D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		85DD1E921C7B268000F2C64D /* Build configuration list for PBXNativeTarget "MirageTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +518,7 @@
 				85DD1E941C7B268000F2C64D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		85DD1E951C7B268000F2C64D /* Build configuration list for PBXNativeTarget "MirageUITests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +527,7 @@
 				85DD1E971C7B268000F2C64D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
