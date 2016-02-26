@@ -22,7 +22,7 @@
             </objects>
             <point key="canvasLocation" x="-214" y="485"/>
         </scene>
-        <!--Login-->
+        <!--Mirage-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Mirage" customModuleProvider="target" sceneMemberID="viewController">
@@ -51,6 +51,7 @@
                                 <state key="normal" title="LOGIN"/>
                                 <connections>
                                     <action selector="login" destination="BYZ-38-t0r" eventType="touchUpInside" id="bUW-gq-vUe"/>
+                                    <segue destination="ygp-XI-xC8" kind="show" id="mHl-rR-9Am"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNM-3h-biU">
@@ -74,11 +75,18 @@
                                     <segue destination="PUp-W7-nKD" kind="show" id="Tq1-uG-I38"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8k2-7i-TWz">
+                                <rect key="frame" x="132" y="224" width="57" height="30"/>
+                                <state key="normal" title="Sign out"/>
+                                <connections>
+                                    <action selector="signout" destination="BYZ-38-t0r" eventType="touchUpInside" id="mXN-N7-kJW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="Login" id="MEu-iP-PhS">
+                    <navigationItem key="navigationItem" title="Mirage" id="MEu-iP-PhS">
                         <barButtonItem key="backBarButtonItem" title="Login" id="Apq-0P-gMD"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -140,6 +148,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bVx-r9-D37" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="213" y="1184"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="QkE-lm-UId">
+            <objects>
+                <viewController id="ygp-XI-xC8" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EsF-zv-PwZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="FJD-pI-erw"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VjW-hF-yMV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V0w-DK-4Ar" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="655" y="-241"/>
         </scene>
         <!--Recover password-->
         <scene sceneID="J7M-Je-gM7">

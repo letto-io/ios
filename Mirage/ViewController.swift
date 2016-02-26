@@ -25,11 +25,6 @@ class ViewController: UIViewController {
 
     @IBAction func login() {
         
-        let session = NSURLSession.sharedSession()
-        let myUrl = NSURL(string: "http://rest-server-mirage.herokuapp.com/controller/login")
-        let request = NSMutableURLRequest(URL:myUrl!)
-        request.HTTPMethod = "POST"
-        
         // Compose a query string
         let email = userField.text
         let password = passwordField.text
@@ -38,60 +33,73 @@ class ViewController: UIViewController {
             return
         }
         
+        let JSONObject: [String : AnyObject] = [
+            "email" : email!,
+            "password" : password!,
+        ]
         
-        let postString = "email=\(email)&password=\(password)";
-        
-        
-        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding);
-        
-        let task = session.dataTaskWithRequest(request) {
-            data, response, error in
+        if NSJSONSerialization.isValidJSONObject(JSONObject) {
+            let request: NSMutableURLRequest = NSMutableURLRequest()
+            let url = "http://rest-server-mirage.herokuapp.com/controller/login"
             
-            if error != nil
-            {
-                print("error=\(error)")
-                return
-            }
+            let _: NSError?
             
-            // You can print out response object
-            print("response = \(response)")
-            
-            // Print out response body
-            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            print("responseString = \(responseString)")
-            
-            //Let’s convert response sent from a server side script to a NSDictionary object:
-            
-            var err: NSError?
+            request.URL = NSURL(string: url)
+            request.HTTPMethod = "POST"
+            request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(JSONObject, options:  NSJSONWritingOptions(rawValue:0))
             
             do {
-                let myJSON = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as? NSDictionary
-                
-                if (err != nil) {
-                    print("JSON Error \(err!.localizedDescription)")
+                let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+                    data, response, error in
+                    
+                    if error != nil {
+                        print("error=\(error)")
+                        return
+                    } else {
+                        if let httpResponse = response as? NSHTTPURLResponse, let fields = httpResponse.allHeaderFields as? [String : String] {
+                            let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(fields, forURL: response!.URL!)
+                            NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: response!.URL!, mainDocumentURL: nil)
+                            for cookie in cookies {
+                                var cookieProperties = [String: AnyObject]()
+                                cookieProperties[NSHTTPCookieName] = cookie.name
+                                cookieProperties[NSHTTPCookieValue] = cookie.value
+                                cookieProperties[NSHTTPCookieDomain] = cookie.domain
+                                cookieProperties[NSHTTPCookiePath] = cookie.path
+                                cookieProperties[NSHTTPCookieVersion] = NSNumber(integer: cookie.version)
+                                cookieProperties[NSHTTPCookieExpires] = NSDate().dateByAddingTimeInterval(31536000)
+                                
+                                //let newCookie = NSHTTPCookie(properties: cookieProperties)
+                                //NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(newCookie!)
+                                
+                                print("name: \(cookie.name) value: \(cookie.value)")
+                                print("name: \(cookie.domain) value: \(cookie.path)")
+                            }
+                        }
+                        print(response)
+                    }
                 }
-                
-                if let parseJSON = myJSON {
-                    // Now we can access value of First Name by its key
-                    let email = parseJSON["email"] as? String
-                    let password = parseJSON["password"] as? String
-                    print("firstNameValue: \(email)")
-                }
+                task.resume()
             } catch {
-                print(error)
+                
             }
-            
-            
-            
         }
-        
-        task.resume()
-        
-            }
+    }
 
     @IBAction func recoverPassword() {
         
         
+    }
+    @IBAction func signout() {
+        
+        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        let cookies = cookieStorage.cookies! as [NSHTTPCookie]
+        print("Cookies.count: \(cookies.count)")
+        for cookie in cookies {
+            print("name: \(cookie.name) value: \(cookie.value)")
+            NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie)
+        }
     }
 }
 
