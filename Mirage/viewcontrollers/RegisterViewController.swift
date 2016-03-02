@@ -42,11 +42,6 @@ class RegisterViewController: UIViewController {
             displayMyAlertMessage("Password do not match")
         }
         
-        
-        
-        
-        
-        
     }
     
     func displayMyAlertMessage(userMessage: String) {

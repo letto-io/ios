@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     @IBAction func login() {
         
         // Compose a query string
@@ -50,7 +50,6 @@ class ViewController: UIViewController {
             request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(JSONObject, options:  NSJSONWritingOptions(rawValue:0))
             
-            do {
                 let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
                     data, response, error in
                     
@@ -70,20 +69,37 @@ class ViewController: UIViewController {
                                 cookieProperties[NSHTTPCookieVersion] = NSNumber(integer: cookie.version)
                                 cookieProperties[NSHTTPCookieExpires] = NSDate().dateByAddingTimeInterval(31536000)
                                 
-                                //let newCookie = NSHTTPCookie(properties: cookieProperties)
-                                //NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(newCookie!)
-                                
                                 print("name: \(cookie.name) value: \(cookie.value)")
                                 print("name: \(cookie.domain) value: \(cookie.path)")
+                                
+                                if httpResponse.statusCode == 404 {
+                                    dispatch_async(dispatch_get_main_queue(), {
+                                        self.displayMyAlertMessage("Email não cadastrado")
+                                        
+                                    })
+                                }
+                                
+                                if httpResponse.statusCode == 401 {
+                                    dispatch_async(dispatch_get_main_queue(), {
+                                        self.displayMyAlertMessage("Email ou senha inválidos ")
+                                        
+                                    })
+                                }
+                                
+                                if httpResponse.statusCode == 200 {
+                                    let newCookie = NSHTTPCookie(properties: cookieProperties)
+                                    NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(newCookie!)
+                                    
+                                    //self.performSegueWithIdentifier("loggedView", sender: self)
+                                    self.dismissViewControllerAnimated(true, completion: nil)
+                                }
+                                
                             }
                         }
                         print(response)
                     }
                 }
                 task.resume()
-            } catch {
-                
-            }
         }
     }
 
@@ -101,5 +117,20 @@ class ViewController: UIViewController {
             NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie)
         }
     }
+    
+    
+    func displayMyAlertMessage(userMessage: String) {
+        
+        var myAlert = UIAlertController(title: "Alerta", message: userMessage, preferredStyle:
+            UIAlertControllerStyle.Alert)
+        
+        let okAction = UIAlertAction(title: "ok", style: UIAlertActionStyle.Destructive, handler: nil)
+        
+        myAlert.addAction(okAction)
+        
+        self.presentViewController(myAlert, animated: true, completion: nil)
+        
+    }
+    
 }
 
