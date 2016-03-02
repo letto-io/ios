@@ -22,8 +22,10 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
     
-    @IBAction func login() {
+    
+    @IBAction func loginButtonTapped() {
         
         // Compose a query string
         let email = userField.text
@@ -74,6 +76,7 @@ class ViewController: UIViewController {
                                 
                                 if httpResponse.statusCode == 404 {
                                     dispatch_async(dispatch_get_main_queue(), {
+                                        NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie)
                                         self.displayMyAlertMessage("Email não cadastrado")
                                         
                                     })
@@ -81,6 +84,7 @@ class ViewController: UIViewController {
                                 
                                 if httpResponse.statusCode == 401 {
                                     dispatch_async(dispatch_get_main_queue(), {
+                                        NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie)
                                         self.displayMyAlertMessage("Email ou senha inválidos ")
                                         
                                     })
@@ -90,7 +94,6 @@ class ViewController: UIViewController {
                                     let newCookie = NSHTTPCookie(properties: cookieProperties)
                                     NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(newCookie!)
                                     
-                                    //self.performSegueWithIdentifier("loggedView", sender: self)
                                     self.dismissViewControllerAnimated(true, completion: nil)
                                 }
                                 
@@ -103,20 +106,6 @@ class ViewController: UIViewController {
         }
     }
 
-    @IBAction func recoverPassword() {
-        
-        
-    }
-    @IBAction func signout() {
-        
-        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-        let cookies = cookieStorage.cookies! as [NSHTTPCookie]
-        print("Cookies.count: \(cookies.count)")
-        for cookie in cookies {
-            print("name: \(cookie.name) value: \(cookie.value)")
-            NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie)
-        }
-    }
     
     
     func displayMyAlertMessage(userMessage: String) {

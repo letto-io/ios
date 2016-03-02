@@ -25,11 +25,10 @@ class LoggedViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
         let cookies = cookieStorage.cookies! as [NSHTTPCookie]
-        
-        for cookie in cookies {
-            if cookie.value.isEmpty {
+                
+            if cookies.isEmpty {
                 self.performSegueWithIdentifier("loginView", sender: self)
-            }
+            
         }
     }
 

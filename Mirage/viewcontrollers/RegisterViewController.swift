@@ -36,11 +36,13 @@ class RegisterViewController: UIViewController {
             
             displayMyAlertMessage("All fields are required")
             return
+        } else if userPasword != repeatPassword {
+            displayMyAlertMessage("Password do not match")
+        } else {
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
         
-        if userPasword != repeatPassword {
-            displayMyAlertMessage("Password do not match")
-        }
+        
         
     }
     
@@ -58,4 +60,7 @@ class RegisterViewController: UIViewController {
     }
     
 
+    @IBAction func haveAccountButtonTapped(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }

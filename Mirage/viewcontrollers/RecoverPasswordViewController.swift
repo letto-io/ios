@@ -14,6 +14,15 @@ class RecoverPasswordViewController: UIViewController {
     
     
     
-    @IBAction func enviar(sender: AnyObject) {
+    @IBAction func sendButtonTapped(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
     }
+    
+    @IBAction func backButtonTapped(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+        
+    }
+    
 }
