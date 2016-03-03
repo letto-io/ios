@@ -41,17 +41,14 @@ class RegisterViewController: UIViewController {
         } else {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
-        
-        
-        
     }
     
     func displayMyAlertMessage(userMessage: String) {
         
-        var myAlert = UIAlertController(title: "Alert", message: userMessage, preferredStyle:
+        var myAlert = UIAlertController(title: "Message", message: userMessage, preferredStyle:
                 UIAlertControllerStyle.Alert)
         
-        let okAction = UIAlertAction(title: "ok", style: UIAlertActionStyle.Destructive, handler: nil)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: nil)
         
         myAlert.addAction(okAction)
         
@@ -62,5 +59,12 @@ class RegisterViewController: UIViewController {
 
     @IBAction func haveAccountButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        userEmailTextField.resignFirstResponder()
+        userPasswordTextField.resignFirstResponder()
+        repeatPasswordTextField.resignFirstResponder()
     }
 }

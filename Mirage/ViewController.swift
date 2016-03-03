@@ -77,7 +77,7 @@ class ViewController: UIViewController {
                                 if httpResponse.statusCode == 404 {
                                     dispatch_async(dispatch_get_main_queue(), {
                                         NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie)
-                                        self.displayMyAlertMessage("Email não cadastrado")
+                                        self.displayMyAlertMessage("Email not found")
                                         
                                     })
                                 }
@@ -85,7 +85,7 @@ class ViewController: UIViewController {
                                 if httpResponse.statusCode == 401 {
                                     dispatch_async(dispatch_get_main_queue(), {
                                         NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie)
-                                        self.displayMyAlertMessage("Email ou senha inválidos ")
+                                        self.displayMyAlertMessage("Invalid password")
                                         
                                     })
                                 }
@@ -110,14 +110,20 @@ class ViewController: UIViewController {
     
     func displayMyAlertMessage(userMessage: String) {
         
-        var myAlert = UIAlertController(title: "Alerta", message: userMessage, preferredStyle:
+        var myAlert = UIAlertController(title: "Message", message: userMessage, preferredStyle:
             UIAlertControllerStyle.Alert)
         
-        let okAction = UIAlertAction(title: "ok", style: UIAlertActionStyle.Destructive, handler: nil)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: nil)
         
         myAlert.addAction(okAction)
         
         self.presentViewController(myAlert, animated: true, completion: nil)
+        
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        userField.resignFirstResponder()
+        passwordField.resignFirstResponder()
         
     }
     
