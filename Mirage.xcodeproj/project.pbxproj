@@ -7,13 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		85BADF8D1C9054E6000B8989 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADF8C1C9054E6000B8989 /* AppDelegate.swift */; };
-		85BADF8F1C9054E6000B8989 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADF8E1C9054E6000B8989 /* ViewController.swift */; };
-		85BADF921C9054E6000B8989 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85BADF901C9054E6000B8989 /* Main.storyboard */; };
 		85BADF941C9054E6000B8989 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85BADF931C9054E6000B8989 /* Assets.xcassets */; };
-		85BADF971C9054E6000B8989 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85BADF951C9054E6000B8989 /* LaunchScreen.storyboard */; };
 		85BADFA21C9054E6000B8989 /* MirageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFA11C9054E6000B8989 /* MirageTests.swift */; };
 		85BADFAD1C9054E6000B8989 /* MirageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFAC1C9054E6000B8989 /* MirageUITests.swift */; };
+		85BADFC01C905577000B8989 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFBF1C905577000B8989 /* AppDelegate.swift */; };
+		85BADFC21C90557C000B8989 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFC11C90557C000B8989 /* ViewController.swift */; };
+		85BADFC41C905593000B8989 /* models in Resources */ = {isa = PBXBuildFile; fileRef = 85BADFC31C905593000B8989 /* models */; };
+		85BADFC61C90559A000B8989 /* util in Resources */ = {isa = PBXBuildFile; fileRef = 85BADFC51C90559A000B8989 /* util */; };
+		85BADFC81C9055A8000B8989 /* viewcontrollers in Resources */ = {isa = PBXBuildFile; fileRef = 85BADFC71C9055A8000B8989 /* viewcontrollers */; };
+		85BADFCA1C9055BB000B8989 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85BADFC91C9055BB000B8989 /* Info.plist */; };
+		85BADFCD1C9056B8000B8989 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85BADFCB1C9056B8000B8989 /* Main.storyboard */; };
+		85BADFD01C9056BF000B8989 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85BADFCE1C9056BF000B8989 /* LaunchScreen.storyboard */; };
+		85BADFD41C9056F7000B8989 /* LectureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFD11C9056F7000B8989 /* LectureViewController.swift */; };
+		85BADFD51C9056F7000B8989 /* RecoverPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFD21C9056F7000B8989 /* RecoverPasswordViewController.swift */; };
+		85BADFD61C9056F7000B8989 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFD31C9056F7000B8989 /* RegisterViewController.swift */; };
+		85BADFD81C905710000B8989 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFD71C905710000B8989 /* Server.swift */; };
+		85BADFDA1C905721000B8989 /* Lecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFD91C905721000B8989 /* Lecture.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,18 +44,27 @@
 
 /* Begin PBXFileReference section */
 		85BADF891C9054E6000B8989 /* Mirage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mirage.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		85BADF8C1C9054E6000B8989 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		85BADF8E1C9054E6000B8989 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		85BADF911C9054E6000B8989 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		85BADF931C9054E6000B8989 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		85BADF961C9054E6000B8989 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		85BADF981C9054E6000B8989 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85BADF9D1C9054E6000B8989 /* MirageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MirageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		85BADFA11C9054E6000B8989 /* MirageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirageTests.swift; sourceTree = "<group>"; };
 		85BADFA31C9054E6000B8989 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85BADFA81C9054E6000B8989 /* MirageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MirageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		85BADFAC1C9054E6000B8989 /* MirageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirageUITests.swift; sourceTree = "<group>"; };
 		85BADFAE1C9054E6000B8989 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85BADFBE1C905577000B8989 /* Mirage-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mirage-Bridging-Header.h"; sourceTree = "<group>"; };
+		85BADFBF1C905577000B8989 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		85BADFC11C90557C000B8989 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		85BADFC31C905593000B8989 /* models */ = {isa = PBXFileReference; lastKnownFileType = folder; path = models; sourceTree = "<group>"; };
+		85BADFC51C90559A000B8989 /* util */ = {isa = PBXFileReference; lastKnownFileType = folder; path = util; sourceTree = "<group>"; };
+		85BADFC71C9055A8000B8989 /* viewcontrollers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = viewcontrollers; sourceTree = "<group>"; };
+		85BADFC91C9055BB000B8989 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85BADFCC1C9056B8000B8989 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		85BADFCF1C9056BF000B8989 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		85BADFD11C9056F7000B8989 /* LectureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LectureViewController.swift; path = Mirage/viewcontrollers/LectureViewController.swift; sourceTree = "<group>"; };
+		85BADFD21C9056F7000B8989 /* RecoverPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecoverPasswordViewController.swift; path = Mirage/viewcontrollers/RecoverPasswordViewController.swift; sourceTree = "<group>"; };
+		85BADFD31C9056F7000B8989 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = Mirage/viewcontrollers/RegisterViewController.swift; sourceTree = "<group>"; };
+		85BADFD71C905710000B8989 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Server.swift; path = Mirage/util/Server.swift; sourceTree = "<group>"; };
+		85BADFD91C905721000B8989 /* Lecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Lecture.swift; path = Mirage/models/Lecture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +95,11 @@
 		85BADF801C9054E6000B8989 = {
 			isa = PBXGroup;
 			children = (
+				85BADFD91C905721000B8989 /* Lecture.swift */,
+				85BADFD71C905710000B8989 /* Server.swift */,
+				85BADFD11C9056F7000B8989 /* LectureViewController.swift */,
+				85BADFD21C9056F7000B8989 /* RecoverPasswordViewController.swift */,
+				85BADFD31C9056F7000B8989 /* RegisterViewController.swift */,
 				85BADF8B1C9054E6000B8989 /* Mirage */,
 				85BADFA01C9054E6000B8989 /* MirageTests */,
 				85BADFAB1C9054E6000B8989 /* MirageUITests */,
@@ -97,12 +120,16 @@
 		85BADF8B1C9054E6000B8989 /* Mirage */ = {
 			isa = PBXGroup;
 			children = (
-				85BADF8C1C9054E6000B8989 /* AppDelegate.swift */,
-				85BADF8E1C9054E6000B8989 /* ViewController.swift */,
-				85BADF901C9054E6000B8989 /* Main.storyboard */,
+				85BADFC71C9055A8000B8989 /* viewcontrollers */,
+				85BADFC51C90559A000B8989 /* util */,
+				85BADFC31C905593000B8989 /* models */,
+				85BADFC11C90557C000B8989 /* ViewController.swift */,
+				85BADFBF1C905577000B8989 /* AppDelegate.swift */,
+				85BADFCB1C9056B8000B8989 /* Main.storyboard */,
 				85BADF931C9054E6000B8989 /* Assets.xcassets */,
-				85BADF951C9054E6000B8989 /* LaunchScreen.storyboard */,
-				85BADF981C9054E6000B8989 /* Info.plist */,
+				85BADFC91C9055BB000B8989 /* Info.plist */,
+				85BADFCE1C9056BF000B8989 /* LaunchScreen.storyboard */,
+				85BADFBE1C905577000B8989 /* Mirage-Bridging-Header.h */,
 			);
 			path = Mirage;
 			sourceTree = "<group>";
@@ -232,9 +259,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85BADF971C9054E6000B8989 /* LaunchScreen.storyboard in Resources */,
+				85BADFC81C9055A8000B8989 /* viewcontrollers in Resources */,
+				85BADFC61C90559A000B8989 /* util in Resources */,
+				85BADFC41C905593000B8989 /* models in Resources */,
+				85BADFCD1C9056B8000B8989 /* Main.storyboard in Resources */,
+				85BADFD01C9056BF000B8989 /* LaunchScreen.storyboard in Resources */,
 				85BADF941C9054E6000B8989 /* Assets.xcassets in Resources */,
-				85BADF921C9054E6000B8989 /* Main.storyboard in Resources */,
+				85BADFCA1C9055BB000B8989 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,8 +290,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85BADF8F1C9054E6000B8989 /* ViewController.swift in Sources */,
-				85BADF8D1C9054E6000B8989 /* AppDelegate.swift in Sources */,
+				85BADFDA1C905721000B8989 /* Lecture.swift in Sources */,
+				85BADFD81C905710000B8989 /* Server.swift in Sources */,
+				85BADFD41C9056F7000B8989 /* LectureViewController.swift in Sources */,
+				85BADFD51C9056F7000B8989 /* RecoverPasswordViewController.swift in Sources */,
+				85BADFD61C9056F7000B8989 /* RegisterViewController.swift in Sources */,
+				85BADFC21C90557C000B8989 /* ViewController.swift in Sources */,
+				85BADFC01C905577000B8989 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,18 +332,18 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		85BADF901C9054E6000B8989 /* Main.storyboard */ = {
+		85BADFCB1C9056B8000B8989 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				85BADF911C9054E6000B8989 /* Base */,
+				85BADFCC1C9056B8000B8989 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		85BADF951C9054E6000B8989 /* LaunchScreen.storyboard */ = {
+		85BADFCE1C9056BF000B8989 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				85BADF961C9054E6000B8989 /* Base */,
+				85BADFCF1C9056BF000B8989 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -400,10 +436,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Mirage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.sienaidea.Mirage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Mirage/Mirage-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -411,10 +450,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Mirage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.sienaidea.Mirage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Mirage/Mirage-Bridging-Header.h";
 			};
 			name = Release;
 		};
