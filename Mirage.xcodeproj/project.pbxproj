@@ -1,0 +1,508 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		85BADF8D1C9054E6000B8989 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADF8C1C9054E6000B8989 /* AppDelegate.swift */; };
+		85BADF8F1C9054E6000B8989 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADF8E1C9054E6000B8989 /* ViewController.swift */; };
+		85BADF921C9054E6000B8989 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85BADF901C9054E6000B8989 /* Main.storyboard */; };
+		85BADF941C9054E6000B8989 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85BADF931C9054E6000B8989 /* Assets.xcassets */; };
+		85BADF971C9054E6000B8989 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85BADF951C9054E6000B8989 /* LaunchScreen.storyboard */; };
+		85BADFA21C9054E6000B8989 /* MirageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFA11C9054E6000B8989 /* MirageTests.swift */; };
+		85BADFAD1C9054E6000B8989 /* MirageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFAC1C9054E6000B8989 /* MirageUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		85BADF9E1C9054E6000B8989 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 85BADF811C9054E6000B8989 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 85BADF881C9054E6000B8989;
+			remoteInfo = Mirage;
+		};
+		85BADFA91C9054E6000B8989 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 85BADF811C9054E6000B8989 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 85BADF881C9054E6000B8989;
+			remoteInfo = Mirage;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		85BADF891C9054E6000B8989 /* Mirage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mirage.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		85BADF8C1C9054E6000B8989 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		85BADF8E1C9054E6000B8989 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		85BADF911C9054E6000B8989 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		85BADF931C9054E6000B8989 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		85BADF961C9054E6000B8989 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		85BADF981C9054E6000B8989 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85BADF9D1C9054E6000B8989 /* MirageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MirageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		85BADFA11C9054E6000B8989 /* MirageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirageTests.swift; sourceTree = "<group>"; };
+		85BADFA31C9054E6000B8989 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85BADFA81C9054E6000B8989 /* MirageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MirageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		85BADFAC1C9054E6000B8989 /* MirageUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirageUITests.swift; sourceTree = "<group>"; };
+		85BADFAE1C9054E6000B8989 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		85BADF861C9054E6000B8989 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85BADF9A1C9054E6000B8989 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85BADFA51C9054E6000B8989 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		85BADF801C9054E6000B8989 = {
+			isa = PBXGroup;
+			children = (
+				85BADF8B1C9054E6000B8989 /* Mirage */,
+				85BADFA01C9054E6000B8989 /* MirageTests */,
+				85BADFAB1C9054E6000B8989 /* MirageUITests */,
+				85BADF8A1C9054E6000B8989 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		85BADF8A1C9054E6000B8989 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				85BADF891C9054E6000B8989 /* Mirage.app */,
+				85BADF9D1C9054E6000B8989 /* MirageTests.xctest */,
+				85BADFA81C9054E6000B8989 /* MirageUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		85BADF8B1C9054E6000B8989 /* Mirage */ = {
+			isa = PBXGroup;
+			children = (
+				85BADF8C1C9054E6000B8989 /* AppDelegate.swift */,
+				85BADF8E1C9054E6000B8989 /* ViewController.swift */,
+				85BADF901C9054E6000B8989 /* Main.storyboard */,
+				85BADF931C9054E6000B8989 /* Assets.xcassets */,
+				85BADF951C9054E6000B8989 /* LaunchScreen.storyboard */,
+				85BADF981C9054E6000B8989 /* Info.plist */,
+			);
+			path = Mirage;
+			sourceTree = "<group>";
+		};
+		85BADFA01C9054E6000B8989 /* MirageTests */ = {
+			isa = PBXGroup;
+			children = (
+				85BADFA11C9054E6000B8989 /* MirageTests.swift */,
+				85BADFA31C9054E6000B8989 /* Info.plist */,
+			);
+			path = MirageTests;
+			sourceTree = "<group>";
+		};
+		85BADFAB1C9054E6000B8989 /* MirageUITests */ = {
+			isa = PBXGroup;
+			children = (
+				85BADFAC1C9054E6000B8989 /* MirageUITests.swift */,
+				85BADFAE1C9054E6000B8989 /* Info.plist */,
+			);
+			path = MirageUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		85BADF881C9054E6000B8989 /* Mirage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85BADFB11C9054E6000B8989 /* Build configuration list for PBXNativeTarget "Mirage" */;
+			buildPhases = (
+				85BADF851C9054E6000B8989 /* Sources */,
+				85BADF861C9054E6000B8989 /* Frameworks */,
+				85BADF871C9054E6000B8989 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Mirage;
+			productName = Mirage;
+			productReference = 85BADF891C9054E6000B8989 /* Mirage.app */;
+			productType = "com.apple.product-type.application";
+		};
+		85BADF9C1C9054E6000B8989 /* MirageTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85BADFB41C9054E6000B8989 /* Build configuration list for PBXNativeTarget "MirageTests" */;
+			buildPhases = (
+				85BADF991C9054E6000B8989 /* Sources */,
+				85BADF9A1C9054E6000B8989 /* Frameworks */,
+				85BADF9B1C9054E6000B8989 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				85BADF9F1C9054E6000B8989 /* PBXTargetDependency */,
+			);
+			name = MirageTests;
+			productName = MirageTests;
+			productReference = 85BADF9D1C9054E6000B8989 /* MirageTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		85BADFA71C9054E6000B8989 /* MirageUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 85BADFB71C9054E6000B8989 /* Build configuration list for PBXNativeTarget "MirageUITests" */;
+			buildPhases = (
+				85BADFA41C9054E6000B8989 /* Sources */,
+				85BADFA51C9054E6000B8989 /* Frameworks */,
+				85BADFA61C9054E6000B8989 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				85BADFAA1C9054E6000B8989 /* PBXTargetDependency */,
+			);
+			name = MirageUITests;
+			productName = MirageUITests;
+			productReference = 85BADFA81C9054E6000B8989 /* MirageUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		85BADF811C9054E6000B8989 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Siena Idea";
+				TargetAttributes = {
+					85BADF881C9054E6000B8989 = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 7BG9GK9Z62;
+					};
+					85BADF9C1C9054E6000B8989 = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 7BG9GK9Z62;
+						TestTargetID = 85BADF881C9054E6000B8989;
+					};
+					85BADFA71C9054E6000B8989 = {
+						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 7BG9GK9Z62;
+						TestTargetID = 85BADF881C9054E6000B8989;
+					};
+				};
+			};
+			buildConfigurationList = 85BADF841C9054E6000B8989 /* Build configuration list for PBXProject "Mirage" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 85BADF801C9054E6000B8989;
+			productRefGroup = 85BADF8A1C9054E6000B8989 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				85BADF881C9054E6000B8989 /* Mirage */,
+				85BADF9C1C9054E6000B8989 /* MirageTests */,
+				85BADFA71C9054E6000B8989 /* MirageUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		85BADF871C9054E6000B8989 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85BADF971C9054E6000B8989 /* LaunchScreen.storyboard in Resources */,
+				85BADF941C9054E6000B8989 /* Assets.xcassets in Resources */,
+				85BADF921C9054E6000B8989 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85BADF9B1C9054E6000B8989 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85BADFA61C9054E6000B8989 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		85BADF851C9054E6000B8989 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85BADF8F1C9054E6000B8989 /* ViewController.swift in Sources */,
+				85BADF8D1C9054E6000B8989 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85BADF991C9054E6000B8989 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85BADFA21C9054E6000B8989 /* MirageTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		85BADFA41C9054E6000B8989 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85BADFAD1C9054E6000B8989 /* MirageUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		85BADF9F1C9054E6000B8989 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 85BADF881C9054E6000B8989 /* Mirage */;
+			targetProxy = 85BADF9E1C9054E6000B8989 /* PBXContainerItemProxy */;
+		};
+		85BADFAA1C9054E6000B8989 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 85BADF881C9054E6000B8989 /* Mirage */;
+			targetProxy = 85BADFA91C9054E6000B8989 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		85BADF901C9054E6000B8989 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85BADF911C9054E6000B8989 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		85BADF951C9054E6000B8989 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85BADF961C9054E6000B8989 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		85BADFAF1C9054E6000B8989 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		85BADFB01C9054E6000B8989 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		85BADFB21C9054E6000B8989 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Mirage/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.sienaidea.Mirage;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		85BADFB31C9054E6000B8989 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Mirage/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.sienaidea.Mirage;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		85BADFB51C9054E6000B8989 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MirageTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.sienaidea.MirageTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mirage.app/Mirage";
+			};
+			name = Debug;
+		};
+		85BADFB61C9054E6000B8989 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MirageTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.sienaidea.MirageTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mirage.app/Mirage";
+			};
+			name = Release;
+		};
+		85BADFB81C9054E6000B8989 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = MirageUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.sienaidea.MirageUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Mirage;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		85BADFB91C9054E6000B8989 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = MirageUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.sienaidea.MirageUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Mirage;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		85BADF841C9054E6000B8989 /* Build configuration list for PBXProject "Mirage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85BADFAF1C9054E6000B8989 /* Debug */,
+				85BADFB01C9054E6000B8989 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		85BADFB11C9054E6000B8989 /* Build configuration list for PBXNativeTarget "Mirage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85BADFB21C9054E6000B8989 /* Debug */,
+				85BADFB31C9054E6000B8989 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		85BADFB41C9054E6000B8989 /* Build configuration list for PBXNativeTarget "MirageTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85BADFB51C9054E6000B8989 /* Debug */,
+				85BADFB61C9054E6000B8989 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		85BADFB71C9054E6000B8989 /* Build configuration list for PBXNativeTarget "MirageUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				85BADFB81C9054E6000B8989 /* Debug */,
+				85BADFB91C9054E6000B8989 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 85BADF811C9054E6000B8989 /* Project object */;
+}
