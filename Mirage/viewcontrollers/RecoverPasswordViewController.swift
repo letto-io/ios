@@ -29,7 +29,7 @@ class RecoverPasswordViewController: UIViewController {
         
         if NSJSONSerialization.isValidJSONObject(JSONObject) {
             let request: NSMutableURLRequest = NSMutableURLRequest()
-            let url = "http://rest-server-mirage.herokuapp.com/controller/recover-password"
+            let url = Server.recoverPasswordURL
             
             let _: NSError?
             

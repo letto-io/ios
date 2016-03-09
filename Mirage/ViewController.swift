@@ -42,7 +42,7 @@ class ViewController: UIViewController {
         
         if NSJSONSerialization.isValidJSONObject(JSONObject) {
             let request: NSMutableURLRequest = NSMutableURLRequest()
-            let url = "http://rest-server-mirage.herokuapp.com/controller/login"
+            let url = Server.loginURL
             
             let _: NSError?
             
