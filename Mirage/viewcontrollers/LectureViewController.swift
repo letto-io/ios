@@ -12,62 +12,22 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
 
 
     
-    override func viewDidAppear(animated: Bool) {
-        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-        let cookies = cookieStorage.cookies! as [NSHTTPCookie]
-        
-        if cookies.isEmpty {
-            self.performSegueWithIdentifier("loginView", sender: self)
-            
-        }
-    }
+//    override func viewDidAppear(animated: Bool) {
+//        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+//        let cookies = cookieStorage.cookies! as [NSHTTPCookie]
+//        
+//        if cookies.isEmpty {
+//            self.performSegueWithIdentifier("loginView", sender: self)
+//            
+//        }
+//    }
     
+
+    @IBOutlet weak var tableView: UITableView!
     
-    
-    func getData(completionHandler: ((NSArray!, NSError!) -> Void)!) -> Void {
-        
-        let url = NSURL(string: Server.lectureURL)
-        
-        // First
-        let cookie = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-        let cookieHeaderField = ["Set-Cookie": "key=value"] // Or ["Set-Cookie": "key=value, key2=value2"] for multiple cookies
-        let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(cookieHeaderField, forURL: url!)
-        cookie.setCookies(cookies, forURL: url, mainDocumentURL: url)
-        
-        
-        let request: NSMutableURLRequest = NSMutableURLRequest()
-        
-        
-        request.HTTPMethod = "GET"
-        
-        
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url!, completionHandler: {data, response, error -> Void in
-            if (error != nil) {
-                return completionHandler(nil, error)
-            }
-            
-            
-            var error: NSError?
-            //let json = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers, error: &error) as NSDictionary
-            
-            if (error != nil) {
-                return completionHandler(nil, error)
-            } else {
-                //return completionHandler(json["results"] as [NSDictionary], nil)
-            }
-        })
-        task.resume()
-    }
-
-
-
-    var tableView: UITableView!
     var items: NSMutableArray = []
     
-    override func viewDidLoad() {
-    
-        super.viewDidLoad()
-        
+    override func viewWillAppear(animated: Bool) {
         let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
         let cookies = cookieStorage.cookies! as [NSHTTPCookie]
         
@@ -82,43 +42,74 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
             self.tableView!.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
             self.view?.addSubview(self.tableView)
             
-                    getData({data, error -> Void in
-                        if (data != nil) {
-                            self.items = NSMutableArray(array: data)
-                            self.tableView!.reloadData()
             
-                        } else {
-                            print("api.getData failed")
-                            print(error)
-                        }
-                    })
+            getData({data, error -> Void in
+                    self.items = NSMutableArray(array: data)
+                    self.tableView!.reloadData()
+                
+                if data == nil {
+                    print("Data failed", error)
+                } else {
+                    print("Sucess", data)
+                }
+                
+            })
         }
-        
-        
-        
-    }
 
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.items.count;
     }
 
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell")
         
         if let navn = self.items[indexPath.row]["trackName"] as? NSString {
-            //cell.textLabel.text = navn
+            cell.textLabel!.text = navn as String
         } else {
-            //cell.textLabel.text = "No Name"
+                cell.textLabel!.text = "No Name"
         }
         
         if let desc = self.items[indexPath.row]["description"] as? NSString {
-            //cell.detailTextLabel.text = desc
+            cell.detailTextLabel!.text = desc as String
         }
         
         return cell
     }
-
-
+    
+    func getData(completionHandler: ((NSArray!, NSError!) -> Void)!) -> Void {
+        
+        let request: NSMutableURLRequest = NSMutableURLRequest()
+        let urlPath = Server.lectureURL
+        let url = NSURL(string: urlPath)!
+        
+        let cookieHeaderField = ["Set-Cookie": "key=value"]
+        
+        let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(cookieHeaderField, forURL: url)
+        NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: url, mainDocumentURL: nil)
+        
+        request.HTTPMethod = "GET"
+        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
+        
+        print(cookies)
+        
+        
+        let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
+            if (error != nil) {
+                return completionHandler(nil, error)
+            }
+            
+            let json = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+            
+            
+            
+            print(json)
+        })
+        task.resume()
+        
+    }
+    
     
     @IBAction func signoutButtonTapped(sender: AnyObject) {
         

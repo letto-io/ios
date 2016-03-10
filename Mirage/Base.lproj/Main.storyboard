@@ -124,6 +124,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="tableView" destination="zH9-3p-arq" id="l0Z-d4-dgM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hso-Tj-bQm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
