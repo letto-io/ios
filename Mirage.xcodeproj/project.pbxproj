@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8575C0F31C9300E200FCAD85 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8575C0F21C9300E200FCAD85 /* Event.swift */; };
 		85BADF941C9054E6000B8989 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85BADF931C9054E6000B8989 /* Assets.xcassets */; };
 		85BADFA21C9054E6000B8989 /* MirageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFA11C9054E6000B8989 /* MirageTests.swift */; };
 		85BADFAD1C9054E6000B8989 /* MirageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFAC1C9054E6000B8989 /* MirageUITests.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8575C0F21C9300E200FCAD85 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Mirage/models/Event.swift; sourceTree = "<group>"; };
 		85BADF891C9054E6000B8989 /* Mirage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mirage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85BADF931C9054E6000B8989 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		85BADF9D1C9054E6000B8989 /* MirageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MirageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +97,7 @@
 		85BADF801C9054E6000B8989 = {
 			isa = PBXGroup;
 			children = (
+				8575C0F21C9300E200FCAD85 /* Event.swift */,
 				85BADFD91C905721000B8989 /* Lecture.swift */,
 				85BADFD71C905710000B8989 /* Server.swift */,
 				85BADFD11C9056F7000B8989 /* LectureViewController.swift */,
@@ -290,6 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8575C0F31C9300E200FCAD85 /* Event.swift in Sources */,
 				85BADFDA1C905721000B8989 /* Lecture.swift in Sources */,
 				85BADFD81C905710000B8989 /* Server.swift in Sources */,
 				85BADFD41C9056F7000B8989 /* LectureViewController.swift in Sources */,
@@ -526,6 +530,7 @@
 				85BADFB31C9054E6000B8989 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		85BADFB41C9054E6000B8989 /* Build configuration list for PBXNativeTarget "MirageTests" */ = {
 			isa = XCConfigurationList;
@@ -534,6 +539,7 @@
 				85BADFB61C9054E6000B8989 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		85BADFB71C9054E6000B8989 /* Build configuration list for PBXNativeTarget "MirageUITests" */ = {
 			isa = XCConfigurationList;
@@ -542,6 +548,7 @@
 				85BADFB91C9054E6000B8989 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

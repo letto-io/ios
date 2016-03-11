@@ -8,21 +8,17 @@
 
 import Foundation
 
-class Lecture {
+class Lecture: NSObject {
     
-    let id, startDate, endDate, classe, code, name, profile: String
+    var id: Int = 0
+    var startdate: String = ""
+    var endDate: String = ""
+    var code: String = ""
+    var name: String = ""
+    var classe: Int = 0
+    var profile: Int = 0
     
-    init(id: String, startDate: String, endDate: String, classe: String, code: String, name: String, profile: String) {
-        self.id = id
-        self.startDate = startDate
-        self.endDate = endDate
-        self.classe = classe
-        self.code = code
-        self.name = name
-        self.profile = profile
-    }
-    	
-    
+    //var event = Event(name: "", code: "")
     
 }
 	

@@ -97,14 +97,50 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
             if (error != nil) {
-                return completionHandler(nil, error)
+                print("Download Error: \(error!.localizedDescription)")
+            } else {
+                var studentJSONParseError: NSError?
+                
+                let lectureJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                
+                if (studentJSONParseError != nil) {
+                    
+                    print("JSON Parsing Error: \(studentJSONParseError!.localizedDescription)")
+                    
+                } else {
+                    
+                    var info : NSArray =  lectureJSONData.valueForKey("lectures") as! NSArray
+                    
+                    
+                    for var i = 0; i < info.count; i++ {
+                        
+                        let lectures = Lecture()
+                        
+                        lectures.id = info[i].valueForKey("id") as! Int
+//                        var name: String? = info[i].valueForKey("name") as! String
+//                        var startDate: String? = info[i].valueForKey("stardate") as! String
+//                        var endDate: String? = info[i].valueForKey("enddate") as! String
+//                        var classe: Int32? = info[i].valueForKey("class") as! Int32
+//                        var code: String? = info[i].valueForKey("code") as! String
+//                        var profile: Int32? = info[i].valueForKey("profile") as! Int32
+                        
+                        //var event: NSArray = info.valueForKey("event") as! NSArray
+                                                
+                        print(lectures)//Returns nil
+                        
+                        print("wsdsds")
+                        
+                        
+                        //lecture.startDate
+                        
+                        
+                    }
+                    
+                    
+                    print(lectureJSONData)
+                }
+                
             }
-            
-            let json = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
-            
-            
-            
-            print(json)
         })
         task.resume()
         
