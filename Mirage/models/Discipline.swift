@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Lecture: NSObject {
+class Discipline: NSObject {
     
     var id: Int = 0
     var code: String = ""

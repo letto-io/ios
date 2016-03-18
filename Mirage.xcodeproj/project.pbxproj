@@ -19,11 +19,11 @@
 		85BADFCA1C9055BB000B8989 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85BADFC91C9055BB000B8989 /* Info.plist */; };
 		85BADFCD1C9056B8000B8989 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85BADFCB1C9056B8000B8989 /* Main.storyboard */; };
 		85BADFD01C9056BF000B8989 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85BADFCE1C9056BF000B8989 /* LaunchScreen.storyboard */; };
-		85BADFD41C9056F7000B8989 /* LectureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFD11C9056F7000B8989 /* LectureViewController.swift */; };
 		85BADFD51C9056F7000B8989 /* RecoverPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFD21C9056F7000B8989 /* RecoverPasswordViewController.swift */; };
 		85BADFD61C9056F7000B8989 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFD31C9056F7000B8989 /* RegisterViewController.swift */; };
 		85BADFD81C905710000B8989 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFD71C905710000B8989 /* Server.swift */; };
-		85BADFDA1C905721000B8989 /* Lecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFD91C905721000B8989 /* Lecture.swift */; };
+		85EEDA921C9C495800F431B1 /* DisciplineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EEDA911C9C495800F431B1 /* DisciplineViewController.swift */; };
+		85EEDA941C9C4A9800F431B1 /* Discipline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EEDA931C9C4A9800F431B1 /* Discipline.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,11 +62,11 @@
 		85BADFC91C9055BB000B8989 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		85BADFCC1C9056B8000B8989 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		85BADFCF1C9056BF000B8989 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		85BADFD11C9056F7000B8989 /* LectureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LectureViewController.swift; path = Mirage/viewcontrollers/LectureViewController.swift; sourceTree = "<group>"; };
 		85BADFD21C9056F7000B8989 /* RecoverPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecoverPasswordViewController.swift; path = Mirage/viewcontrollers/RecoverPasswordViewController.swift; sourceTree = "<group>"; };
 		85BADFD31C9056F7000B8989 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = Mirage/viewcontrollers/RegisterViewController.swift; sourceTree = "<group>"; };
 		85BADFD71C905710000B8989 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Server.swift; path = Mirage/util/Server.swift; sourceTree = "<group>"; };
-		85BADFD91C905721000B8989 /* Lecture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Lecture.swift; path = Mirage/models/Lecture.swift; sourceTree = "<group>"; };
+		85EEDA911C9C495800F431B1 /* DisciplineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DisciplineViewController.swift; path = Mirage/viewcontrollers/DisciplineViewController.swift; sourceTree = "<group>"; };
+		85EEDA931C9C4A9800F431B1 /* Discipline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Discipline.swift; path = Mirage/models/Discipline.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,10 +97,10 @@
 		85BADF801C9054E6000B8989 = {
 			isa = PBXGroup;
 			children = (
+				85EEDA931C9C4A9800F431B1 /* Discipline.swift */,
+				85EEDA911C9C495800F431B1 /* DisciplineViewController.swift */,
 				8575C0F21C9300E200FCAD85 /* Event.swift */,
-				85BADFD91C905721000B8989 /* Lecture.swift */,
 				85BADFD71C905710000B8989 /* Server.swift */,
-				85BADFD11C9056F7000B8989 /* LectureViewController.swift */,
 				85BADFD21C9056F7000B8989 /* RecoverPasswordViewController.swift */,
 				85BADFD31C9056F7000B8989 /* RegisterViewController.swift */,
 				85BADF8B1C9054E6000B8989 /* Mirage */,
@@ -293,10 +293,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85EEDA941C9C4A9800F431B1 /* Discipline.swift in Sources */,
+				85EEDA921C9C495800F431B1 /* DisciplineViewController.swift in Sources */,
 				8575C0F31C9300E200FCAD85 /* Event.swift in Sources */,
-				85BADFDA1C905721000B8989 /* Lecture.swift in Sources */,
 				85BADFD81C905710000B8989 /* Server.swift in Sources */,
-				85BADFD41C9056F7000B8989 /* LectureViewController.swift in Sources */,
 				85BADFD51C9056F7000B8989 /* RecoverPasswordViewController.swift in Sources */,
 				85BADFD61C9056F7000B8989 /* RegisterViewController.swift in Sources */,
 				85BADFC21C90557C000B8989 /* ViewController.swift in Sources */,

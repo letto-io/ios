@@ -12,6 +12,6 @@ class Server {
     
     static let loginURL = "http://rest-server-mirage.herokuapp.com/controller/login"
     static let recoverPasswordURL = "http://rest-server-mirage.herokuapp.com/controller/recover-password"
-    static let lectureURL = "http://rest-server-mirage.herokuapp.com/controller/instruction"
+    static let disciplineURL = "http://rest-server-mirage.herokuapp.com/controller/instruction"
     
 }

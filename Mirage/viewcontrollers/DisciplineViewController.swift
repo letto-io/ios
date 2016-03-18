@@ -13,9 +13,9 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
 
     @IBOutlet weak var tableView: UITableView!  
     
-    var lecture = Array<Lecture>()
+    var discipline = Array<Discipline>()
     
-    var lectures = [Lecture()]
+    var disciplines = [Discipline()]
     
     func refleshTableView() {
         
@@ -38,7 +38,7 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
             self.performSegueWithIdentifier("loginView", sender: self)
             
         } else {
-            addLectures()
+            addLDisciplines()
             refleshTableView()
         }
 
@@ -52,7 +52,7 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
             self.performSegueWithIdentifier("loginView", sender: self)
             
         } else {
-            addLectures()
+            addLDisciplines()
             refleshTableView()
         }
     }
@@ -66,14 +66,14 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
             self.performSegueWithIdentifier("loginView", sender: self)
             
         } else {
-            addLectures()
+            addLDisciplines()
             refleshTableView()
         }
     }
     
-    func addLectures() {
+    func addLDisciplines() {
         let request: NSMutableURLRequest = NSMutableURLRequest()
-        let urlPath = Server.lectureURL
+        let urlPath = Server.disciplineURL
         let url = NSURL(string: urlPath)!
         
         let cookieHeaderField = ["Set-Cookie": "key=value"]
@@ -107,7 +107,7 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
                     
                     for var i = 0; i < info.count; i++ {
                         
-                        let lectures = Lecture()
+                        let disciplines = Discipline()
                         let events = Event()
                         
                         for var j = 0; j < event.count; j++ {
@@ -116,16 +116,16 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
                         }
                         
                         
-                        lectures.id = info[i].valueForKey("id") as! Int
-                        lectures.event = events
-                        lectures.code = info[i].valueForKey("code") as! String
-                        lectures.startDate = info[i].valueForKey("startdate") as! String
-                        lectures.classe = info[i].valueForKey("class") as! Int
-                        lectures.endDate = info[i].valueForKey("enddate") as! String
-                        lectures.profile = info[i].valueForKey("profile") as! Int
-                        lectures.name = info[i].valueForKey("name") as! String
+                        disciplines.id = info[i].valueForKey("id") as! Int
+                        disciplines.event = events
+                        disciplines.code = info[i].valueForKey("code") as! String
+                        disciplines.startDate = info[i].valueForKey("startdate") as! String
+                        disciplines.classe = info[i].valueForKey("class") as! Int
+                        disciplines.endDate = info[i].valueForKey("enddate") as! String
+                        disciplines.profile = info[i].valueForKey("profile") as! Int
+                        disciplines.name = info[i].valueForKey("name") as! String
                         
-                        self.lecture.insert(lectures, atIndex: i)
+                        self.discipline.insert(disciplines, atIndex: i)
                         
                     }
                     
@@ -136,35 +136,35 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
         
         task.resume()
         
-        self.lectures = lecture
+        self.disciplines = discipline
 
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return lecture.count;
+        return discipline.count;
     }
     
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let row = indexPath.row
-        let lecture = lectures[ row ]
+        let discipline = disciplines[ row ]
         let cellIdentifier = "cell"
         
         let cell : UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)! as UITableViewCell
         
         cell.backgroundColor = UIColor.whiteColor()
         cell.textLabel!.font = UIFont(name: "StarJediOutline", size:15)
-        cell.textLabel?.text = lecture.name
+        cell.textLabel?.text = discipline.name
         
         let startDate = UILabel(frame: CGRectMake(150.0, 20.0, 100.0, 30.0))
-        startDate.text = lecture.startDate
+        startDate.text = discipline.startDate
         startDate.tag = indexPath.row
         startDate.font = UIFont(name: "Avenir", size: 10)
         cell.contentView.addSubview(startDate)
         
         let classe = UILabel(frame: CGRectMake(15.0, 20.0, 100.0, 30.0))
-        classe.text = "Turma \(String(lecture.classe))"
+        classe.text = "Turma \(String(discipline.classe))"
         classe.tag = indexPath.row
         classe.font = UIFont(name: "Avenir", size: 10)
         cell.contentView.addSubview(classe)
@@ -182,7 +182,7 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
             NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie)
         }
         
-        lecture.removeAll()
+        discipline.removeAll()
         
         self.performSegueWithIdentifier("loginView", sender: self)
         
