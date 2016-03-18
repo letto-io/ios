@@ -94,11 +94,11 @@ class RecoverPasswordViewController: UIViewController {
     }
     
     
-    @IBAction func backButtonTapped(sender: AnyObject) {
+    @IBAction func barButtonItemTapped(sender: AnyObject) {
+        
         self.dismissViewControllerAnimated(true, completion: nil)
-        
-        
     }
+    
     
     
     func displayMyAlertMessage(userMessage: String) {

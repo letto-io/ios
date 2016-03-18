@@ -11,14 +11,12 @@ import Foundation
 class Lecture: NSObject {
     
     var id: Int = 0
-    var startdate: String = ""
-    var endDate: String = ""
     var code: String = ""
-    var name: String = ""
+    var startDate: String = ""
     var classe: Int = 0
+    var endDate: String = ""
     var profile: Int = 0
-    
-    //var event = Event(name: "", code: "")
-    
+    var name: String = ""
+    var event = Event()
 }
 	

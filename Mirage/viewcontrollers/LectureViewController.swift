@@ -11,21 +11,52 @@ import UIKit
 class LectureViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
 
+    @IBOutlet weak var tableView: UITableView!  
     
-//    override func viewDidAppear(animated: Bool) {
-//        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-//        let cookies = cookieStorage.cookies! as [NSHTTPCookie]
-//        
-//        if cookies.isEmpty {
-//            self.performSegueWithIdentifier("loginView", sender: self)
-//            
-//        }
-//    }
+    var lecture = Array<Lecture>()
     
+    var lectures = [Lecture()]
+    
+    func refleshTableView() {
+        
+        if tableView == nil {
+            return
+        }
+        
+        self.tableView.dataSource = self
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.view?.addSubview(self.tableView)
+        
+        tableView.reloadData()
+    }
+    
+    override func viewDidLoad() {
+        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        let cookies = cookieStorage.cookies! as [NSHTTPCookie]
+        
+        if cookies.isEmpty {
+            self.performSegueWithIdentifier("loginView", sender: self)
+            
+        } else {
+            addLectures()
+            refleshTableView()
+        }
 
-    @IBOutlet weak var tableView: UITableView!
+    }
     
-    var items: NSMutableArray = []
+    override func viewDidAppear(animated: Bool) {
+        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        let cookies = cookieStorage.cookies! as [NSHTTPCookie]
+        
+        if cookies.isEmpty {
+            self.performSegueWithIdentifier("loginView", sender: self)
+            
+        } else {
+            addLectures()
+            refleshTableView()
+        }
+    }
+
     
     override func viewWillAppear(animated: Bool) {
         let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
@@ -35,51 +66,12 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
             self.performSegueWithIdentifier("loginView", sender: self)
             
         } else {
-            self.view.frame = CGRect(x: 0, y: 0, width: 320, height: 480)
-            self.tableView = UITableView(frame:self.view!.frame)
-            self.tableView!.delegate = self
-            self.tableView!.dataSource = self
-            self.tableView!.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-            self.view?.addSubview(self.tableView)
-            
-            
-            getData({data, error -> Void in
-                    self.items = NSMutableArray(array: data)
-                    self.tableView!.reloadData()
-                
-                if data == nil {
-                    print("Data failed", error)
-                } else {
-                    print("Sucess", data)
-                }
-                
-            })
+            addLectures()
+            refleshTableView()
         }
-
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.items.count;
-    }
-
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "cell")
-        
-        if let navn = self.items[indexPath.row]["trackName"] as? NSString {
-            cell.textLabel!.text = navn as String
-        } else {
-                cell.textLabel!.text = "No Name"
-        }
-        
-        if let desc = self.items[indexPath.row]["description"] as? NSString {
-            cell.detailTextLabel!.text = desc as String
-        }
-        
-        return cell
-    }
-    
-    func getData(completionHandler: ((NSArray!, NSError!) -> Void)!) -> Void {
-        
+    func addLectures() {
         let request: NSMutableURLRequest = NSMutableURLRequest()
         let urlPath = Server.lectureURL
         let url = NSURL(string: urlPath)!
@@ -109,43 +101,76 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
                     
                 } else {
                     
-                    var info : NSArray =  lectureJSONData.valueForKey("lectures") as! NSArray
+                    let info : NSArray =  lectureJSONData.valueForKey("lectures") as! NSArray
+                    let event: NSArray = info.valueForKey("event") as! NSArray
                     
                     
                     for var i = 0; i < info.count; i++ {
                         
                         let lectures = Lecture()
+                        let events = Event()
+                        
+                        for var j = 0; j < event.count; j++ {
+                            events.name = event[i].valueForKey("name") as! String
+                            events.code = event[i].valueForKey("code") as! String
+                        }
+                        
                         
                         lectures.id = info[i].valueForKey("id") as! Int
-//                        var name: String? = info[i].valueForKey("name") as! String
-//                        var startDate: String? = info[i].valueForKey("stardate") as! String
-//                        var endDate: String? = info[i].valueForKey("enddate") as! String
-//                        var classe: Int32? = info[i].valueForKey("class") as! Int32
-//                        var code: String? = info[i].valueForKey("code") as! String
-//                        var profile: Int32? = info[i].valueForKey("profile") as! Int32
+                        lectures.event = events
+                        lectures.code = info[i].valueForKey("code") as! String
+                        lectures.startDate = info[i].valueForKey("startdate") as! String
+                        lectures.classe = info[i].valueForKey("class") as! Int
+                        lectures.endDate = info[i].valueForKey("enddate") as! String
+                        lectures.profile = info[i].valueForKey("profile") as! Int
+                        lectures.name = info[i].valueForKey("name") as! String
                         
-                        //var event: NSArray = info.valueForKey("event") as! NSArray
-                                                
-                        print(lectures)//Returns nil
-                        
-                        print("wsdsds")
-                        
-                        
-                        //lecture.startDate
-                        
+                        self.lecture.insert(lectures, atIndex: i)
                         
                     }
                     
-                    
                     print(lectureJSONData)
                 }
-                
             }
         })
+        
         task.resume()
         
+        self.lectures = lecture
+
     }
     
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return lecture.count;
+    }
+    
+
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let row = indexPath.row
+        let lecture = lectures[ row ]
+        let cellIdentifier = "cell"
+        
+        let cell : UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)! as UITableViewCell
+        
+        cell.backgroundColor = UIColor.whiteColor()
+        cell.textLabel!.font = UIFont(name: "StarJediOutline", size:15)
+        cell.textLabel?.text = lecture.name
+        
+        let startDate = UILabel(frame: CGRectMake(150.0, 20.0, 100.0, 30.0))
+        startDate.text = lecture.startDate
+        startDate.tag = indexPath.row
+        startDate.font = UIFont(name: "Avenir", size: 10)
+        cell.contentView.addSubview(startDate)
+        
+        let classe = UILabel(frame: CGRectMake(15.0, 20.0, 100.0, 30.0))
+        classe.text = "Turma \(String(lecture.classe))"
+        classe.tag = indexPath.row
+        classe.font = UIFont(name: "Avenir", size: 10)
+        cell.contentView.addSubview(classe)
+        
+        return cell
+    }
     
     @IBAction func signoutButtonTapped(sender: AnyObject) {
         
@@ -156,6 +181,8 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
             print("name: \(cookie.name) value: \(cookie.value)")
             NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie)
         }
+        
+        lecture.removeAll()
         
         self.performSegueWithIdentifier("loginView", sender: self)
         

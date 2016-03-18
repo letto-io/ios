@@ -8,13 +8,9 @@
 
 import Foundation
 
-class Event {
+class Event: NSObject {
     
-    let name, code: String
-    
-    init(name: String, code: String) {
-        self.name = name
-        self.code = code
-    }
+    var name: String = ""
+    var code: String = ""
     
 }
