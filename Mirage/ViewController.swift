@@ -77,7 +77,7 @@ class ViewController: UIViewController {
                                 if httpResponse.statusCode == 404 {
                                     dispatch_async(dispatch_get_main_queue(), {
                                         NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie)
-                                        self.displayMyAlertMessage("Email not found")
+                                        self.displayMyAlertMessage("Email não cadastrado")
                                         
                                     })
                                 }
@@ -85,7 +85,7 @@ class ViewController: UIViewController {
                                 if httpResponse.statusCode == 401 {
                                     dispatch_async(dispatch_get_main_queue(), {
                                         NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie)
-                                        self.displayMyAlertMessage("Invalid password")
+                                        self.displayMyAlertMessage("Senha incorreta")
                                         
                                     })
                                 }
@@ -108,7 +108,7 @@ class ViewController: UIViewController {
     
     func displayMyAlertMessage(userMessage: String) {
         
-        var myAlert = UIAlertController(title: "Message", message: userMessage, preferredStyle:
+        let myAlert = UIAlertController(title: "Mensagem", message: userMessage, preferredStyle:
             UIAlertControllerStyle.Alert)
         
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: nil)

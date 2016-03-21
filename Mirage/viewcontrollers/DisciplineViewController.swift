@@ -25,9 +25,11 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
         
         self.tableView.dataSource = self
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
         self.view?.addSubview(self.tableView)
         
         tableView.reloadData()
+        
     }
     
     override func viewDidLoad() {
@@ -38,6 +40,7 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
             self.performSegueWithIdentifier("loginView", sender: self)
             
         } else {
+            
             addLDisciplines()
             refleshTableView()
         }

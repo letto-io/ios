@@ -64,26 +64,25 @@ class RecoverPasswordViewController: UIViewController {
                         
                             if httpResponse.statusCode == 404 {
                                 dispatch_async(dispatch_get_main_queue(), {
-                                    self.displayMyAlertMessage("Email not found")
+                                    self.displayMyAlertMessage("Email não encontrado")
                                     
                                 })
                             }
                             
                             if httpResponse.statusCode == 401 {
                                 dispatch_async(dispatch_get_main_queue(), {
-                                    self.displayMyAlertMessage("Invalid email")
+                                    self.displayMyAlertMessage("Email inválido")
                                     
                                 })
                             }
                             
                             if httpResponse.statusCode == 200 {
-                                
                                 dispatch_async(dispatch_get_main_queue(), {
-                                    self.displayMyAlertMessage("Sucess")
+                                    self.displayMyAlertMessage("Sucesso")
                                     
                                 })
                             }
-                            
+                        
                         }
                     
                     print(response)
@@ -94,16 +93,13 @@ class RecoverPasswordViewController: UIViewController {
     }
     
     
-    @IBAction func barButtonItemTapped(sender: AnyObject) {
-        
+    @IBAction func cancelButtonTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    
-    
     func displayMyAlertMessage(userMessage: String) {
         
-        var myAlert = UIAlertController(title: "Message", message: userMessage, preferredStyle:
+        let myAlert = UIAlertController(title: "Mensagem", message: userMessage, preferredStyle:
             UIAlertControllerStyle.Alert)
         
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: nil)
