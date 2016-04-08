@@ -95,6 +95,7 @@ class ViewController: UIViewController {
                                     NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(newCookie!)
                                     
                                     self.dismissViewControllerAnimated(true, completion: nil)
+                                    //self.performSegueWithIdentifier("disciplineView", sender: self)
                                 }
                                 
                             }

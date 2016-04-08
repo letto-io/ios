@@ -8,43 +8,48 @@
 
 import UIKit
 
-class LectureViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class DisciplineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
 
-    @IBOutlet weak var tableView: UITableView!  
+    @IBOutlet weak var tableView: UITableView!
     
     var discipline = Array<Discipline>()
     
-    var disciplines = [Discipline()]
+    var disc: Int = 0
+    var perfil: Int = 0
     
-    func refleshTableView() {
+    func refreshTableView() {
+        
+        var aa = discipline
         
         if tableView == nil {
             return
         }
         
+        self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
+        var nib = UINib(nibName: "DisciplineCell", bundle: nil)
+        self.tableView.registerNib(nib, forCellReuseIdentifier: "cell")
         self.view?.addSubview(self.tableView)
+//        
+//        let refreshControl = UIRefreshControl()
+//        refreshControl.addTarget(self, action: Selector(getInstruction()), forControlEvents: UIControlEvents.ValueChanged)
+//        tableView.addSubview(refreshControl)
         
+        getInstruction()
+    
         tableView.reloadData()
         
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
         let cookies = cookieStorage.cookies! as [NSHTTPCookie]
         
         if cookies.isEmpty {
             self.performSegueWithIdentifier("loginView", sender: self)
-            
-        } else {
-            
-            addLDisciplines()
-            refleshTableView()
         }
-
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -55,8 +60,8 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
             self.performSegueWithIdentifier("loginView", sender: self)
             
         } else {
-            addLDisciplines()
-            refleshTableView()
+            
+            refreshTableView()
         }
     }
 
@@ -69,12 +74,12 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
             self.performSegueWithIdentifier("loginView", sender: self)
             
         } else {
-            addLDisciplines()
-            refleshTableView()
+            
+            refreshTableView()
         }
     }
     
-    func addLDisciplines() {
+    func getInstruction() {
         let request: NSMutableURLRequest = NSMutableURLRequest()
         let urlPath = Server.disciplineURL
         let url = NSURL(string: urlPath)!
@@ -96,51 +101,57 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
             } else {
                 var studentJSONParseError: NSError?
                 
-                let lectureJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                let disciplineJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
                 
                 if (studentJSONParseError != nil) {
                     
-                    print("JSON Parsing Error: \(studentJSONParseError!.localizedDescription)")
+                    //print("JSON Parsing Error: \(studentJSONParseError!.localizedDescription)")
+                    return
                     
                 } else {
                     
-                    let info : NSArray =  lectureJSONData.valueForKey("lectures") as! NSArray
-                    let event: NSArray = info.valueForKey("event") as! NSArray
-                    
-                    
-                    for var i = 0; i < info.count; i++ {
+                    if (disciplineJSONData.valueForKey("error") != nil) {
                         
-                        let disciplines = Discipline()
-                        let events = Event()
+                        self.performSegueWithIdentifier("loginView", sender: self)
+                    } else {
+
+                        let info : NSArray =  disciplineJSONData.valueForKey("lectures") as! NSArray
+                        let event: NSArray = info.valueForKey("event") as! NSArray
                         
-                        for var j = 0; j < event.count; j++ {
-                            events.name = event[i].valueForKey("name") as! String
-                            events.code = event[i].valueForKey("code") as! String
+                        for i in 0 ..< info.count {
+                            
+                            let disciplines = Discipline()
+                            let events = Event()
+                            
+                            for j in 0 ..< event.count {
+                                events.name = event[j].valueForKey("name") as! String
+                                events.code = event[j].valueForKey("code") as! String
+                            }
+                            
+                            disciplines.id = info[i].valueForKey("id") as! Int
+                            disciplines.event = events
+                            disciplines.code = info[i].valueForKey("code") as! String
+                            disciplines.startDate = info[i].valueForKey("startdate") as! String
+                            disciplines.classe = info[i].valueForKey("class") as! Int
+                            disciplines.endDate = info[i].valueForKey("enddate") as! String
+                            disciplines.profile = info[i].valueForKey("profile") as! Int
+                            disciplines.name = info[i].valueForKey("name") as! String
+                            
+                            if self.discipline.count == info.count {
+                                return
+                            } else {
+                                self.discipline.insert(disciplines, atIndex: i)
+                            }
                         }
-                        
-                        
-                        disciplines.id = info[i].valueForKey("id") as! Int
-                        disciplines.event = events
-                        disciplines.code = info[i].valueForKey("code") as! String
-                        disciplines.startDate = info[i].valueForKey("startdate") as! String
-                        disciplines.classe = info[i].valueForKey("class") as! Int
-                        disciplines.endDate = info[i].valueForKey("enddate") as! String
-                        disciplines.profile = info[i].valueForKey("profile") as! Int
-                        disciplines.name = info[i].valueForKey("name") as! String
-                        
-                        self.discipline.insert(disciplines, atIndex: i)
-                        
+
                     }
                     
-                    print(lectureJSONData)
+                    print(disciplineJSONData)
                 }
             }
         })
         
         task.resume()
-        
-        self.disciplines = discipline
-
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -150,30 +161,25 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let row = indexPath.row
-        let discipline = disciplines[ row ]
-        let cellIdentifier = "cell"
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! DisciplineTableViewCell
+        let disc = discipline[ indexPath.row ]
         
-        let cell : UITableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier)! as UITableViewCell
-        
-        cell.backgroundColor = UIColor.whiteColor()
-        cell.textLabel!.font = UIFont(name: "StarJediOutline", size:15)
-        cell.textLabel?.text = discipline.name
-        
-        let startDate = UILabel(frame: CGRectMake(150.0, 20.0, 100.0, 30.0))
-        startDate.text = discipline.startDate
-        startDate.tag = indexPath.row
-        startDate.font = UIFont(name: "Avenir", size: 10)
-        cell.contentView.addSubview(startDate)
-        
-        let classe = UILabel(frame: CGRectMake(15.0, 20.0, 100.0, 30.0))
-        classe.text = "Turma \(String(discipline.classe))"
-        classe.tag = indexPath.row
-        classe.font = UIFont(name: "Avenir", size: 10)
-        cell.contentView.addSubview(classe)
+        cell.nameLabel.text = disc.name
+        cell.startDateLabel.text = disc.startDate
+        cell.classeLabel.text = "Turma \(String(disc.classe))"
         
         return cell
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        disc = discipline[ indexPath.row ].id
+        perfil = discipline[ indexPath.row ].profile
+        
+        performSegueWithIdentifier("presentationView", sender: self)
+        
+    }
+    
     
     @IBAction func signoutButtonTapped(sender: AnyObject) {
         
@@ -185,9 +191,24 @@ class LectureViewController: UIViewController, UITableViewDataSource, UITableVie
             NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie)
         }
         
+        
         discipline.removeAll()
         
         self.performSegueWithIdentifier("loginView", sender: self)
         
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if (segue.identifier == "presentationView") {
+            
+            // initialize new view controller and cast it as your view controller
+            let viewController = segue.destinationViewController as! PresentationViewController
+            // your new view controller should have property that will store passed value
+            viewController.id = disc
+            viewController.profile = perfil
+        }
+        
+    }
+    
 }

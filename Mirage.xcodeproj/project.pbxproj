@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8530CAE41CA2C01700081F71 /* PresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8530CAE31CA2C01700081F71 /* PresentationViewController.swift */; };
 		8575C0F31C9300E200FCAD85 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8575C0F21C9300E200FCAD85 /* Event.swift */; };
+		859748311CABF6CD007A7481 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859748301CABF6CD007A7481 /* Person.swift */; };
+		859748331CAC173B007A7481 /* Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859748321CAC173B007A7481 /* Presentation.swift */; };
 		85BADF941C9054E6000B8989 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85BADF931C9054E6000B8989 /* Assets.xcassets */; };
 		85BADFA21C9054E6000B8989 /* MirageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFA11C9054E6000B8989 /* MirageTests.swift */; };
 		85BADFAD1C9054E6000B8989 /* MirageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFAC1C9054E6000B8989 /* MirageUITests.swift */; };
@@ -16,12 +19,16 @@
 		85BADFC41C905593000B8989 /* models in Resources */ = {isa = PBXBuildFile; fileRef = 85BADFC31C905593000B8989 /* models */; };
 		85BADFC61C90559A000B8989 /* util in Resources */ = {isa = PBXBuildFile; fileRef = 85BADFC51C90559A000B8989 /* util */; };
 		85BADFC81C9055A8000B8989 /* viewcontrollers in Resources */ = {isa = PBXBuildFile; fileRef = 85BADFC71C9055A8000B8989 /* viewcontrollers */; };
-		85BADFCA1C9055BB000B8989 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 85BADFC91C9055BB000B8989 /* Info.plist */; };
 		85BADFCD1C9056B8000B8989 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85BADFCB1C9056B8000B8989 /* Main.storyboard */; };
 		85BADFD01C9056BF000B8989 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85BADFCE1C9056BF000B8989 /* LaunchScreen.storyboard */; };
 		85BADFD51C9056F7000B8989 /* RecoverPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFD21C9056F7000B8989 /* RecoverPasswordViewController.swift */; };
 		85BADFD61C9056F7000B8989 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFD31C9056F7000B8989 /* RegisterViewController.swift */; };
 		85BADFD81C905710000B8989 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFD71C905710000B8989 /* Server.swift */; };
+		85D821131CB28D7600E8A178 /* PresentationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D821121CB28D7600E8A178 /* PresentationTableViewCell.swift */; };
+		85D821151CB2A30E00E8A178 /* DisciplineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D821141CB2A30E00E8A178 /* DisciplineTableViewCell.swift */; };
+		85E1A75A1CB538960094F000 /* view in Resources */ = {isa = PBXBuildFile; fileRef = 85E1A7591CB538960094F000 /* view */; };
+		85E1A75C1CB538D80094F000 /* DisciplineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E1A75B1CB538D80094F000 /* DisciplineCell.xib */; };
+		85E1A75E1CB551390094F000 /* PresentationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E1A75D1CB551390094F000 /* PresentationCell.xib */; };
 		85EEDA921C9C495800F431B1 /* DisciplineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EEDA911C9C495800F431B1 /* DisciplineViewController.swift */; };
 		85EEDA941C9C4A9800F431B1 /* Discipline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EEDA931C9C4A9800F431B1 /* Discipline.swift */; };
 /* End PBXBuildFile section */
@@ -44,7 +51,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8530CAE31CA2C01700081F71 /* PresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentationViewController.swift; path = Mirage/viewcontrollers/PresentationViewController.swift; sourceTree = "<group>"; };
 		8575C0F21C9300E200FCAD85 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Mirage/models/Event.swift; sourceTree = "<group>"; };
+		859748301CABF6CD007A7481 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Person.swift; path = Mirage/models/Person.swift; sourceTree = "<group>"; };
+		859748321CAC173B007A7481 /* Presentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presentation.swift; path = Mirage/models/Presentation.swift; sourceTree = "<group>"; };
 		85BADF891C9054E6000B8989 /* Mirage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mirage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85BADF931C9054E6000B8989 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		85BADF9D1C9054E6000B8989 /* MirageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MirageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +75,11 @@
 		85BADFD21C9056F7000B8989 /* RecoverPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecoverPasswordViewController.swift; path = Mirage/viewcontrollers/RecoverPasswordViewController.swift; sourceTree = "<group>"; };
 		85BADFD31C9056F7000B8989 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = Mirage/viewcontrollers/RegisterViewController.swift; sourceTree = "<group>"; };
 		85BADFD71C905710000B8989 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Server.swift; path = Mirage/util/Server.swift; sourceTree = "<group>"; };
+		85D821121CB28D7600E8A178 /* PresentationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentationTableViewCell.swift; path = Mirage/viewcontrollers/PresentationTableViewCell.swift; sourceTree = "<group>"; };
+		85D821141CB2A30E00E8A178 /* DisciplineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DisciplineTableViewCell.swift; path = Mirage/viewcontrollers/DisciplineTableViewCell.swift; sourceTree = "<group>"; };
+		85E1A7591CB538960094F000 /* view */ = {isa = PBXFileReference; lastKnownFileType = folder; path = view; sourceTree = "<group>"; };
+		85E1A75B1CB538D80094F000 /* DisciplineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DisciplineCell.xib; path = Mirage/view/DisciplineCell.xib; sourceTree = "<group>"; };
+		85E1A75D1CB551390094F000 /* PresentationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PresentationCell.xib; path = Mirage/view/PresentationCell.xib; sourceTree = "<group>"; };
 		85EEDA911C9C495800F431B1 /* DisciplineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DisciplineViewController.swift; path = Mirage/viewcontrollers/DisciplineViewController.swift; sourceTree = "<group>"; };
 		85EEDA931C9C4A9800F431B1 /* Discipline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Discipline.swift; path = Mirage/models/Discipline.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,6 +112,13 @@
 		85BADF801C9054E6000B8989 = {
 			isa = PBXGroup;
 			children = (
+				85E1A75D1CB551390094F000 /* PresentationCell.xib */,
+				85E1A75B1CB538D80094F000 /* DisciplineCell.xib */,
+				85D821141CB2A30E00E8A178 /* DisciplineTableViewCell.swift */,
+				85D821121CB28D7600E8A178 /* PresentationTableViewCell.swift */,
+				859748321CAC173B007A7481 /* Presentation.swift */,
+				859748301CABF6CD007A7481 /* Person.swift */,
+				8530CAE31CA2C01700081F71 /* PresentationViewController.swift */,
 				85EEDA931C9C4A9800F431B1 /* Discipline.swift */,
 				85EEDA911C9C495800F431B1 /* DisciplineViewController.swift */,
 				8575C0F21C9300E200FCAD85 /* Event.swift */,
@@ -123,6 +145,7 @@
 		85BADF8B1C9054E6000B8989 /* Mirage */ = {
 			isa = PBXGroup;
 			children = (
+				85E1A7591CB538960094F000 /* view */,
 				85BADFC71C9055A8000B8989 /* viewcontrollers */,
 				85BADFC51C90559A000B8989 /* util */,
 				85BADFC31C905593000B8989 /* models */,
@@ -218,7 +241,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Siena Idea";
 				TargetAttributes = {
 					85BADF881C9054E6000B8989 = {
@@ -265,10 +288,12 @@
 				85BADFC81C9055A8000B8989 /* viewcontrollers in Resources */,
 				85BADFC61C90559A000B8989 /* util in Resources */,
 				85BADFC41C905593000B8989 /* models in Resources */,
+				85E1A75A1CB538960094F000 /* view in Resources */,
 				85BADFCD1C9056B8000B8989 /* Main.storyboard in Resources */,
 				85BADFD01C9056BF000B8989 /* LaunchScreen.storyboard in Resources */,
 				85BADF941C9054E6000B8989 /* Assets.xcassets in Resources */,
-				85BADFCA1C9055BB000B8989 /* Info.plist in Resources */,
+				85E1A75E1CB551390094F000 /* PresentationCell.xib in Resources */,
+				85E1A75C1CB538D80094F000 /* DisciplineCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,9 +321,14 @@
 				85EEDA941C9C4A9800F431B1 /* Discipline.swift in Sources */,
 				85EEDA921C9C495800F431B1 /* DisciplineViewController.swift in Sources */,
 				8575C0F31C9300E200FCAD85 /* Event.swift in Sources */,
+				859748331CAC173B007A7481 /* Presentation.swift in Sources */,
+				85D821151CB2A30E00E8A178 /* DisciplineTableViewCell.swift in Sources */,
+				859748311CABF6CD007A7481 /* Person.swift in Sources */,
 				85BADFD81C905710000B8989 /* Server.swift in Sources */,
+				8530CAE41CA2C01700081F71 /* PresentationViewController.swift in Sources */,
 				85BADFD51C9056F7000B8989 /* RecoverPasswordViewController.swift in Sources */,
 				85BADFD61C9056F7000B8989 /* RegisterViewController.swift in Sources */,
+				85D821131CB28D7600E8A178 /* PresentationTableViewCell.swift in Sources */,
 				85BADFC21C90557C000B8989 /* ViewController.swift in Sources */,
 				85BADFC01C905577000B8989 /* AppDelegate.swift in Sources */,
 			);
@@ -372,6 +402,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -394,6 +425,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -416,6 +448,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -431,6 +464,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -441,10 +475,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Mirage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.sienaidea.Mirage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Mirage/Mirage-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -455,10 +492,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Mirage/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.sienaidea.Mirage;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Mirage/Mirage-Bridging-Header.h";
 			};
 			name = Release;

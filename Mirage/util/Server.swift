@@ -10,8 +10,11 @@ import Foundation
 
 class Server {
     
-    static let loginURL = "http://rest-server-mirage.herokuapp.com/controller/login"
-    static let recoverPasswordURL = "http://rest-server-mirage.herokuapp.com/controller/recover-password"
-    static let disciplineURL = "http://rest-server-mirage.herokuapp.com/controller/instruction"
+    static let presentation = "/presentation"
+    
+    static let loginURL = "http://ws-edupanel.herokuapp.com/controller/login"
+    static let recoverPasswordURL = "http://ws-edupanel.herokuapp.com/controller/recover-password"
+    static let disciplineURL = "http://ws-edupanel.herokuapp.com/controller/instruction"
+    static let presentationURL = "http://ws-edupanel.herokuapp.com/controller/instruction/"
     
 }
