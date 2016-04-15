@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8530CAE41CA2C01700081F71 /* PresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8530CAE31CA2C01700081F71 /* PresentationViewController.swift */; };
+		856A2B461CBBE9B100BF4CD9 /* CreateNewPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856A2B441CBBE9B100BF4CD9 /* CreateNewPresentationViewController.swift */; };
 		8575C0F31C9300E200FCAD85 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8575C0F21C9300E200FCAD85 /* Event.swift */; };
 		859748311CABF6CD007A7481 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859748301CABF6CD007A7481 /* Person.swift */; };
 		859748331CAC173B007A7481 /* Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859748321CAC173B007A7481 /* Presentation.swift */; };
@@ -26,6 +27,7 @@
 		85BADFD81C905710000B8989 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFD71C905710000B8989 /* Server.swift */; };
 		85D821131CB28D7600E8A178 /* PresentationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D821121CB28D7600E8A178 /* PresentationTableViewCell.swift */; };
 		85D821151CB2A30E00E8A178 /* DisciplineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D821141CB2A30E00E8A178 /* DisciplineTableViewCell.swift */; };
+		85DA3FC51CBFE39B00458F31 /* CreateNewPresentationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85DA3FC41CBFE39B00458F31 /* CreateNewPresentationViewController.xib */; };
 		85E1A75A1CB538960094F000 /* view in Resources */ = {isa = PBXBuildFile; fileRef = 85E1A7591CB538960094F000 /* view */; };
 		85E1A75C1CB538D80094F000 /* DisciplineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E1A75B1CB538D80094F000 /* DisciplineCell.xib */; };
 		85E1A75E1CB551390094F000 /* PresentationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E1A75D1CB551390094F000 /* PresentationCell.xib */; };
@@ -52,6 +54,7 @@
 
 /* Begin PBXFileReference section */
 		8530CAE31CA2C01700081F71 /* PresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentationViewController.swift; path = Mirage/viewcontrollers/PresentationViewController.swift; sourceTree = "<group>"; };
+		856A2B441CBBE9B100BF4CD9 /* CreateNewPresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateNewPresentationViewController.swift; path = Mirage/viewcontrollers/CreateNewPresentationViewController.swift; sourceTree = "<group>"; };
 		8575C0F21C9300E200FCAD85 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Mirage/models/Event.swift; sourceTree = "<group>"; };
 		859748301CABF6CD007A7481 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Person.swift; path = Mirage/models/Person.swift; sourceTree = "<group>"; };
 		859748321CAC173B007A7481 /* Presentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presentation.swift; path = Mirage/models/Presentation.swift; sourceTree = "<group>"; };
@@ -77,6 +80,7 @@
 		85BADFD71C905710000B8989 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Server.swift; path = Mirage/util/Server.swift; sourceTree = "<group>"; };
 		85D821121CB28D7600E8A178 /* PresentationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentationTableViewCell.swift; path = Mirage/viewcontrollers/PresentationTableViewCell.swift; sourceTree = "<group>"; };
 		85D821141CB2A30E00E8A178 /* DisciplineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DisciplineTableViewCell.swift; path = Mirage/viewcontrollers/DisciplineTableViewCell.swift; sourceTree = "<group>"; };
+		85DA3FC41CBFE39B00458F31 /* CreateNewPresentationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CreateNewPresentationViewController.xib; path = Mirage/view/CreateNewPresentationViewController.xib; sourceTree = "<group>"; };
 		85E1A7591CB538960094F000 /* view */ = {isa = PBXFileReference; lastKnownFileType = folder; path = view; sourceTree = "<group>"; };
 		85E1A75B1CB538D80094F000 /* DisciplineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DisciplineCell.xib; path = Mirage/view/DisciplineCell.xib; sourceTree = "<group>"; };
 		85E1A75D1CB551390094F000 /* PresentationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PresentationCell.xib; path = Mirage/view/PresentationCell.xib; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 		85BADF801C9054E6000B8989 = {
 			isa = PBXGroup;
 			children = (
+				856A2B441CBBE9B100BF4CD9 /* CreateNewPresentationViewController.swift */,
+				85DA3FC41CBFE39B00458F31 /* CreateNewPresentationViewController.xib */,
 				85E1A75D1CB551390094F000 /* PresentationCell.xib */,
 				85E1A75B1CB538D80094F000 /* DisciplineCell.xib */,
 				85D821141CB2A30E00E8A178 /* DisciplineTableViewCell.swift */,
@@ -286,6 +292,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85BADFC81C9055A8000B8989 /* viewcontrollers in Resources */,
+				85DA3FC51CBFE39B00458F31 /* CreateNewPresentationViewController.xib in Resources */,
 				85BADFC61C90559A000B8989 /* util in Resources */,
 				85BADFC41C905593000B8989 /* models in Resources */,
 				85E1A75A1CB538960094F000 /* view in Resources */,
@@ -329,6 +336,7 @@
 				85BADFD51C9056F7000B8989 /* RecoverPasswordViewController.swift in Sources */,
 				85BADFD61C9056F7000B8989 /* RegisterViewController.swift in Sources */,
 				85D821131CB28D7600E8A178 /* PresentationTableViewCell.swift in Sources */,
+				856A2B461CBBE9B100BF4CD9 /* CreateNewPresentationViewController.swift in Sources */,
 				85BADFC21C90557C000B8989 /* ViewController.swift in Sources */,
 				85BADFC01C905577000B8989 /* AppDelegate.swift in Sources */,
 			);

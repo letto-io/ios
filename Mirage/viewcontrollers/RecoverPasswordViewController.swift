@@ -19,7 +19,9 @@ class RecoverPasswordViewController: UIViewController {
         // Compose a query string
         let email = emailField.text
         
-        if (email == nil) {
+        if (email!.isEmpty) {
+            
+            displayMyAlertMessage("Campo obrigatório")
             return
         }
         
@@ -50,17 +52,6 @@ class RecoverPasswordViewController: UIViewController {
                         let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(fields, forURL: response!.URL!)
                         NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: response!.URL!, mainDocumentURL: nil)
                         
-//                        for cookie in cookies {
-//                            var cookieProperties = [String: AnyObject]()
-//                            cookieProperties[NSHTTPCookieName] = cookie.name
-//                            cookieProperties[NSHTTPCookieValue] = cookie.value
-//                            cookieProperties[NSHTTPCookieDomain] = cookie.domain
-//                            cookieProperties[NSHTTPCookiePath] = cookie.path
-//                            cookieProperties[NSHTTPCookieVersion] = NSNumber(integer: cookie.version)
-//                            cookieProperties[NSHTTPCookieExpires] = NSDate().dateByAddingTimeInterval(31536000)
-//                            
-//                            print("name: \(cookie.name) value: \(cookie.value)")
-//                            print("name: \(cookie.domain) value: \(cookie.path)")
                         
                             if httpResponse.statusCode == 404 {
                                 dispatch_async(dispatch_get_main_queue(), {

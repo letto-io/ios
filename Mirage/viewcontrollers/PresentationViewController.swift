@@ -8,16 +8,18 @@
 
 import UIKit
 
-class PresentationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+class PresentationViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddNewPresentationDelegate {
     
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var navigationBar: UINavigationBar!
     
-    var id: Int = 0
-    var profile: Int = 0
+    var idDisc: Int = Discipline().id
+    var profileDisc: Int = Discipline().profile
     
     var presentation = Array<Presentation>()
+    var id = Presentation().id
     
     func refreshTableView() {
         
@@ -30,14 +32,6 @@ class PresentationViewController: UIViewController, UITableViewDataSource, UITab
         self.tableView.registerNib(nib, forCellReuseIdentifier: "cell")
         self.view?.addSubview(self.tableView)
         
-        //verifica se é um perfil de professor para criação de apresentações
-        if profile == 2 {
-            let navItem = UINavigationItem(title: "Apresentações");
-            let addItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: nil, action: Selector("selector"));
-            navItem.rightBarButtonItem = addItem;
-            navigationBar.setItems([navItem], animated: false);
-        }
-        
         getPresentation()
         
         tableView.reloadData()
@@ -47,8 +41,21 @@ class PresentationViewController: UIViewController, UITableViewDataSource, UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //refreshTableView()
+        let navItem = UINavigationItem(title: "Apresentações");
         
+        let back = UIBarButtonItem(title: "Voltar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(PresentationViewController.back))
+        
+        navItem.leftBarButtonItem = back;
+        navigationBar.setItems([navItem], animated: false);
+        
+        //verifica se é um perfil de professor para criação de apresentações
+        if profileDisc == 2 {
+            
+            let newPresentationButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(PresentationViewController.showNewPresentation))
+            
+            navItem.rightBarButtonItem = newPresentationButton;
+            navigationBar.setItems([navItem], animated: false)
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -59,9 +66,22 @@ class PresentationViewController: UIViewController, UITableViewDataSource, UITab
         refreshTableView()
     }
     
+    func showNewPresentation() {
+        
+        let newPresentation = CreateNewPresentationViewController(delegate: self)
+        
+        newPresentation.id = idDisc
+        
+        self.presentViewController(newPresentation, animated: true, completion: nil)
+    }
+    
+    func back() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     func getPresentation() {
         let request: NSMutableURLRequest = NSMutableURLRequest()
-        let urlPath = Server.presentationURL+"\(id)" + Server.presentation
+        let urlPath = Server.presentationURL+"\(idDisc)" + Server.presentation
         let url = NSURL(string: urlPath)!
         
         let cookieHeaderField = ["Set-Cookie": "key=value"]
@@ -124,11 +144,6 @@ class PresentationViewController: UIViewController, UITableViewDataSource, UITab
         })
         
         task.resume()
-        
-    }
-    
-    func newPresentation() {
-        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -146,22 +161,39 @@ class PresentationViewController: UIViewController, UITableViewDataSource, UITab
         cell.dateLabel.text = present.date
         
         cell.closePresentationButton.tag = indexPath.row
+        id = present.id
+        cell.closePresentationButton.addTarget(self, action: #selector(PresentationViewController.closePresentationButtonPressed(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         return cell
         
     }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        let row = indexPath.row
+        
+        id = presentation[ indexPath.row ].id
         
         
         performSegueWithIdentifier("", sender: self)
     }
     
-
-    @IBAction func buttonBackTapped(sender: UIBarButtonItem) {
+    
+    func closePresentationButtonPressed(sender: UIButton) {
         
-        self.performSegueWithIdentifier("disciplineView", sender: self)
+        let request: NSMutableURLRequest = NSMutableURLRequest()
+        let urlPath = Server.presentationURL+"\(idDisc)" + Server.presentation + "/" + "\(id)" + "/close"
+        let url = NSURL(string: urlPath)!
+        
+        let cookieHeaderField = ["Set-Cookie": "key=value"]
+        
+        let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(cookieHeaderField, forURL: url)
+        NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: url, mainDocumentURL: nil)
+        
+        request.HTTPMethod = "POST"
+        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
+        
+        
+        
+        
         
     }
         

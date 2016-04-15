@@ -15,12 +15,10 @@ class DisciplineViewController: UIViewController, UITableViewDataSource, UITable
     
     var discipline = Array<Discipline>()
     
-    var disc: Int = 0
-    var perfil: Int = 0
+    var id: Int = Discipline().id
+    var profile: Int = Discipline().profile
     
     func refreshTableView() {
-        
-        var aa = discipline
         
         if tableView == nil {
             return
@@ -28,7 +26,7 @@ class DisciplineViewController: UIViewController, UITableViewDataSource, UITable
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        var nib = UINib(nibName: "DisciplineCell", bundle: nil)
+        let nib = UINib(nibName: "DisciplineCell", bundle: nil)
         self.tableView.registerNib(nib, forCellReuseIdentifier: "cell")
         self.view?.addSubview(self.tableView)
 //        
@@ -173,8 +171,8 @@ class DisciplineViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        disc = discipline[ indexPath.row ].id
-        perfil = discipline[ indexPath.row ].profile
+        id = discipline[ indexPath.row ].id
+        profile = discipline[ indexPath.row ].profile
         
         performSegueWithIdentifier("presentationView", sender: self)
         
@@ -205,8 +203,8 @@ class DisciplineViewController: UIViewController, UITableViewDataSource, UITable
             // initialize new view controller and cast it as your view controller
             let viewController = segue.destinationViewController as! PresentationViewController
             // your new view controller should have property that will store passed value
-            viewController.id = disc
-            viewController.profile = perfil
+            viewController.idDisc = id
+            viewController.profileDisc = profile
         }
         
     }

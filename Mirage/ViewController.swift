@@ -31,7 +31,17 @@ class ViewController: UIViewController {
         let email = userField.text
         let password = passwordField.text
         
-        if (email == nil || password == nil) {
+        if (email!.isEmpty && password!.isEmpty) {
+            
+            displayMyAlertMessage("Email e Senha são obrigatórios")
+            return
+        } else if (email!.isEmpty) {
+            
+            displayMyAlertMessage("Email é obrigatório")
+            return
+        } else if (password!.isEmpty) {
+            
+            displayMyAlertMessage("Senha é obrigatório")
             return
         }
         
@@ -43,8 +53,6 @@ class ViewController: UIViewController {
         if NSJSONSerialization.isValidJSONObject(JSONObject) {
             let request: NSMutableURLRequest = NSMutableURLRequest()
             let url = Server.loginURL
-            
-            let _: NSError?
             
             request.URL = NSURL(string: url)
             request.HTTPMethod = "POST"
@@ -62,47 +70,37 @@ class ViewController: UIViewController {
                         if let httpResponse = response as? NSHTTPURLResponse, let fields = httpResponse.allHeaderFields as? [String : String] {
                             let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(fields, forURL: response!.URL!)
                             NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: response!.URL!, mainDocumentURL: nil)
-                            for cookie in cookies {
-                                var cookieProperties = [String: AnyObject]()
-                                cookieProperties[NSHTTPCookieName] = cookie.name
-                                cookieProperties[NSHTTPCookieValue] = cookie.value
-                                cookieProperties[NSHTTPCookieDomain] = cookie.domain
-                                cookieProperties[NSHTTPCookiePath] = cookie.path
-                                cookieProperties[NSHTTPCookieVersion] = NSNumber(integer: cookie.version)
-                                cookieProperties[NSHTTPCookieExpires] = NSDate().dateByAddingTimeInterval(31536000)
-                                
-                                print("name: \(cookie.name) value: \(cookie.value)")
-                                print("name: \(cookie.domain) value: \(cookie.path)")
-                                
-                                if httpResponse.statusCode == 404 {
-                                    dispatch_async(dispatch_get_main_queue(), {
-                                        NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie)
-                                        self.displayMyAlertMessage("Email não cadastrado")
-                                        
-                                    })
-                                }
-                                
-                                if httpResponse.statusCode == 401 {
-                                    dispatch_async(dispatch_get_main_queue(), {
-                                        NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie)
-                                        self.displayMyAlertMessage("Senha incorreta")
-                                        
-                                    })
-                                }
-                                
-                                if httpResponse.statusCode == 200 {
-                                    let newCookie = NSHTTPCookie(properties: cookieProperties)
-                                    NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(newCookie!)
+                            
+                            if httpResponse.statusCode == 401 {
+                                dispatch_async(dispatch_get_main_queue(), {
+                                    self.displayMyAlertMessage("Email ou Senha incorretos")
+                                })
+                            } else {
+                                for cookie in cookies {
+                                    var cookieProperties = [String: AnyObject]()
+                                    cookieProperties[NSHTTPCookieName] = cookie.name
+                                    cookieProperties[NSHTTPCookieValue] = cookie.value
+                                    cookieProperties[NSHTTPCookieDomain] = cookie.domain
+                                    cookieProperties[NSHTTPCookiePath] = cookie.path
+                                    cookieProperties[NSHTTPCookieVersion] = NSNumber(integer: cookie.version)
+                                    cookieProperties[NSHTTPCookieExpires] = NSDate().dateByAddingTimeInterval(31536000)
                                     
-                                    self.dismissViewControllerAnimated(true, completion: nil)
-                                    //self.performSegueWithIdentifier("disciplineView", sender: self)
+                                    print("name: \(cookie.name) value: \(cookie.value)")
+                                    print("name: \(cookie.domain) value: \(cookie.path)")
+                                    
+                                    if httpResponse.statusCode == 200 {
+                                        let newCookie = NSHTTPCookie(properties: cookieProperties)
+                                        NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(newCookie!)
+                                        
+                                        self.dismissViewControllerAnimated(true, completion: nil)
+                                    }
                                 }
-                                
                             }
-                        }
                         print(response)
                     }
                 }
+                            
+            }
                 task.resume()
         }
     }
