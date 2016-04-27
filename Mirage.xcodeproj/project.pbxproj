@@ -37,7 +37,7 @@
 		85D3CF341CD102A90058CCFF /* DisciplineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85D3CF331CD102A90058CCFF /* DisciplineCell.xib */; };
 		85D3CF361CD102B10058CCFF /* PresentationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85D3CF351CD102B10058CCFF /* PresentationCell.xib */; };
 		85D8DAB91CD103510069C6CE /* DoubtTabBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85D8DAB81CD103510069C6CE /* DoubtTabBarViewController.xib */; };
-		85D8DABB1CD1035D0069C6CE /* PresentationsTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85D8DABA1CD1035D0069C6CE /* PresentationsTabBarController.xib */; };
+		85D8DABD1CD104780069C6CE /* PresentationsTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85D8DABC1CD104780069C6CE /* PresentationsTabBarController.xib */; };
 		85DA3FC51CBFE39B00458F31 /* CreateNewPresentationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85DA3FC41CBFE39B00458F31 /* CreateNewPresentationViewController.xib */; };
 		85E1A75A1CB538960094F000 /* view in Resources */ = {isa = PBXBuildFile; fileRef = 85E1A7591CB538960094F000 /* view */; };
 		85ECF1571CC4FA4A00BF43B9 /* DisciplinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ECF1551CC4FA4A00BF43B9 /* DisciplinesViewController.swift */; };
@@ -101,7 +101,7 @@
 		85D3CF331CD102A90058CCFF /* DisciplineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DisciplineCell.xib; path = Mirage/view/viewcell/DisciplineCell.xib; sourceTree = "<group>"; };
 		85D3CF351CD102B10058CCFF /* PresentationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PresentationCell.xib; path = Mirage/view/viewcell/PresentationCell.xib; sourceTree = "<group>"; };
 		85D8DAB81CD103510069C6CE /* DoubtTabBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DoubtTabBarViewController.xib; path = Mirage/view/tabbarview/DoubtTabBarViewController.xib; sourceTree = "<group>"; };
-		85D8DABA1CD1035D0069C6CE /* PresentationsTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PresentationsTabBarController.xib; path = Mirage/view/tabbarview/PresentationsTabBarController.xib; sourceTree = "<group>"; };
+		85D8DABC1CD104780069C6CE /* PresentationsTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PresentationsTabBarController.xib; path = Mirage/view/tabbarview/PresentationsTabBarController.xib; sourceTree = "<group>"; };
 		85DA3FC41CBFE39B00458F31 /* CreateNewPresentationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CreateNewPresentationViewController.xib; path = Mirage/view/CreateNewPresentationViewController.xib; sourceTree = "<group>"; };
 		85E1A7591CB538960094F000 /* view */ = {isa = PBXFileReference; lastKnownFileType = folder; path = view; sourceTree = "<group>"; };
 		85ECF1551CC4FA4A00BF43B9 /* DisciplinesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DisciplinesViewController.swift; path = Mirage/viewcontrollers/DisciplinesViewController.swift; sourceTree = "<group>"; };
@@ -145,7 +145,7 @@
 				85C2F9571CC85646006CE08E /* ClosedPresentationViewController.swift */,
 				85C2F95B1CC86727006CE08E /* ClosedPresentationViewController.xib */,
 				85D3CF291CD101070058CCFF /* PresentationsTabBarController.swift */,
-				85D8DABA1CD1035D0069C6CE /* PresentationsTabBarController.xib */,
+				85D8DABC1CD104780069C6CE /* PresentationsTabBarController.xib */,
 				85C2F9551CC855AF006CE08E /* OpenPresentationsViewController.swift */,
 				85ECF15F1CC5093B00BF43B9 /* OpenPresentationsViewController.xib */,
 				85ECF1551CC4FA4A00BF43B9 /* DisciplinesViewController.swift */,
@@ -327,7 +327,7 @@
 				85D8DAB91CD103510069C6CE /* DoubtTabBarViewController.xib in Resources */,
 				85BADFC81C9055A8000B8989 /* viewcontrollers in Resources */,
 				85D3CF361CD102B10058CCFF /* PresentationCell.xib in Resources */,
-				85D8DABB1CD1035D0069C6CE /* PresentationsTabBarController.xib in Resources */,
+				85D8DABD1CD104780069C6CE /* PresentationsTabBarController.xib in Resources */,
 				85DA3FC51CBFE39B00458F31 /* CreateNewPresentationViewController.xib in Resources */,
 				85BADFC61C90559A000B8989 /* util in Resources */,
 				85BADFC41C905593000B8989 /* models in Resources */,
