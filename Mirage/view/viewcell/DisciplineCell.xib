@@ -24,13 +24,13 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPE-Cm-dfy">
                         <rect key="frame" x="8" y="30" width="114" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="114" id="exe-T5-weP"/>
+                            <constraint firstAttribute="width" constant="114" id="6Sl-66-Dn4"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UbU-zL-bOO">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UbU-zL-bOO">
                         <rect key="frame" x="182" y="30" width="130" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -38,12 +38,14 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="vPE-Cm-dfy" firstAttribute="bottom" secondItem="lzI-a5-Udr" secondAttribute="bottomMargin" id="7Wu-Dt-Xp5"/>
-                    <constraint firstItem="9DB-aI-k11" firstAttribute="leading" secondItem="vPE-Cm-dfy" secondAttribute="leading" id="EcE-NZ-FvU"/>
-                    <constraint firstItem="9DB-aI-k11" firstAttribute="trailing" secondItem="lzI-a5-Udr" secondAttribute="trailingMargin" id="Ueu-UT-wY6"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="UbU-zL-bOO" secondAttribute="trailing" id="cdP-sM-g1c"/>
-                    <constraint firstItem="9DB-aI-k11" firstAttribute="top" secondItem="lzI-a5-Udr" secondAttribute="top" id="gSy-80-Tdm"/>
-                    <constraint firstItem="9DB-aI-k11" firstAttribute="leading" secondItem="lzI-a5-Udr" secondAttribute="leadingMargin" id="s0A-VL-Gsf"/>
+                    <constraint firstItem="9DB-aI-k11" firstAttribute="trailing" secondItem="lzI-a5-Udr" secondAttribute="trailingMargin" id="1ar-g8-AIn"/>
+                    <constraint firstItem="vPE-Cm-dfy" firstAttribute="bottom" secondItem="lzI-a5-Udr" secondAttribute="bottomMargin" id="2v9-Su-AtU"/>
+                    <constraint firstItem="9DB-aI-k11" firstAttribute="top" secondItem="lzI-a5-Udr" secondAttribute="top" id="CzG-47-cDO"/>
+                    <constraint firstItem="9DB-aI-k11" firstAttribute="trailing" secondItem="UbU-zL-bOO" secondAttribute="trailing" id="I7I-YA-b1Y"/>
+                    <constraint firstItem="UbU-zL-bOO" firstAttribute="leading" secondItem="vPE-Cm-dfy" secondAttribute="trailing" constant="60" id="WAL-lK-D4l"/>
+                    <constraint firstItem="9DB-aI-k11" firstAttribute="leading" secondItem="lzI-a5-Udr" secondAttribute="leadingMargin" id="bFU-y5-k0H"/>
+                    <constraint firstItem="9DB-aI-k11" firstAttribute="leading" secondItem="vPE-Cm-dfy" secondAttribute="leading" id="lz1-Go-thX"/>
+                    <constraint firstItem="vPE-Cm-dfy" firstAttribute="baseline" secondItem="UbU-zL-bOO" secondAttribute="baseline" id="nvi-li-QWj"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

@@ -8,22 +8,21 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var userField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        userField.delegate = self
+        userField.keyboardType = UIKeyboardType.ASCIICapable
+        
+        passwordField.delegate = self
+        passwordField.keyboardType = UIKeyboardType.ASCIICapable
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    
     
     @IBAction func loginButtonTapped() {
         
@@ -92,7 +91,11 @@ class ViewController: UIViewController {
                                         let newCookie = NSHTTPCookie(properties: cookieProperties)
                                         NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(newCookie!)
                                         
-                                        self.dismissViewControllerAnimated(true, completion: nil)
+                                        dispatch_async(dispatch_get_main_queue(), {
+                                            let discipline = DisciplinesViewController()
+                                            
+                                            self.presentViewController(discipline, animated: true, completion: nil)
+                                        })
                                     }
                                 }
                             }
@@ -105,6 +108,7 @@ class ViewController: UIViewController {
         }
     }
     
+    //exibe mensagens de alerta
     func displayMyAlertMessage(userMessage: String) {
         
         let myAlert = UIAlertController(title: "Mensagem", message: userMessage, preferredStyle:
@@ -118,10 +122,22 @@ class ViewController: UIViewController {
         
     }
     
+    //esconde teclado ao tocar em alguma parte da tela
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         userField.resignFirstResponder()
         passwordField.resignFirstResponder()
         
+    }
+    
+    //chama função de login através do botão ir do teclado
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        userField.resignFirstResponder()
+        
+        if passwordField.becomeFirstResponder() {
+            loginButtonTapped()
+        }
+        
+        return true;
     }
     
 }

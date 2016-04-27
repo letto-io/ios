@@ -8,9 +8,15 @@
 
 import UIKit
 
-class RecoverPasswordViewController: UIViewController {
+class RecoverPasswordViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailField: UITextField!
+    
+    
+    override func viewDidLoad() {
+        emailField.delegate = self
+        emailField.keyboardType = UIKeyboardType.ASCIICapable
+    }
     
     
     
@@ -83,8 +89,8 @@ class RecoverPasswordViewController: UIViewController {
         }
     }
     
-    
     @IBAction func cancelButtonTapped(sender: AnyObject) {
+        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -104,5 +110,15 @@ class RecoverPasswordViewController: UIViewController {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         emailField.resignFirstResponder()
     }
+    
+    //chama função de login através do botão ir do teclado
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        emailField.resignFirstResponder()
+
+        sendButtonTapped()
+        
+        return true;
+    }
+
     
 }

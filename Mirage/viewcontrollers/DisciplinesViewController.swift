@@ -1,52 +1,36 @@
-    //
-//  LoggedViewController.swift
+//
+//  DisciplinesViewController.swift
 //  Mirage
 //
-//  Created by Siena Idea on 02/03/16.
+//  Created by Siena Idea on 18/04/16.
 //  Copyright © 2016 Siena Idea. All rights reserved.
 //
 
 import UIKit
 
-class DisciplineViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    var refreshControl: UIRefreshControl!
     
     var discipline = Array<Discipline>()
     
     var id: Int = Discipline().id
     var profile: Int = Discipline().profile
     
-    func refreshTableView() {
-        
-        if tableView == nil {
-            return
-        }
-        
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
-        let nib = UINib(nibName: "DisciplineCell", bundle: nil)
-        self.tableView.registerNib(nib, forCellReuseIdentifier: "cell")
-        self.view?.addSubview(self.tableView)
-//        
-//        let refreshControl = UIRefreshControl()
-//        refreshControl.addTarget(self, action: Selector(getInstruction()), forControlEvents: UIControlEvents.ValueChanged)
-//        tableView.addSubview(refreshControl)
-        
-        getInstruction()
-    
-        tableView.reloadData()
-        
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
         let cookies = cookieStorage.cookies! as [NSHTTPCookie]
         
         if cookies.isEmpty {
-            self.performSegueWithIdentifier("loginView", sender: self)
+            self.dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            refreshControl = UIRefreshControl()
+            refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+            refreshControl.addTarget(self, action: #selector(OpenPresentationsViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
+            tableView.addSubview(refreshControl) // not required when using UITableViewController
         }
     }
     
@@ -55,26 +39,44 @@ class DisciplineViewController: UIViewController, UITableViewDataSource, UITable
         let cookies = cookieStorage.cookies! as [NSHTTPCookie]
         
         if cookies.isEmpty {
-            self.performSegueWithIdentifier("loginView", sender: self)
-            
+            self.dismissViewControllerAnimated(true, completion: nil)
         } else {
-            
             refreshTableView()
         }
     }
-
     
     override func viewWillAppear(animated: Bool) {
         let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
         let cookies = cookieStorage.cookies! as [NSHTTPCookie]
         
         if cookies.isEmpty {
-            self.performSegueWithIdentifier("loginView", sender: self)
-            
+            self.dismissViewControllerAnimated(true, completion: nil)
         } else {
-            
             refreshTableView()
         }
+    }
+    
+    func refreshTableView() {
+        
+        if tableView == nil {
+            return
+        }
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        let nib = UINib(nibName: "DisciplineCell", bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: "cell")
+        view.addSubview(tableView)
+        
+        getInstruction()
+        tableView.reloadData()
+    }
+    
+    // pull to refresh
+    func refresh() {
+        getInstruction()
+        refreshControl.endRefreshing()
+        tableView.reloadData()
     }
     
     func getInstruction() {
@@ -109,10 +111,9 @@ class DisciplineViewController: UIViewController, UITableViewDataSource, UITable
                 } else {
                     
                     if (disciplineJSONData.valueForKey("error") != nil) {
-                        
-                        self.performSegueWithIdentifier("loginView", sender: self)
+                        return
                     } else {
-
+                        
                         let info : NSArray =  disciplineJSONData.valueForKey("lectures") as! NSArray
                         let event: NSArray = info.valueForKey("event") as! NSArray
                         
@@ -141,7 +142,7 @@ class DisciplineViewController: UIViewController, UITableViewDataSource, UITable
                                 self.discipline.insert(disciplines, atIndex: i)
                             }
                         }
-
+                        
                     }
                     
                     print(disciplineJSONData)
@@ -156,7 +157,7 @@ class DisciplineViewController: UIViewController, UITableViewDataSource, UITable
         return discipline.count;
     }
     
-
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! DisciplineTableViewCell
@@ -174,39 +175,27 @@ class DisciplineViewController: UIViewController, UITableViewDataSource, UITable
         id = discipline[ indexPath.row ].id
         profile = discipline[ indexPath.row ].profile
         
-        performSegueWithIdentifier("presentationView", sender: self)
+        let presentation = PresentationsTabBarController()
+        
+        presentation.idDisc = id
+        presentation.profileDisc = profile
+        
+        self.presentViewController(presentation, animated: true, completion: nil)
         
     }
     
     
-    @IBAction func signoutButtonTapped(sender: AnyObject) {
-        
-        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-        let cookies = cookieStorage.cookies! as [NSHTTPCookie]
-        print("Cookies.count: \(cookies.count)")
-        for cookie in cookies {
-            print("name: \(cookie.name) value: \(cookie.value)")
-            NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie)
-        }
-        
-        
-        discipline.removeAll()
-        
-        self.performSegueWithIdentifier("loginView", sender: self)
-        
+    init() {
+        super.init(nibName: "DisciplinesViewController", bundle: nil)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-        if (segue.identifier == "presentationView") {
-            
-            // initialize new view controller and cast it as your view controller
-            let viewController = segue.destinationViewController as! PresentationViewController
-            // your new view controller should have property that will store passed value
-            viewController.idDisc = id
-            viewController.profileDisc = profile
-        }
-        
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+    }
+
+
+    @IBAction func menuAction(sender: AnyObject) {
     }
     
+
 }

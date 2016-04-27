@@ -11,7 +11,7 @@ import UIKit
 class PresentationTableViewCell: UITableViewCell {
 
     
-    @IBOutlet weak var closePresentationButton: UIButton!
+
     @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     

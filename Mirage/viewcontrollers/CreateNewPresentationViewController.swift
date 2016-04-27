@@ -17,7 +17,7 @@ class CreateNewPresentationViewController: UIViewController {
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var nameTextField: UITextField!
     
-    var id = PresentationViewController().id
+    var id = OpenPresentationsViewController().id
     
     
     override func viewDidLoad() {
@@ -93,8 +93,7 @@ class CreateNewPresentationViewController: UIViewController {
                         
                         if httpResponse.statusCode == 200 {
                             dispatch_async(dispatch_get_main_queue(), {
-                                self.displayMyAlertMessage("Cadastrado com sucesso")
-                                
+                                self.dismissViewControllerAnimated(true, completion: nil)
                             })
                         }
                     }
