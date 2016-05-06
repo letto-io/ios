@@ -6,9 +6,9 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DoubtViewController" customModule="Mirage" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OpenDoubtViewController" customModule="Mirage" customModuleProvider="target">
             <connections>
-                <outlet property="tableView" destination="RMd-wf-TOR" id="uBL-cm-Zfc"/>
+                <outlet property="tableView" destination="QA0-zj-auh" id="CUG-Tg-9GV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,24 +17,24 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RMd-wf-TOR">
-                    <rect key="frame" x="7" y="0.0" width="360" height="608"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QA0-zj-auh">
+                    <rect key="frame" x="8" y="0.0" width="359" height="608"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
-                        <outlet property="dataSource" destination="i5M-Pr-FkT" id="hCj-1D-Hqp"/>
-                        <outlet property="delegate" destination="i5M-Pr-FkT" id="edV-kw-o3o"/>
+                        <outlet property="dataSource" destination="i5M-Pr-FkT" id="7Fk-t5-r5E"/>
+                        <outlet property="delegate" destination="i5M-Pr-FkT" id="f85-l0-vP5"/>
                     </connections>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="RMd-wf-TOR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XwC-3W-bOh"/>
-                <constraint firstItem="RMd-wf-TOR" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nil-Om-dHL"/>
-                <constraint firstItem="RMd-wf-TOR" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" id="uTo-3h-wcn"/>
-                <constraint firstAttribute="bottom" secondItem="RMd-wf-TOR" secondAttribute="bottom" constant="59" id="ulw-qR-k48"/>
+                <constraint firstAttribute="bottom" secondItem="QA0-zj-auh" secondAttribute="bottom" constant="59" id="2sr-Ab-TCZ"/>
+                <constraint firstItem="QA0-zj-auh" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" id="Xqx-Oe-on2"/>
+                <constraint firstItem="QA0-zj-auh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Xzn-vd-QLM"/>
+                <constraint firstItem="QA0-zj-auh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="gvq-3w-Fx8"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="801.5" y="272.5"/>
+            <point key="canvasLocation" x="613.5" y="271.5"/>
         </view>
     </objects>
 </document>

@@ -12,8 +12,7 @@ class Presentation: NSObject {
     
     var id: Int = 0
     var status: Int = 0
-    var date: String = ""
+    var createdat: String = ""
     var subject: String = ""
-    var time: String = ""
     var person = Person()
 }

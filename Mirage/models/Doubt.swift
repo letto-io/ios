@@ -11,12 +11,15 @@ import Foundation
 class Doubt: NSObject {
     
     var id: Int = 0
-    var stattus: String = ""
-    var text: String = ""
-    var createAt: String = ""
-    var anonymous: String = ""
+    var status: Int = 0
+    var likes: Int = 0
     var presentationId = Presentation().id
-    var personId = Person().id
-    var personName = Person().name
+    var contributions: Int = 0
+    var text: String = ""
+    var createdat: String = ""
+    var like: Bool = false
+    var anonymous: Bool = false
+    var person = Person()
     
+    var understand: Bool = false
 }

@@ -18,37 +18,23 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wLF-We-HHe">
-                    <rect key="frame" x="8" y="64" width="359" height="603"/>
+                    <rect key="frame" x="8" y="0.0" width="359" height="667"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="i5M-Pr-FkT" id="DEV-xH-nPA"/>
                         <outlet property="delegate" destination="i5M-Pr-FkT" id="tAy-nX-Tzc"/>
                     </connections>
                 </tableView>
-                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fj5-UB-kR4">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                    <color key="barTintColor" red="0.4048448241" green="0.69905849360000005" blue="0.60271915899999995" alpha="1" colorSpace="calibratedRGB"/>
-                    <textAttributes key="titleTextAttributes">
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                        <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
-                    </textAttributes>
-                    <items>
-                        <navigationItem title="Disciplinas" id="R2A-RB-IHj"/>
-                    </items>
-                </navigationBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="fj5-UB-kR4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4zg-8u-nAi"/>
-                <constraint firstItem="fj5-UB-kR4" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Di5-vS-9AC"/>
-                <constraint firstItem="wLF-We-HHe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="UVJ-RY-AsD"/>
-                <constraint firstAttribute="bottom" secondItem="wLF-We-HHe" secondAttribute="bottom" id="eys-a4-B30"/>
-                <constraint firstAttribute="trailing" secondItem="fj5-UB-kR4" secondAttribute="trailing" id="hcU-Ml-5Mz"/>
-                <constraint firstItem="wLF-We-HHe" firstAttribute="top" secondItem="fj5-UB-kR4" secondAttribute="bottom" constant="20" id="kka-Dz-niF"/>
-                <constraint firstItem="fj5-UB-kR4" firstAttribute="centerX" secondItem="wLF-We-HHe" secondAttribute="centerX" id="wYo-Ha-dEJ"/>
+                <constraint firstItem="wLF-We-HHe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="749-Sf-p8I"/>
+                <constraint firstItem="wLF-We-HHe" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" id="86t-2f-KTm"/>
+                <constraint firstItem="wLF-We-HHe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YGq-eA-BgW"/>
+                <constraint firstAttribute="bottom" secondItem="wLF-We-HHe" secondAttribute="bottom" id="fsX-A7-OpK"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="1845" y="332"/>
+            <point key="canvasLocation" x="1461.5" y="305.5"/>
         </view>
     </objects>
 </document>

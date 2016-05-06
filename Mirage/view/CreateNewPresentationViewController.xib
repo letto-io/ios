@@ -8,7 +8,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateNewPresentationViewController" customModule="Mirage" customModuleProvider="target">
             <connections>
                 <outlet property="nameTextField" destination="1h4-E4-xbW" id="KLq-Yd-Vmd"/>
-                <outlet property="navigationBar" destination="aZn-ic-oaj" id="KEF-pp-3KS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,25 +21,12 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aZn-ic-oaj">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                    <color key="barTintColor" red="0.4048448241" green="0.69905849360000005" blue="0.60271915899999995" alpha="1" colorSpace="calibratedRGB"/>
-                    <textAttributes key="titleTextAttributes">
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                    </textAttributes>
-                    <items>
-                        <navigationItem title="Nova Apresentação" id="n0H-Cb-92c"/>
-                    </items>
-                </navigationBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="aZn-ic-oaj" firstAttribute="centerX" secondItem="1h4-E4-xbW" secondAttribute="centerX" id="3AZ-DP-c53"/>
-                <constraint firstAttribute="trailing" secondItem="aZn-ic-oaj" secondAttribute="trailing" id="BFZ-0P-WQp"/>
-                <constraint firstItem="1h4-E4-xbW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="HvH-wf-2p9"/>
-                <constraint firstItem="aZn-ic-oaj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZO5-Rp-RQA"/>
-                <constraint firstItem="aZn-ic-oaj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Zkq-cc-9Nz"/>
-                <constraint firstItem="1h4-E4-xbW" firstAttribute="top" secondItem="aZn-ic-oaj" secondAttribute="bottom" constant="42" id="l5o-ir-n1K"/>
+                <constraint firstItem="1h4-E4-xbW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bP0-LQ-8H7"/>
+                <constraint firstItem="1h4-E4-xbW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="86" id="i8m-R3-wNY"/>
+                <constraint firstItem="1h4-E4-xbW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="kDr-g9-XYJ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="884" y="327"/>

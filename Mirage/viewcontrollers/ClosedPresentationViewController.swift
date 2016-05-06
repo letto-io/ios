@@ -14,36 +14,25 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
     
+    //inicialização de variaveis para disciplinas
     var idDisc: Int = Discipline().id
     var profileDisc: Int = Discipline().profile
+    var nameDisc: String = Discipline().name
+    
+    //inicialização de variaveis para apresentações
+    var id = Presentation().id
+    var subject  = Presentation().subject
     
     var presentation = Array<Presentation>()
     var closedPresentation = Array<Presentation>()
-    var id = Presentation().id
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let navItem = UINavigationItem(title: "Apresentações");
-        
-        let back = UIBarButtonItem(title: "Voltar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(ClosedPresentationViewController.back))
-        
-        navItem.leftBarButtonItem = back;
-        navigationBar.setItems([navItem], animated: false);
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(ClosedPresentationViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl) // not required when using UITableViewController
-        
-        //verifica se é um perfil de professor para criação de apresentações
-        if profileDisc == 2 {
-            
-            let newPresentationButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(OpenPresentationsViewController.showNewPresentation))
-            
-            navItem.rightBarButtonItem = newPresentationButton;
-            navigationBar.setItems([navItem], animated: false)
-        }
         
         refreshTableView()
     }
@@ -72,19 +61,6 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
         }
     }
     
-    func showNewPresentation() {
-        
-        let newPresentation = CreateNewPresentationViewController(delegate: self)
-        
-        newPresentation.id = idDisc
-        
-        self.presentViewController(newPresentation, animated: true, completion: nil)
-    }
-    
-    func back() {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     // pull to refresh
     func refresh() {
         getPresentation()
@@ -94,7 +70,7 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
     
     func getPresentation() {
         let request: NSMutableURLRequest = NSMutableURLRequest()
-        let urlPath = Server.presentationURL+"\(idDisc)" + Server.presentation
+        let urlPath = Server.presentationURL+"\(idDisc)" + "/presentation"
         let url = NSURL(string: urlPath)!
         
         let cookieHeaderField = ["Set-Cookie": "key=value"]
@@ -139,21 +115,11 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
                             
                             presentations.id = info[i].valueForKey("id") as! Int
                             presentations.person = persons
-                            presentations.date = info[i].valueForKey("date") as! String
-                            presentations.time = info[i].valueForKey("time") as! String
+                            presentations.createdat = info[i].valueForKey("createdat") as! String
                             presentations.status = info[i].valueForKey("status") as! Int
                             presentations.subject = info[i].valueForKey("subject") as! String
                             
                             self.presentation.insert(presentations, atIndex: i)
-                            var c = 0
-                            
-                            //verifica apenas as apresentacoes que estão abertas e insere em outro Array
-                            if presentations.status == 1 {
-                                c += 1
-                                for k in 0 ..< c{
-                                    self.closedPresentation.insert(presentations, atIndex: k)
-                                }
-                            }
                         }
                     }
                     print(presentationJSONData)
@@ -162,9 +128,23 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
         })
         
         task.resume()
+        
+        closedPresentation.removeAll()
+        
+        var auxPresent = Array<Presentation>()
+        
+        for i in 0 ..< presentation.count {
+            var j = 0
+            
+            if presentation[i].status == 1 {
+                auxPresent.insert(presentation[i], atIndex: j)
+                j += 1
+            }
+        }
+        
+        closedPresentation = auxPresent.reverse()
     }
-    
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return closedPresentation.count
@@ -172,24 +152,32 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! PresentationTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! PresentationTableViewCell
         
         let present = closedPresentation[ indexPath.row ]
         
         cell.subjectLabel.text = present.subject
         
-        cell.dateLabel.text = present.date
+        cell.dateLabel.text = present.createdat
         
         return cell
         
     }
     
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        id = closedPresentation[ indexPath.row ].id
+        subject = closedPresentation[ indexPath.row ].subject
         
-        id = presentation[ indexPath.row ].id
+        let doubtTabBar  = DoubtTabBarViewController()
         
+        doubtTabBar.idDisc = idDisc
+        doubtTabBar.profileDisc = profileDisc
+        doubtTabBar.nameDisc = nameDisc
         
-        performSegueWithIdentifier("", sender: self)
+        doubtTabBar.idPresent = id
+        doubtTabBar.subjectPresent = subject
+        
+        self.navigationController?.pushViewController(doubtTabBar, animated: true)
     }
     
     init() {

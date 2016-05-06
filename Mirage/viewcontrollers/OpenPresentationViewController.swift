@@ -1,51 +1,46 @@
 //
-//  PresentationsViewController.swift
+//  OpenPresentationViewController.swift
 //  Mirage
 //
-//  Created by Siena Idea on 18/04/16.
+//  Created by Siena Idea on 27/04/16.
 //  Copyright © 2016 Siena Idea. All rights reserved.
 //
 
 import UIKit
 
-class OpenPresentationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddNewPresentationDelegate {
-
+class OpenPresentationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddNewPresentationDelegate {
+   
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var navigationBar: UINavigationBar!
+    
     var refreshControl: UIRefreshControl!
     
+    //inicialização de variaveis para disciplinas
     var idDisc: Int = Discipline().id
     var profileDisc: Int = Discipline().profile
+    var nameDisc: String = Discipline().name
+    
+    //inicialização de variaveis para apresentações
+    var id = Presentation().id
+    var subject  = Presentation().subject
     
     var presentation = Array<Presentation>()
     var openPresentation = Array<Presentation>()
-    var id = Presentation().id
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let navItem = UINavigationItem(title: "Apresentações");
-        
-        let back = UIBarButtonItem(title: "Voltar", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(OpenPresentationsViewController.back))
-        
-        navItem.leftBarButtonItem = back;
-        navigationBar.setItems([navItem], animated: false);
-        
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: #selector(OpenPresentationsViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
-        tableView.addSubview(refreshControl) // not required when using UITableViewController
+        refreshControl.addTarget(self, action: #selector(OpenPresentationViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.addSubview(refreshControl)
         
-        //verifica se é um perfil de professor para criação de apresentações
+        //verifica se é um perfil de professor para fechar apresentações
         if profileDisc == 2 {
             
-            let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(OpenPresentationsViewController.longPress(_:)))
+            let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(OpenPresentationViewController.longPress(_:)))
             self.view.addGestureRecognizer(longPressRecognizer)
             
-            let newPresentationButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(OpenPresentationsViewController.showNewPresentation))
-            
-            navItem.rightBarButtonItem = newPresentationButton;
-            navigationBar.setItems([navItem], animated: false)
         }
         
         refreshTableView()
@@ -75,21 +70,6 @@ class OpenPresentationsViewController: UIViewController, UITableViewDelegate, UI
         }
     }
     
-    //cadastrar nova apresentação
-    func showNewPresentation() {
-        
-        let newPresentation = CreateNewPresentationViewController(delegate: self)
-        
-        newPresentation.id = idDisc
-        
-        self.presentViewController(newPresentation, animated: true, completion: nil)
-    }
-    
-    //voltar a tela anterior
-    func back() {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     //chama displayAlert para fechar apresentação
     func longPress(longPressGestureRecognizer: UILongPressGestureRecognizer) {
         
@@ -99,11 +79,8 @@ class OpenPresentationsViewController: UIViewController, UITableViewDelegate, UI
             
             if let indexPah = tableView.indexPathForRowAtPoint(touchPoint) {
                 
-                print(indexPah.row)
-                
                 let id  = openPresentation[ indexPah.row ].id
                 let subject  = openPresentation[ indexPah.row ].subject
-                
                 
                 displayMyAlertMessage("Fechar apresentação?", subject: subject, id: id)
             }
@@ -119,7 +96,7 @@ class OpenPresentationsViewController: UIViewController, UITableViewDelegate, UI
     
     func getPresentation() {
         let request: NSMutableURLRequest = NSMutableURLRequest()
-        let urlPath = Server.presentationURL+"\(idDisc)" + Server.presentation
+        let urlPath = Server.presentationURL+"\(idDisc)" + "/presentation"
         let url = NSURL(string: urlPath)!
         
         let cookieHeaderField = ["Set-Cookie": "key=value"]
@@ -164,21 +141,11 @@ class OpenPresentationsViewController: UIViewController, UITableViewDelegate, UI
                             
                             presentations.id = info[i].valueForKey("id") as! Int
                             presentations.person = persons
-                            presentations.date = info[i].valueForKey("date") as! String
-                            presentations.time = info[i].valueForKey("time") as! String
+                            presentations.createdat = info[i].valueForKey("createdat") as! String
                             presentations.status = info[i].valueForKey("status") as! Int
                             presentations.subject = info[i].valueForKey("subject") as! String
                             
                             self.presentation.insert(presentations, atIndex: i)
-                            var c = 0
-                            //verifica apenas as apresentacoes que estão abertas e insere em outro Array
-                            if presentations.status == 0 {
-                                c += 1
-                                for k in 0 ..< c{
-                                    self.openPresentation.insert(presentations, atIndex: k)
-                                    
-                                }
-                            }
                         }
                     }
                     print(presentationJSONData)
@@ -187,6 +154,21 @@ class OpenPresentationsViewController: UIViewController, UITableViewDelegate, UI
         })
         
         task.resume()
+        
+        openPresentation.removeAll()
+        
+        var auxPresent = Array<Presentation>()
+        
+        for i in 0 ..< presentation.count {
+            var j = 0
+            
+            if presentation[i].status == 0 {
+                auxPresent.insert(presentation[i], atIndex: j)
+                j += 1
+            }
+        }
+        
+        openPresentation = auxPresent.reverse()
     }
     
     
@@ -197,28 +179,37 @@ class OpenPresentationsViewController: UIViewController, UITableViewDelegate, UI
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! PresentationTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! PresentationTableViewCell
         
         let present = openPresentation[ indexPath.row ]
         
         cell.subjectLabel.text = present.subject
-            
-        cell.dateLabel.text = present.date
+        
+        cell.dateLabel.text = present.createdat
         
         return cell
         
     }
     
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        id = openPresentation[ indexPath.row ].id
+        subject = openPresentation[ indexPath.row ].subject
         
-        id = presentation[ indexPath.row ].id
+        let doubtTabBar  = DoubtTabBarViewController()
         
+        doubtTabBar.idDisc = idDisc
+        doubtTabBar.profileDisc = profileDisc
+        doubtTabBar.nameDisc = nameDisc
         
-        performSegueWithIdentifier("", sender: self)
+        doubtTabBar.idPresent = id
+        doubtTabBar.subjectPresent = subject
+        
+        self.navigationController?.pushViewController(doubtTabBar, animated: true)
     }
     
+    
     init() {
-        super.init(nibName: "OpenPresentationsViewController", bundle: nil)
+        super.init(nibName: "OpenPresentationViewController", bundle: nil)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -234,7 +225,7 @@ class OpenPresentationsViewController: UIViewController, UITableViewDelegate, UI
         let okAction: UIAlertAction = UIAlertAction(title: "CONFIRMAR", style: .Destructive) { action -> Void in
             
             let request: NSMutableURLRequest = NSMutableURLRequest()
-            let urlPath = Server.presentationURL+"\(self.idDisc)" + Server.presentation + "/" + "\(id)" + "/close"
+            let urlPath = Server.presentationURL+"\(self.idDisc)" + "/presentation/" + "\(id)" + "/close"
             
             request.URL = NSURL(string: urlPath)
             request.HTTPMethod = "POST"
@@ -269,7 +260,7 @@ class OpenPresentationsViewController: UIViewController, UITableViewDelegate, UI
                         if httpResponse.statusCode == 200 {
                             dispatch_async(dispatch_get_main_queue(), {
                                 
-                                self.viewDidAppear(true)
+                                self.navigationController?.popViewControllerAnimated(true)
                                 
                             })
                         }
@@ -291,5 +282,5 @@ class OpenPresentationsViewController: UIViewController, UITableViewDelegate, UI
         
         self.presentViewController(myAlert, animated: true, completion: nil)
     }
-}
 
+}

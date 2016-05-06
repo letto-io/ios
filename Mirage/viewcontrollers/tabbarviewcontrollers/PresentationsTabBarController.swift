@@ -8,10 +8,11 @@
 
 import UIKit
 
-class PresentationsTabBarController: UITabBarController, UITabBarControllerDelegate {
+class PresentationsTabBarController: UITabBarController, UITabBarControllerDelegate, AddNewPresentationDelegate {
     
     var idDisc = Discipline().id
     var profileDisc = Discipline().profile
+    var nameDisc = Discipline().name
     
     var icon1: UITabBarItem!
     var icon2: UITabBarItem!
@@ -24,15 +25,30 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
     }
 
     override func viewWillAppear(animated: Bool) {
-        let item1 = OpenPresentationsViewController()
+        
+        self.navigationItem.title = "Apresentações"
+        
+        //verifica se é um perfil de professor para criar novas apresentações
+        if profileDisc == 2 {
+
+            let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(OpenPresentationViewController.longPress(_:)))
+            self.view.addGestureRecognizer(longPressRecognizer)
+
+            let newPresentationButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(PresentationsTabBarController.showNewPresentation))
+
+            self.navigationItem.setRightBarButtonItem(newPresentationButton, animated: true)
+        }
+        
+        let item1 = OpenPresentationViewController()
         item1.idDisc = idDisc
         item1.profileDisc = profileDisc
+        item1.nameDisc = nameDisc
         
-        item1.getPresentation()
         
         let item2  = ClosedPresentationViewController()
         item2.idDisc = idDisc
         item2.profileDisc = profileDisc
+        item2.nameDisc = nameDisc
         
         item2.getPresentation()
         
@@ -42,6 +58,16 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
         item2.tabBarItem = icon2
         let controllers = [item1, item2]  //array of the root view controllers displayed by the tab bar interface
         self.viewControllers = controllers
+    }
+    
+    //cadastrar nova apresentação
+    func showNewPresentation() {
+        
+        let newPresentation = CreateNewPresentationViewController(delegate: self)
+        
+        newPresentation.id = idDisc
+        
+        self.navigationController?.pushViewController(newPresentation, animated: true)
     }
     
     //Delegate methods

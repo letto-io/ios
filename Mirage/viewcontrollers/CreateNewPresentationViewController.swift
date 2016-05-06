@@ -17,26 +17,21 @@ class CreateNewPresentationViewController: UIViewController {
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var nameTextField: UITextField!
     
-    var id = OpenPresentationsViewController().id
+    var id = OpenPresentationViewController().id
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let navItem = UINavigationItem(title: "Nova Apresentação");
+        self.navigationItem.title = "Nova Apresentação"
 
-        let newItemButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(CreateNewPresentationViewController.cancel))
         
         let saveItemButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Play, target: self, action: #selector(CreateNewPresentationViewController.saveNewPresentation))
         
-        navItem.leftBarButtonItem = newItemButton
-        navItem.rightBarButtonItem = saveItemButton
-        navigationBar.setItems([navItem], animated: false)
+        self.navigationItem.setRightBarButtonItem(saveItemButton, animated: true)
+        
     }
     
-    func cancel() {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
     
     func saveNewPresentation() {
         
@@ -55,7 +50,7 @@ class CreateNewPresentationViewController: UIViewController {
         
         if NSJSONSerialization.isValidJSONObject(JSONObject) {
             let request: NSMutableURLRequest = NSMutableURLRequest()
-            let url = Server.presentationURL+"\(id)" + Server.presentation
+            let url = Server.presentationURL+"\(id)" + "/presentation"
             
             let _: NSError?
             
@@ -93,7 +88,7 @@ class CreateNewPresentationViewController: UIViewController {
                         
                         if httpResponse.statusCode == 200 {
                             dispatch_async(dispatch_get_main_queue(), {
-                                self.dismissViewControllerAnimated(true, completion: nil)
+                                self.navigationController?.popViewControllerAnimated(true)
                             })
                         }
                     }

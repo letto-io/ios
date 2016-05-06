@@ -9,20 +9,23 @@
 import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
-
+    
     @IBOutlet weak var userField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         userField.delegate = self
         userField.keyboardType = UIKeyboardType.ASCIICapable
         
         passwordField.delegate = self
         passwordField.keyboardType = UIKeyboardType.ASCIICapable
+        
     }
 
+    
     
     @IBAction func loginButtonTapped() {
         
@@ -92,9 +95,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                         NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(newCookie!)
                                         
                                         dispatch_async(dispatch_get_main_queue(), {
-                                            let discipline = DisciplinesViewController()
                                             
-                                            self.presentViewController(discipline, animated: true, completion: nil)
+                                            let navController = UINavigationController(rootViewController: DisciplinesViewController())
+                                            
+                                            
+                                            self.presentViewController(navController, animated: true, completion: nil)
                                         })
                                     }
                                 }

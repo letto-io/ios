@@ -8,7 +8,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ClosedPresentationViewController" customModule="Mirage" customModuleProvider="target">
             <connections>
-                <outlet property="navigationBar" destination="TUg-6p-Odf" id="0O9-9k-Cln"/>
                 <outlet property="tableView" destination="my3-pI-aW2" id="DVh-km-54M"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -18,38 +17,24 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="my3-pI-aW2">
-                    <rect key="frame" x="8" y="64" width="359" height="602"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="my3-pI-aW2">
+                    <rect key="frame" x="7" y="0.0" width="360" height="608"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="zlT-fX-pRN"/>
-                        <outlet property="delegate" destination="-1" id="j5p-nC-gjr"/>
+                        <outlet property="dataSource" destination="i5M-Pr-FkT" id="AwF-ju-xUJ"/>
+                        <outlet property="delegate" destination="i5M-Pr-FkT" id="2hg-k7-erL"/>
                     </connections>
                 </tableView>
-                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TUg-6p-Odf">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                    <color key="barTintColor" red="0.4048448241" green="0.69905849360000005" blue="0.60271915899999995" alpha="1" colorSpace="calibratedRGB"/>
-                    <textAttributes key="titleTextAttributes">
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                        <offsetWrapper key="textShadowOffset" horizontal="0.0" vertical="0.0"/>
-                    </textAttributes>
-                    <items>
-                        <navigationItem title="Apresentações" id="RIV-sL-yiO"/>
-                    </items>
-                </navigationBar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="TUg-6p-Odf" firstAttribute="centerX" secondItem="my3-pI-aW2" secondAttribute="centerX" id="46n-Cp-1y2"/>
-                <constraint firstAttribute="bottom" secondItem="my3-pI-aW2" secondAttribute="bottom" constant="1" id="Cn0-XI-BGW"/>
-                <constraint firstItem="my3-pI-aW2" firstAttribute="top" secondItem="TUg-6p-Odf" secondAttribute="bottom" constant="20" id="Mqa-s8-srW"/>
-                <constraint firstItem="TUg-6p-Odf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XTh-3D-wUQ"/>
-                <constraint firstAttribute="trailing" secondItem="TUg-6p-Odf" secondAttribute="trailing" id="XoU-sS-zaX"/>
-                <constraint firstItem="my3-pI-aW2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="kzT-2Z-ir8"/>
-                <constraint firstItem="TUg-6p-Odf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="uJe-LA-a4S"/>
+                <constraint firstItem="my3-pI-aW2" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" id="CDb-a8-RKR"/>
+                <constraint firstAttribute="bottom" secondItem="my3-pI-aW2" secondAttribute="bottom" constant="59" id="iqf-lT-VrN"/>
+                <constraint firstItem="my3-pI-aW2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="mMg-uB-sVv"/>
+                <constraint firstItem="my3-pI-aW2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="yFb-GJ-0t0"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="550" y="271"/>
+            <point key="canvasLocation" x="578.5" y="163.5"/>
         </view>
     </objects>
 </document>

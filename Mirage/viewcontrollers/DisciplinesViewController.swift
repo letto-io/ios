@@ -8,15 +8,16 @@
 
 import UIKit
 
-class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class DisciplinesViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
     
     var discipline = Array<Discipline>()
     
-    var id: Int = Discipline().id
+    var id = Discipline().id
     var profile: Int = Discipline().profile
+    var name: String = Discipline().name
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +28,12 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
         if cookies.isEmpty {
             self.dismissViewControllerAnimated(true, completion: nil)
         } else {
+            
+            self.navigationItem.title = "Disciplinas"
+            
             refreshControl = UIRefreshControl()
             refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-            refreshControl.addTarget(self, action: #selector(OpenPresentationsViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
+            refreshControl.addTarget(self, action: #selector(OpenPresentationViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
             tableView.addSubview(refreshControl) // not required when using UITableViewController
         }
     }
@@ -42,6 +46,7 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
             self.dismissViewControllerAnimated(true, completion: nil)
         } else {
             refreshTableView()
+            self.navigationItem.title = "Disciplinas"
         }
     }
     
@@ -53,6 +58,7 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
             self.dismissViewControllerAnimated(true, completion: nil)
         } else {
             refreshTableView()
+            self.navigationItem.title = "Disciplinas"
         }
     }
     
@@ -99,11 +105,11 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
             if (error != nil) {
                 print("Download Error: \(error!.localizedDescription)")
             } else {
-                var studentJSONParseError: NSError?
+                var disciplineJSONParseError: NSError?
                 
                 let disciplineJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
                 
-                if (studentJSONParseError != nil) {
+                if (disciplineJSONParseError != nil) {
                     
                     //print("JSON Parsing Error: \(studentJSONParseError!.localizedDescription)")
                     return
@@ -174,13 +180,15 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
         
         id = discipline[ indexPath.row ].id
         profile = discipline[ indexPath.row ].profile
+        name = discipline[ indexPath.row ].name
         
-        let presentation = PresentationsTabBarController()
+        let presentationTabBar = PresentationsTabBarController()
         
-        presentation.idDisc = id
-        presentation.profileDisc = profile
+        presentationTabBar.idDisc = id
+        presentationTabBar.profileDisc = profile
+        presentationTabBar.nameDisc = name
         
-        self.presentViewController(presentation, animated: true, completion: nil)
+        self.navigationController?.pushViewController(presentationTabBar, animated: true)
         
     }
     
