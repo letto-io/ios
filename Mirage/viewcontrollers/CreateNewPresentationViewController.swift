@@ -14,7 +14,6 @@ protocol AddNewPresentationDelegate {
 
 class CreateNewPresentationViewController: UIViewController {
 
-    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var nameTextField: UITextField!
     
     var id = OpenPresentationViewController().id
@@ -26,7 +25,7 @@ class CreateNewPresentationViewController: UIViewController {
         self.navigationItem.title = "Nova Apresentação"
 
         
-        let saveItemButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Play, target: self, action: #selector(CreateNewPresentationViewController.saveNewPresentation))
+        let saveItemButton = UIBarButtonItem(image: UIImage(named: "send-black.png"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(CreateNewPresentationViewController.saveNewPresentation))
         
         self.navigationItem.setRightBarButtonItem(saveItemButton, animated: true)
         

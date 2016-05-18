@@ -13,12 +13,12 @@ class DisciplineTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var classeLabel: UILabel!
     @IBOutlet weak var startDateLabel: UILabel!
+    @IBOutlet weak var bookImageView: UIImageView!
     
         
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

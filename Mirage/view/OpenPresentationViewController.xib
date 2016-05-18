@@ -19,14 +19,14 @@
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nUm-Mc-KeV">
                     <rect key="frame" x="7" y="0.0" width="360" height="609"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="i5M-Pr-FkT" id="iH4-xc-UPT"/>
                         <outlet property="delegate" destination="i5M-Pr-FkT" id="hW0-L3-SU7"/>
                     </connections>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="nUm-Mc-KeV" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="4rk-aQ-17Q"/>
                 <constraint firstItem="nUm-Mc-KeV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="IZe-wR-Ldf"/>

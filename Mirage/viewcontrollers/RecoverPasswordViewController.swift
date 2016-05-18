@@ -16,11 +16,15 @@ class RecoverPasswordViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         emailField.delegate = self
         emailField.keyboardType = UIKeyboardType.ASCIICapable
+        
+        let recoverPasswordButton = UIBarButtonItem(image: UIImage(named: "send-black.png"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(RecoverPasswordViewController.sendButtonTapped))
+        
+        self.navigationItem.setRightBarButtonItem(recoverPasswordButton, animated: true)
     }
     
     
     
-    @IBAction func sendButtonTapped() {
+    func sendButtonTapped() {
         
         // Compose a query string
         let email = emailField.text
@@ -87,11 +91,6 @@ class RecoverPasswordViewController: UIViewController, UITextFieldDelegate {
             }
             task.resume()
         }
-    }
-    
-    @IBAction func cancelButtonTapped(sender: AnyObject) {
-        
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func displayMyAlertMessage(userMessage: String) {

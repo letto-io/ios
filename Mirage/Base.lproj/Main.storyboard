@@ -25,10 +25,10 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2D-aH-7b9">
                                 <rect key="frame" x="50" y="132" width="280" height="30"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="0.59607843137254901" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="ENTRAR">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="loginButtonTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="IaH-Ic-uUX"/>
@@ -60,7 +60,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Q2D-aH-7b9" firstAttribute="trailing" secondItem="cNM-3h-biU" secondAttribute="trailing" id="17j-R2-C7I"/>
                             <constraint firstItem="5nT-7n-eMs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="22" id="1YB-nu-6kw"/>
@@ -131,7 +131,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="5Hj-lK-dQy" firstAttribute="leading" secondItem="G1f-4I-FiL" secondAttribute="leadingMargin" constant="14" id="884-6j-NPy"/>
                             <constraint firstItem="0XG-nH-O1O" firstAttribute="trailing" secondItem="G1f-4I-FiL" secondAttribute="trailingMargin" id="IH1-dd-chX"/>
@@ -180,26 +180,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KoS-Cx-2fs">
-                                <rect key="frame" x="55" y="134" width="270" height="30"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                <state key="normal" title="ENVIAR">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="sendButtonTapped" destination="BhP-HI-FG1" eventType="touchUpInside" id="lTC-9Y-JlQ"/>
-                                </connections>
-                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="KoS-Cx-2fs" firstAttribute="top" secondItem="vpm-JJ-ixx" secondAttribute="bottom" constant="82" id="19a-Ua-W2z"/>
-                            <constraint firstItem="vpm-JJ-ixx" firstAttribute="leading" secondItem="1rL-D1-QFK" secondAttribute="leadingMargin" constant="34" id="U5U-Z5-fGD"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="vpm-JJ-ixx" secondAttribute="trailing" constant="29" id="XeE-Dk-kKg"/>
-                            <constraint firstItem="vpm-JJ-ixx" firstAttribute="top" secondItem="pMC-0j-IPj" secondAttribute="bottom" constant="22" id="XeS-ac-1TZ"/>
-                            <constraint firstItem="KoS-Cx-2fs" firstAttribute="leading" secondItem="1rL-D1-QFK" secondAttribute="leadingMargin" constant="39" id="Z5I-cG-Bts"/>
-                            <constraint firstItem="vpm-JJ-ixx" firstAttribute="centerX" secondItem="KoS-Cx-2fs" secondAttribute="centerX" id="ZJG-sL-Mtt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vpm-JJ-ixx" secondAttribute="trailing" constant="29" id="NtT-ze-h2Q"/>
+                            <constraint firstItem="vpm-JJ-ixx" firstAttribute="top" secondItem="pMC-0j-IPj" secondAttribute="bottom" constant="22" id="eTH-qh-8Ct"/>
+                            <constraint firstItem="vpm-JJ-ixx" firstAttribute="leading" secondItem="1rL-D1-QFK" secondAttribute="leadingMargin" constant="34" id="jAU-K4-fVc"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>

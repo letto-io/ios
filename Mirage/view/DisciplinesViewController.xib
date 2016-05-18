@@ -19,14 +19,14 @@
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wLF-We-HHe">
                     <rect key="frame" x="8" y="0.0" width="359" height="667"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="i5M-Pr-FkT" id="DEV-xH-nPA"/>
                         <outlet property="delegate" destination="i5M-Pr-FkT" id="tAy-nX-Tzc"/>
                     </connections>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="wLF-We-HHe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="749-Sf-p8I"/>
                 <constraint firstItem="wLF-We-HHe" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" id="86t-2f-KTm"/>

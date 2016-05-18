@@ -113,6 +113,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    
     //exibe mensagens de alerta
     func displayMyAlertMessage(userMessage: String) {
         

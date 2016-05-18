@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         // Set navigation bar tint / background colour
-        UINavigationBar.appearance().barTintColor = UIColor.lightGrayColor()
+        UINavigationBar.appearance().barTintColor = UIColor(hue: 0.5167, saturation: 1, brightness: 0.75, alpha: 1.0) /* #00acc1 */
         
         // Set Navigation bar Title colour
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
@@ -25,10 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Set navigation bar ItemButton tint colour
         UIBarButtonItem.appearance().tintColor = UIColor.darkGrayColor()
         
-        
         //Set navigation bar Back button tint colour
         UINavigationBar.appearance().tintColor = UIColor.whiteColor()
         
+        UITabBar.appearance().barTintColor = UIColor(hue: 0.5083, saturation: 1, brightness: 0.47, alpha: 1.0) /* #007279 */
+        
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.blackColor()], forState:.Normal)
+        
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName: UIColor.whiteColor()], forState:.Selected)
         
         return true
     }

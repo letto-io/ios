@@ -16,15 +16,15 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9DB-aI-k11">
-                        <rect key="frame" x="8" y="0.0" width="304" height="21"/>
+                        <rect key="frame" x="54" y="0.0" width="258" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vPE-Cm-dfy">
-                        <rect key="frame" x="8" y="30" width="114" height="21"/>
+                        <rect key="frame" x="54" y="30" width="68" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="114" id="6Sl-66-Dn4"/>
+                            <constraint firstAttribute="width" constant="68" id="d2q-uO-gsu"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -36,24 +36,34 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="miC-dm-Mw8">
+                        <rect key="frame" x="8" y="0.0" width="35" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="35" id="n55-Ma-0rx"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="9DB-aI-k11" firstAttribute="trailing" secondItem="lzI-a5-Udr" secondAttribute="trailingMargin" id="1ar-g8-AIn"/>
-                    <constraint firstItem="vPE-Cm-dfy" firstAttribute="bottom" secondItem="lzI-a5-Udr" secondAttribute="bottomMargin" id="2v9-Su-AtU"/>
-                    <constraint firstItem="9DB-aI-k11" firstAttribute="top" secondItem="lzI-a5-Udr" secondAttribute="top" id="CzG-47-cDO"/>
-                    <constraint firstItem="9DB-aI-k11" firstAttribute="trailing" secondItem="UbU-zL-bOO" secondAttribute="trailing" id="I7I-YA-b1Y"/>
-                    <constraint firstItem="UbU-zL-bOO" firstAttribute="leading" secondItem="vPE-Cm-dfy" secondAttribute="trailing" constant="60" id="WAL-lK-D4l"/>
-                    <constraint firstItem="9DB-aI-k11" firstAttribute="leading" secondItem="lzI-a5-Udr" secondAttribute="leadingMargin" id="bFU-y5-k0H"/>
-                    <constraint firstItem="9DB-aI-k11" firstAttribute="leading" secondItem="vPE-Cm-dfy" secondAttribute="leading" id="lz1-Go-thX"/>
-                    <constraint firstItem="vPE-Cm-dfy" firstAttribute="baseline" secondItem="UbU-zL-bOO" secondAttribute="baseline" id="nvi-li-QWj"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="miC-dm-Mw8" secondAttribute="bottom" constant="16" id="3vV-0m-N1L"/>
+                    <constraint firstItem="miC-dm-Mw8" firstAttribute="top" secondItem="lzI-a5-Udr" secondAttribute="top" id="BKY-lV-pCJ"/>
+                    <constraint firstItem="miC-dm-Mw8" firstAttribute="top" secondItem="9DB-aI-k11" secondAttribute="top" id="KYk-Bb-EB1"/>
+                    <constraint firstItem="vPE-Cm-dfy" firstAttribute="bottom" secondItem="lzI-a5-Udr" secondAttribute="bottomMargin" id="Kgd-ZH-IsR"/>
+                    <constraint firstItem="9DB-aI-k11" firstAttribute="leading" secondItem="miC-dm-Mw8" secondAttribute="trailing" constant="11" id="NNU-Vo-bSD"/>
+                    <constraint firstItem="miC-dm-Mw8" firstAttribute="leading" secondItem="lzI-a5-Udr" secondAttribute="leadingMargin" id="a5r-Uf-qW6"/>
+                    <constraint firstItem="9DB-aI-k11" firstAttribute="leading" secondItem="vPE-Cm-dfy" secondAttribute="leading" id="eob-p3-faN"/>
+                    <constraint firstItem="UbU-zL-bOO" firstAttribute="leading" secondItem="vPE-Cm-dfy" secondAttribute="trailing" constant="60" id="fgG-yR-Hv9"/>
+                    <constraint firstItem="9DB-aI-k11" firstAttribute="trailing" secondItem="lzI-a5-Udr" secondAttribute="trailingMargin" id="pFo-bg-ukT"/>
+                    <constraint firstItem="9DB-aI-k11" firstAttribute="trailing" secondItem="UbU-zL-bOO" secondAttribute="trailing" id="pI7-WW-mRD"/>
+                    <constraint firstItem="vPE-Cm-dfy" firstAttribute="baseline" secondItem="UbU-zL-bOO" secondAttribute="baseline" id="y6X-mk-3el"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="bookImageView" destination="miC-dm-Mw8" id="UJn-AL-Lac"/>
                 <outlet property="classeLabel" destination="vPE-Cm-dfy" id="d34-Pr-8CO"/>
                 <outlet property="nameLabel" destination="9DB-aI-k11" id="sLA-he-yfD"/>
                 <outlet property="startDateLabel" destination="UbU-zL-bOO" id="wI3-mE-i22"/>
             </connections>
-            <point key="canvasLocation" x="649" y="230"/>
+            <point key="canvasLocation" x="792" y="301"/>
         </tableViewCell>
     </objects>
 </document>

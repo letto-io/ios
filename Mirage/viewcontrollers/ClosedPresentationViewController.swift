@@ -156,8 +156,10 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
         
         let present = closedPresentation[ indexPath.row ]
         
-        cell.subjectLabel.text = present.subject
+        cell.subjectLabel.textColor = ColorUtil.colorPrimaryText
+        cell.dateLabel.textColor = ColorUtil.colorSecondaryText
         
+        cell.subjectLabel.text = present.subject
         cell.dateLabel.text = present.createdat
         
         return cell

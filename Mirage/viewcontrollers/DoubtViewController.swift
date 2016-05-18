@@ -11,8 +11,9 @@ import UIKit
 class DoubtViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var navigationBar: UINavigationBar!
+    var refreshControl: UIRefreshControl!
     
+    var id  = Doubt().id
     var idDisc = Discipline().id
     var profileDisc = Discipline().profile
     var nameDisc = Discipline().name
@@ -23,8 +24,13 @@ class DoubtViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-       refreshTableView()
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(DoubtViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
+        tableView.addSubview(refreshControl) // not required when using UITableViewController
+        
+        refreshTableView()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -49,6 +55,13 @@ class DoubtViewController: UIViewController, UITableViewDelegate, UITableViewDat
             getDoubt()
             tableView.reloadData()
         }
+    }
+    
+    // pull to refresh
+    func refresh() {
+        getDoubt()
+        refreshControl.endRefreshing()
+        tableView.reloadData()
     }
     
     func getDoubt() {
@@ -135,6 +148,8 @@ class DoubtViewController: UIViewController, UITableViewDelegate, UITableViewDat
         })
         
         task.resume()
+        
+        doubt.sortInPlace({ $0.createdat < $1.createdat })
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -148,16 +163,153 @@ class DoubtViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let doubts = doubt[ indexPath.row ]
         
-        cell.nameLabel.text = doubts.person.name
+        cell.nameLabel.textColor = ColorUtil.colorPrimaryText
+        cell.textDoubtLabel.textColor = ColorUtil.colorSecondaryText
+        cell.hourLabel.textColor = ColorUtil.colorSecondaryText
+        cell.countLikesLabel.textColor = ColorUtil.colorSecondaryText
+        cell.understandLabel.textColor = ColorUtil.colorSecondaryText
+        
+        if doubts.anonymous == false {
+            cell.nameLabel.text = doubts.person.name
+        } else {
+            cell.nameLabel.text = "Anônimo"
+        }
+        
         cell.textDoubtLabel.text = doubts.text
         cell.hourLabel.text = doubts.createdat
-        cell.likesLabel.text = String(doubts.likes)
-
+        cell.countLikesLabel.text = String(doubts.likes)
+        cell.understandLabel.text = "ENTENDI"
+        
+        let imageLikeButton = UIImage(named: "arrow-up-bold-circle-outline.png")
+        let imageUnderstandButton = UIImage(named: "checkbox-blank-outline-48.png")
+        
+        cell.likeButton.setImage(imageLikeButton, forState: .Normal)
+        cell.understandButton.setImage(imageUnderstandButton, forState: .Normal)
+        cell.likeButton.tintColor = ColorUtil.colorSecondaryText
+        cell.understandButton.tintColor = ColorUtil.colorSecondaryText
+        
+        //passagem de id para url de like na dúvida
+        
+        id = doubts.id
+        
+        if doubts.like == false {
+            cell.likeButton.addTarget(self, action: #selector(DoubtViewController.likeButtonPressed), forControlEvents: .TouchUpInside)
+        } else {
+            cell.likeButton.addTarget(self, action: #selector(DoubtViewController.deleteLikeButtonPressed), forControlEvents: .TouchUpInside)
+        }
+        
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        id = doubt[ indexPath.row ].id
+    }
+    
+    func likeButtonPressed() {
+        let request: NSMutableURLRequest = NSMutableURLRequest()
+        let urlPath = Server.presentationURL+"\(idDisc)" + "/presentation/" + "\(idPresent)" + "/doubt/" + "\(id)" + "/like"
         
+        request.URL = NSURL(string: urlPath)
+        request.HTTPMethod = "POST"
+        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
+            
+            if error != nil {
+                print("error=\(error)")
+                return
+            } else {
+                if let httpResponse = response as? NSHTTPURLResponse, let fields = httpResponse.allHeaderFields as? [String : String] {
+                    let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(fields, forURL: response!.URL!)
+                    NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: response!.URL!, mainDocumentURL: nil)
+                    
+                    if httpResponse.statusCode == 404 {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            
+                            self.displayMyAlertMessage("Não foi possível completar sua requisição")
+                        })
+                    }
+                    
+                    if httpResponse.statusCode == 401 {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            
+                            self.displayMyAlertMessage("Você não pode ranquear sua propria dúvida!")
+                        })
+                    }
+                    
+                    
+                    if httpResponse.statusCode == 200 {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            
+                            self.tableView.reloadData()
+                        })
+                    }
+                }
+                print(response)
+            }
+        }
+        task.resume()
+        
+    }
+    
+    func deleteLikeButtonPressed() {
+        let request: NSMutableURLRequest = NSMutableURLRequest()
+        let urlPath = Server.presentationURL+"\(idDisc)" + "/presentation/" + "\(idPresent)" + "/doubt/" + "\(id)" + "/like"
+        
+        request.URL = NSURL(string: urlPath)
+        request.HTTPMethod = "delete"
+        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
+            
+            if error != nil {
+                print("error=\(error)")
+                return
+            } else {
+                if let httpResponse = response as? NSHTTPURLResponse, let fields = httpResponse.allHeaderFields as? [String : String] {
+                    let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(fields, forURL: response!.URL!)
+                    NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: response!.URL!, mainDocumentURL: nil)
+                    
+                    if httpResponse.statusCode == 404 {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            
+                            self.displayMyAlertMessage("Não foi possível completar sua requisição")
+                        })
+                    }
+                    
+                    if httpResponse.statusCode == 401 {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            
+                            self.displayMyAlertMessage("Delete like erro 401!")
+                        })
+                    }
+                    
+                    
+                    if httpResponse.statusCode == 200 {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            
+                            self.refreshTableView()
+                        })
+                    }
+                }
+                print(response)
+            }
+        }
+        task.resume()
+    }
+    
+    func displayMyAlertMessage(userMessage: String) {
+        
+        let myAlert = UIAlertController(title: "Mensagem", message: userMessage, preferredStyle:
+            UIAlertControllerStyle.Alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: nil)
+        
+        myAlert.addAction(okAction)
+        
+        self.presentViewController(myAlert, animated: true, completion: nil)
     }
     
     init() {
@@ -167,6 +319,4 @@ class DoubtViewController: UIViewController, UITableViewDelegate, UITableViewDat
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
-
-    
 }

@@ -13,13 +13,15 @@ class DoubtTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var textDoubtLabel: UILabel!
     @IBOutlet weak var hourLabel: UILabel!
-    @IBOutlet weak var likesLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var understandButton: UIButton!
+    @IBOutlet weak var understandLabel: UILabel!
+    @IBOutlet weak var countLikesLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

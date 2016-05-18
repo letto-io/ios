@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		851DF7391CE368A300CB3C79 /* ClosedDoubtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851DF7371CE368A300CB3C79 /* ClosedDoubtViewController.swift */; };
+		851DF73C1CE368C500CB3C79 /* ClosedDoubtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 851DF73B1CE368C500CB3C79 /* ClosedDoubtViewController.xib */; };
+		851DF73F1CE36FF800CB3C79 /* RankingDoubtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851DF73D1CE36FF800CB3C79 /* RankingDoubtViewController.swift */; };
+		851DF7421CE3701900CB3C79 /* RankingDoubtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 851DF7411CE3701900CB3C79 /* RankingDoubtViewController.xib */; };
 		856A2B461CBBE9B100BF4CD9 /* CreateNewPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856A2B441CBBE9B100BF4CD9 /* CreateNewPresentationViewController.swift */; };
 		8570F5281CDA9CE0000E41B4 /* OpenDoubtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8570F5261CDA9CE0000E41B4 /* OpenDoubtViewController.swift */; };
 		8570F52B1CDA9ED5000E41B4 /* OpenDoubtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8570F52A1CDA9ED5000E41B4 /* OpenDoubtViewController.xib */; };
@@ -30,6 +34,7 @@
 		85C2F95C1CC86727006CE08E /* ClosedPresentationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85C2F95B1CC86727006CE08E /* ClosedPresentationViewController.xib */; };
 		85C766AA1CD1A7370026AE36 /* OpenPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C766A81CD1A7370026AE36 /* OpenPresentationViewController.swift */; };
 		85C766AD1CD1A90D0026AE36 /* OpenPresentationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85C766AC1CD1A90D0026AE36 /* OpenPresentationViewController.xib */; };
+		85C7C9731CE9F44F00BDCEE1 /* CheckBoxControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C7C9721CE9F44F00BDCEE1 /* CheckBoxControl.swift */; };
 		85CA80741CD7754500194E67 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CA80721CD7754500194E67 /* MenuViewController.swift */; };
 		85CA80771CD77D5600194E67 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85CA80761CD77D5600194E67 /* MenuViewController.xib */; };
 		85CA807F1CD7834400194E67 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CA807E1CD7834400194E67 /* BaseViewController.swift */; };
@@ -48,6 +53,9 @@
 		85D8DABD1CD104780069C6CE /* PresentationsTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85D8DABC1CD104780069C6CE /* PresentationsTabBarController.xib */; };
 		85DA3FC51CBFE39B00458F31 /* CreateNewPresentationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85DA3FC41CBFE39B00458F31 /* CreateNewPresentationViewController.xib */; };
 		85E1A75A1CB538960094F000 /* view in Resources */ = {isa = PBXBuildFile; fileRef = 85E1A7591CB538960094F000 /* view */; };
+		85E348841CE4A63200DCD6C1 /* CreateNewDoubtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E348821CE4A63200DCD6C1 /* CreateNewDoubtViewController.swift */; };
+		85E348871CE4A65300DCD6C1 /* CreateNewDoubtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85E348861CE4A65300DCD6C1 /* CreateNewDoubtViewController.xib */; };
+		85E3488B1CE4BD5B00DCD6C1 /* ColorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E3488A1CE4BD5B00DCD6C1 /* ColorUtil.swift */; };
 		85ECF1571CC4FA4A00BF43B9 /* DisciplinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ECF1551CC4FA4A00BF43B9 /* DisciplinesViewController.swift */; };
 		85ECF15A1CC4FAEC00BF43B9 /* DisciplinesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85ECF1591CC4FAEC00BF43B9 /* DisciplinesViewController.xib */; };
 		85EEDA941C9C4A9800F431B1 /* Discipline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EEDA931C9C4A9800F431B1 /* Discipline.swift */; };
@@ -71,6 +79,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		851DF7371CE368A300CB3C79 /* ClosedDoubtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClosedDoubtViewController.swift; path = Mirage/viewcontrollers/ClosedDoubtViewController.swift; sourceTree = "<group>"; };
+		851DF73B1CE368C500CB3C79 /* ClosedDoubtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ClosedDoubtViewController.xib; path = Mirage/view/ClosedDoubtViewController.xib; sourceTree = "<group>"; };
+		851DF73D1CE36FF800CB3C79 /* RankingDoubtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RankingDoubtViewController.swift; path = Mirage/viewcontrollers/RankingDoubtViewController.swift; sourceTree = "<group>"; };
+		851DF7411CE3701900CB3C79 /* RankingDoubtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RankingDoubtViewController.xib; path = Mirage/view/RankingDoubtViewController.xib; sourceTree = "<group>"; };
 		856A2B441CBBE9B100BF4CD9 /* CreateNewPresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateNewPresentationViewController.swift; path = Mirage/viewcontrollers/CreateNewPresentationViewController.swift; sourceTree = "<group>"; };
 		8570F5261CDA9CE0000E41B4 /* OpenDoubtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OpenDoubtViewController.swift; path = Mirage/viewcontrollers/OpenDoubtViewController.swift; sourceTree = "<group>"; };
 		8570F52A1CDA9ED5000E41B4 /* OpenDoubtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OpenDoubtViewController.xib; path = Mirage/view/OpenDoubtViewController.xib; sourceTree = "<group>"; };
@@ -101,6 +113,7 @@
 		85C2F95B1CC86727006CE08E /* ClosedPresentationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ClosedPresentationViewController.xib; path = Mirage/view/ClosedPresentationViewController.xib; sourceTree = "<group>"; };
 		85C766A81CD1A7370026AE36 /* OpenPresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OpenPresentationViewController.swift; path = Mirage/viewcontrollers/OpenPresentationViewController.swift; sourceTree = "<group>"; };
 		85C766AC1CD1A90D0026AE36 /* OpenPresentationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OpenPresentationViewController.xib; path = Mirage/view/OpenPresentationViewController.xib; sourceTree = "<group>"; };
+		85C7C9721CE9F44F00BDCEE1 /* CheckBoxControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckBoxControl.swift; path = Mirage/util/CheckBoxControl.swift; sourceTree = "<group>"; };
 		85CA80721CD7754500194E67 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuViewController.swift; path = Mirage/viewcontrollers/MenuViewController.swift; sourceTree = "<group>"; };
 		85CA80761CD77D5600194E67 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MenuViewController.xib; path = Mirage/view/MenuViewController.xib; sourceTree = "<group>"; };
 		85CA807E1CD7834400194E67 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = Mirage/viewcontrollers/BaseViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +132,9 @@
 		85D8DABC1CD104780069C6CE /* PresentationsTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PresentationsTabBarController.xib; path = Mirage/view/tabbarview/PresentationsTabBarController.xib; sourceTree = "<group>"; };
 		85DA3FC41CBFE39B00458F31 /* CreateNewPresentationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CreateNewPresentationViewController.xib; path = Mirage/view/CreateNewPresentationViewController.xib; sourceTree = "<group>"; };
 		85E1A7591CB538960094F000 /* view */ = {isa = PBXFileReference; lastKnownFileType = folder; path = view; sourceTree = "<group>"; };
+		85E348821CE4A63200DCD6C1 /* CreateNewDoubtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateNewDoubtViewController.swift; path = Mirage/viewcontrollers/CreateNewDoubtViewController.swift; sourceTree = "<group>"; };
+		85E348861CE4A65300DCD6C1 /* CreateNewDoubtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CreateNewDoubtViewController.xib; path = Mirage/view/CreateNewDoubtViewController.xib; sourceTree = "<group>"; };
+		85E3488A1CE4BD5B00DCD6C1 /* ColorUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorUtil.swift; path = Mirage/util/ColorUtil.swift; sourceTree = "<group>"; };
 		85ECF1551CC4FA4A00BF43B9 /* DisciplinesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DisciplinesViewController.swift; path = Mirage/viewcontrollers/DisciplinesViewController.swift; sourceTree = "<group>"; };
 		85ECF1591CC4FAEC00BF43B9 /* DisciplinesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DisciplinesViewController.xib; path = Mirage/view/DisciplinesViewController.xib; sourceTree = "<group>"; };
 		85EEDA931C9C4A9800F431B1 /* Discipline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Discipline.swift; path = Mirage/models/Discipline.swift; sourceTree = "<group>"; };
@@ -152,6 +168,13 @@
 		85BADF801C9054E6000B8989 = {
 			isa = PBXGroup;
 			children = (
+				85E3488A1CE4BD5B00DCD6C1 /* ColorUtil.swift */,
+				85E348821CE4A63200DCD6C1 /* CreateNewDoubtViewController.swift */,
+				85E348861CE4A65300DCD6C1 /* CreateNewDoubtViewController.xib */,
+				851DF73D1CE36FF800CB3C79 /* RankingDoubtViewController.swift */,
+				851DF7411CE3701900CB3C79 /* RankingDoubtViewController.xib */,
+				851DF7371CE368A300CB3C79 /* ClosedDoubtViewController.swift */,
+				851DF73B1CE368C500CB3C79 /* ClosedDoubtViewController.xib */,
 				8570F5261CDA9CE0000E41B4 /* OpenDoubtViewController.swift */,
 				8570F52A1CDA9ED5000E41B4 /* OpenDoubtViewController.xib */,
 				85CA80821CD7913200194E67 /* DoubtTableViewCell.swift */,
@@ -177,6 +200,7 @@
 				85D3CF351CD102B10058CCFF /* PresentationCell.xib */,
 				85D3CF2F1CD102880058CCFF /* DisciplineTableViewCell.swift */,
 				85D3CF331CD102A90058CCFF /* DisciplineCell.xib */,
+				85C7C9721CE9F44F00BDCEE1 /* CheckBoxControl.swift */,
 				859748321CAC173B007A7481 /* Presentation.swift */,
 				859748301CABF6CD007A7481 /* Person.swift */,
 				85EEDA931C9C4A9800F431B1 /* Discipline.swift */,
@@ -345,12 +369,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				851DF7421CE3701900CB3C79 /* RankingDoubtViewController.xib in Resources */,
 				85C766AD1CD1A90D0026AE36 /* OpenPresentationViewController.xib in Resources */,
+				851DF73C1CE368C500CB3C79 /* ClosedDoubtViewController.xib in Resources */,
 				85D8DAB91CD103510069C6CE /* DoubtTabBarViewController.xib in Resources */,
 				85BADFC81C9055A8000B8989 /* viewcontrollers in Resources */,
 				85D3CF361CD102B10058CCFF /* PresentationCell.xib in Resources */,
 				8570F52B1CDA9ED5000E41B4 /* OpenDoubtViewController.xib in Resources */,
 				85D8DABD1CD104780069C6CE /* PresentationsTabBarController.xib in Resources */,
+				85E348871CE4A65300DCD6C1 /* CreateNewDoubtViewController.xib in Resources */,
 				85DA3FC51CBFE39B00458F31 /* CreateNewPresentationViewController.xib in Resources */,
 				85BADFC61C90559A000B8989 /* util in Resources */,
 				85BADFC41C905593000B8989 /* models in Resources */,
@@ -389,12 +416,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				85D3CF1B1CD0F1EF0058CCFF /* DoubtViewController.swift in Sources */,
+				851DF7391CE368A300CB3C79 /* ClosedDoubtViewController.swift in Sources */,
 				85EEDA941C9C4A9800F431B1 /* Discipline.swift in Sources */,
 				8575C0F31C9300E200FCAD85 /* Event.swift in Sources */,
 				859748331CAC173B007A7481 /* Presentation.swift in Sources */,
 				85C766AA1CD1A7370026AE36 /* OpenPresentationViewController.swift in Sources */,
 				85CA807F1CD7834400194E67 /* BaseViewController.swift in Sources */,
 				859748311CABF6CD007A7481 /* Person.swift in Sources */,
+				851DF73F1CE36FF800CB3C79 /* RankingDoubtViewController.swift in Sources */,
 				85C2F9591CC85646006CE08E /* ClosedPresentationViewController.swift in Sources */,
 				85ECF1571CC4FA4A00BF43B9 /* DisciplinesViewController.swift in Sources */,
 				85D3CF301CD102880058CCFF /* DisciplineTableViewCell.swift in Sources */,
@@ -404,10 +433,13 @@
 				85CA80741CD7754500194E67 /* MenuViewController.swift in Sources */,
 				85BADFD51C9056F7000B8989 /* RecoverPasswordViewController.swift in Sources */,
 				85BADFD61C9056F7000B8989 /* RegisterViewController.swift in Sources */,
+				85E3488B1CE4BD5B00DCD6C1 /* ColorUtil.swift in Sources */,
 				85D3CF321CD1028D0058CCFF /* PresentationTableViewCell.swift in Sources */,
 				856A2B461CBBE9B100BF4CD9 /* CreateNewPresentationViewController.swift in Sources */,
 				85BADFC21C90557C000B8989 /* ViewController.swift in Sources */,
 				85D3CF201CD0FE090058CCFF /* Doubt.swift in Sources */,
+				85E348841CE4A63200DCD6C1 /* CreateNewDoubtViewController.swift in Sources */,
+				85C7C9731CE9F44F00BDCEE1 /* CheckBoxControl.swift in Sources */,
 				8570F5281CDA9CE0000E41B4 /* OpenDoubtViewController.swift in Sources */,
 				85BADFC01C905577000B8989 /* AppDelegate.swift in Sources */,
 				85D3CF281CD100EE0058CCFF /* DoubtTabBarViewController.swift in Sources */,

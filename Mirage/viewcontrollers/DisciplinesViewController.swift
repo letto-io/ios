@@ -35,6 +35,7 @@ class DisciplinesViewController: BaseViewController, UITableViewDelegate, UITabl
             refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
             refreshControl.addTarget(self, action: #selector(OpenPresentationViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
             tableView.addSubview(refreshControl) // not required when using UITableViewController
+            
         }
     }
     
@@ -169,9 +170,21 @@ class DisciplinesViewController: BaseViewController, UITableViewDelegate, UITabl
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! DisciplineTableViewCell
         let disc = discipline[ indexPath.row ]
         
+        cell.nameLabel.textColor = ColorUtil.colorPrimaryText
+        cell.startDateLabel.textColor = ColorUtil.colorSecondaryText
+        cell.classeLabel.textColor = ColorUtil.colorSecondaryText
+        
         cell.nameLabel.text = disc.name
         cell.startDateLabel.text = disc.startDate
         cell.classeLabel.text = "Turma \(String(disc.classe))"
+        
+        let imageBook = UIImage(named: "book-multiple-black.png")
+        cell.bookImageView.image = imageBook
+        
+        cell.bookImageView.image = imageBook!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        cell.bookImageView.tintColor = UIColor.darkGrayColor()
+        
+        
         
         return cell
     }
@@ -189,9 +202,7 @@ class DisciplinesViewController: BaseViewController, UITableViewDelegate, UITabl
         presentationTabBar.nameDisc = name
         
         self.navigationController?.pushViewController(presentationTabBar, animated: true)
-        
     }
-    
     
     init() {
         super.init(nibName: "DisciplinesViewController", bundle: nil)
@@ -200,10 +211,4 @@ class DisciplinesViewController: BaseViewController, UITableViewDelegate, UITabl
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
-
-
-    @IBAction func menuAction(sender: AnyObject) {
-    }
-    
-
 }

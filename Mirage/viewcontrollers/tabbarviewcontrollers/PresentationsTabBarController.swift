@@ -44,6 +44,7 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
         item1.profileDisc = profileDisc
         item1.nameDisc = nameDisc
         
+        item1.getPresentation()
         
         let item2  = ClosedPresentationViewController()
         item2.idDisc = idDisc
@@ -52,10 +53,16 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
         
         item2.getPresentation()
         
-        icon1 = UITabBarItem(title: "ABERTAS", image: UIImage(named: "ic_lock_open.png"), selectedImage: UIImage(named: "ic_lock_open.png"))
+        let imageOpen = UIImage(named: "lock-open-outline-white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        let imageClosed = UIImage(named: "lock-outline-white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        
+        
+        icon1 = UITabBarItem(title: "ABERTAS", image: UIImage(named: "lock-open-outline-black")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: imageOpen)
         item1.tabBarItem = icon1
-        icon2 = UITabBarItem(title: "FECHADAS", image: UIImage(named: "ic_lock_outline.png"), selectedImage: UIImage(named: "ic_lock_outline"))
+        icon2 = UITabBarItem(title: "FECHADAS", image: UIImage(named: "lock-outline-black")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: imageClosed)
         item2.tabBarItem = icon2
+
+        
         let controllers = [item1, item2]  //array of the root view controllers displayed by the tab bar interface
         self.viewControllers = controllers
     }

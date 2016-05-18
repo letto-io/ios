@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="90" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RMd-wf-TOR">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RMd-wf-TOR">
                     <rect key="frame" x="7" y="0.0" width="360" height="608"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
@@ -26,7 +26,7 @@
                     </connections>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="RMd-wf-TOR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XwC-3W-bOh"/>
                 <constraint firstItem="RMd-wf-TOR" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nil-Om-dHL"/>
@@ -34,7 +34,7 @@
                 <constraint firstAttribute="bottom" secondItem="RMd-wf-TOR" secondAttribute="bottom" constant="59" id="ulw-qR-k48"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="801.5" y="272.5"/>
+            <point key="canvasLocation" x="305.5" y="186.5"/>
         </view>
     </objects>
 </document>
