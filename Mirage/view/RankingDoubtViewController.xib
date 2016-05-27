@@ -16,8 +16,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="t23-L3-dKd">
-                    <rect key="frame" x="8" y="0.0" width="359" height="608"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="t23-L3-dKd">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="608"/>
                     <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="i5M-Pr-FkT" id="zcs-1d-AU3"/>
@@ -26,6 +26,12 @@
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="t23-L3-dKd" secondAttribute="trailing" id="bIh-G1-B9O"/>
+                <constraint firstItem="t23-L3-dKd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="s9i-gY-6WY"/>
+                <constraint firstItem="t23-L3-dKd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="z1p-Am-V9E"/>
+                <constraint firstAttribute="bottom" secondItem="t23-L3-dKd" secondAttribute="bottom" constant="59" id="zxp-4i-fAT"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="72.5" y="-111.5"/>
         </view>

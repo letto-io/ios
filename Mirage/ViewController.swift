@@ -15,8 +15,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         userField.delegate = self
         userField.keyboardType = UIKeyboardType.ASCIICapable
         
@@ -30,26 +28,26 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func loginButtonTapped() {
         
         // Compose a query string
-        let email = userField.text
+        let email = userField.text!
         let password = passwordField.text
         
-        if (email!.isEmpty && password!.isEmpty) {
+        if (email.isEmpty && password!.isEmpty) {
             
-            displayMyAlertMessage("Email e Senha são obrigatórios")
+            displayMyAlertMessage(StringUtil.msgEmailPasswordRequired)
             return
-        } else if (email!.isEmpty) {
+        } else if (email.isEmpty) {
             
-            displayMyAlertMessage("Email é obrigatório")
+            displayMyAlertMessage(StringUtil.msgEmailRequired)
             return
         } else if (password!.isEmpty) {
             
-            displayMyAlertMessage("Senha é obrigatório")
+            displayMyAlertMessage(StringUtil.msgPasswordRequired)
             return
         }
         
         let JSONObject: [String : AnyObject] = [
-            "email" : email!,
-            "password" : password!,
+            StringUtil.jsEmail : email,
+            StringUtil.jsPassord : password!,
         ]
         
         if NSJSONSerialization.isValidJSONObject(JSONObject) {
@@ -57,16 +55,16 @@ class ViewController: UIViewController, UITextFieldDelegate {
             let url = Server.loginURL
             
             request.URL = NSURL(string: url)
-            request.HTTPMethod = "POST"
+            request.HTTPMethod = StringUtil.httpPOST
             request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue(StringUtil.httpApplication, forHTTPHeaderField: StringUtil.httpHeader)
             request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(JSONObject, options:  NSJSONWritingOptions(rawValue:0))
             
                 let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
                     data, response, error in
                     
                     if error != nil {
-                        print("error=\(error)")
+                        print(error)
                         return
                     } else {
                         if let httpResponse = response as? NSHTTPURLResponse, let fields = httpResponse.allHeaderFields as? [String : String] {
@@ -75,7 +73,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             
                             if httpResponse.statusCode == 401 {
                                 dispatch_async(dispatch_get_main_queue(), {
-                                    self.displayMyAlertMessage("Email ou Senha incorretos")
+                                    self.displayMyAlertMessage(StringUtil.msgEmailPasswordIncorrect)
                                 })
                             } else {
                                 for cookie in cookies {
@@ -87,19 +85,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
                                     cookieProperties[NSHTTPCookieVersion] = NSNumber(integer: cookie.version)
                                     cookieProperties[NSHTTPCookieExpires] = NSDate().dateByAddingTimeInterval(31536000)
                                     
-                                    print("name: \(cookie.name) value: \(cookie.value)")
-                                    print("name: \(cookie.domain) value: \(cookie.path)")
-                                    
                                     if httpResponse.statusCode == 200 {
                                         let newCookie = NSHTTPCookie(properties: cookieProperties)
                                         NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(newCookie!)
                                         
                                         dispatch_async(dispatch_get_main_queue(), {
-                                            
-                                            let navController = UINavigationController(rootViewController: DisciplinesViewController())
-                                            
-                                            
-                                            self.presentViewController(navController, animated: true, completion: nil)
+    
+                                            self.performSegueWithIdentifier(StringUtil.disciplineView, sender: self)
                                         })
                                     }
                                 }
@@ -117,10 +109,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
     //exibe mensagens de alerta
     func displayMyAlertMessage(userMessage: String) {
         
-        let myAlert = UIAlertController(title: "Mensagem", message: userMessage, preferredStyle:
+        let myAlert = UIAlertController(title: StringUtil.message, message: userMessage, preferredStyle:
             UIAlertControllerStyle.Alert)
         
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: nil)
+        let okAction = UIAlertAction(title: StringUtil.ok, style: UIAlertActionStyle.Destructive, handler: nil)
         
         myAlert.addAction(okAction)
         

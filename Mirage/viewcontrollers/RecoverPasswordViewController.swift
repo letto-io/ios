@@ -17,7 +17,7 @@ class RecoverPasswordViewController: UIViewController, UITextFieldDelegate {
         emailField.delegate = self
         emailField.keyboardType = UIKeyboardType.ASCIICapable
         
-        let recoverPasswordButton = UIBarButtonItem(image: UIImage(named: "send-black.png"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(RecoverPasswordViewController.sendButtonTapped))
+        let recoverPasswordButton = UIBarButtonItem(image: ImageUtil.imageSaveButton, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(RecoverPasswordViewController.sendButtonTapped))
         
         self.navigationItem.setRightBarButtonItem(recoverPasswordButton, animated: true)
     }
@@ -31,12 +31,12 @@ class RecoverPasswordViewController: UIViewController, UITextFieldDelegate {
         
         if (email!.isEmpty) {
             
-            displayMyAlertMessage("Campo obrigatório")
+            displayMyAlertMessage(StringUtil.msgEmailRequired)
             return
         }
         
         let JSONObject: [String : AnyObject] = [
-            "email" : email!,
+            StringUtil.jsEmail : email!,
         ]
         
         if NSJSONSerialization.isValidJSONObject(JSONObject) {
@@ -46,16 +46,16 @@ class RecoverPasswordViewController: UIViewController, UITextFieldDelegate {
             let _: NSError?
             
             request.URL = NSURL(string: url)
-            request.HTTPMethod = "POST"
+            request.HTTPMethod = StringUtil.httpPOST
             request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue(StringUtil.httpApplication, forHTTPHeaderField: StringUtil.httpHeader)
             request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(JSONObject, options:  NSJSONWritingOptions(rawValue:0))
             
             let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
                 data, response, error in
                 
                 if error != nil {
-                    print("error=\(error)")
+                    print(error)
                     return
                 } else {
                     if let httpResponse = response as? NSHTTPURLResponse, let fields = httpResponse.allHeaderFields as? [String : String] {
@@ -65,21 +65,21 @@ class RecoverPasswordViewController: UIViewController, UITextFieldDelegate {
                         
                             if httpResponse.statusCode == 404 {
                                 dispatch_async(dispatch_get_main_queue(), {
-                                    self.displayMyAlertMessage("Email não encontrado")
+                                    self.displayMyAlertMessage(StringUtil.msgEmailNotFound)
                                     
                                 })
                             }
                             
                             if httpResponse.statusCode == 401 {
                                 dispatch_async(dispatch_get_main_queue(), {
-                                    self.displayMyAlertMessage("Email inválido")
+                                    self.displayMyAlertMessage(StringUtil.msgInvalidEmail)
                                     
                                 })
                             }
                             
                             if httpResponse.statusCode == 200 {
                                 dispatch_async(dispatch_get_main_queue(), {
-                                    self.displayMyAlertMessage("Sucesso")
+                                    self.displayMyAlertMessage(StringUtil.msgSendEmail)
                                     
                                 })
                             }
@@ -95,10 +95,10 @@ class RecoverPasswordViewController: UIViewController, UITextFieldDelegate {
     
     func displayMyAlertMessage(userMessage: String) {
         
-        let myAlert = UIAlertController(title: "Mensagem", message: userMessage, preferredStyle:
+        let myAlert = UIAlertController(title: StringUtil.message, message: userMessage, preferredStyle:
             UIAlertControllerStyle.Alert)
         
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: nil)
+        let okAction = UIAlertAction(title: StringUtil.ok, style: UIAlertActionStyle.Destructive, handler: nil)
         
         myAlert.addAction(okAction)
         

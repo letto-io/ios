@@ -3,12 +3,10 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DisciplinesViewController" customModule="Mirage" customModuleProvider="target">
             <connections>
-                <outlet property="tableView" destination="wLF-We-HHe" id="KyH-gQ-qkN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,24 +15,24 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wLF-We-HHe">
-                    <rect key="frame" x="8" y="0.0" width="359" height="667"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wLF-We-HHe">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <outlet property="dataSource" destination="i5M-Pr-FkT" id="DEV-xH-nPA"/>
-                        <outlet property="delegate" destination="i5M-Pr-FkT" id="tAy-nX-Tzc"/>
+                        <outlet property="dataSource" destination="i5M-Pr-FkT" id="vw2-Bl-21S"/>
+                        <outlet property="delegate" destination="i5M-Pr-FkT" id="BVo-qg-B24"/>
                     </connections>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="wLF-We-HHe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="749-Sf-p8I"/>
-                <constraint firstItem="wLF-We-HHe" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" id="86t-2f-KTm"/>
-                <constraint firstItem="wLF-We-HHe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YGq-eA-BgW"/>
-                <constraint firstAttribute="bottom" secondItem="wLF-We-HHe" secondAttribute="bottom" id="fsX-A7-OpK"/>
+                <constraint firstAttribute="trailing" secondItem="wLF-We-HHe" secondAttribute="trailing" id="1IA-I3-Jqs"/>
+                <constraint firstItem="wLF-We-HHe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="MQM-MO-q3f"/>
+                <constraint firstItem="wLF-We-HHe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rf1-J5-nlb"/>
+                <constraint firstAttribute="bottom" secondItem="wLF-We-HHe" secondAttribute="bottom" id="zUv-JD-EMz"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="1461.5" y="305.5"/>
+            <point key="canvasLocation" x="2529.5" y="220.5"/>
         </view>
     </objects>
 </document>

@@ -34,10 +34,10 @@ class RegisterViewController: UIViewController {
         
         if userEmail!.isEmpty || userPasword!.isEmpty || repeatPassword!.isEmpty {
             
-            displayMyAlertMessage("Todos os campos são requeridos")
+            displayMyAlertMessage(StringUtil.msgAllRequired)
             return
         } else if userPasword != repeatPassword {
-            displayMyAlertMessage("Senhas não correspodem")
+            displayMyAlertMessage(StringUtil.msgPasswordNotMatch)
         } else {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
@@ -45,10 +45,10 @@ class RegisterViewController: UIViewController {
     
     func displayMyAlertMessage(userMessage: String) {
         
-        let myAlert = UIAlertController(title: "Mensagem", message: userMessage, preferredStyle:
+        let myAlert = UIAlertController(title: StringUtil.message, message: userMessage, preferredStyle:
                 UIAlertControllerStyle.Alert)
         
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: nil)
+        let okAction = UIAlertAction(title: StringUtil.ok, style: UIAlertActionStyle.Destructive, handler: nil)
         
         myAlert.addAction(okAction)
         

@@ -26,7 +26,7 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
 
     override func viewWillAppear(animated: Bool) {
         
-        self.navigationItem.title = "Apresentações"
+        self.navigationItem.title = StringUtil.titlePresentasation
         
         //verifica se é um perfil de professor para criar novas apresentações
         if profileDisc == 2 {
@@ -53,18 +53,31 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
         
         item2.getPresentation()
         
-        let imageOpen = UIImage(named: "lock-open-outline-white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        let imageClosed = UIImage(named: "lock-outline-white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        
-        
-        icon1 = UITabBarItem(title: "ABERTAS", image: UIImage(named: "lock-open-outline-black")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: imageOpen)
+        icon1 = UITabBarItem(title: StringUtil.open, image: ImageUtil.imageOpenBlack , selectedImage: ImageUtil.imageOpenWhite)
         item1.tabBarItem = icon1
-        icon2 = UITabBarItem(title: "FECHADAS", image: UIImage(named: "lock-outline-black")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal), selectedImage: imageClosed)
+        icon2 = UITabBarItem(title: StringUtil.closed, image: ImageUtil.imageClosedBlack, selectedImage: ImageUtil.imageClosedWhite)
         item2.tabBarItem = icon2
-
+        
+        
+        var menuButton = UIBarButtonItem()
+            
+        if self.revealViewController() != nil {
+            
+            menuButton = UIBarButtonItem(image: ImageUtil.imageMenuButton, style: UIBarButtonItemStyle.Plain, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle))
+            
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+            
+        }
+        
+        let back = UIBarButtonItem(image: ImageUtil.imageBackButton, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(PresentationsTabBarController.back))
+        self.navigationItem.setLeftBarButtonItems([menuButton, back], animated: true)
         
         let controllers = [item1, item2]  //array of the root view controllers displayed by the tab bar interface
         self.viewControllers = controllers
+    }
+    
+    func back() {
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
     //cadastrar nova apresentação
@@ -79,12 +92,12 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
     
     //Delegate methods
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-        print("Should select viewController: \(viewController.nibName)")
+        print(viewController.nibName)
         return true;
     }
     
     init() {
-        super.init(nibName: "PresentationsTabBarController", bundle: nil)
+        super.init(nibName: StringUtil.presentationsTabBarController, bundle: nil)
     }
     
     required init(coder aDecoder: NSCoder) {

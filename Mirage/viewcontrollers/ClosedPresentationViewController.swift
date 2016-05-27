@@ -10,7 +10,6 @@ import UIKit
 
 class ClosedPresentationViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddNewPresentationDelegate {
 
-    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
     
@@ -30,7 +29,7 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
         super.viewDidLoad()
         
         refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.attributedTitle = NSAttributedString(string: StringUtil.pullToRefresh)
         refreshControl.addTarget(self, action: #selector(ClosedPresentationViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl) // not required when using UITableViewController
         
@@ -52,8 +51,8 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
         } else {
             tableView.delegate = self
             tableView.dataSource = self
-            let nib = UINib(nibName: "PresentationCell", bundle: nil)
-            tableView.registerNib(nib, forCellReuseIdentifier: "cell")
+            let nib = UINib(nibName: StringUtil.presentationCell, bundle: nil)
+            tableView.registerNib(nib, forCellReuseIdentifier: StringUtil.cellIdentifier)
             view.addSubview(tableView)
             
             getPresentation()
@@ -70,15 +69,15 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
     
     func getPresentation() {
         let request: NSMutableURLRequest = NSMutableURLRequest()
-        let urlPath = Server.presentationURL+"\(idDisc)" + "/presentation"
+        let urlPath = Server.presentationURL+"\(idDisc)" + Server.presentaion
         let url = NSURL(string: urlPath)!
         
-        let cookieHeaderField = ["Set-Cookie": "key=value"]
+        let cookieHeaderField = [StringUtil.set_Cookie : StringUtil.key_Value]
         
         let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(cookieHeaderField, forURL: url)
         NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: url, mainDocumentURL: nil)
         
-        request.HTTPMethod = "GET"
+        request.HTTPMethod = StringUtil.httpGET
         request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
         
         print(cookies)
@@ -86,7 +85,7 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
             if (error != nil) {
-                print("Download Error: \(error!.localizedDescription)")
+                print(error!.localizedDescription)
             } else {
                 var studentJSONParseError: NSError?
                 
@@ -94,12 +93,12 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
                 
                 if (studentJSONParseError != nil) {
                     
-                    print("JSON Parsing Error: \(studentJSONParseError!.localizedDescription)")
+                    print(studentJSONParseError!.localizedDescription)
                     
                 } else {
                     
-                    let info : NSArray =  presentationJSONData.valueForKey("presentations") as! NSArray
-                    let person : NSArray = info.valueForKey("person") as! NSArray
+                    let info : NSArray =  presentationJSONData.valueForKey(StringUtil.presentations) as! NSArray
+                    let person : NSArray = info.valueForKey(StringUtil.person) as! NSArray
                     
                     for i in 0 ..< info.count {
                         if self.presentation.count == info.count {
@@ -110,14 +109,14 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
                             let persons = Person()
                             
                             for j in 0 ..< person.count {
-                                persons.name = person[j].valueForKey("name") as! String
+                                persons.name = person[j].valueForKey(StringUtil.name) as! String
                             }
                             
-                            presentations.id = info[i].valueForKey("id") as! Int
+                            presentations.id = info[i].valueForKey(StringUtil.id) as! Int
                             presentations.person = persons
-                            presentations.createdat = info[i].valueForKey("createdat") as! String
-                            presentations.status = info[i].valueForKey("status") as! Int
-                            presentations.subject = info[i].valueForKey("subject") as! String
+                            presentations.createdat = info[i].valueForKey(StringUtil.createdat) as! String
+                            presentations.status = info[i].valueForKey(StringUtil.status) as! Int
+                            presentations.subject = info[i].valueForKey(StringUtil.subject) as! String
                             
                             self.presentation.insert(presentations, atIndex: i)
                         }
@@ -152,7 +151,7 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! PresentationTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cellIdentifier, forIndexPath: indexPath) as! PresentationTableViewCell
         
         let present = closedPresentation[ indexPath.row ]
         
@@ -183,7 +182,7 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
     }
     
     init() {
-        super.init(nibName: "ClosedPresentationViewController", bundle: nil)
+        super.init(nibName: StringUtil.closedPresentationViewController, bundle: nil)
     }
     
     required init(coder aDecoder: NSCoder) {

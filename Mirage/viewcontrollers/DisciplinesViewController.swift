@@ -8,10 +8,11 @@
 
 import UIKit
 
-class DisciplinesViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
+    
     
     var discipline = Array<Discipline>()
     
@@ -28,14 +29,12 @@ class DisciplinesViewController: BaseViewController, UITableViewDelegate, UITabl
         if cookies.isEmpty {
             self.dismissViewControllerAnimated(true, completion: nil)
         } else {
-            
-            self.navigationItem.title = "Disciplinas"
+            refreshTableView()
             
             refreshControl = UIRefreshControl()
-            refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+            refreshControl.attributedTitle = NSAttributedString(string: StringUtil.pullToRefresh)
             refreshControl.addTarget(self, action: #selector(OpenPresentationViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
             tableView.addSubview(refreshControl) // not required when using UITableViewController
-            
         }
     }
     
@@ -47,7 +46,6 @@ class DisciplinesViewController: BaseViewController, UITableViewDelegate, UITabl
             self.dismissViewControllerAnimated(true, completion: nil)
         } else {
             refreshTableView()
-            self.navigationItem.title = "Disciplinas"
         }
     }
     
@@ -59,7 +57,6 @@ class DisciplinesViewController: BaseViewController, UITableViewDelegate, UITabl
             self.dismissViewControllerAnimated(true, completion: nil)
         } else {
             refreshTableView()
-            self.navigationItem.title = "Disciplinas"
         }
     }
     
@@ -71,9 +68,19 @@ class DisciplinesViewController: BaseViewController, UITableViewDelegate, UITabl
         
         tableView.delegate = self
         tableView.dataSource = self
-        let nib = UINib(nibName: "DisciplineCell", bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: "cell")
+        let nib = UINib(nibName: StringUtil.disciplineCell , bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: StringUtil.cellIdentifier)
         view.addSubview(tableView)
+        
+        self.navigationItem.title = StringUtil.titleDiscipline
+        
+        if self.revealViewController() != nil {
+            
+            let menuButton = UIBarButtonItem(image: ImageUtil.imageMenuButton, style: UIBarButtonItemStyle.Plain, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle))
+            
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+            self.navigationItem.setLeftBarButtonItem(menuButton, animated: true)
+        }
         
         getInstruction()
         tableView.reloadData()
@@ -91,12 +98,12 @@ class DisciplinesViewController: BaseViewController, UITableViewDelegate, UITabl
         let urlPath = Server.disciplineURL
         let url = NSURL(string: urlPath)!
         
-        let cookieHeaderField = ["Set-Cookie": "key=value"]
+        let cookieHeaderField = [StringUtil.set_Cookie : StringUtil.key_Value]
         
         let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(cookieHeaderField, forURL: url)
         NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: url, mainDocumentURL: nil)
         
-        request.HTTPMethod = "GET"
+        request.HTTPMethod = StringUtil.httpGET
         request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
         
         print(cookies)
@@ -104,25 +111,22 @@ class DisciplinesViewController: BaseViewController, UITableViewDelegate, UITabl
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
             if (error != nil) {
-                print("Download Error: \(error!.localizedDescription)")
+                print(error!.localizedDescription)
             } else {
                 var disciplineJSONParseError: NSError?
                 
                 let disciplineJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
                 
                 if (disciplineJSONParseError != nil) {
-                    
-                    //print("JSON Parsing Error: \(studentJSONParseError!.localizedDescription)")
                     return
-                    
                 } else {
                     
-                    if (disciplineJSONData.valueForKey("error") != nil) {
+                    if (disciplineJSONData.valueForKey(StringUtil.error) != nil) {
                         return
                     } else {
                         
-                        let info : NSArray =  disciplineJSONData.valueForKey("lectures") as! NSArray
-                        let event: NSArray = info.valueForKey("event") as! NSArray
+                        let info : NSArray =  disciplineJSONData.valueForKey(StringUtil.lectures) as! NSArray
+                        let event: NSArray = info.valueForKey(StringUtil.event) as! NSArray
                         
                         for i in 0 ..< info.count {
                             
@@ -130,18 +134,18 @@ class DisciplinesViewController: BaseViewController, UITableViewDelegate, UITabl
                             let events = Event()
                             
                             for j in 0 ..< event.count {
-                                events.name = event[j].valueForKey("name") as! String
-                                events.code = event[j].valueForKey("code") as! String
+                                events.name = event[j].valueForKey(StringUtil.name) as! String
+                                events.code = event[j].valueForKey(StringUtil.code) as! String
                             }
                             
-                            disciplines.id = info[i].valueForKey("id") as! Int
+                            disciplines.id = info[i].valueForKey(StringUtil.id) as! Int
                             disciplines.event = events
-                            disciplines.code = info[i].valueForKey("code") as! String
-                            disciplines.startDate = info[i].valueForKey("startdate") as! String
-                            disciplines.classe = info[i].valueForKey("class") as! Int
-                            disciplines.endDate = info[i].valueForKey("enddate") as! String
-                            disciplines.profile = info[i].valueForKey("profile") as! Int
-                            disciplines.name = info[i].valueForKey("name") as! String
+                            disciplines.code = info[i].valueForKey(StringUtil.code) as! String
+                            disciplines.startDate = info[i].valueForKey(StringUtil.startdate) as! String
+                            disciplines.classe = info[i].valueForKey(StringUtil.classe) as! Int
+                            disciplines.endDate = info[i].valueForKey(StringUtil.enddate) as! String
+                            disciplines.profile = info[i].valueForKey(StringUtil.profile) as! Int
+                            disciplines.name = info[i].valueForKey(StringUtil.name) as! String
                             
                             if self.discipline.count == info.count {
                                 return
@@ -167,7 +171,7 @@ class DisciplinesViewController: BaseViewController, UITableViewDelegate, UITabl
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! DisciplineTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cellIdentifier, forIndexPath: indexPath) as! DisciplineTableViewCell
         let disc = discipline[ indexPath.row ]
         
         cell.nameLabel.textColor = ColorUtil.colorPrimaryText
@@ -176,9 +180,9 @@ class DisciplinesViewController: BaseViewController, UITableViewDelegate, UITabl
         
         cell.nameLabel.text = disc.name
         cell.startDateLabel.text = disc.startDate
-        cell.classeLabel.text = "Turma \(String(disc.classe))"
+        cell.classeLabel.text = StringUtil.turma + (String(disc.classe))
         
-        let imageBook = UIImage(named: "book-multiple-black.png")
+        let imageBook = ImageUtil.imageDiscipline
         cell.bookImageView.image = imageBook
         
         cell.bookImageView.image = imageBook!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
@@ -205,7 +209,7 @@ class DisciplinesViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     init() {
-        super.init(nibName: "DisciplinesViewController", bundle: nil)
+        super.init(nibName: StringUtil.disciplineViewController, bundle: nil)
     }
     
     required init(coder aDecoder: NSCoder) {

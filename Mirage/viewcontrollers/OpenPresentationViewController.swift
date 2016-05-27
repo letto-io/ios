@@ -31,7 +31,7 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
         super.viewDidLoad()
         
         refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.attributedTitle = NSAttributedString(string: StringUtil.pullToRefresh)
         refreshControl.addTarget(self, action: #selector(OpenPresentationViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
         
@@ -45,9 +45,14 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
         
         refreshTableView()
     }
+
     
     override func viewDidAppear(animated: Bool) {
         refreshTableView()
+        
+        if presentation.isEmpty {
+            displayMyAlertMessage(StringUtil.msgNoPresentation)
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -61,8 +66,8 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
         } else {
             tableView.delegate = self
             tableView.dataSource = self
-            let nib = UINib(nibName: "PresentationCell", bundle: nil)
-            tableView.registerNib(nib, forCellReuseIdentifier: "cell")
+            let nib = UINib(nibName: StringUtil.presentationCell, bundle: nil)
+            tableView.registerNib(nib, forCellReuseIdentifier: StringUtil.cellIdentifier)
             view.addSubview(tableView)
             
             getPresentation()
@@ -82,7 +87,7 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
                 let id  = openPresentation[ indexPah.row ].id
                 let subject  = openPresentation[ indexPah.row ].subject
                 
-                displayMyAlertMessage("Fechar apresentação?", subject: subject, id: id)
+                displayMyAlertMessage(StringUtil.msgClosePresentation, subject: subject, id: id)
             }
         }
     }
@@ -96,15 +101,15 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
     
     func getPresentation() {
         let request: NSMutableURLRequest = NSMutableURLRequest()
-        let urlPath = Server.presentationURL+"\(idDisc)" + "/presentation"
+        let urlPath = Server.presentationURL+"\(idDisc)" + Server.presentaion
         let url = NSURL(string: urlPath)!
         
-        let cookieHeaderField = ["Set-Cookie": "key=value"]
+        let cookieHeaderField = [StringUtil.set_Cookie : StringUtil.key_Value]
         
         let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(cookieHeaderField, forURL: url)
         NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: url, mainDocumentURL: nil)
         
-        request.HTTPMethod = "GET"
+        request.HTTPMethod = StringUtil.httpGET
         request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
         
         print(cookies)
@@ -112,7 +117,7 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
             if (error != nil) {
-                print("Download Error: \(error!.localizedDescription)")
+                print(error!.localizedDescription)
             } else {
                 var studentJSONParseError: NSError?
                 
@@ -120,12 +125,12 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
                 
                 if (studentJSONParseError != nil) {
                     
-                    print("JSON Parsing Error: \(studentJSONParseError!.localizedDescription)")
+                    print(studentJSONParseError!.localizedDescription)
                     
                 } else {
                     
-                    let info : NSArray =  presentationJSONData.valueForKey("presentations") as! NSArray
-                    let person : NSArray = info.valueForKey("person") as! NSArray
+                    let info : NSArray =  presentationJSONData.valueForKey(StringUtil.presentations) as! NSArray
+                    let person : NSArray = info.valueForKey(StringUtil.person) as! NSArray
                     
                     for i in 0 ..< info.count {
                         if self.presentation.count == info.count {
@@ -136,14 +141,14 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
                             let persons = Person()
                             
                             for j in 0 ..< person.count {
-                                persons.name = person[j].valueForKey("name") as! String
+                                persons.name = person[j].valueForKey(StringUtil.name) as! String
                             }
                             
-                            presentations.id = info[i].valueForKey("id") as! Int
+                            presentations.id = info[i].valueForKey(StringUtil.id) as! Int
                             presentations.person = persons
-                            presentations.createdat = info[i].valueForKey("createdat") as! String
-                            presentations.status = info[i].valueForKey("status") as! Int
-                            presentations.subject = info[i].valueForKey("subject") as! String
+                            presentations.createdat = info[i].valueForKey(StringUtil.createdat) as! String
+                            presentations.status = info[i].valueForKey(StringUtil.status) as! Int
+                            presentations.subject = info[i].valueForKey(StringUtil.subject) as! String
                             
                             self.presentation.insert(presentations, atIndex: i)
                         }
@@ -179,7 +184,7 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! PresentationTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cellIdentifier, forIndexPath: indexPath) as! PresentationTableViewCell
         
         let present = openPresentation[ indexPath.row ]
         
@@ -211,11 +216,33 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
     
     
     init() {
-        super.init(nibName: "OpenPresentationViewController", bundle: nil)
+        super.init(nibName: StringUtil.openPresentationViewController, bundle: nil)
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
+    }
+    
+    //exibe mensagens de alerta
+    func displayMyAlertMessage(userMessage: String) {
+        
+        let myAlert = UIAlertController(title: StringUtil.message, message: userMessage, preferredStyle:
+            UIAlertControllerStyle.Alert)
+        
+        let backAction = UIAlertAction(title: StringUtil.back, style: .Destructive) { action -> Void in
+            
+            self.navigationController?.popViewControllerAnimated(true)
+        }
+        
+        let okAction: UIAlertAction = UIAlertAction(title: StringUtil.ok, style: .Default) { action -> Void in
+            
+            print(StringUtil.ok)
+        }
+        
+        myAlert.addAction(backAction)
+        myAlert.addAction(okAction)
+        
+        self.presentViewController(myAlert, animated: true, completion: nil)
     }
     
     //exibe mensagens de alerta
@@ -224,20 +251,20 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
         let myAlert = UIAlertController(title: subject, message: userMessage, preferredStyle:
             UIAlertControllerStyle.Alert)
         
-        let okAction: UIAlertAction = UIAlertAction(title: "CONFIRMAR", style: .Destructive) { action -> Void in
+        let okAction: UIAlertAction = UIAlertAction(title: StringUtil.confirm, style: .Destructive) { action -> Void in
             
             let request: NSMutableURLRequest = NSMutableURLRequest()
-            let urlPath = Server.presentationURL+"\(self.idDisc)" + "/presentation/" + "\(id)" + "/close"
+            let urlPath = Server.presentationURL+"\(self.idDisc)" + Server.presentaion_bar + "\(id)" + Server.close
             
             request.URL = NSURL(string: urlPath)
-            request.HTTPMethod = "POST"
+            request.HTTPMethod = StringUtil.httpPOST
             request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
             
             let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
                 data, response, error in
                 
                 if error != nil {
-                    print("error=\(error)")
+                    print(error)
                     return
                 } else {
                     if let httpResponse = response as? NSHTTPURLResponse, let fields = httpResponse.allHeaderFields as? [String : String] {
@@ -274,9 +301,9 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
         }
         
         
-        let cancelAction: UIAlertAction = UIAlertAction(title: "CANCELAR", style: .Cancel) { action -> Void in
+        let cancelAction: UIAlertAction = UIAlertAction(title: StringUtil.cancel, style: .Cancel) { action -> Void in
             
-            print("cancel")
+            print(StringUtil.cancel)
         }
         
         myAlert.addAction(okAction)

@@ -22,9 +22,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0V-CR-ZqH">
-                        <rect key="frame" x="182" y="30" width="130" height="21"/>
+                        <rect key="frame" x="163" y="30" width="149" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="130" id="Xor-XY-Hzk"/>
+                            <constraint firstAttribute="width" constant="149" id="trk-r5-xdi"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -32,11 +32,11 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="o0V-CR-ZqH" firstAttribute="bottom" secondItem="Hgu-rR-dmx" secondAttribute="bottomMargin" id="Vp2-rf-MQo"/>
                     <constraint firstItem="HIN-KF-dkx" firstAttribute="top" secondItem="Hgu-rR-dmx" secondAttribute="top" id="a3b-64-BDM"/>
                     <constraint firstItem="HIN-KF-dkx" firstAttribute="trailing" secondItem="Hgu-rR-dmx" secondAttribute="trailingMargin" id="d2V-LW-9eM"/>
                     <constraint firstItem="HIN-KF-dkx" firstAttribute="leading" secondItem="Hgu-rR-dmx" secondAttribute="leadingMargin" id="gMv-ou-IaC"/>
-                    <constraint firstItem="HIN-KF-dkx" firstAttribute="trailing" secondItem="o0V-CR-ZqH" secondAttribute="trailing" id="oKQ-iV-Tok"/>
+                    <constraint firstItem="o0V-CR-ZqH" firstAttribute="trailing" secondItem="HIN-KF-dkx" secondAttribute="trailing" id="lra-pQ-NyV"/>
+                    <constraint firstItem="o0V-CR-ZqH" firstAttribute="bottom" secondItem="Hgu-rR-dmx" secondAttribute="bottomMargin" id="p4d-bv-ucP"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8516A7EC1CF767E700168B25 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516A7EB1CF767E700168B25 /* MenuTableViewController.swift */; };
+		8516A7EE1CF7775300168B25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8516A7ED1CF7775300168B25 /* Assets.xcassets */; };
+		8516A7F01CF7C4F000168B25 /* StringUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8516A7EF1CF7C4F000168B25 /* StringUtil.swift */; };
 		851DF7391CE368A300CB3C79 /* ClosedDoubtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851DF7371CE368A300CB3C79 /* ClosedDoubtViewController.swift */; };
 		851DF73C1CE368C500CB3C79 /* ClosedDoubtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 851DF73B1CE368C500CB3C79 /* ClosedDoubtViewController.xib */; };
 		851DF73F1CE36FF800CB3C79 /* RankingDoubtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851DF73D1CE36FF800CB3C79 /* RankingDoubtViewController.swift */; };
@@ -17,7 +20,6 @@
 		8575C0F31C9300E200FCAD85 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8575C0F21C9300E200FCAD85 /* Event.swift */; };
 		859748311CABF6CD007A7481 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859748301CABF6CD007A7481 /* Person.swift */; };
 		859748331CAC173B007A7481 /* Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859748321CAC173B007A7481 /* Presentation.swift */; };
-		85BADF941C9054E6000B8989 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85BADF931C9054E6000B8989 /* Assets.xcassets */; };
 		85BADFA21C9054E6000B8989 /* MirageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFA11C9054E6000B8989 /* MirageTests.swift */; };
 		85BADFAD1C9054E6000B8989 /* MirageUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFAC1C9054E6000B8989 /* MirageUITests.swift */; };
 		85BADFC01C905577000B8989 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFBF1C905577000B8989 /* AppDelegate.swift */; };
@@ -32,12 +34,9 @@
 		85BADFD81C905710000B8989 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85BADFD71C905710000B8989 /* Server.swift */; };
 		85C2F9591CC85646006CE08E /* ClosedPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C2F9571CC85646006CE08E /* ClosedPresentationViewController.swift */; };
 		85C2F95C1CC86727006CE08E /* ClosedPresentationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85C2F95B1CC86727006CE08E /* ClosedPresentationViewController.xib */; };
+		85C35F9D1CEDE47D008F0526 /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C35F9C1CEDE47D008F0526 /* ImageUtil.swift */; };
 		85C766AA1CD1A7370026AE36 /* OpenPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C766A81CD1A7370026AE36 /* OpenPresentationViewController.swift */; };
 		85C766AD1CD1A90D0026AE36 /* OpenPresentationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85C766AC1CD1A90D0026AE36 /* OpenPresentationViewController.xib */; };
-		85C7C9731CE9F44F00BDCEE1 /* CheckBoxControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C7C9721CE9F44F00BDCEE1 /* CheckBoxControl.swift */; };
-		85CA80741CD7754500194E67 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CA80721CD7754500194E67 /* MenuViewController.swift */; };
-		85CA80771CD77D5600194E67 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85CA80761CD77D5600194E67 /* MenuViewController.xib */; };
-		85CA807F1CD7834400194E67 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CA807E1CD7834400194E67 /* BaseViewController.swift */; };
 		85CA80841CD7913200194E67 /* DoubtTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85CA80821CD7913200194E67 /* DoubtTableViewCell.swift */; };
 		85CA80871CD7914C00194E67 /* DoubtTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85CA80861CD7914C00194E67 /* DoubtTableViewCell.xib */; };
 		85D3CF1B1CD0F1EF0058CCFF /* DoubtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D3CF191CD0F1EF0058CCFF /* DoubtViewController.swift */; };
@@ -59,6 +58,8 @@
 		85ECF1571CC4FA4A00BF43B9 /* DisciplinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ECF1551CC4FA4A00BF43B9 /* DisciplinesViewController.swift */; };
 		85ECF15A1CC4FAEC00BF43B9 /* DisciplinesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85ECF1591CC4FAEC00BF43B9 /* DisciplinesViewController.xib */; };
 		85EEDA941C9C4A9800F431B1 /* Discipline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EEDA931C9C4A9800F431B1 /* Discipline.swift */; };
+		85FC78811CF3385B001E2696 /* SWRevealViewController in Resources */ = {isa = PBXBuildFile; fileRef = 85FC78801CF3385B001E2696 /* SWRevealViewController */; };
+		85FC78851CF33881001E2696 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FC78841CF33881001E2696 /* SWRevealViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8516A7EB1CF767E700168B25 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuTableViewController.swift; path = Mirage/viewcontrollers/MenuTableViewController.swift; sourceTree = "<group>"; };
+		8516A7ED1CF7775300168B25 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8516A7EF1CF7C4F000168B25 /* StringUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringUtil.swift; path = Mirage/util/StringUtil.swift; sourceTree = "<group>"; };
 		851DF7371CE368A300CB3C79 /* ClosedDoubtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClosedDoubtViewController.swift; path = Mirage/viewcontrollers/ClosedDoubtViewController.swift; sourceTree = "<group>"; };
 		851DF73B1CE368C500CB3C79 /* ClosedDoubtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ClosedDoubtViewController.xib; path = Mirage/view/ClosedDoubtViewController.xib; sourceTree = "<group>"; };
 		851DF73D1CE36FF800CB3C79 /* RankingDoubtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RankingDoubtViewController.swift; path = Mirage/viewcontrollers/RankingDoubtViewController.swift; sourceTree = "<group>"; };
@@ -90,7 +94,6 @@
 		859748301CABF6CD007A7481 /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Person.swift; path = Mirage/models/Person.swift; sourceTree = "<group>"; };
 		859748321CAC173B007A7481 /* Presentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Presentation.swift; path = Mirage/models/Presentation.swift; sourceTree = "<group>"; };
 		85BADF891C9054E6000B8989 /* Mirage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mirage.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		85BADF931C9054E6000B8989 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		85BADF9D1C9054E6000B8989 /* MirageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MirageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		85BADFA11C9054E6000B8989 /* MirageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MirageTests.swift; sourceTree = "<group>"; };
 		85BADFA31C9054E6000B8989 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -111,12 +114,9 @@
 		85BADFD71C905710000B8989 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Server.swift; path = Mirage/util/Server.swift; sourceTree = "<group>"; };
 		85C2F9571CC85646006CE08E /* ClosedPresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClosedPresentationViewController.swift; path = Mirage/viewcontrollers/ClosedPresentationViewController.swift; sourceTree = "<group>"; };
 		85C2F95B1CC86727006CE08E /* ClosedPresentationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ClosedPresentationViewController.xib; path = Mirage/view/ClosedPresentationViewController.xib; sourceTree = "<group>"; };
+		85C35F9C1CEDE47D008F0526 /* ImageUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageUtil.swift; path = Mirage/util/ImageUtil.swift; sourceTree = "<group>"; };
 		85C766A81CD1A7370026AE36 /* OpenPresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OpenPresentationViewController.swift; path = Mirage/viewcontrollers/OpenPresentationViewController.swift; sourceTree = "<group>"; };
 		85C766AC1CD1A90D0026AE36 /* OpenPresentationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OpenPresentationViewController.xib; path = Mirage/view/OpenPresentationViewController.xib; sourceTree = "<group>"; };
-		85C7C9721CE9F44F00BDCEE1 /* CheckBoxControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CheckBoxControl.swift; path = Mirage/util/CheckBoxControl.swift; sourceTree = "<group>"; };
-		85CA80721CD7754500194E67 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuViewController.swift; path = Mirage/viewcontrollers/MenuViewController.swift; sourceTree = "<group>"; };
-		85CA80761CD77D5600194E67 /* MenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MenuViewController.xib; path = Mirage/view/MenuViewController.xib; sourceTree = "<group>"; };
-		85CA807E1CD7834400194E67 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = Mirage/viewcontrollers/BaseViewController.swift; sourceTree = "<group>"; };
 		85CA80821CD7913200194E67 /* DoubtTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DoubtTableViewCell.swift; path = Mirage/viewcontrollers/tableviewcell/DoubtTableViewCell.swift; sourceTree = "<group>"; };
 		85CA80861CD7914C00194E67 /* DoubtTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DoubtTableViewCell.xib; path = Mirage/view/viewcell/DoubtTableViewCell.xib; sourceTree = "<group>"; };
 		85D3CF191CD0F1EF0058CCFF /* DoubtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DoubtViewController.swift; path = Mirage/viewcontrollers/DoubtViewController.swift; sourceTree = "<group>"; };
@@ -138,6 +138,9 @@
 		85ECF1551CC4FA4A00BF43B9 /* DisciplinesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DisciplinesViewController.swift; path = Mirage/viewcontrollers/DisciplinesViewController.swift; sourceTree = "<group>"; };
 		85ECF1591CC4FAEC00BF43B9 /* DisciplinesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DisciplinesViewController.xib; path = Mirage/view/DisciplinesViewController.xib; sourceTree = "<group>"; };
 		85EEDA931C9C4A9800F431B1 /* Discipline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Discipline.swift; path = Mirage/models/Discipline.swift; sourceTree = "<group>"; };
+		85FC78801CF3385B001E2696 /* SWRevealViewController */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SWRevealViewController; sourceTree = "<group>"; };
+		85FC78831CF3387D001E2696 /* SWRevealViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = Mirage/SWRevealViewController/SWRevealViewController.h; sourceTree = "<group>"; };
+		85FC78841CF33881001E2696 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = Mirage/SWRevealViewController/SWRevealViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +171,7 @@
 		85BADF801C9054E6000B8989 = {
 			isa = PBXGroup;
 			children = (
+				8516A7EB1CF767E700168B25 /* MenuTableViewController.swift */,
 				85E3488A1CE4BD5B00DCD6C1 /* ColorUtil.swift */,
 				85E348821CE4A63200DCD6C1 /* CreateNewDoubtViewController.swift */,
 				85E348861CE4A65300DCD6C1 /* CreateNewDoubtViewController.xib */,
@@ -179,9 +183,6 @@
 				8570F52A1CDA9ED5000E41B4 /* OpenDoubtViewController.xib */,
 				85CA80821CD7913200194E67 /* DoubtTableViewCell.swift */,
 				85CA80861CD7914C00194E67 /* DoubtTableViewCell.xib */,
-				85CA807E1CD7834400194E67 /* BaseViewController.swift */,
-				85CA80721CD7754500194E67 /* MenuViewController.swift */,
-				85CA80761CD77D5600194E67 /* MenuViewController.xib */,
 				85C766A81CD1A7370026AE36 /* OpenPresentationViewController.swift */,
 				85C766AC1CD1A90D0026AE36 /* OpenPresentationViewController.xib */,
 				85D3CF271CD100EE0058CCFF /* DoubtTabBarViewController.swift */,
@@ -200,14 +201,17 @@
 				85D3CF351CD102B10058CCFF /* PresentationCell.xib */,
 				85D3CF2F1CD102880058CCFF /* DisciplineTableViewCell.swift */,
 				85D3CF331CD102A90058CCFF /* DisciplineCell.xib */,
-				85C7C9721CE9F44F00BDCEE1 /* CheckBoxControl.swift */,
 				859748321CAC173B007A7481 /* Presentation.swift */,
 				859748301CABF6CD007A7481 /* Person.swift */,
 				85EEDA931C9C4A9800F431B1 /* Discipline.swift */,
 				85D3CF1F1CD0FE090058CCFF /* Doubt.swift */,
 				8575C0F21C9300E200FCAD85 /* Event.swift */,
 				85BADFD71C905710000B8989 /* Server.swift */,
+				85FC78831CF3387D001E2696 /* SWRevealViewController.h */,
+				85FC78841CF33881001E2696 /* SWRevealViewController.m */,
 				85BADFD21C9056F7000B8989 /* RecoverPasswordViewController.swift */,
+				8516A7EF1CF7C4F000168B25 /* StringUtil.swift */,
+				85C35F9C1CEDE47D008F0526 /* ImageUtil.swift */,
 				85BADFD31C9056F7000B8989 /* RegisterViewController.swift */,
 				85BADF8B1C9054E6000B8989 /* Mirage */,
 				85BADFA01C9054E6000B8989 /* MirageTests */,
@@ -229,6 +233,7 @@
 		85BADF8B1C9054E6000B8989 /* Mirage */ = {
 			isa = PBXGroup;
 			children = (
+				85FC78801CF3385B001E2696 /* SWRevealViewController */,
 				85E1A7591CB538960094F000 /* view */,
 				85BADFC71C9055A8000B8989 /* viewcontrollers */,
 				85BADFC51C90559A000B8989 /* util */,
@@ -236,7 +241,7 @@
 				85BADFC11C90557C000B8989 /* ViewController.swift */,
 				85BADFBF1C905577000B8989 /* AppDelegate.swift */,
 				85BADFCB1C9056B8000B8989 /* Main.storyboard */,
-				85BADF931C9054E6000B8989 /* Assets.xcassets */,
+				8516A7ED1CF7775300168B25 /* Assets.xcassets */,
 				85BADFC91C9055BB000B8989 /* Info.plist */,
 				85BADFCE1C9056BF000B8989 /* LaunchScreen.storyboard */,
 				85BADFBE1C905577000B8989 /* Mirage-Bridging-Header.h */,
@@ -371,10 +376,12 @@
 			files = (
 				851DF7421CE3701900CB3C79 /* RankingDoubtViewController.xib in Resources */,
 				85C766AD1CD1A90D0026AE36 /* OpenPresentationViewController.xib in Resources */,
+				8516A7EE1CF7775300168B25 /* Assets.xcassets in Resources */,
 				851DF73C1CE368C500CB3C79 /* ClosedDoubtViewController.xib in Resources */,
 				85D8DAB91CD103510069C6CE /* DoubtTabBarViewController.xib in Resources */,
 				85BADFC81C9055A8000B8989 /* viewcontrollers in Resources */,
 				85D3CF361CD102B10058CCFF /* PresentationCell.xib in Resources */,
+				85FC78811CF3385B001E2696 /* SWRevealViewController in Resources */,
 				8570F52B1CDA9ED5000E41B4 /* OpenDoubtViewController.xib in Resources */,
 				85D8DABD1CD104780069C6CE /* PresentationsTabBarController.xib in Resources */,
 				85E348871CE4A65300DCD6C1 /* CreateNewDoubtViewController.xib in Resources */,
@@ -389,8 +396,6 @@
 				85BADFCD1C9056B8000B8989 /* Main.storyboard in Resources */,
 				85BADFD01C9056BF000B8989 /* LaunchScreen.storyboard in Resources */,
 				85ECF15A1CC4FAEC00BF43B9 /* DisciplinesViewController.xib in Resources */,
-				85CA80771CD77D5600194E67 /* MenuViewController.xib in Resources */,
-				85BADF941C9054E6000B8989 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -418,11 +423,13 @@
 				85D3CF1B1CD0F1EF0058CCFF /* DoubtViewController.swift in Sources */,
 				851DF7391CE368A300CB3C79 /* ClosedDoubtViewController.swift in Sources */,
 				85EEDA941C9C4A9800F431B1 /* Discipline.swift in Sources */,
+				8516A7F01CF7C4F000168B25 /* StringUtil.swift in Sources */,
 				8575C0F31C9300E200FCAD85 /* Event.swift in Sources */,
 				859748331CAC173B007A7481 /* Presentation.swift in Sources */,
+				85FC78851CF33881001E2696 /* SWRevealViewController.m in Sources */,
 				85C766AA1CD1A7370026AE36 /* OpenPresentationViewController.swift in Sources */,
-				85CA807F1CD7834400194E67 /* BaseViewController.swift in Sources */,
 				859748311CABF6CD007A7481 /* Person.swift in Sources */,
+				8516A7EC1CF767E700168B25 /* MenuTableViewController.swift in Sources */,
 				851DF73F1CE36FF800CB3C79 /* RankingDoubtViewController.swift in Sources */,
 				85C2F9591CC85646006CE08E /* ClosedPresentationViewController.swift in Sources */,
 				85ECF1571CC4FA4A00BF43B9 /* DisciplinesViewController.swift in Sources */,
@@ -430,7 +437,7 @@
 				85D3CF2A1CD101070058CCFF /* PresentationsTabBarController.swift in Sources */,
 				85BADFD81C905710000B8989 /* Server.swift in Sources */,
 				85CA80841CD7913200194E67 /* DoubtTableViewCell.swift in Sources */,
-				85CA80741CD7754500194E67 /* MenuViewController.swift in Sources */,
+				85C35F9D1CEDE47D008F0526 /* ImageUtil.swift in Sources */,
 				85BADFD51C9056F7000B8989 /* RecoverPasswordViewController.swift in Sources */,
 				85BADFD61C9056F7000B8989 /* RegisterViewController.swift in Sources */,
 				85E3488B1CE4BD5B00DCD6C1 /* ColorUtil.swift in Sources */,
@@ -439,7 +446,6 @@
 				85BADFC21C90557C000B8989 /* ViewController.swift in Sources */,
 				85D3CF201CD0FE090058CCFF /* Doubt.swift in Sources */,
 				85E348841CE4A63200DCD6C1 /* CreateNewDoubtViewController.swift in Sources */,
-				85C7C9731CE9F44F00BDCEE1 /* CheckBoxControl.swift in Sources */,
 				8570F5281CDA9CE0000E41B4 /* OpenDoubtViewController.swift in Sources */,
 				85BADFC01C905577000B8989 /* AppDelegate.swift in Sources */,
 				85D3CF281CD100EE0058CCFF /* DoubtTabBarViewController.swift in Sources */,

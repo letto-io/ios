@@ -25,18 +25,34 @@ class CreateNewDoubtViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = "Nova Dúvida"
+        self.navigationItem.title = StringUtil.newDoubtTitle
+        
+        var menuButton = UIBarButtonItem()
+        
+        if self.revealViewController() != nil {
+            
+            menuButton = UIBarButtonItem(image: ImageUtil.imageMenuButton, style: UIBarButtonItemStyle.Plain, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle))
+            
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+            
+        }
+        
+        let back = UIBarButtonItem(image: ImageUtil.imageBackButton, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(CreateNewDoubtViewController.back))
+        self.navigationItem.setLeftBarButtonItems([menuButton, back], animated: true)
 
-        let saveDoubtButton = UIBarButtonItem(image: UIImage(named: "send-black.png"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(CreateNewDoubtViewController.saveNewDoubt))
+        let saveDoubtButton = UIBarButtonItem(image: ImageUtil.imageSaveButton, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(CreateNewDoubtViewController.saveNewDoubt))
         
         self.navigationItem.setRightBarButtonItem(saveDoubtButton, animated: true)
         
-        let uncheckedImage = UIImage(named: "checkbox-blank-outline-48")! as UIImage
+        let uncheckedImage = ImageUtil.imageUnderstandButtonWhite
         
         self.anonymousButton.setImage(uncheckedImage, forState: .Normal)
         
     }
     
+    func back() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     
     func saveNewDoubt() {
         
@@ -46,33 +62,32 @@ class CreateNewDoubtViewController: UIViewController {
         
         
         if (text!.isEmpty) {
-            
-            displayMyAlertMessage("Campo obrigatório")
+            displayMyAlertMessage(StringUtil.msgDoubtTextRequired)
             return
         }
         
         let JSONObject: [String : AnyObject] = [
-            "text" : text!,
-            "anonymous": anonymous
+            StringUtil.jsText : text!,
+            StringUtil.jsAnonymous : anonymous
         ]
         
         if NSJSONSerialization.isValidJSONObject(JSONObject) {
             let request: NSMutableURLRequest = NSMutableURLRequest()
-            let url = Server.presentationURL+"\(idDisc)" + "/presentation/" + "\(idPresent)" + "/doubt"
+            let url = Server.presentationURL+"\(idDisc)" + Server.presentaion_bar + "\(idPresent)" + Server.doubt
             
             let _: NSError?
             
             request.URL = NSURL(string: url)
-            request.HTTPMethod = "POST"
+            request.HTTPMethod = StringUtil.httpPOST
             request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            request.setValue(StringUtil.httpApplication, forHTTPHeaderField: StringUtil.httpHeader)
             request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(JSONObject, options:  NSJSONWritingOptions(rawValue:0))
             
             let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
                 data, response, error in
                 
                 if error != nil {
-                    print("error=\(error)")
+                    print(error)
                     return
                 } else {
                     if let httpResponse = response as? NSHTTPURLResponse, let fields = httpResponse.allHeaderFields as? [String : String] {
@@ -81,14 +96,14 @@ class CreateNewDoubtViewController: UIViewController {
                         
                         if httpResponse.statusCode == 404 {
                             dispatch_async(dispatch_get_main_queue(), {
-                                self.displayMyAlertMessage("Erro 404")
+                                self.displayMyAlertMessage(StringUtil.error404)
                                 
                             })
                         }
                         
                         if httpResponse.statusCode == 401 {
                             dispatch_async(dispatch_get_main_queue(), {
-                                self.displayMyAlertMessage("Erro 401")
+                                self.displayMyAlertMessage(StringUtil.error401)
                                 
                             })
                         }
@@ -111,8 +126,8 @@ class CreateNewDoubtViewController: UIViewController {
     @IBAction func anonymousButtonPressed() {
         
         // Images
-        let checkedImage = UIImage(named: "checkbox-marked-black")! as UIImage
-        let uncheckedImage = UIImage(named: "checkbox-blank-outline-48")! as UIImage
+        let checkedImage = ImageUtil.imageUnderstandMarkedButtonWhite
+        let uncheckedImage = ImageUtil.imageUnderstandButtonWhite
         
         if isChecked == true {
             isChecked = false
@@ -131,7 +146,7 @@ class CreateNewDoubtViewController: UIViewController {
     var delegate:AddNewDoubtDelegate?
     init(delegate:AddNewDoubtDelegate) {
         self.delegate = delegate
-        super.init(nibName: "CreateNewDoubtViewController", bundle: nil)
+        super.init(nibName: StringUtil.createNewDoubtViewController, bundle: nil)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -140,10 +155,10 @@ class CreateNewDoubtViewController: UIViewController {
     
     func displayMyAlertMessage(userMessage: String) {
         
-        let myAlert = UIAlertController(title: "Mensagem", message: userMessage, preferredStyle:
+        let myAlert = UIAlertController(title: StringUtil.message, message: userMessage, preferredStyle:
             UIAlertControllerStyle.Alert)
         
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: nil)
+        let okAction = UIAlertAction(title: StringUtil.ok, style: UIAlertActionStyle.Destructive, handler: nil)
         
         myAlert.addAction(okAction)
         
@@ -152,9 +167,7 @@ class CreateNewDoubtViewController: UIViewController {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        //nameTextField.resignFirstResponder()
-        
-        
+        doubtTextField.resignFirstResponder()
     }
 
 }

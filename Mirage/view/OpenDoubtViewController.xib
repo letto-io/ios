@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OpenDoubtViewController" customModule="Mirage" customModuleProvider="target">
@@ -17,8 +16,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QA0-zj-auh">
-                    <rect key="frame" x="8" y="0.0" width="359" height="608"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QA0-zj-auh">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="608"/>
                     <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="i5M-Pr-FkT" id="7Fk-t5-r5E"/>
@@ -28,10 +27,10 @@
             </subviews>
             <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="QA0-zj-auh" secondAttribute="bottom" constant="59" id="2sr-Ab-TCZ"/>
-                <constraint firstItem="QA0-zj-auh" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailingMargin" id="Xqx-Oe-on2"/>
-                <constraint firstItem="QA0-zj-auh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Xzn-vd-QLM"/>
-                <constraint firstItem="QA0-zj-auh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leadingMargin" id="gvq-3w-Fx8"/>
+                <constraint firstAttribute="bottom" secondItem="QA0-zj-auh" secondAttribute="bottom" constant="59" id="1Is-L8-CvR"/>
+                <constraint firstItem="QA0-zj-auh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ZYI-Kl-9HD"/>
+                <constraint firstAttribute="trailing" secondItem="QA0-zj-auh" secondAttribute="trailing" id="gBM-Yc-kwO"/>
+                <constraint firstItem="QA0-zj-auh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="tLk-uS-0zz"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="864.5" y="274.5"/>
