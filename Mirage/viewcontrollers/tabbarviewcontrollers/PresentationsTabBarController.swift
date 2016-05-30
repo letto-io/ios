@@ -35,7 +35,9 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
             self.view.addGestureRecognizer(longPressRecognizer)
 
             let newPresentationButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(PresentationsTabBarController.showNewPresentation))
-
+            
+            newPresentationButton.tintColor = ColorUtil.orangeColor
+            
             self.navigationItem.setRightBarButtonItem(newPresentationButton, animated: true)
         }
         

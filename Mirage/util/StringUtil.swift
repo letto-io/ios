@@ -61,7 +61,8 @@ class StringUtil {
         static let enddate = "enddate"
         static let classe = "class"
         static let profile  = "profile"
-        static let turma = "Turma"
+        static let turma = "Turma "
+        static let start = "Inicio: "
     
     //PresentationsTabBarController.swift
         static let presentationsTabBarController = "PresentationsTabBarController"

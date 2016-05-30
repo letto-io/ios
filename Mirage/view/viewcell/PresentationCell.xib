@@ -18,25 +18,26 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HIN-KF-dkx">
                         <rect key="frame" x="8" y="0.0" width="304" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0V-CR-ZqH">
                         <rect key="frame" x="163" y="30" width="149" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="149" id="trk-r5-xdi"/>
+                            <constraint firstAttribute="width" constant="149" id="Kc4-TI-ApO"/>
+                            <constraint firstAttribute="height" constant="21" id="Lje-S3-dqO"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.44705882352941173" green="0.44705882352941173" blue="0.44705882352941173" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="o0V-CR-ZqH" firstAttribute="bottom" secondItem="Hgu-rR-dmx" secondAttribute="bottomMargin" id="ROY-jQ-slf"/>
                     <constraint firstItem="HIN-KF-dkx" firstAttribute="top" secondItem="Hgu-rR-dmx" secondAttribute="top" id="a3b-64-BDM"/>
+                    <constraint firstItem="o0V-CR-ZqH" firstAttribute="trailing" secondItem="HIN-KF-dkx" secondAttribute="trailing" id="bbH-RB-R4j"/>
                     <constraint firstItem="HIN-KF-dkx" firstAttribute="trailing" secondItem="Hgu-rR-dmx" secondAttribute="trailingMargin" id="d2V-LW-9eM"/>
                     <constraint firstItem="HIN-KF-dkx" firstAttribute="leading" secondItem="Hgu-rR-dmx" secondAttribute="leadingMargin" id="gMv-ou-IaC"/>
-                    <constraint firstItem="o0V-CR-ZqH" firstAttribute="trailing" secondItem="HIN-KF-dkx" secondAttribute="trailing" id="lra-pQ-NyV"/>
-                    <constraint firstItem="o0V-CR-ZqH" firstAttribute="bottom" secondItem="Hgu-rR-dmx" secondAttribute="bottomMargin" id="p4d-bv-ucP"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

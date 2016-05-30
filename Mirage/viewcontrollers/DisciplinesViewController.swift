@@ -33,6 +33,7 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
             
             refreshControl = UIRefreshControl()
             refreshControl.attributedTitle = NSAttributedString(string: StringUtil.pullToRefresh)
+            refreshControl.tintColor = ColorUtil.orangeColor
             refreshControl.addTarget(self, action: #selector(OpenPresentationViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
             tableView.addSubview(refreshControl) // not required when using UITableViewController
         }
@@ -174,22 +175,14 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
         let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cellIdentifier, forIndexPath: indexPath) as! DisciplineTableViewCell
         let disc = discipline[ indexPath.row ]
         
-        cell.nameLabel.textColor = ColorUtil.colorPrimaryText
-        cell.startDateLabel.textColor = ColorUtil.colorSecondaryText
-        cell.classeLabel.textColor = ColorUtil.colorSecondaryText
-        
         cell.nameLabel.text = disc.name
-        cell.startDateLabel.text = disc.startDate
+        cell.startDateLabel.text = StringUtil.start + DateUtil.date(disc.startDate)
         cell.classeLabel.text = StringUtil.turma + (String(disc.classe))
         
         let imageBook = ImageUtil.imageDiscipline
         cell.bookImageView.image = imageBook
-        
-        cell.bookImageView.image = imageBook!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        cell.bookImageView.tintColor = UIColor.darkGrayColor()
-        
-        
-        
+        cell.bookImageView.tintColor = UIColor.grayColor()
+
         return cell
     }
     

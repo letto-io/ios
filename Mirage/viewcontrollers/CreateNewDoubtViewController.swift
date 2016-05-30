@@ -46,7 +46,8 @@ class CreateNewDoubtViewController: UIViewController {
         
         let uncheckedImage = ImageUtil.imageUnderstandButtonWhite
         
-        self.anonymousButton.setImage(uncheckedImage, forState: .Normal)
+        self.anonymousButton.setImage(uncheckedImage.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: .Normal)
+        self.anonymousButton.tintColor = ColorUtil.orangeColor
         
     }
     
@@ -126,8 +127,8 @@ class CreateNewDoubtViewController: UIViewController {
     @IBAction func anonymousButtonPressed() {
         
         // Images
-        let checkedImage = ImageUtil.imageUnderstandMarkedButtonWhite
-        let uncheckedImage = ImageUtil.imageUnderstandButtonWhite
+        let checkedImage = ImageUtil.imageUnderstandMarkedButtonWhite.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        let uncheckedImage = ImageUtil.imageUnderstandButtonWhite.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         
         if isChecked == true {
             isChecked = false
@@ -140,6 +141,8 @@ class CreateNewDoubtViewController: UIViewController {
         } else {
             self.anonymousButton.setImage(uncheckedImage, forState: .Normal)
         }
+        
+        self.anonymousButton.tintColor = ColorUtil.orangeColor
     }
     
     

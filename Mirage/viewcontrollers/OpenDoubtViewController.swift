@@ -177,12 +177,6 @@ class OpenDoubtViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let doubts = openDoubt[ indexPath.row ]
         
-        cell.nameLabel.textColor = ColorUtil.colorPrimaryText
-        cell.textDoubtLabel.textColor = ColorUtil.colorSecondaryText
-        cell.hourLabel.textColor = ColorUtil.colorSecondaryText
-        cell.countLikesLabel.textColor = ColorUtil.colorSecondaryText
-        cell.understandLabel.textColor = ColorUtil.colorSecondaryText
-        
         if doubts.anonymous == false {
             cell.nameLabel.text = doubts.person.name
         } else {
@@ -190,7 +184,7 @@ class OpenDoubtViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         
         cell.textDoubtLabel.text = doubts.text
-        cell.hourLabel.text = doubts.createdat
+        cell.hourLabel.text = DateUtil.hour(doubts.createdat)
         cell.countLikesLabel.text = String(doubts.likes)
         cell.understandLabel.text = StringUtil.entendi
         

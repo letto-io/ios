@@ -30,6 +30,7 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: StringUtil.pullToRefresh)
+        refreshControl.tintColor = ColorUtil.orangeColor
         refreshControl.addTarget(self, action: #selector(ClosedPresentationViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl) // not required when using UITableViewController
         
@@ -159,7 +160,7 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
         cell.dateLabel.textColor = ColorUtil.colorSecondaryText
         
         cell.subjectLabel.text = present.subject
-        cell.dateLabel.text = present.createdat
+        cell.dateLabel.text = DateUtil.date1(present.createdat)
         
         return cell
         

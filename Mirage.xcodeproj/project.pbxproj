@@ -14,6 +14,7 @@
 		851DF73C1CE368C500CB3C79 /* ClosedDoubtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 851DF73B1CE368C500CB3C79 /* ClosedDoubtViewController.xib */; };
 		851DF73F1CE36FF800CB3C79 /* RankingDoubtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 851DF73D1CE36FF800CB3C79 /* RankingDoubtViewController.swift */; };
 		851DF7421CE3701900CB3C79 /* RankingDoubtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 851DF7411CE3701900CB3C79 /* RankingDoubtViewController.xib */; };
+		852F5C2F1CFC7C49004178A8 /* DateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852F5C2E1CFC7C49004178A8 /* DateUtil.swift */; };
 		856A2B461CBBE9B100BF4CD9 /* CreateNewPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856A2B441CBBE9B100BF4CD9 /* CreateNewPresentationViewController.swift */; };
 		8570F5281CDA9CE0000E41B4 /* OpenDoubtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8570F5261CDA9CE0000E41B4 /* OpenDoubtViewController.swift */; };
 		8570F52B1CDA9ED5000E41B4 /* OpenDoubtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8570F52A1CDA9ED5000E41B4 /* OpenDoubtViewController.xib */; };
@@ -87,6 +88,7 @@
 		851DF73B1CE368C500CB3C79 /* ClosedDoubtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ClosedDoubtViewController.xib; path = Mirage/view/ClosedDoubtViewController.xib; sourceTree = "<group>"; };
 		851DF73D1CE36FF800CB3C79 /* RankingDoubtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RankingDoubtViewController.swift; path = Mirage/viewcontrollers/RankingDoubtViewController.swift; sourceTree = "<group>"; };
 		851DF7411CE3701900CB3C79 /* RankingDoubtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RankingDoubtViewController.xib; path = Mirage/view/RankingDoubtViewController.xib; sourceTree = "<group>"; };
+		852F5C2E1CFC7C49004178A8 /* DateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateUtil.swift; path = Mirage/util/DateUtil.swift; sourceTree = "<group>"; };
 		856A2B441CBBE9B100BF4CD9 /* CreateNewPresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateNewPresentationViewController.swift; path = Mirage/viewcontrollers/CreateNewPresentationViewController.swift; sourceTree = "<group>"; };
 		8570F5261CDA9CE0000E41B4 /* OpenDoubtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OpenDoubtViewController.swift; path = Mirage/viewcontrollers/OpenDoubtViewController.swift; sourceTree = "<group>"; };
 		8570F52A1CDA9ED5000E41B4 /* OpenDoubtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OpenDoubtViewController.xib; path = Mirage/view/OpenDoubtViewController.xib; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 		85BADF801C9054E6000B8989 = {
 			isa = PBXGroup;
 			children = (
+				852F5C2E1CFC7C49004178A8 /* DateUtil.swift */,
 				8516A7EB1CF767E700168B25 /* MenuTableViewController.swift */,
 				85E3488A1CE4BD5B00DCD6C1 /* ColorUtil.swift */,
 				85E348821CE4A63200DCD6C1 /* CreateNewDoubtViewController.swift */,
@@ -441,6 +444,7 @@
 				85BADFD51C9056F7000B8989 /* RecoverPasswordViewController.swift in Sources */,
 				85BADFD61C9056F7000B8989 /* RegisterViewController.swift in Sources */,
 				85E3488B1CE4BD5B00DCD6C1 /* ColorUtil.swift in Sources */,
+				852F5C2F1CFC7C49004178A8 /* DateUtil.swift in Sources */,
 				85D3CF321CD1028D0058CCFF /* PresentationTableViewCell.swift in Sources */,
 				856A2B461CBBE9B100BF4CD9 /* CreateNewPresentationViewController.swift in Sources */,
 				85BADFC21C90557C000B8989 /* ViewController.swift in Sources */,

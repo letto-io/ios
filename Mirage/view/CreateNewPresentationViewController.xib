@@ -17,16 +17,27 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tema" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1h4-E4-xbW">
-                    <rect key="frame" x="16" y="86" width="343" height="30"/>
+                    <rect key="frame" x="16" y="120" width="343" height="30"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tema" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HR5-31-0Pr">
+                    <rect key="frame" x="16" y="86" width="171" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="171" id="tK5-HJ-1Ur"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="0.59607843140000005" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="1h4-E4-xbW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="bP0-LQ-8H7"/>
-                <constraint firstItem="1h4-E4-xbW" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="86" id="i8m-R3-wNY"/>
-                <constraint firstItem="1h4-E4-xbW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="kDr-g9-XYJ"/>
+                <constraint firstItem="HR5-31-0Pr" firstAttribute="leading" secondItem="1h4-E4-xbW" secondAttribute="leading" id="Gmo-Yl-nC2"/>
+                <constraint firstItem="1h4-E4-xbW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Iw9-c8-JS6"/>
+                <constraint firstItem="HR5-31-0Pr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="86" id="g58-BY-ilm"/>
+                <constraint firstItem="1h4-E4-xbW" firstAttribute="top" secondItem="HR5-31-0Pr" secondAttribute="bottom" constant="13" id="qgM-rW-SpZ"/>
+                <constraint firstItem="HR5-31-0Pr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="wzO-24-WOH"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="884" y="327"/>

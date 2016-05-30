@@ -30,7 +30,9 @@ class MenuTableViewController: UITableViewController {
         exitLabel.text = "Sair"
         
         imageViewExit.image = ImageUtil.imageExitButton
+        imageViewExit.tintColor = UIColor.lightGrayColor()
         imageViewConfig.image = ImageUtil.imageConfigButton
+        imageViewConfig.tintColor = UIColor.lightGrayColor()
     }
 
 

@@ -123,7 +123,7 @@ class DoubtViewController: UIViewController, UITableViewDelegate, UITableViewDat
                                     let key = keys[i] as! String
                                     let doubt = info.valueForKey(key)!
                                     
-                                    for j in 0 ..< keys.count {
+                                    for _ in 0 ..< keys.count {
                                         let key = doubt.valueForKey(StringUtil.person)!
                                         person.id = key.valueForKey(StringUtil.id) as! Int
                                         person.name = key.valueForKey(StringUtil.name) as! String
@@ -167,12 +167,6 @@ class DoubtViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let doubts = doubt[ indexPath.row ]
         
-        cell.nameLabel.textColor = ColorUtil.colorPrimaryText
-        cell.textDoubtLabel.textColor = ColorUtil.colorSecondaryText
-        cell.hourLabel.textColor = ColorUtil.colorSecondaryText
-        cell.countLikesLabel.textColor = ColorUtil.colorSecondaryText
-        cell.understandLabel.textColor = ColorUtil.colorSecondaryText
-        
         if doubts.anonymous == false {
             cell.nameLabel.text = doubts.person.name
         } else {
@@ -180,7 +174,7 @@ class DoubtViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
         
         cell.textDoubtLabel.text = doubts.text
-        cell.hourLabel.text = doubts.createdat
+        cell.hourLabel.text = DateUtil.hour(doubts.createdat)
         cell.countLikesLabel.text = String(doubts.likes)
         cell.understandLabel.text = StringUtil.entendi
         

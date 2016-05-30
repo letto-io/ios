@@ -38,6 +38,8 @@ class DoubtTabBarViewController: UITabBarController, UITabBarControllerDelegate,
             
             let newDoubtButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(DoubtTabBarViewController.showNewDoubt))
             
+            newDoubtButton.tintColor = ColorUtil.orangeColor
+            
             self.navigationItem.setRightBarButtonItem(newDoubtButton, animated: true)
         }
         

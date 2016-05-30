@@ -28,7 +28,7 @@
                         <constraint firstAttribute="width" constant="171" id="y9q-UT-v6G"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="1" green="0.59607843137254901" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LpP-ob-6bX">
@@ -53,7 +53,7 @@
                 <constraint firstItem="6I9-kx-qUv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="86" id="zb0-jZ-fvQ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="1544.5" y="382.5"/>
+            <point key="canvasLocation" x="1668.5" y="373.5"/>
         </view>
     </objects>
 </document>

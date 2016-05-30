@@ -32,6 +32,7 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: StringUtil.pullToRefresh)
+        refreshControl.tintColor = ColorUtil.orangeColor
         refreshControl.addTarget(self, action: #selector(OpenPresentationViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl)
         
@@ -192,7 +193,7 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
         cell.dateLabel.textColor = ColorUtil.colorSecondaryText
         
         cell.subjectLabel.text = present.subject
-        cell.dateLabel.text = present.createdat
+        cell.dateLabel.text = DateUtil.date1(present.createdat)
         
         return cell
         

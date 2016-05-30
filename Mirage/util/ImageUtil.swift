@@ -18,25 +18,25 @@ class ImageUtil {
     static let imageUnderstandButtonBlack = UIImage(named: "checkbox-blank-outline-black.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
     
     //botão voltar navigationController
-    static let imageBackButton = UIImage(named: "arrow_back.png")
+    static let imageBackButton = UIImage(named: "arrow_back.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     
     //botão menuDrawer
-    static let imageMenuButton = UIImage(named: "menu-vertical.png")
+    static let imageMenuButton = UIImage(named: "menu-vertical.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     
     //botão sair
-    static let imageExitButton = UIImage(named: "exit-to-app-black.png")
+    static let imageExitButton = UIImage(named: "exit-to-app-black.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     
     //botão configurações
-    static let imageConfigButton = UIImage(named: "settings-black.png")
+    static let imageConfigButton = UIImage(named: "settings-black.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     
     //DisciplineViewController
-    static let imageDiscipline = UIImage(named: "book-multiple-black.png")
+    static let imageDiscipline = UIImage(named: "book-multiple-black.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     
     //CreateNewPresentationViewController
-    static let imageSaveButton = UIImage(named: "send-black.png")
+    static let imageSaveButton = UIImage(named: "send-black.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     
     //CreateNewDoubtViewControler
-    static let imageUnderstandButtonWhite = UIImage(named: "checkbox-blank-outline-black.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-    static let imageUnderstandMarkedButtonWhite = UIImage(named: "checkbox-marked-black.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+    static let imageUnderstandButtonWhite = UIImage(named: "checkbox-blank-outline-white.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+    static let imageUnderstandMarkedButtonWhite = UIImage(named: "checkbox-marked-white.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     
 }
