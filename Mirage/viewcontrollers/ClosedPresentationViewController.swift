@@ -88,15 +88,8 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                var studentJSONParseError: NSError?
                 
                 let presentationJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
-                
-                if (studentJSONParseError != nil) {
-                    
-                    print(studentJSONParseError!.localizedDescription)
-                    
-                } else {
                     
                     let info : NSArray =  presentationJSONData.valueForKey(StringUtil.presentations) as! NSArray
                     let person : NSArray = info.valueForKey(StringUtil.person) as! NSArray
@@ -122,8 +115,7 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
                             self.presentation.insert(presentations, atIndex: i)
                         }
                     }
-                    print(presentationJSONData)
-                }
+                print(presentationJSONData)
             }
         })
         
@@ -155,9 +147,6 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
         let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cellIdentifier, forIndexPath: indexPath) as! PresentationTableViewCell
         
         let present = closedPresentation[ indexPath.row ]
-        
-        cell.subjectLabel.textColor = ColorUtil.colorPrimaryText
-        cell.dateLabel.textColor = ColorUtil.colorSecondaryText
         
         cell.subjectLabel.text = present.subject
         cell.dateLabel.text = DateUtil.date1(present.createdat)

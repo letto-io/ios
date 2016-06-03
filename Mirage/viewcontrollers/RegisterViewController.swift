@@ -16,15 +16,16 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        let back = UIBarButtonItem(image: ImageUtil.imageBackButton, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(RegisterViewController.back))
+        self.navigationItem.setLeftBarButtonItem(back, animated: true)
+        
     }
     
+    func back() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+
 
     @IBAction func registerButtonTapped(sender: AnyObject) {
         

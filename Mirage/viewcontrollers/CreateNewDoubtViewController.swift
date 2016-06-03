@@ -44,11 +44,8 @@ class CreateNewDoubtViewController: UIViewController {
         
         self.navigationItem.setRightBarButtonItem(saveDoubtButton, animated: true)
         
-        let uncheckedImage = ImageUtil.imageUnderstandButtonWhite
-        
-        self.anonymousButton.setImage(uncheckedImage.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: .Normal)
-        self.anonymousButton.tintColor = ColorUtil.orangeColor
-        
+        self.anonymousButton.setImage(ImageUtil.imageCheckBoxButtonWhite, forState: .Normal)
+        self.anonymousButton.tintColor = UIColor.grayColor()
     }
     
     func back() {
@@ -127,13 +124,15 @@ class CreateNewDoubtViewController: UIViewController {
     @IBAction func anonymousButtonPressed() {
         
         // Images
-        let checkedImage = ImageUtil.imageUnderstandMarkedButtonWhite.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        let uncheckedImage = ImageUtil.imageUnderstandButtonWhite.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        let checkedImage = ImageUtil.imageCheckBoxMarkedButtonWhite
+        let uncheckedImage = ImageUtil.imageCheckBoxButtonWhite
         
         if isChecked == true {
             isChecked = false
+            self.anonymousButton.tintColor = UIColor.grayColor()
         } else {
             isChecked = true
+            self.anonymousButton.tintColor = ColorUtil.orangeColor
         }
         
         if isChecked == true {
@@ -141,8 +140,6 @@ class CreateNewDoubtViewController: UIViewController {
         } else {
             self.anonymousButton.setImage(uncheckedImage, forState: .Normal)
         }
-        
-        self.anonymousButton.tintColor = ColorUtil.orangeColor
     }
     
     

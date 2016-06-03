@@ -26,7 +26,6 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
     var presentation = Array<Presentation>()
     var openPresentation = Array<Presentation>()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -120,15 +119,8 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                var studentJSONParseError: NSError?
                 
                 let presentationJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
-                
-                if (studentJSONParseError != nil) {
-                    
-                    print(studentJSONParseError!.localizedDescription)
-                    
-                } else {
                     
                     let info : NSArray =  presentationJSONData.valueForKey(StringUtil.presentations) as! NSArray
                     let person : NSArray = info.valueForKey(StringUtil.person) as! NSArray
@@ -154,8 +146,7 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
                             self.presentation.insert(presentations, atIndex: i)
                         }
                     }
-                    print(presentationJSONData)
-                }
+                print(presentationJSONData)
             }
         })
         
@@ -176,8 +167,7 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
         
         openPresentation = auxPresent.reverse()
     }
-    
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return openPresentation.count
@@ -188,9 +178,6 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
         let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cellIdentifier, forIndexPath: indexPath) as! PresentationTableViewCell
         
         let present = openPresentation[ indexPath.row ]
-        
-        cell.subjectLabel.textColor = ColorUtil.colorPrimaryText
-        cell.dateLabel.textColor = ColorUtil.colorSecondaryText
         
         cell.subjectLabel.text = present.subject
         cell.dateLabel.text = DateUtil.date1(present.createdat)

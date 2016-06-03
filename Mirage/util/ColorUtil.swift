@@ -10,8 +10,6 @@ import UIKit
 
 class ColorUtil {
     
-    static let colorPrimaryText = UIColor(hue: 0, saturation: 0, brightness: 0.12, alpha: 1.0) /* #212121 */
-    static let colorSecondaryText = UIColor(hue: 0, saturation: 0, brightness: 0.44, alpha: 1.0) /* #727272 */
     static let orangeColor = UIColor(hue: 0.0667, saturation: 0.68, brightness: 1, alpha: 1.0) /* #ff9850 */
     
     

@@ -18,11 +18,15 @@ class RecoverPasswordViewController: UIViewController, UITextFieldDelegate {
         emailField.keyboardType = UIKeyboardType.ASCIICapable
         
         let recoverPasswordButton = UIBarButtonItem(image: ImageUtil.imageSaveButton, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(RecoverPasswordViewController.sendButtonTapped))
-        
         self.navigationItem.setRightBarButtonItem(recoverPasswordButton, animated: true)
+        
+        let back = UIBarButtonItem(image: ImageUtil.imageBackButton, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(RecoverPasswordViewController.back))
+        self.navigationItem.setLeftBarButtonItem(back, animated: true)
     }
     
-    
+    func back() {
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     
     func sendButtonTapped() {
         

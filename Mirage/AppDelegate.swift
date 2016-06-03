@@ -23,10 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.whiteColor()]
         
         // Set navigation bar ItemButton tint colour
-        UIBarButtonItem.appearance().tintColor = UIColor.darkGrayColor()
-        
-        //Set navigation bar Back button tint colour
-        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UIBarButtonItem.appearance().tintColor = UIColor(hue: 0, saturation: 0, brightness: 0.98, alpha: 1.0) /* #fafafa */
         
         UITabBar.appearance().barTintColor = UIColor(hue: 0.5083, saturation: 1, brightness: 0.47, alpha: 1.0) /* #007279 */
         

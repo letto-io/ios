@@ -13,9 +13,7 @@ class ImageUtil {
     static let imageRankingBlack = UIImage(named: "arrow-up-bold-black.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
     
     //botão curtir e entendi das dúvidas
-    static let imageLikeButton = UIImage(named: "arrow-up-bold-circle-outline-white.png")
-    static let imageLikeButtonBlack = UIImage(named: "arrow-up-bold-circle-outline-black")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-    static let imageUnderstandButtonBlack = UIImage(named: "checkbox-blank-outline-black.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+    static let imageLikeButton = UIImage(named: "arrow-up-bold-circle-outline-white.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     
     //botão voltar navigationController
     static let imageBackButton = UIImage(named: "arrow_back.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
@@ -36,7 +34,7 @@ class ImageUtil {
     static let imageSaveButton = UIImage(named: "send-black.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     
     //CreateNewDoubtViewControler
-    static let imageUnderstandButtonWhite = UIImage(named: "checkbox-blank-outline-white.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-    static let imageUnderstandMarkedButtonWhite = UIImage(named: "checkbox-marked-white.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+    static let imageCheckBoxButtonWhite = UIImage(named: "checkbox-blank-outline-white.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+    static let imageCheckBoxMarkedButtonWhite = UIImage(named: "checkbox-marked-white.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     
 }

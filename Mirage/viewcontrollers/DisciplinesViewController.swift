@@ -114,13 +114,9 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                var disciplineJSONParseError: NSError?
                 
-                let disciplineJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
-                
-                if (disciplineJSONParseError != nil) {
-                    return
-                } else {
+                do {
+                    let disciplineJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
                     
                     if (disciplineJSONData.valueForKey(StringUtil.error) != nil) {
                         return
@@ -156,8 +152,10 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
                         }
                         
                     }
-                    
                     print(disciplineJSONData)
+                } catch let error as NSError {
+                    print(error.localizedDescription)
+                    return
                 }
             }
         })
@@ -199,13 +197,5 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
         presentationTabBar.nameDisc = name
         
         self.navigationController?.pushViewController(presentationTabBar, animated: true)
-    }
-    
-    init() {
-        super.init(nibName: StringUtil.disciplineViewController, bundle: nil)
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)!
     }
 }

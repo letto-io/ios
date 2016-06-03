@@ -28,6 +28,7 @@ class ClosedDoubtViewController: UIViewController, UITableViewDelegate, UITableV
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: StringUtil.pullToRefresh)
+        refreshControl.tintColor = ColorUtil.orangeColor
         refreshControl.addTarget(self, action: #selector(ClosedPresentationViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
         tableView.addSubview(refreshControl) // not required when using UITableViewController
         
@@ -85,17 +86,9 @@ class ClosedDoubtViewController: UIViewController, UITableViewDelegate, UITableV
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                var doubtJSONParseError: NSError?
-                
+        
                 let doubtJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
                 
-                if (doubtJSONParseError != nil) {
-                    
-                    //print("JSON Parsing Error: \(studentJSONParseError!.localizedDescription)")
-                    return
-                    
-                } else {
-                    
                     if (doubtJSONData.valueForKey(StringUtil.error) != nil) {
                         return
                     } else {
@@ -143,8 +136,7 @@ class ClosedDoubtViewController: UIViewController, UITableViewDelegate, UITableV
                         }
                     }
                     
-                    print(doubtJSONData)
-                }
+                print(doubtJSONData)
             }
         })
         
@@ -188,20 +180,20 @@ class ClosedDoubtViewController: UIViewController, UITableViewDelegate, UITableV
         cell.countLikesLabel.text = String(doubts.likes)
         cell.understandLabel.text = StringUtil.entendi
         
-        
-        cell.likeButton.setImage(ImageUtil.imageLikeButtonBlack, forState: .Normal)
-        cell.understandButton.setImage(ImageUtil.imageUnderstandButtonBlack, forState: .Normal)
-        cell.likeButton.tintColor = ColorUtil.colorSecondaryText
-        cell.understandButton.tintColor = ColorUtil.colorSecondaryText
+        cell.likeButton.setImage(ImageUtil.imageLikeButton, forState: .Normal)
+        cell.likeButton.tintColor = ColorUtil.orangeColor
+        cell.understandButton.setImage(ImageUtil.imageCheckBoxButtonWhite, forState: .Normal)
+        cell.understandButton.tintColor = UIColor.grayColor()
         
         //passagem de id para url de like na dúvida
-        cell.likeButton.tag = closedDoubt[ indexPath.row ].id
+        cell.likeButton.tag = doubt[ indexPath.row ].id
         
         if doubts.like == false {
-            cell.likeButton.addTarget(self, action: #selector(OpenDoubtViewController.likeButtonPressed), forControlEvents: .TouchUpInside)
+            cell.likeButton.addTarget(self, action: #selector(DoubtViewController.likeButtonPressed), forControlEvents: .TouchUpInside)
             cell.likeButton.setImage(ImageUtil.imageLikeButton, forState: .Normal)
+            cell.likeButton.tintColor = UIColor.grayColor()
         } else {
-            cell.likeButton.addTarget(self, action: #selector(OpenDoubtViewController.deleteLikeButtonPressed), forControlEvents: .TouchUpInside)
+            cell.likeButton.addTarget(self, action: #selector(DoubtViewController.deleteLikeButtonPressed), forControlEvents: .TouchUpInside)
         }
         
         return cell

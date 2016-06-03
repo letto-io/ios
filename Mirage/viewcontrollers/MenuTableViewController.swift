@@ -24,7 +24,7 @@ class MenuTableViewController: UITableViewController {
         super.viewDidLoad()
 
         userNameLabel.text = "User Name"
-        loginLabel.text = "email"
+        loginLabel.text = "email@email.com"
         configLabel.text = "Configurações"
         optionsLabel.text = "Opções"
         exitLabel.text = "Sair"
