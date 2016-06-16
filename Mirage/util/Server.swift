@@ -16,6 +16,7 @@ class Server {
     static let doubt = "/doubt"
     static let doubt_bar = "/doubt/"
     static let like = "/like"
+    static let contribution = "/contribution"
     
     static let loginURL = "http://ws-edupanel.herokuapp.com/controller/login"
     static let recoverPasswordURL = "http://ws-edupanel.herokuapp.com/controller/recover-password"

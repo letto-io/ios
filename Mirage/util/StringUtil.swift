@@ -34,6 +34,7 @@ class StringUtil {
     static let disciplineCell = "DisciplineCell"
     static let presentationCell = "PresentationCell"
     static let doubtCell = "DoubtTableViewCell"
+    static let doubtResponseCell = "DoubtResponseTableViewCell"
     
     
     
@@ -127,6 +128,34 @@ class StringUtil {
         static let createNewDoubtViewController = "CreateNewDoubtViewController"
         static let newDoubtTitle = "Nova Dúvida"
         static let msgDoubtTextRequired = "Descreva sua dúvida"
+    
+    
+    //DoubtsResponseTabBarViewController.swif
+    static let doubtsResponseTabBarViewController = "DoubtsResponseTabBarViewController"
+    static let Texto = "Texto"
+    static let Audio = "Audio"
+    static let Video = "Video"
+    
+    
+    //TextDoubtReponseViewController.swift
+    static let textDoubtReponseViewController = "TextDoubtReponseViewController"
+    static let mcmaterial = "mcmaterial"
+    static let mime = "mime"
+    
+    
+    //AudioDoubtResponseViewController
+    static let AudioDoubtResponseViewController = "AudioDoubtResponseViewController"
+    static let audio = "audio"
+    
+    //VideoDoubtResponseViewController
+    static let VideoDoubtResponseViewController = "VideoDoubtResponseViewController"
+    static let video = "video"
+    
+    //AttachmentDoubtResponseViewController
+    static let AttachmentDoubtResponseViewController = "AttachmentDoubtResponseViewController"
+    static let image = "image"
+    static let applicationPdf = "application/pdf"
+    static let Anexo = "Anexo"
         
         
     

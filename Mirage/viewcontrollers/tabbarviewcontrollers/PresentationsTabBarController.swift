@@ -10,12 +10,9 @@ import UIKit
 
 class PresentationsTabBarController: UITabBarController, UITabBarControllerDelegate, AddNewPresentationDelegate {
     
-    var idDisc = Discipline().id
-    var profileDisc = Discipline().profile
-    var nameDisc = Discipline().name
-    
     var icon1: UITabBarItem!
     var icon2: UITabBarItem!
+    var discipline = Discipline()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +26,7 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
         self.navigationItem.title = StringUtil.titlePresentasation
         
         //verifica se é um perfil de professor para criar novas apresentações
-        if profileDisc == 2 {
+        if discipline.profile == 2 {
 
             let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(OpenPresentationViewController.longPress(_:)))
             self.view.addGestureRecognizer(longPressRecognizer)
@@ -42,17 +39,15 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
         }
         
         let item1 = OpenPresentationViewController()
-        item1.idDisc = idDisc
-        item1.profileDisc = profileDisc
-        item1.nameDisc = nameDisc
-        
+        item1.discipline.id = discipline.id
+        item1.discipline.profile = discipline.profile
+        item1.discipline.name = discipline.name
         item1.getPresentation()
         
         let item2  = ClosedPresentationViewController()
-        item2.idDisc = idDisc
-        item2.profileDisc = profileDisc
-        item2.nameDisc = nameDisc
-        
+        item2.discipline.id = discipline.id
+        item2.discipline.profile = discipline.profile
+        item2.discipline.name = discipline.name
         item2.getPresentation()
         
         icon1 = UITabBarItem(title: StringUtil.open, image: ImageUtil.imageOpenBlack , selectedImage: ImageUtil.imageOpenWhite)
@@ -76,6 +71,7 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
         
         let controllers = [item1, item2]  //array of the root view controllers displayed by the tab bar interface
         self.viewControllers = controllers
+        
     }
     
     func back() {
@@ -87,7 +83,7 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
         
         let newPresentation = CreateNewPresentationViewController(delegate: self)
         
-        newPresentation.id = idDisc
+        newPresentation.discipline.id = discipline.id
         
         self.navigationController?.pushViewController(newPresentation, animated: true)
     }

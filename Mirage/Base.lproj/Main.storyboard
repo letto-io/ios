@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Zba-Td-Gn9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Zba-Td-Gn9">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -19,12 +19,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="5nT-7n-eMs">
-                                <rect key="frame" x="50" y="22" width="280" height="30"/>
+                                <rect key="frame" x="50" y="147" width="280" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVH-ec-IGz">
-                                <rect key="frame" x="50" y="236" width="280" height="30"/>
+                                <rect key="frame" x="50" y="361" width="280" height="30"/>
                                 <color key="backgroundColor" red="0.21833378683122645" green="0.46421969928222262" blue="0.60627003205128205" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -34,12 +34,12 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Senha" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="cIZ-0t-zAs">
-                                <rect key="frame" x="50" y="72" width="280" height="30"/>
+                                <rect key="frame" x="50" y="197" width="280" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cNM-3h-biU">
-                                <rect key="frame" x="205" y="170" width="125" height="29"/>
+                                <rect key="frame" x="205" y="295" width="125" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Esqueceu a senha?">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -49,7 +49,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q2D-aH-7b9">
-                                <rect key="frame" x="50" y="132" width="280" height="30"/>
+                                <rect key="frame" x="50" y="257" width="280" height="30"/>
                                 <color key="backgroundColor" red="1" green="0.59607843137254901" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                 <state key="normal" title="ENTRAR">
@@ -60,17 +60,26 @@
                                     <segue destination="rOj-So-0Nh" kind="show" identifier="disciplineView" id="WeC-aE-EDP"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="oddin_logo" translatesAutoresizingMaskIntoConstraints="NO" id="rKA-Bw-tUb">
+                                <rect key="frame" x="142" y="10" width="90" height="129"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="129" id="NfJ-7K-DqA"/>
+                                    <constraint firstAttribute="width" constant="90" id="lMS-ml-mNU"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Q2D-aH-7b9" firstAttribute="trailing" secondItem="cNM-3h-biU" secondAttribute="trailing" id="17j-R2-C7I"/>
-                            <constraint firstItem="5nT-7n-eMs" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="22" id="1YB-nu-6kw"/>
                             <constraint firstItem="cNM-3h-biU" firstAttribute="top" secondItem="Q2D-aH-7b9" secondAttribute="bottom" constant="8" symbolic="YES" id="3Ld-Nb-9At"/>
                             <constraint firstItem="Q2D-aH-7b9" firstAttribute="leading" secondItem="XVH-ec-IGz" secondAttribute="leading" id="3d6-4e-uno"/>
                             <constraint firstItem="5nT-7n-eMs" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="34" id="99T-y1-ceJ"/>
+                            <constraint firstItem="5nT-7n-eMs" firstAttribute="top" secondItem="rKA-Bw-tUb" secondAttribute="bottom" constant="8" symbolic="YES" id="GY5-sQ-zsm"/>
                             <constraint firstItem="cNM-3h-biU" firstAttribute="trailing" secondItem="XVH-ec-IGz" secondAttribute="trailing" id="HpZ-rY-t7a"/>
                             <constraint firstItem="5nT-7n-eMs" firstAttribute="leading" secondItem="cIZ-0t-zAs" secondAttribute="leading" id="Mpf-jk-91W"/>
+                            <constraint firstItem="rKA-Bw-tUb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="10" id="d8Q-Fn-sUN"/>
                             <constraint firstItem="5nT-7n-eMs" firstAttribute="trailing" secondItem="cIZ-0t-zAs" secondAttribute="trailing" id="hpc-Gs-ZlY"/>
+                            <constraint firstItem="rKA-Bw-tUb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iwD-LR-GS1"/>
                             <constraint firstItem="cIZ-0t-zAs" firstAttribute="leading" secondItem="Q2D-aH-7b9" secondAttribute="leading" id="jwa-Hg-Cm9"/>
                             <constraint firstItem="Q2D-aH-7b9" firstAttribute="top" secondItem="cIZ-0t-zAs" secondAttribute="bottom" constant="30" id="n9g-dr-g3T"/>
                             <constraint firstItem="cIZ-0t-zAs" firstAttribute="top" secondItem="5nT-7n-eMs" secondAttribute="bottom" constant="20" id="spl-z4-bgA"/>
@@ -80,7 +89,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="ODDIN" id="MEu-iP-PhS">
+                    <navigationItem key="navigationItem" id="MEu-iP-PhS">
                         <barButtonItem key="backBarButtonItem" title="LOGIN" id="Apq-0P-gMD"/>
                     </navigationItem>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -107,15 +116,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="abG-zU-dXN">
-                                <rect key="frame" x="8" y="0.0" width="359" height="559"/>
+                                <rect key="frame" x="8" y="0.0" width="358" height="559"/>
                                 <color key="backgroundColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="kl4-NA-w2a">
-                                        <rect key="frame" x="0.0" y="28" width="359" height="60"/>
+                                        <rect key="frame" x="0.0" y="28" width="358" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kl4-NA-w2a" id="Gmp-eL-AKl">
-                                            <rect key="frame" x="0.0" y="0.0" width="359" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="358" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -268,7 +277,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="hFE-aB-wCq"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="PKe-nG-4i6"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dce-9s-3Bc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -452,6 +461,9 @@
             <point key="canvasLocation" x="-699.5" y="1357.5"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="oddin_logo" width="458" height="645"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="0RZ-lD-GLV"/>
     </inferredMetricsTieBreakers>

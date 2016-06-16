@@ -10,13 +10,8 @@ import UIKit
 
 class DoubtTabBarViewController: UITabBarController, UITabBarControllerDelegate, AddNewDoubtDelegate {
     
-    var idDisc = Discipline().id
-    var profileDisc = Discipline().profile
-    var nameDisc = Discipline().name
-    
-    var idPresent = Presentation().id
-    var subjectPresent = Presentation().subject
-    
+    var discipline = Discipline()
+    var presentation = Presentation()
     var icon1: UITabBarItem!
     var icon2: UITabBarItem!
     var icon3: UITabBarItem!
@@ -34,7 +29,7 @@ class DoubtTabBarViewController: UITabBarController, UITabBarControllerDelegate,
         self.navigationItem.title = StringUtil.doubtTitle
         
         //verifica se é um perfil de aluno para postar novas duvidas
-        if profileDisc == 0 {
+        if discipline.profile == 0 {
             
             let newDoubtButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(DoubtTabBarViewController.showNewDoubt))
             
@@ -44,39 +39,35 @@ class DoubtTabBarViewController: UITabBarController, UITabBarControllerDelegate,
         }
         
         let item1 = DoubtViewController()
-        item1.idDisc = idDisc
-        item1.profileDisc = profileDisc
-        item1.nameDisc = nameDisc
-        item1.idPresent = idPresent
-        item1.subjectPresent = subjectPresent
-        
+        item1.discipline.id = discipline.id
+        item1.discipline.profile = discipline.profile
+        item1.discipline.name = discipline.name
+        item1.presentation.id = presentation.id
+        item1.presentation.subject = presentation.subject
         item1.getDoubt()
         
         let item2 = OpenDoubtViewController()
-        item2.idDisc = idDisc
-        item2.profileDisc = profileDisc
-        item2.nameDisc = nameDisc
-        item2.idPresent = idPresent
-        item2.subjectPresent = subjectPresent
-        
+        item2.discipline.id = discipline.id
+        item2.discipline.profile = discipline.profile
+        item2.discipline.name = discipline.name
+        item2.presentation.id = presentation.id
+        item2.presentation.subject = presentation.subject
         item2.getDoubt()
         
         let item3 = ClosedDoubtViewController()
-        item3.idDisc = idDisc
-        item3.profileDisc = profileDisc
-        item3.nameDisc = nameDisc
-        item3.idPresent = idPresent
-        item3.subjectPresent = subjectPresent
-        
+        item3.discipline.id = discipline.id
+        item3.discipline.profile = discipline.profile
+        item3.discipline.name = discipline.name
+        item3.presentation.id = presentation.id
+        item3.presentation.subject = presentation.subject
         item3.getDoubt()
         
         let item4 = RankingDoubtViewController()
-        item4.idDisc = idDisc
-        item4.profileDisc = profileDisc
-        item4.nameDisc = nameDisc
-        item4.idPresent = idPresent
-        item4.subjectPresent = subjectPresent
-        
+        item4.discipline.id = discipline.id
+        item4.discipline.profile = discipline.profile
+        item4.discipline.name = discipline.name
+        item4.presentation.id = presentation.id
+        item4.presentation.subject = presentation.subject
         item4.getDoubt()
         
         icon1 = UITabBarItem(title: StringUtil.all, image: ImageUtil.imageAllBlack, selectedImage: ImageUtil.imageAllWhite)
@@ -115,8 +106,8 @@ class DoubtTabBarViewController: UITabBarController, UITabBarControllerDelegate,
         
         let newDoubt = CreateNewDoubtViewController(delegate: self)
         
-        newDoubt.idDisc = idDisc
-        newDoubt.idPresent = idPresent
+        newDoubt.discipline.id = discipline.id
+        newDoubt.presentation.id = presentation.id
         
         self.navigationController?.pushViewController(newDoubt, animated: true)
     }

@@ -7,10 +7,16 @@ class ImageUtil {
     static let imageClosedWhite = UIImage(named: "lock-outline-white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
     static let imageOpenBlack = UIImage(named: "lock-open-outline-black")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
     static let imageClosedBlack = UIImage(named: "lock-outline-black")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+    static let imageTextBlack = UIImage(named: "format-text-black")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+    static let imageAudioBlack = UIImage(named: "microphone-black")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+    static let imageVideoBlack = UIImage(named: "video-black")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
     static let imageAllWhite = UIImage(named: "arrow-compress-all-white.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
     static let imageAllBlack = UIImage(named: "arrow-compress-all-black.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
     static let imageRankingWhite = UIImage(named: "arrow-up-bold-white.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
     static let imageRankingBlack = UIImage(named: "arrow-up-bold-black.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+    static let imageTextWhite = UIImage(named: "format-text-white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+    static let imageAudioWhite = UIImage(named: "microphone-white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+    static let imageVideoWhite = UIImage(named: "video-white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
     
     //botão curtir e entendi das dúvidas
     static let imageLikeButton = UIImage(named: "arrow-up-bold-circle-outline-white.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
