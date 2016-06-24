@@ -17,113 +17,79 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         userField.delegate = self
         userField.keyboardType = UIKeyboardType.ASCIICapable
-        
         passwordField.delegate = self
         passwordField.keyboardType = UIKeyboardType.ASCIICapable
         
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
     }
 
-    
-    
     @IBAction func loginButtonTapped() {
-        
         // Compose a query string
         let email = userField.text!
-        let password = passwordField.text
+        let password = passwordField.text!
         
-        if (email.isEmpty && password!.isEmpty) {
-            
-            displayMyAlertMessage(StringUtil.msgEmailPasswordRequired)
+        if (email.isEmpty && password.isEmpty) {
+            self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgEmailPasswordRequired), animated: true, completion: nil)
             return
         } else if (email.isEmpty) {
-            
-            displayMyAlertMessage(StringUtil.msgEmailRequired)
+            self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgEmailRequired), animated: true, completion: nil)
             return
-        } else if (password!.isEmpty) {
-            
-            displayMyAlertMessage(StringUtil.msgPasswordRequired)
+        } else if (password.isEmpty) {
+            self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgPasswordRequired), animated: true, completion: nil)
             return
         }
         
         let JSONObject: [String : AnyObject] = [
             StringUtil.jsEmail : email,
-            StringUtil.jsPassord : password!,
+            StringUtil.jsPassord : password
         ]
         
         if NSJSONSerialization.isValidJSONObject(JSONObject) {
-            let request: NSMutableURLRequest = NSMutableURLRequest()
-            let url = Server.loginURL
-            
-            request.URL = NSURL(string: url)
-            request.HTTPMethod = StringUtil.httpPOST
-            request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
-            request.setValue(StringUtil.httpApplication, forHTTPHeaderField: StringUtil.httpHeader)
-            request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(JSONObject, options:  NSJSONWritingOptions(rawValue:0))
-            
-                let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
-                    data, response, error in
-                    
-                    if error != nil {
-                        print(error)
-                        return
-                    } else {
-                        if let httpResponse = response as? NSHTTPURLResponse, let fields = httpResponse.allHeaderFields as? [String : String] {
-                            let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(fields, forURL: response!.URL!)
-                            NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: response!.URL!, mainDocumentURL: nil)
-                            
-                            if httpResponse.statusCode == 401 {
+            let request  = Server.postRequestParseJSON(Server.loginURL, JSONObject: JSONObject)
+    
+            let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+                if error != nil {
+                    print(error)
+                    return
+                } else {
+                    if let httpResponse = response as? NSHTTPURLResponse, let fields = httpResponse.allHeaderFields as? [String : String] {
+                        let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(fields, forURL: response!.URL!)
+                        NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: response!.URL!, mainDocumentURL: nil)
+                        
+                        if httpResponse.statusCode == 401 {
+                            dispatch_async(dispatch_get_main_queue(), {
+                                self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgEmailPasswordIncorrect), animated: true, completion: nil)
+                            })
+                        } else if httpResponse.statusCode == 200 {
+                            for cookie in cookies {
+                                var cookieProperties = [String: AnyObject]()
+                                cookieProperties[NSHTTPCookieName] = cookie.name
+                                cookieProperties[NSHTTPCookieValue] = cookie.value
+                                cookieProperties[NSHTTPCookieDomain] = cookie.domain
+                                cookieProperties[NSHTTPCookiePath] = cookie.path
+                                cookieProperties[NSHTTPCookieVersion] = NSNumber(integer: cookie.version)
+                                cookieProperties[NSHTTPCookieExpires] = NSDate().dateByAddingTimeInterval(31536000)
+                                
+                                let newCookie = NSHTTPCookie(properties: cookieProperties)
+                                NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(newCookie!)
+                                
                                 dispatch_async(dispatch_get_main_queue(), {
-                                    self.displayMyAlertMessage(StringUtil.msgEmailPasswordIncorrect)
+                                    self.performSegueWithIdentifier(StringUtil.disciplineView, sender: self)
                                 })
-                            } else {
-                                for cookie in cookies {
-                                    var cookieProperties = [String: AnyObject]()
-                                    cookieProperties[NSHTTPCookieName] = cookie.name
-                                    cookieProperties[NSHTTPCookieValue] = cookie.value
-                                    cookieProperties[NSHTTPCookieDomain] = cookie.domain
-                                    cookieProperties[NSHTTPCookiePath] = cookie.path
-                                    cookieProperties[NSHTTPCookieVersion] = NSNumber(integer: cookie.version)
-                                    cookieProperties[NSHTTPCookieExpires] = NSDate().dateByAddingTimeInterval(31536000)
-                                    
-                                    if httpResponse.statusCode == 200 {
-                                        let newCookie = NSHTTPCookie(properties: cookieProperties)
-                                        NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(newCookie!)
-                                        
-                                        dispatch_async(dispatch_get_main_queue(), {
-    
-                                            self.performSegueWithIdentifier(StringUtil.disciplineView, sender: self)
-                                        })
-                                    }
-                                }
                             }
-                        print(response)
-                    }
+                        }
+                    print(response)
                 }
-                            
             }
-                task.resume()
         }
+        task.resume()
     }
-    
-    //exibe mensagens de alerta
-    func displayMyAlertMessage(userMessage: String) {
-        
-        let myAlert = UIAlertController(title: StringUtil.message, message: userMessage, preferredStyle:
-            UIAlertControllerStyle.Alert)
-        
-        let okAction = UIAlertAction(title: StringUtil.ok, style: UIAlertActionStyle.Destructive, handler: nil)
-        
-        myAlert.addAction(okAction)
-        
-        self.presentViewController(myAlert, animated: true, completion: nil)
-        
     }
     
     //esconde teclado ao tocar em alguma parte da tela
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         userField.resignFirstResponder()
         passwordField.resignFirstResponder()
-        
     }
     
     //chama função de login através do botão ir do teclado
@@ -133,9 +99,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         if passwordField.becomeFirstResponder() {
             loginButtonTapped()
         }
-        
         return true;
     }
-    
 }
 

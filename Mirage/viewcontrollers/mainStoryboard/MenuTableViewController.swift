@@ -22,7 +22,6 @@ class MenuTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         userNameLabel.text = "User Name"
         loginLabel.text = "email@email.com"
         configLabel.text = "Configurações"
@@ -39,13 +38,16 @@ class MenuTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return 3
     }
 
+    @IBAction func exitButton(sender: AnyObject) {
+        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        var cookies = cookieStorage.cookies! as [NSHTTPCookie]
+        cookies.removeAll(keepCapacity: true)
+    }
 }

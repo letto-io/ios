@@ -18,40 +18,25 @@ class ClosedDoubtViewController: UIViewController, UITableViewDelegate, UITableV
     var doubts  = Array<Doubt>()
     var closedDoubts  = Array<Doubt>()
     
+    func tableViews() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        getDoubt()
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableViews()
+        DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.doubtCell, view: view)
         
         refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: StringUtil.pullToRefresh)
-        refreshControl.tintColor = ColorUtil.orangeColor
-        refreshControl.addTarget(self, action: #selector(ClosedPresentationViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
-        tableView.addSubview(refreshControl) // not required when using UITableViewController
-        
-        refreshTableView()
+        DefaultViewController.refreshControl(refreshControl, tableView: tableView)
+        refreshControl.addTarget(self, action: #selector(DoubtViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
     }
     
     override func viewDidAppear(animated: Bool) {
-        refreshTableView()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        refreshTableView()
-    }
-    
-    func refreshTableView() {
-        
-        if tableView == nil {
-            return
-        } else {
-            tableView.delegate = self
-            tableView.dataSource = self
-            let nib = UINib(nibName: StringUtil.doubtCell, bundle: nil)
-            tableView.registerNib(nib, forCellReuseIdentifier: StringUtil.cellIdentifier)
-            view.addSubview(tableView)
-            
-            getDoubt()
-            tableView.reloadData()
-        }
+        tableViews()
     }
     
     // pull to refresh
@@ -62,25 +47,13 @@ class ClosedDoubtViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func getDoubt() {
-        let request: NSMutableURLRequest = NSMutableURLRequest()
-        let urlPath = Server.presentationURL+"\(discipline.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt
-        let url = NSURL(string: urlPath)!
-        
-        let cookieHeaderField = [StringUtil.set_Cookie : StringUtil.key_Value]
-        
-        let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(cookieHeaderField, forURL: url)
-        NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: url, mainDocumentURL: nil)
-        
-        request.HTTPMethod = StringUtil.httpGET
-        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
-        
-        print(cookies)
+        let url = Server.getRequest(Server.presentationURL+"\(discipline.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt)
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                let doubtJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                let doubtJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
                 
                 if (doubtJSONData.valueForKey(StringUtil.error) != nil) {
                     return
@@ -112,17 +85,14 @@ class ClosedDoubtViewController: UIViewController, UITableViewDelegate, UITableV
                 j += 1
             }
         }
-        
         closedDoubts = auxDoubt.reverse()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return closedDoubts.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cellIdentifier, forIndexPath: indexPath) as! DoubtTableViewCell
         
         let doubt = closedDoubts[ indexPath.row ]
@@ -158,20 +128,20 @@ class ClosedDoubtViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        doubt = closedDoubts[ indexPath.row ]
         
+        let doubtsResponse = DoubtsResponseTabBarViewController()
+        doubtsResponse.discipline = discipline
+        doubtsResponse.presentation = presentation
+        doubtsResponse.doubt = doubt
+        
+        self.navigationController?.pushViewController(doubtsResponse, animated: true)
     }
     
     func likeButtonPressed(sender: UIButton) {
-        let request: NSMutableURLRequest = NSMutableURLRequest()
-        let urlPath = Server.presentationURL+"\(discipline.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(sender.tag)" + Server.like
+        let request = Server.postResquestNotSendCookie(Server.presentationURL+"\(discipline.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(sender.tag)" + Server.like)
         
-        request.URL = NSURL(string: urlPath)
-        request.HTTPMethod = StringUtil.httpPOST
-        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
-        
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
-            data, response, error in
-            
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
             if error != nil {
                 print(error)
                 return
@@ -182,41 +152,28 @@ class ClosedDoubtViewController: UIViewController, UITableViewDelegate, UITableV
                     
                     if httpResponse.statusCode == 404 {
                         dispatch_async(dispatch_get_main_queue(), {
-                            
-                            self.displayMyAlertMessage(StringUtil.msgErrorRequest)
+                            self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgErrorRequest), animated: true, completion: nil)
                         })
-                    }
-                    
-                    if httpResponse.statusCode == 401 {
+                    } else if httpResponse.statusCode == 401 {
                         dispatch_async(dispatch_get_main_queue(), {
-                            
-                            self.displayMyAlertMessage(StringUtil.msgNotRankYourDoubt)
+                            self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgNotRankYourDoubt), animated: true, completion: nil)
                         })
-                    }
-                    
-                    if httpResponse.statusCode == 200 {
-                        //self.doubt.removeAll()
-                        
+                    } else if httpResponse.statusCode == 200 {
+                        dispatch_async(dispatch_get_main_queue(), {
+                            self.viewDidAppear(true)
+                        })
                     }
                 }
                 print(response)
             }
         }
         task.resume()
-        
     }
     
     func deleteLikeButtonPressed(sender: UIButton) {
-        let request: NSMutableURLRequest = NSMutableURLRequest()
-        let urlPath = Server.presentationURL+"\(discipline.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(sender.tag)" + Server.like
+        let request = Server.deleteRequest(Server.presentationURL+"\(discipline.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(sender.tag)" + Server.like)
         
-        request.URL = NSURL(string: urlPath)
-        request.HTTPMethod = StringUtil.httpDELETE
-        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
-        
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
-            data, response, error in
-            
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
             if error != nil {
                 print(error)
                 return
@@ -227,24 +184,15 @@ class ClosedDoubtViewController: UIViewController, UITableViewDelegate, UITableV
                     
                     if httpResponse.statusCode == 404 {
                         dispatch_async(dispatch_get_main_queue(), {
-                            
-                            self.displayMyAlertMessage(StringUtil.msgErrorRequest)
+                            self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgErrorRequest), animated: true, completion: nil)
                         })
-                    }
-                    
-                    if httpResponse.statusCode == 401 {
+                    } else if httpResponse.statusCode == 401 {
                         dispatch_async(dispatch_get_main_queue(), {
-                            
-                            self.displayMyAlertMessage(StringUtil.error401)
+                            self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgNotRankYourDoubt), animated: true, completion: nil)
                         })
-                    }
-                    
-                    
-                    if httpResponse.statusCode == 200 {
+                    } else if httpResponse.statusCode == 200 {
                         dispatch_async(dispatch_get_main_queue(), {
-                            
-                            //self.doubt.removeAll()
-                            
+                            self.viewDidAppear(true)
                         })
                     }
                 }
@@ -252,19 +200,6 @@ class ClosedDoubtViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
         task.resume()
-    }
-    
-    func displayMyAlertMessage(userMessage: String) {
-        
-        let myAlert = UIAlertController(title: StringUtil.message, message: userMessage, preferredStyle:
-            UIAlertControllerStyle.Alert)
-        
-        let okAction = UIAlertAction(title: StringUtil.ok, style: UIAlertActionStyle.Destructive, handler: nil)
-        
-        myAlert.addAction(okAction)
-        
-        self.presentViewController(myAlert, animated: true, completion: nil)
-        
     }
     
     init() {

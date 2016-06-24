@@ -25,7 +25,7 @@ class ImageUtil {
     static let imageBackButton = UIImage(named: "arrow_back.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     
     //botão menuDrawer
-    static let imageMenuButton = UIImage(named: "menu-vertical.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+    static let imageMenuButton = UIImage(named: "menu-white.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     
     //botão sair
     static let imageExitButton = UIImage(named: "exit-to-app-black.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
@@ -42,5 +42,7 @@ class ImageUtil {
     //CreateNewDoubtViewControler
     static let imageCheckBoxButtonWhite = UIImage(named: "checkbox-blank-outline-white.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     static let imageCheckBoxMarkedButtonWhite = UIImage(named: "checkbox-marked-white.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+    
+    static let imageCloseDoubt = UIImage(named: "lock-outline-white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     
 }

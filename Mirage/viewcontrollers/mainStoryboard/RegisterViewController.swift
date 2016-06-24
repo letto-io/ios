@@ -16,52 +16,22 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let back = UIBarButtonItem(image: ImageUtil.imageBackButton, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(RegisterViewController.back))
-        self.navigationItem.setLeftBarButtonItem(back, animated: true)
-        
     }
-    
-    func back() {
-        self.navigationController?.popViewControllerAnimated(true)
-    }
-
 
     @IBAction func registerButtonTapped(sender: AnyObject) {
+        let userEmail = userEmailTextField.text!
+        let userPasword = userPasswordTextField.text!
+        let repeatPassword = repeatPasswordTextField.text!
         
-        let userEmail = userEmailTextField.text
-        let userPasword = userPasswordTextField.text
-        let repeatPassword = repeatPasswordTextField.text
-        
-        if userEmail!.isEmpty || userPasword!.isEmpty || repeatPassword!.isEmpty {
-            
-            displayMyAlertMessage(StringUtil.msgAllRequired)
+        if userEmail.isEmpty || userPasword.isEmpty || repeatPassword.isEmpty {
+            self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgAllRequired), animated: true, completion: nil)
             return
         } else if userPasword != repeatPassword {
-            displayMyAlertMessage(StringUtil.msgPasswordNotMatch)
+            self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgPasswordNotMatch), animated: true, completion: nil)
         } else {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
-    
-    func displayMyAlertMessage(userMessage: String) {
-        
-        let myAlert = UIAlertController(title: StringUtil.message, message: userMessage, preferredStyle:
-                UIAlertControllerStyle.Alert)
-        
-        let okAction = UIAlertAction(title: StringUtil.ok, style: UIAlertActionStyle.Destructive, handler: nil)
-        
-        myAlert.addAction(okAction)
-        
-        self.presentViewController(myAlert, animated: true, completion: nil)
-        
-    }
-    
-
-    @IBAction func haveAccountButtonTapped(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
-    
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         userEmailTextField.resignFirstResponder()

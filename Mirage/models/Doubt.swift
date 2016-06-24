@@ -28,27 +28,27 @@ class Doubt: NSObject {
         for i in 0 ..< keys.count {
             let db = Doubt()
             
-            let key = keys[i] as! String
-            let doubts = doubts.valueForKey(key)!
+            let key = keys[i] as AnyObject
+            let dbts = doubts.valueForKey(key as! String)!
             
             for _ in 0 ..< keys.count {
-                let key = doubts.valueForKey(StringUtil.person)!
+                let key = dbts.valueForKey(StringUtil.person)!
                 db.person.id = key.valueForKey(StringUtil.id) as! Int
                 db.person.name = key.valueForKey(StringUtil.name) as! String
             }
             
-            db.id = doubts.valueForKey(StringUtil.id) as! Int
-            db.contributions = doubts.valueForKey(StringUtil.contributions) as! Int
-            db.likes = doubts.valueForKey(StringUtil.likes) as! Int
-            db.status = doubts.valueForKey(StringUtil.status) as! Int
-            db.presentationId = doubts.valueForKey(StringUtil.presentationid) as! Int
-            db.text = doubts.valueForKey(StringUtil.text) as! String
-            db.createdat = doubts.valueForKey(StringUtil.createdat) as! String
-            db.anonymous = doubts.valueForKey(StringUtil.anonymous) as! Bool
-            db.like = doubts.valueForKey(StringUtil.like) as! Bool
+            db.id = dbts.valueForKey(StringUtil.id) as! Int
+            db.contributions = dbts.valueForKey(StringUtil.contributions) as! Int
+            db.likes = dbts.valueForKey(StringUtil.likes) as! Int
+            db.status = dbts.valueForKey(StringUtil.status) as! Int
+            db.presentationId = dbts.valueForKey(StringUtil.presentationid) as! Int
+            db.text = dbts.valueForKey(StringUtil.text) as! String
+            db.createdat = dbts.valueForKey(StringUtil.createdat) as! String
+            db.anonymous = dbts.valueForKey(StringUtil.anonymous) as! Bool
+            db.like = dbts.valueForKey(StringUtil.like) as! Bool
             
             doubt.insert(db, atIndex: i)
         }
         return doubt
-    }
+    }		
 }

@@ -38,6 +38,7 @@
 		85EEDA941C9C4A9800F431B1 /* Discipline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EEDA931C9C4A9800F431B1 /* Discipline.swift */; };
 		85FC78811CF3385B001E2696 /* SWRevealViewController in Resources */ = {isa = PBXBuildFile; fileRef = 85FC78801CF3385B001E2696 /* SWRevealViewController */; };
 		85FC78851CF33881001E2696 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FC78841CF33881001E2696 /* SWRevealViewController.m */; };
+		B60321A81D14B386006FCCEB /* DefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60321A71D14B386006FCCEB /* DefaultViewController.swift */; };
 		B619D06C1D0EF43A001CE3A9 /* DisciplinesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B619D06B1D0EF43A001CE3A9 /* DisciplinesViewController.swift */; };
 		B619D0721D0EF457001CE3A9 /* ClosedDoubtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B619D06D1D0EF457001CE3A9 /* ClosedDoubtViewController.swift */; };
 		B619D0731D0EF457001CE3A9 /* CreateNewDoubtViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B619D06E1D0EF457001CE3A9 /* CreateNewDoubtViewController.swift */; };
@@ -134,6 +135,7 @@
 		85FC78801CF3385B001E2696 /* SWRevealViewController */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SWRevealViewController; sourceTree = "<group>"; };
 		85FC78831CF3387D001E2696 /* SWRevealViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = Mirage/SWRevealViewController/SWRevealViewController.h; sourceTree = "<group>"; };
 		85FC78841CF33881001E2696 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = Mirage/SWRevealViewController/SWRevealViewController.m; sourceTree = "<group>"; };
+		B60321A71D14B386006FCCEB /* DefaultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultViewController.swift; path = Mirage/viewcontrollers/DefaultViewController.swift; sourceTree = "<group>"; };
 		B619D06B1D0EF43A001CE3A9 /* DisciplinesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DisciplinesViewController.swift; path = Mirage/viewcontrollers/Discipline/DisciplinesViewController.swift; sourceTree = "<group>"; };
 		B619D06D1D0EF457001CE3A9 /* ClosedDoubtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClosedDoubtViewController.swift; path = Mirage/viewcontrollers/Doubt/ClosedDoubtViewController.swift; sourceTree = "<group>"; };
 		B619D06E1D0EF457001CE3A9 /* CreateNewDoubtViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateNewDoubtViewController.swift; path = Mirage/viewcontrollers/Doubt/CreateNewDoubtViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 		85BADF801C9054E6000B8989 = {
 			isa = PBXGroup;
 			children = (
+				B60321A71D14B386006FCCEB /* DefaultViewController.swift */,
 				85FC78831CF3387D001E2696 /* SWRevealViewController.h */,
 				85FC78841CF33881001E2696 /* SWRevealViewController.m */,
 				B619D06B1D0EF43A001CE3A9 /* DisciplinesViewController.swift */,
@@ -504,6 +507,7 @@
 				B619D06C1D0EF43A001CE3A9 /* DisciplinesViewController.swift in Sources */,
 				B6719A0E1D08591300D882BC /* MCMaterial.swift in Sources */,
 				B6719A0C1D08589000D882BC /* Contributions.swift in Sources */,
+				B60321A81D14B386006FCCEB /* DefaultViewController.swift in Sources */,
 				B619D0751D0EF457001CE3A9 /* OpenDoubtViewController.swift in Sources */,
 				85BADFC21C90557C000B8989 /* ViewController.swift in Sources */,
 				85D3CF201CD0FE090058CCFF /* Doubt.swift in Sources */,

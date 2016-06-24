@@ -14,72 +14,36 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
     var refreshControl: UIRefreshControl!
     var discipline = Discipline()
     var disciplines = Array<Discipline>()
+
+    func tableViews() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        getInstruction()
+        tableView.reloadData()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-        let cookies = cookieStorage.cookies! as [NSHTTPCookie]
-        
-        if cookies.isEmpty {
-            self.dismissViewControllerAnimated(true, completion: nil)
-        } else {
-            refreshTableView()
-            
-            refreshControl = UIRefreshControl()
-            refreshControl.attributedTitle = NSAttributedString(string: StringUtil.pullToRefresh)
-            refreshControl.tintColor = ColorUtil.orangeColor
-            refreshControl.addTarget(self, action: #selector(OpenPresentationViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
-            tableView.addSubview(refreshControl) // not required when using UITableViewController
-        }
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-        let cookies = cookieStorage.cookies! as [NSHTTPCookie]
-        
-        if cookies.isEmpty {
-            self.dismissViewControllerAnimated(true, completion: nil)
-        } else {
-            refreshTableView()
-        }
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-        let cookies = cookieStorage.cookies! as [NSHTTPCookie]
-        
-        if cookies.isEmpty {
-            self.dismissViewControllerAnimated(true, completion: nil)
-        } else {
-            refreshTableView()
-        }
-    }
-    
-    func refreshTableView() {
-        
-        if tableView == nil {
-            return
-        }
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        let nib = UINib(nibName: StringUtil.disciplineCell , bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: StringUtil.cellIdentifier)
-        view.addSubview(tableView)
-        
         self.navigationItem.title = StringUtil.titleDiscipline
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
+        
+        tableViews()
+        DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.disciplineCell, view: view)
+        
+        refreshControl = UIRefreshControl()
+        DefaultViewController.refreshControl(refreshControl, tableView: tableView)
+        refreshControl.addTarget(self, action: #selector(DisciplinesViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
         
         if self.revealViewController() != nil {
-            
             let menuButton = UIBarButtonItem(image: ImageUtil.imageMenuButton, style: UIBarButtonItemStyle.Plain, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle))
             
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
             self.navigationItem.setLeftBarButtonItem(menuButton, animated: true)
         }
-        
-        getInstruction()
-        tableView.reloadData()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        tableViews()
     }
     
     // pull to refresh
@@ -90,49 +54,33 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func getInstruction() {
-        let request: NSMutableURLRequest = NSMutableURLRequest()
-        let urlPath = Server.disciplineURL
-        let url = NSURL(string: urlPath)!
-        
-        let cookieHeaderField = [StringUtil.set_Cookie : StringUtil.key_Value]
-        
-        let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(cookieHeaderField, forURL: url)
-        NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: url, mainDocumentURL: nil)
-        
-        request.HTTPMethod = StringUtil.httpGET
-        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
-        
-        print(cookies)
-        
+        let url = Server.getRequest(Server.disciplineURL)
+
         let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                
                 var disciplineJSONData = NSDictionary()
                 
                 do {
-                    disciplineJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                    disciplineJSONData =  try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
                 } catch is NSCocoaError {
-                    if   error!._domain == NSCocoaErrorDomain
-                        && error!._code   == 3840 {
+                    if error!._domain == NSCocoaErrorDomain
+                        && error!._code  == 3840 {
                         print("Invalid format")
                     }
                 }
                 if (disciplineJSONData.valueForKey(StringUtil.error) != nil) {
                     return
                 } else {
-                    
                     let disciplines : NSArray =  disciplineJSONData.valueForKey(StringUtil.lectures) as! NSArray
                     let events: NSArray = disciplines.valueForKey(StringUtil.event) as! NSArray
                     
                     self.disciplines = Discipline.iterateJSONArray(disciplines, events: events)
-                    
                 }
                 print(disciplineJSONData)
             }
         })
-        
         task.resume()
     }
     
@@ -140,9 +88,7 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
         return disciplines.count;
     }
     
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cellIdentifier, forIndexPath: indexPath) as! DisciplineTableViewCell
         let disc = disciplines[ indexPath.row ]
         
@@ -158,11 +104,9 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
         discipline = disciplines[ indexPath.row ]
         
         let presentationTabBar = PresentationsTabBarController()
-        
         presentationTabBar.discipline = discipline
     
         self.navigationController?.pushViewController(presentationTabBar, animated: true)

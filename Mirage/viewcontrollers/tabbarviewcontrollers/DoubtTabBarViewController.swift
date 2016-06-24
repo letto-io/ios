@@ -12,6 +12,7 @@ class DoubtTabBarViewController: UITabBarController, UITabBarControllerDelegate,
     
     var discipline = Discipline()
     var presentation = Presentation()
+    var doubts = Array<Doubt>()
     var icon1: UITabBarItem!
     var icon2: UITabBarItem!
     var icon3: UITabBarItem!
@@ -19,55 +20,39 @@ class DoubtTabBarViewController: UITabBarController, UITabBarControllerDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         delegate = self
     }
     
-    
     override func viewWillAppear(animated: Bool) {
-        
-        self.navigationItem.title = StringUtil.doubtTitle
+        self.navigationItem.title = presentation.subject
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style:.Plain, target:nil, action:nil)
         
         //verifica se é um perfil de aluno para postar novas duvidas
         if discipline.profile == 0 {
-            
             let newDoubtButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(DoubtTabBarViewController.showNewDoubt))
-            
             newDoubtButton.tintColor = ColorUtil.orangeColor
             
             self.navigationItem.setRightBarButtonItem(newDoubtButton, animated: true)
         }
         
         let item1 = DoubtViewController()
-        item1.discipline.id = discipline.id
-        item1.discipline.profile = discipline.profile
-        item1.discipline.name = discipline.name
-        item1.presentation.id = presentation.id
-        item1.presentation.subject = presentation.subject
-        item1.getDoubt()
+        item1.discipline = discipline
+        item1.presentation = presentation
+        //item1.getDoubt()
         
         let item2 = OpenDoubtViewController()
-        item2.discipline.id = discipline.id
-        item2.discipline.profile = discipline.profile
-        item2.discipline.name = discipline.name
-        item2.presentation.id = presentation.id
-        item2.presentation.subject = presentation.subject
+        item2.discipline = discipline
+        item2.presentation = presentation
         item2.getDoubt()
         
         let item3 = ClosedDoubtViewController()
-        item3.discipline.id = discipline.id
-        item3.discipline.profile = discipline.profile
-        item3.discipline.name = discipline.name
-        item3.presentation.id = presentation.id
-        item3.presentation.subject = presentation.subject
+        item3.discipline = discipline
+        item3.presentation = presentation
         item3.getDoubt()
         
         let item4 = RankingDoubtViewController()
-        item4.discipline.id = discipline.id
-        item4.discipline.profile = discipline.profile
-        item4.discipline.name = discipline.name
-        item4.presentation.id = presentation.id
-        item4.presentation.subject = presentation.subject
+        item4.discipline = discipline
+        item4.presentation = presentation
         item4.getDoubt()
         
         icon1 = UITabBarItem(title: StringUtil.all, image: ImageUtil.imageAllBlack, selectedImage: ImageUtil.imageAllWhite)
@@ -79,40 +64,19 @@ class DoubtTabBarViewController: UITabBarController, UITabBarControllerDelegate,
         icon4 = UITabBarItem(title: StringUtil.ranking, image: ImageUtil.imageRankingBlack, selectedImage: ImageUtil.imageRankingWhite)
         item4.tabBarItem = icon4
         
-        var menuButton = UIBarButtonItem()
-        
-        if self.revealViewController() != nil {
-            
-            menuButton = UIBarButtonItem(image: ImageUtil.imageMenuButton, style: UIBarButtonItemStyle.Plain, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle))
-            
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-            
-        }
-        
-        let back = UIBarButtonItem(image: ImageUtil.imageBackButton, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DoubtTabBarViewController.back))
-        self.navigationItem.setLeftBarButtonItems([menuButton, back], animated: true)
-        
         let controllers = [item1, item2, item3, item4]  //array of the root view controllers displayed by the tab bar interface
         self.viewControllers = controllers
-        
-    }
-    
-    func back() {
-        self.navigationController?.popViewControllerAnimated(true)
     }
     
     //postar nova duvida
     func showNewDoubt() {
-        
         let newDoubt = CreateNewDoubtViewController(delegate: self)
-        
-        newDoubt.discipline.id = discipline.id
-        newDoubt.presentation.id = presentation.id
+        newDoubt.discipline = discipline
+        newDoubt.presentation = presentation
         
         self.navigationController?.pushViewController(newDoubt, animated: true)
     }
 
-    
     //Delegate methods
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
         print(viewController.nibName)

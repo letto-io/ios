@@ -57,7 +57,6 @@
                                 </state>
                                 <connections>
                                     <action selector="loginButtonTapped" destination="BYZ-38-t0r" eventType="touchUpInside" id="IaH-Ic-uUX"/>
-                                    <segue destination="rOj-So-0Nh" kind="show" identifier="disciplineView" id="WeC-aE-EDP"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="oddin_logo" translatesAutoresizingMaskIntoConstraints="NO" id="rKA-Bw-tUb">
@@ -89,19 +88,18 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" id="MEu-iP-PhS">
-                        <barButtonItem key="backBarButtonItem" title="LOGIN" id="Apq-0P-gMD"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="MEu-iP-PhS"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="passwordField" destination="cIZ-0t-zAs" id="wsz-VP-wAw"/>
                         <outlet property="userField" destination="5nT-7n-eMs" id="ERw-ro-4lp"/>
+                        <segue destination="rOj-So-0Nh" kind="show" identifier="disciplineView" id="ihr-cC-IZm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="434.5" y="455.5"/>
+            <point key="canvasLocation" x="428.5" y="455.5"/>
         </scene>
         <!--Disciplines View Controller-->
         <scene sceneID="JVJ-zg-6O8">
@@ -155,7 +153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7H0-I8-Wq7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="434.5" y="1315.5"/>
+            <point key="canvasLocation" x="428.5" y="1343.5"/>
         </scene>
         <!--Register-->
         <scene sceneID="W0V-JD-XvR">
@@ -212,9 +210,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="REGISTRE-SE" id="bLQ-dh-bTY">
-                        <barButtonItem key="backBarButtonItem" title="LOGIN" id="hfj-bY-H8m"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="REGISTRE-SE" id="bLQ-dh-bTY"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
@@ -420,21 +416,29 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="md7-PM-Wl5">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="81"/>
+                                                    <connections>
+                                                        <action selector="exitButton:" destination="exj-No-9jw" eventType="touchUpInside" id="TMr-zE-aX2"/>
+                                                        <segue destination="Tev-e9-AHu" kind="custom" identifier="sw_exit" customClass="SWRevealViewControllerSeguePushController" id="eWJ-JQ-iqU"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="8KQ-NU-bkZ" firstAttribute="centerY" secondItem="YTe-H4-PhC" secondAttribute="centerY" id="0DQ-ZG-sbv"/>
                                                 <constraint firstItem="8KQ-NU-bkZ" firstAttribute="top" secondItem="kPv-f0-EA9" secondAttribute="bottom" constant="8" symbolic="YES" id="4Xa-Lr-L2O"/>
+                                                <constraint firstItem="md7-PM-Wl5" firstAttribute="leading" secondItem="bwm-a5-PSm" secondAttribute="leading" id="62n-Zt-zlP"/>
+                                                <constraint firstAttribute="bottom" secondItem="md7-PM-Wl5" secondAttribute="bottom" id="AkP-GF-dbo"/>
+                                                <constraint firstItem="md7-PM-Wl5" firstAttribute="top" secondItem="kPv-f0-EA9" secondAttribute="top" id="CLj-wa-Kdw"/>
                                                 <constraint firstItem="kPv-f0-EA9" firstAttribute="top" secondItem="bwm-a5-PSm" secondAttribute="top" id="Dk7-V3-g6z"/>
                                                 <constraint firstItem="kPv-f0-EA9" firstAttribute="leading" secondItem="bwm-a5-PSm" secondAttribute="leadingMargin" id="H4d-iO-5xT"/>
                                                 <constraint firstItem="kPv-f0-EA9" firstAttribute="leading" secondItem="8KQ-NU-bkZ" secondAttribute="leading" id="VQV-Cr-LH3"/>
                                                 <constraint firstItem="YTe-H4-PhC" firstAttribute="leading" secondItem="8KQ-NU-bkZ" secondAttribute="trailing" constant="20" id="cGZ-Au-eTT"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="8KQ-NU-bkZ" secondAttribute="bottom" constant="8" id="n53-Bm-UbH"/>
                                                 <constraint firstItem="YTe-H4-PhC" firstAttribute="top" secondItem="bwm-a5-PSm" secondAttribute="topMargin" constant="25" id="tNs-4N-PGm"/>
+                                                <constraint firstAttribute="trailing" secondItem="md7-PM-Wl5" secondAttribute="trailing" id="znd-eS-EBN"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="Tev-e9-AHu" kind="custom" identifier="sw_exit" customClass="SWRevealViewControllerSeguePushController" id="0RZ-lD-GLV"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -458,13 +462,13 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xcf-8W-LhM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-699.5" y="1357.5"/>
+            <point key="canvasLocation" x="-699.5" y="1354.5"/>
         </scene>
     </scenes>
     <resources>
         <image name="oddin_logo" width="458" height="645"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0RZ-lD-GLV"/>
+        <segue reference="eWJ-JQ-iqU"/>
     </inferredMetricsTieBreakers>
 </document>

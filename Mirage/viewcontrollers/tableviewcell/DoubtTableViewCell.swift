@@ -15,6 +15,7 @@ class DoubtTableViewCell: UITableViewCell {
     @IBOutlet weak var hourLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var understandButton: UIButton!
+    @IBOutlet weak var closeDoubt: UIButton!
     @IBOutlet weak var understandLabel: UILabel!
     @IBOutlet weak var countLikesLabel: UILabel!
     var isChecked = Bool()

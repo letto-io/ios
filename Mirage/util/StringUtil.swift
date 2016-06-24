@@ -94,7 +94,7 @@ class StringUtil {
         static let newPresentationTitle = "Nova Apresentação"
         static let msgSubjectRequired = "Tema é obrigatório"
         static let msgErrorRequest = "Não foi possível completar sua requisição!"
-        static let msgNewPresentationSuccess = "Apresentação criada com sucesso"
+        static let msgNewPresentationSuccess = "Apresentação cadastrada com sucesso"
         static let msgNewPresentationConfirm = "Deseja confimar?"
     
     
@@ -128,6 +128,8 @@ class StringUtil {
         static let createNewDoubtViewController = "CreateNewDoubtViewController"
         static let newDoubtTitle = "Nova Dúvida"
         static let msgDoubtTextRequired = "Descreva sua dúvida"
+        static let msgNewDoubtConfirm = "Deseja confimar?"
+        static let msgNewDoubtSuccess = "Dúvida cadastrada com sucesso"
     
     
     //DoubtsResponseTabBarViewController.swif
@@ -141,6 +143,7 @@ class StringUtil {
     static let textDoubtReponseViewController = "TextDoubtReponseViewController"
     static let mcmaterial = "mcmaterial"
     static let mime = "mime"
+    static let msgNoContributions = "Não há contribuições"
     
     
     //AudioDoubtResponseViewController
