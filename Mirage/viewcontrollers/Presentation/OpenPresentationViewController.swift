@@ -42,9 +42,6 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
 
     override func viewDidAppear(animated: Bool) {
         tableViews()
-        if presentations.isEmpty {
-            self.presentViewController(DefaultViewController.alertMessageTableIsEmpty(StringUtil.msgNoPresentation, navigationController: self.navigationController!), animated: true, completion: nil)
-        }
     }
     
     //chama displayAlert para fechar apresentação

@@ -36,9 +36,6 @@ class DoubtViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidAppear(animated: Bool) {
         tableViews()
-        if doubts.isEmpty {
-            self.presentViewController(DefaultViewController.alertMessageTableIsEmpty(StringUtil.msgNoDoubt, navigationController: self.navigationController!), animated: true, completion: nil)
-        }
     }
 
     // pull to refresh

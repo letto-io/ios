@@ -37,9 +37,6 @@ class TextDoubtReponseViewController: UIViewController, UITableViewDelegate, UIT
     
     override func viewDidAppear(animated: Bool) {
         tableViews()
-        if contributions.isEmpty {
-            self.presentViewController(DefaultViewController.alertMessageTableIsEmpty(StringUtil.msgNoContributions, navigationController: self.navigationController!), animated: true, completion: nil)
-        }
     }
     
     // pull to refresh

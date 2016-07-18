@@ -18,6 +18,12 @@ class ImageUtil {
     static let imageAudioWhite = UIImage(named: "microphone-white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
     static let imageVideoWhite = UIImage(named: "video-white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
     
+    static let imageCameraWhite = UIImage(named: "camera-white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+    static let imageCameraBlack = UIImage(named: "camera-black")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+    static let imageBlack = UIImage(named: "image-black")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+    static let imageWhite = UIImage(named: "image-white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+    static let imageAttachment = UIImage(named: "attachment")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+    
     //botão curtir e entendi das dúvidas
     static let imageLikeButton = UIImage(named: "arrow-up-bold-circle-outline-white.png")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     

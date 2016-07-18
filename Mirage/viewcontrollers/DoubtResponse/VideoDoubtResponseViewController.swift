@@ -10,8 +10,9 @@ import UIKit
 import AVKit
 import MediaPlayer
 import AVFoundation
+import MobileCoreServices
 
-class VideoDoubtResponseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class VideoDoubtResponseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
@@ -21,6 +22,9 @@ class VideoDoubtResponseViewController: UIViewController, UITableViewDelegate, U
     var videoContributions = Array<Contributions>()
     var contributions = Array<Contributions>()
     var contribution = Contributions()
+    
+    let imagePicker: UIImagePickerController! = UIImagePickerController()
+    let saveFileName = "/test.mp4"
     
     func tableViews() {
         tableView.delegate = self
@@ -97,13 +101,7 @@ class VideoDoubtResponseViewController: UIViewController, UITableViewDelegate, U
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                
-//                let inputStream = NSInputStream(fileAtPath: "/path/to/file/video.mp4")!
-//                var buffer = [UInt8](count: data!.length, repeatedValue: 0)
-//                data!.getBytes(&buffer, length: data!.length)
-//                inputStream.open()
-//                inputStream.read(&buffer, maxLength: buffer.count)
-//                inputStream.close()
+
                 
                 
             }
@@ -114,21 +112,23 @@ class VideoDoubtResponseViewController: UIViewController, UITableViewDelegate, U
         let video = NSURL(string: "http://192.168.0.26:3000/system/materials/big_buck_bunny.mp4")
         
         let videoPlayer = AVPlayer(URL: video1!)
+        
+        // Find the video in the app's document directory
+        let paths = NSSearchPathForDirectoriesInDomains(
+            NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+        let documentsDirectory: AnyObject = paths[1]
+        let dataPath = documentsDirectory.stringByAppendingPathComponent(saveFileName)
+        let videoAsset = (AVAsset(URL: NSURL(fileURLWithPath: dataPath)))
+        let playerItem = AVPlayerItem(asset: videoAsset)
+        
+        // Play the video
+        let player = AVPlayer(playerItem: playerItem)
         let playerViewController = AVPlayerViewController()
-        playerViewController.player = videoPlayer
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playerDidReachEndNotificationHandler:", name: AVPlayerItemDidPlayToEndTimeNotification, object: videoPlayer.currentItem)
-        self.presentViewController(playerViewController, animated: true)
-        {
+        playerViewController.player = player
+        
+        self.presentViewController(playerViewController, animated: true) {
             playerViewController.player!.play()
         }
-        
-//        
-//        let player = AVPlayer(URL: video!)
-//        let playerViewController = AVPlayerViewController()
-//        playerViewController.player = player
-//        self.presentViewController(playerViewController, animated: true) {
-//            playerViewController.player!.play()
-//        }
         
     }
     
@@ -151,10 +151,7 @@ class VideoDoubtResponseViewController: UIViewController, UITableViewDelegate, U
         downloadContribution(contribution.mcmaterial.id)
     }
     
-    func loadVideo()
-    {
-        
-    }
+    
     
     init() {
         super.init(nibName: StringUtil.VideoDoubtResponseViewController, bundle: nil)

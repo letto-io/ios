@@ -60,20 +60,12 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                var disciplineJSONData = NSDictionary()
-                
-                do {
-                    disciplineJSONData =  try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-                } catch is NSCocoaError {
-                    if error!._domain == NSCocoaErrorDomain
-                        && error!._code  == 3840 {
-                        print("Invalid format")
-                    }
-                }
+                   let disciplineJSONData =  try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+               
                 if (disciplineJSONData.valueForKey(StringUtil.error) != nil) {
                     return
                 } else {
-                    let disciplines : NSArray =  disciplineJSONData.valueForKey(StringUtil.lectures) as! NSArray
+                    let disciplines: NSArray =  disciplineJSONData.valueForKey(StringUtil.lectures) as! NSArray
                     let events: NSArray = disciplines.valueForKey(StringUtil.event) as! NSArray
                     
                     self.disciplines = Discipline.iterateJSONArray(disciplines, events: events)

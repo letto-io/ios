@@ -137,7 +137,10 @@ class StringUtil {
     static let Texto = "Texto"
     static let Audio = "Audio"
     static let Video = "Video"
-    
+    static let Galeria = "Galeria"
+    static let Foto = "Foto"
+    static let newContribution = "Nova Contribuição"
+    static let galery = "galery"
     
     //TextDoubtReponseViewController.swift
     static let textDoubtReponseViewController = "TextDoubtReponseViewController"

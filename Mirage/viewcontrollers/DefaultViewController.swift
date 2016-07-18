@@ -35,21 +35,21 @@ class DefaultViewController: UIViewController {
         return myAlert
     }
     
-    //exibe mensagens de alerta
-    static func alertMessageTableIsEmpty(userMessage: String, navigationController: UINavigationController) -> UIAlertController {
-        let myAlert = UIAlertController(title: StringUtil.message, message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let backAction = UIAlertAction(title: StringUtil.back, style: .Destructive) { action -> Void in
-            navigationController.popViewControllerAnimated(true)
-        }
-        
-        let okAction: UIAlertAction = UIAlertAction(title: StringUtil.ok, style: .Default) { action -> Void in
-            print(StringUtil.ok)
-        }
-        
-        myAlert.addAction(backAction)
-        myAlert.addAction(okAction)
-        
-        return myAlert
-    }
+//    //exibe mensagens de alerta
+//    static func alertMessageTableIsEmpty(userMessage: String, navigationController: UINavigationController) -> UIAlertController {
+//        let myAlert = UIAlertController(title: StringUtil.message, message: userMessage, preferredStyle: UIAlertControllerStyle.Alert)
+//        
+//        let backAction = UIAlertAction(title: StringUtil.back, style: .Destructive) { action -> Void in
+//            navigationController.popViewControllerAnimated(true)
+//        }
+//        
+//        let okAction: UIAlertAction = UIAlertAction(title: StringUtil.ok, style: .Default) { action -> Void in
+//            print(StringUtil.ok)
+//        }
+//        
+//        myAlert.addAction(backAction)
+//        myAlert.addAction(okAction)
+//        
+//        return myAlert
+//    }
 }

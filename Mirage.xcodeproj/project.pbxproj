@@ -72,6 +72,8 @@
 		B619D0B21D0EF76F001CE3A9 /* PresentationsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B619D0AF1D0EF76F001CE3A9 /* PresentationsTabBarController.swift */; };
 		B648BA081D09928200D6B34D /* DoubtResponseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B648BA061D09928200D6B34D /* DoubtResponseTableViewCell.swift */; };
 		B648BA0B1D0993B400D6B34D /* DoubtResponseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B648BA0A1D0993B400D6B34D /* DoubtResponseTableViewCell.xib */; };
+		B651C5E21D255CD800E46F55 /* CreateNewTextDoubtResponseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B651C5E01D255CD800E46F55 /* CreateNewTextDoubtResponseViewController.swift */; };
+		B651C5E51D255CFF00E46F55 /* CreateNewTextDoubtResponseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B651C5E41D255CFF00E46F55 /* CreateNewTextDoubtResponseViewController.xib */; };
 		B65EC4DF1D12E95900303409 /* AttachmentDoubtResponseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B65EC4DE1D12E95900303409 /* AttachmentDoubtResponseViewController.xib */; };
 		B6719A0C1D08589000D882BC /* Contributions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6719A0B1D08589000D882BC /* Contributions.swift */; };
 		B6719A0E1D08591300D882BC /* MCMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6719A0D1D08591300D882BC /* MCMaterial.swift */; };
@@ -169,6 +171,8 @@
 		B619D0AF1D0EF76F001CE3A9 /* PresentationsTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentationsTabBarController.swift; path = Mirage/viewcontrollers/tabbarviewcontrollers/PresentationsTabBarController.swift; sourceTree = "<group>"; };
 		B648BA061D09928200D6B34D /* DoubtResponseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DoubtResponseTableViewCell.swift; path = Mirage/viewcontrollers/tableviewcell/DoubtResponseTableViewCell.swift; sourceTree = "<group>"; };
 		B648BA0A1D0993B400D6B34D /* DoubtResponseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DoubtResponseTableViewCell.xib; path = Mirage/view/viewcell/DoubtResponseTableViewCell.xib; sourceTree = "<group>"; };
+		B651C5E01D255CD800E46F55 /* CreateNewTextDoubtResponseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateNewTextDoubtResponseViewController.swift; path = Mirage/viewcontrollers/DoubtResponse/CreateNewTextDoubtResponseViewController.swift; sourceTree = "<group>"; };
+		B651C5E41D255CFF00E46F55 /* CreateNewTextDoubtResponseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CreateNewTextDoubtResponseViewController.xib; path = Mirage/view/DoubtResponse/CreateNewTextDoubtResponseViewController.xib; sourceTree = "<group>"; };
 		B65EC4DE1D12E95900303409 /* AttachmentDoubtResponseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AttachmentDoubtResponseViewController.xib; path = Mirage/view/DoubtResponse/AttachmentDoubtResponseViewController.xib; sourceTree = "<group>"; };
 		B6719A0B1D08589000D882BC /* Contributions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Contributions.swift; path = Mirage/models/Contributions.swift; sourceTree = "<group>"; };
 		B6719A0D1D08591300D882BC /* MCMaterial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MCMaterial.swift; path = Mirage/models/MCMaterial.swift; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 		85BADF801C9054E6000B8989 = {
 			isa = PBXGroup;
 			children = (
+				B651C5E01D255CD800E46F55 /* CreateNewTextDoubtResponseViewController.swift */,
 				B60321A71D14B386006FCCEB /* DefaultViewController.swift */,
 				85FC78831CF3387D001E2696 /* SWRevealViewController.h */,
 				85FC78841CF33881001E2696 /* SWRevealViewController.m */,
@@ -257,6 +262,7 @@
 				85D8DABC1CD104780069C6CE /* PresentationsTabBarController.xib */,
 				85D8DAB81CD103510069C6CE /* DoubtTabBarViewController.xib */,
 				B69B2DE71D05B8C600607431 /* DoubtsResponseTabBarViewController.xib */,
+				B651C5E41D255CFF00E46F55 /* CreateNewTextDoubtResponseViewController.xib */,
 				85D3CF331CD102A90058CCFF /* DisciplineCell.xib */,
 				85D3CF351CD102B10058CCFF /* PresentationCell.xib */,
 				85CA80861CD7914C00194E67 /* DoubtTableViewCell.xib */,
@@ -431,6 +437,7 @@
 				B619D0A11D0EF4F8001CE3A9 /* ClosedDoubtViewController.xib in Resources */,
 				B619D0A01D0EF4F8001CE3A9 /* DisciplinesViewController.xib in Resources */,
 				B619D0AC1D0EF4F8001CE3A9 /* OpenPresentationViewController.xib in Resources */,
+				B651C5E51D255CFF00E46F55 /* CreateNewTextDoubtResponseViewController.xib in Resources */,
 				85FC78811CF3385B001E2696 /* SWRevealViewController in Resources */,
 				B619D0A91D0EF4F8001CE3A9 /* VideoDoubtResponseViewController.xib in Resources */,
 				B619D0A41D0EF4F8001CE3A9 /* OpenDoubtViewController.xib in Resources */,
@@ -474,6 +481,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B651C5E21D255CD800E46F55 /* CreateNewTextDoubtResponseViewController.swift in Sources */,
 				B619D0761D0EF457001CE3A9 /* RankingDoubtViewController.swift in Sources */,
 				85EEDA941C9C4A9800F431B1 /* Discipline.swift in Sources */,
 				B619D0831D0EF477001CE3A9 /* MenuTableViewController.swift in Sources */,
