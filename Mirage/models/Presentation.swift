@@ -10,32 +10,40 @@ import Foundation
 
 class Presentation: NSObject {
     
-    var id: Int = 0
-    var status: Int = 0
-    var createdat: String = ""
-    var subject: String = ""
+    var id = Int()
+    var status = Int()
+    var createdat = String()
+    var subject = String()
+    var instruction = Instruction()
     var person = Person()
     
     
-    static func iterateJSONArray(presentations: NSArray, persons: NSArray) -> Array<Presentation> {
-        var presentation = Array<Presentation>()
+    static func iterateJSONArray(presentation: NSArray, instruction: NSArray, person: NSArray) -> Array<Presentation> {
+        var presentations = Array<Presentation>()
         
-        for i in 0 ..< presentations.count {
-        
+        for i in 0 ..< presentation.count {
             let present = Presentation()
             
-            for _ in 0 ..< persons.count {
-                present.person.name = persons[i].valueForKey(StringUtil.name) as! String
+            for _ in 0 ..< instruction.count {
+                present.instruction.id = instruction[i].valueForKey(StringUtil.id) as! Int
+                present.instruction.classNumber = instruction[i].valueForKey(StringUtil.class_number) as! Int
+                present.instruction.startDate = instruction[i].valueForKey(StringUtil.start_date) as! String
+                present.instruction.endDate = instruction[i].valueForKey(StringUtil.end_date) as! String
             }
             
-            present.id = presentations[i].valueForKey(StringUtil.id) as! Int
-            present.createdat = presentations[i].valueForKey(StringUtil.createdat) as! String
-            present.status = presentations[i].valueForKey(StringUtil.status) as! Int
-            present.subject = presentations[i].valueForKey(StringUtil.subject) as! String
+            for _ in 0 ..< person.count {
+                present.person.id = person[i].valueForKey(StringUtil.id) as! Int
+                present.person.name = person[i].valueForKey(StringUtil.name) as! String
+            }
             
-            presentation.insert(present, atIndex: i)
+            present.id = presentation[i].valueForKey(StringUtil.id) as! Int
+            present.createdat = presentation[i].valueForKey(StringUtil.created_at) as! String
+            present.status = presentation[i].valueForKey(StringUtil.status) as! Int
+            present.subject = presentation[i].valueForKey(StringUtil.subject) as! String
+            
+            presentations.insert(present, atIndex: i)
         }
         
-        return presentation
+        return presentations
     }
 }

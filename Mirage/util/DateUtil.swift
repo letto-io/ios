@@ -25,7 +25,7 @@ class DateUtil {
     static func date1(date: String) -> String {
         
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         let date = dateFormatter.dateFromString(date)
         
         dateFormatter.dateFormat = "dd/MM/yyyy"
@@ -37,7 +37,7 @@ class DateUtil {
     static func hour(date: String) -> String {
         
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
         let date = dateFormatter.dateFromString(date)
         
         dateFormatter.dateFormat = "HH:mm:ss"

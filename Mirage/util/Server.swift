@@ -10,6 +10,14 @@ import Foundation
 
 class Server {
     
+    static let url = "http://rws-edupanel.herokuapp.com"
+    
+    static let session = "/session"
+    static let instructions = "/instructions/"
+    static let presentations = "/presentations/"
+    
+    
+    
     static let presentaion = "/presentation"
     static let presentaion_bar = "/presentation/"
     static let contribution_bar = "/contribution/"
@@ -21,11 +29,23 @@ class Server {
     static let contribution = "/contribution"
     
     
-    static let loginURL = "http://ws-edupanel.herokuapp.com/controller/login"
     static let recoverPasswordURL = "http://ws-edupanel.herokuapp.com/controller/recover-password"
-    static let disciplineURL = "http://ws-edupanel.herokuapp.com/controller/instruction"
-    static let presentationURL = "http://ws-edupanel.herokuapp.com/controller/instruction/"
+    static let disciplineURL = "http://rws-edupanel.herokuapp.com/instructions"
+    static let presentationURL = "http://rws-edupanel.herokuapp.com/presentations/"
     
+    static var token = String()
+    
+    static func getRequestNew(url: String) -> NSMutableURLRequest {
+        let request: NSMutableURLRequest = NSMutableURLRequest()
+        let urlPath = url
+        request.URL = NSURL(string: urlPath)
+        
+        request.HTTPMethod = StringUtil.httpGET
+        request.addValue(Server.token, forHTTPHeaderField: StringUtil.sessionToken)
+        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
+        
+        return request
+    }
     
     static func getRequest(url: String) -> NSURL {
         let request: NSMutableURLRequest = NSMutableURLRequest()
@@ -74,6 +94,110 @@ class Server {
         request.URL = NSURL(string: urlPath)
         request.HTTPMethod = StringUtil.httpDELETE
         request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
+        
+        return request
+    }
+    
+    static func uploadRequestImagePNG(url: String, fname: String, image: UIImage) -> NSMutableURLRequest{
+        let request: NSMutableURLRequest = NSMutableURLRequest()
+        let urlPath = url
+        
+        request.URL = NSURL(string: urlPath)
+        let image_data = UIImagePNGRepresentation(image)
+        
+        let fname = fname
+        let mimetype = "image/png"
+        
+        let boundary:String = "------WebKitFormBoundaryasdas543wfsdfs5453533d3sdfsf3"
+        let contentType = "multipart/form-data; boundary=\(boundary)"
+        request.HTTPMethod = "POST"
+        request.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        let body = NSMutableData()
+        body.appendData(NSString(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData(NSString(format: "Content-Disposition: form-data; name=\"file\"; filename=\"\(fname)\"\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData(NSString(format:"Content-Type: \(mimetype)\r\n\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData(image_data!)
+        body.appendData(NSString(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        request.HTTPBody = body
+        
+        return request
+    }
+    
+    static func uploadRequestVideoMP4(url: String, fname: String, videoData: NSData) -> NSMutableURLRequest{
+        let request: NSMutableURLRequest = NSMutableURLRequest()
+        let urlPath = url
+        
+        request.URL = NSURL(string: urlPath)
+        let video_data = videoData
+        
+        let fname = fname
+        let mimetype = "video/mp4"
+        
+        let boundary:String = "------WebKitFormBoundaryasdas543wfsdfs5453533d3sdfsf3"
+        let contentType = "multipart/form-data; boundary=\(boundary)"
+        request.HTTPMethod = "POST"
+        request.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        let body = NSMutableData()
+        body.appendData(NSString(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData(NSString(format: "Content-Disposition: form-data; name=\"file\"; filename=\"\(fname)\"\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData(NSString(format:"Content-Type: \(mimetype)\r\n\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData(video_data)
+        body.appendData(NSString(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        request.HTTPBody = body
+        
+        return request
+    }
+    
+    static func uploadRequestVideoMP4FromGalery(url: String, fname: String, image: UIImage) -> NSMutableURLRequest{
+        let request: NSMutableURLRequest = NSMutableURLRequest()
+        let urlPath = url
+        
+        request.URL = NSURL(string: urlPath)
+        let video_data = UIImagePNGRepresentation(image)
+        
+        let fname = fname
+        let mimetype = "video/mp4"
+        
+        let boundary:String = "------WebKitFormBoundaryasdas543wfsdfs5453533d3sdfsf3"
+        let contentType = "multipart/form-data; boundary=\(boundary)"
+        request.HTTPMethod = "POST"
+        request.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        let body = NSMutableData()
+        body.appendData(NSString(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData(NSString(format: "Content-Disposition: form-data; name=\"file\"; filename=\"\(fname)\"\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData(NSString(format:"Content-Type: \(mimetype)\r\n\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData(video_data!)
+        body.appendData(NSString(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        request.HTTPBody = body
+        
+        return request
+    }
+    
+    static func uploadRequestAudiom4a(url: String, fname: String, audioRecorder: NSData) -> NSMutableURLRequest{
+        let request: NSMutableURLRequest = NSMutableURLRequest()
+        let urlPath = url
+        
+        request.URL = NSURL(string: urlPath)
+        let audio = audioRecorder
+        
+        let fname = fname
+        let mimetype = "audio/3gpp"
+        
+        let boundary:String = "------WebKitFormBoundaryasdas543wfsdfs5453533d3sdfsf3"
+        let contentType = "multipart/form-data; boundary=\(boundary)"
+        request.HTTPMethod = "POST"
+        request.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        let body = NSMutableData()
+        body.appendData(NSString(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData(NSString(format: "Content-Disposition: form-data; name=\"file\"; filename=\"\(fname)\"\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData(NSString(format:"Content-Type: \(mimetype)\r\n\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
+        body.appendData(audio)
+        body.appendData(NSString(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
+        
+        request.HTTPBody = body
         
         return request
     }

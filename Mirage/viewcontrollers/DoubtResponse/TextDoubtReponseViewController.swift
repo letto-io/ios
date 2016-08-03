@@ -12,7 +12,7 @@ class TextDoubtReponseViewController: UIViewController, UITableViewDelegate, UIT
 
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
-    var discipline = Discipline()
+    var instruction = Instruction()
     var presentation = Presentation()
     var doubt = Doubt()
     var textContributions = Array<Contributions>()
@@ -47,7 +47,7 @@ class TextDoubtReponseViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func getDoubtResponse() {
-        let url = Server.getRequest(Server.presentationURL+"\(discipline.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(doubt.id)" + Server.contribution)
+        let url = Server.getRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(doubt.id)" + Server.contribution)
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
             if (error != nil) {

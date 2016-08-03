@@ -12,10 +12,11 @@ class RankingDoubtViewController: UIViewController, UITableViewDelegate, UITable
 
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
-    var discipline = Discipline()
+    var instruction = Instruction()
     var presentation = Presentation()
     var doubt = Doubt()
     var doubts  = Array<Doubt>()
+    var orderedDoubts = Array<Doubt>()
     
     func tableViews() {
         tableView.delegate = self
@@ -46,7 +47,7 @@ class RankingDoubtViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func getDoubt() {
-        let url = Server.getRequest(Server.presentationURL+"\(discipline.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt)
+        let url = Server.getRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt)
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
             if (error != nil) {
@@ -72,18 +73,27 @@ class RankingDoubtViewController: UIViewController, UITableViewDelegate, UITable
     
         task.resume()
         
-        doubts.sortInPlace({ $0.likes > $1.likes })
+        orderedDoubts.removeAll()
+        
+        var auxDoubt = Array<Doubt>()
+        
+        for i in 0 ..< doubts.count {
+            var j = 0
+            auxDoubt.insert(doubts[i], atIndex: j)
+            j += 1
+        }
+        orderedDoubts = auxDoubt.sort({ $0.likes > $1.likes })
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return doubts.count
+        return orderedDoubts.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cellIdentifier, forIndexPath: indexPath) as! DoubtTableViewCell
         
-        let doubt = doubts[ indexPath.row ]
+        let doubt = orderedDoubts[ indexPath.row ]
         
         if doubt.anonymous == false {
             cell.nameLabel.text = doubt.person.name
@@ -94,12 +104,9 @@ class RankingDoubtViewController: UIViewController, UITableViewDelegate, UITable
         cell.textDoubtLabel.text = doubt.text
         cell.hourLabel.text = DateUtil.hour(doubt.createdat)
         cell.countLikesLabel.text = String(doubt.likes)
-        cell.understandLabel.text = StringUtil.entendi
         
         cell.likeButton.setImage(ImageUtil.imageLikeButton, forState: .Normal)
         cell.likeButton.tintColor = ColorUtil.orangeColor
-        cell.understandButton.setImage(ImageUtil.imageCheckBoxButtonWhite, forState: .Normal)
-        cell.understandButton.tintColor = UIColor.grayColor()
         
         //passagem de id para url de like na dúvida
         cell.likeButton.tag = doubts[ indexPath.row ].id
@@ -116,10 +123,10 @@ class RankingDoubtViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        doubt = doubts[ indexPath.row ]
+        doubt = orderedDoubts[ indexPath.row ]
         
         let doubtsResponse = DoubtsResponseTabBarViewController()
-        doubtsResponse.discipline = discipline
+        doubtsResponse.instruction = instruction
         doubtsResponse.presentation = presentation
         doubtsResponse.doubt = doubt
         
@@ -127,7 +134,7 @@ class RankingDoubtViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func likeButtonPressed(sender: UIButton) {
-        let request = Server.postResquestNotSendCookie(Server.presentationURL+"\(discipline.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(sender.tag)" + Server.like)
+        let request = Server.postResquestNotSendCookie(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(sender.tag)" + Server.like)
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
             if error != nil {
@@ -159,7 +166,7 @@ class RankingDoubtViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func deleteLikeButtonPressed(sender: UIButton) {
-        let request = Server.deleteRequest(Server.presentationURL+"\(discipline.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(sender.tag)" + Server.like)
+        let request = Server.deleteRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(sender.tag)" + Server.like)
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
             if error != nil {

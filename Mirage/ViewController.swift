@@ -12,6 +12,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var userField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    var login: Login!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,41 +46,28 @@ class ViewController: UIViewController, UITextFieldDelegate {
         ]
         
         if NSJSONSerialization.isValidJSONObject(JSONObject) {
-            let request  = Server.postRequestParseJSON(Server.loginURL, JSONObject: JSONObject)
+            let request  = Server.postRequestParseJSON(Server.url + Server.session, JSONObject: JSONObject)
     
             let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
                 if error != nil {
                     print(error)
                     return
                 } else {
-                    if let httpResponse = response as? NSHTTPURLResponse, let fields = httpResponse.allHeaderFields as? [String : String] {
-                        let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(fields, forURL: response!.URL!)
-                        NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: response!.URL!, mainDocumentURL: nil)
-                        
+                    if let httpResponse = response as? NSHTTPURLResponse {
                         if httpResponse.statusCode == 401 {
                             dispatch_async(dispatch_get_main_queue(), {
                                 self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgEmailPasswordIncorrect), animated: true, completion: nil)
                             })
-                        } else if httpResponse.statusCode == 200 {
-                            for cookie in cookies {
-                                var cookieProperties = [String: AnyObject]()
-                                cookieProperties[NSHTTPCookieName] = cookie.name
-                                cookieProperties[NSHTTPCookieValue] = cookie.value
-                                cookieProperties[NSHTTPCookieDomain] = cookie.domain
-                                cookieProperties[NSHTTPCookiePath] = cookie.path
-                                cookieProperties[NSHTTPCookieVersion] = NSNumber(integer: cookie.version)
-                                cookieProperties[NSHTTPCookieExpires] = NSDate().dateByAddingTimeInterval(31536000)
-                                
-                                let newCookie = NSHTTPCookie(properties: cookieProperties)
-                                NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookie(newCookie!)
-                                
-                                dispatch_async(dispatch_get_main_queue(), {
-                                    self.performSegueWithIdentifier(StringUtil.disciplineView, sender: self)
-                                })
-                            }
+                        } else if httpResponse.statusCode == 201 {
+                            let loginJSONData =  try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                            self.login = Login.iterateJSONArray(loginJSONData)
+                            Server.token = self.login.token
+                            
+                            dispatch_async(dispatch_get_main_queue(), {
+                                self.performSegueWithIdentifier(StringUtil.disciplineView, sender: self)
+                            })
                         }
-                    print(response)
-                }
+                    }
             }
         }
         task.resume()

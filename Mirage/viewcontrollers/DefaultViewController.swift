@@ -17,7 +17,6 @@ class DefaultViewController: UIViewController {
         return tableView
     }
     
-    
     static func refreshControl(refreshControl: UIRefreshControl, tableView: UITableView) -> UIRefreshControl {
         refreshControl.attributedTitle = NSAttributedString(string: StringUtil.pullToRefresh)
         refreshControl.tintColor = ColorUtil.orangeColor

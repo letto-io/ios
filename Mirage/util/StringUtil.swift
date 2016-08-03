@@ -23,6 +23,7 @@ class StringUtil {
     static let httpApplication = "application/json"
     static let httpHeader = "Content-Type"
     static let set_Cookie = "Set-Cookie"
+     static let sessionToken = "x-session-token"
     static let key_Value = "key=value"
     static let value = "value"
     static let error = "error"
@@ -54,16 +55,18 @@ class StringUtil {
         static let disciplineViewController = "DisciplinesViewController"
         static let titleDiscipline = "Disciplinas"
         static let lectures = "lectures"
+        static let lecture = "lecture"
         static let event = "event"
         static let code = "code"
         static let name = "name"
         static let id = "id"
-        static let startdate = "startdate"
-        static let enddate = "enddate"
-        static let classe = "class"
+        static let workload = "workload"
+        static let start_date = "start_date"
+        static let end_date = "end_date"
+        static let class_number = "class_number"
         static let profile  = "profile"
-        static let turma = "Turma "
-        static let start = "Inicio: "
+        static let turma = "Turma: "
+        static let start = "Início: "
     
     //PresentationsTabBarController.swift
         static let presentationsTabBarController = "PresentationsTabBarController"
@@ -87,6 +90,7 @@ class StringUtil {
         static let createdat = "createdat"
         static let status = "status"
         static let subject  = "subject"
+        static let instruction = "instruction"
     
     
     //CreateNewPresentationViewController.swift
@@ -162,6 +166,16 @@ class StringUtil {
     static let image = "image"
     static let applicationPdf = "application/pdf"
     static let Anexo = "Anexo"
+    static let fileName = "Nova contribuição"
+    static let fileNameEmpty = "Por favor digite o nome do arquivo!"
+    static let cameraNotAccess = "Aplicação não pode acessar a camera"
+
+    
+    //Login
+    static let login_id = "id"
+    static let created_at = "created_at"
+    static let token = "token"
+    static let user_id = "user_id"
         
         
     

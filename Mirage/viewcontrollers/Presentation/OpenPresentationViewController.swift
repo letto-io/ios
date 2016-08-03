@@ -12,7 +12,7 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
-    var discipline = Discipline()
+    var instruction = Instruction()
     var presentation = Presentation()
     var presentations = Array<Presentation>()
     var openPresentation = Array<Presentation>()
@@ -34,10 +34,10 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
         refreshControl.addTarget(self, action: #selector(OpenPresentationViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
         
         //verifica se é um perfil de professor para fechar apresentações
-        if discipline.profile == 2 {
-            let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(OpenPresentationViewController.longPress(_:)))
-            self.view.addGestureRecognizer(longPressRecognizer)
-        }
+//        if discipline.profile == 2 {
+//            let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(OpenPresentationViewController.longPress(_:)))
+//            self.view.addGestureRecognizer(longPressRecognizer)
+//        }
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -66,20 +66,20 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func getPresentation() {
-        let url = Server.getRequest(Server.presentationURL+"\(discipline.id)" + Server.presentaion)
+        let request = Server.getRequestNew(Server.url + Server.instructions + "\(instruction.id)" + Server.presentations)
         
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                let presentationJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-                let presentations : NSArray =  presentationJSONData.valueForKey(StringUtil.presentations) as! NSArray
-                let persons : NSArray = presentations.valueForKey(StringUtil.person) as! NSArray
+                let presentation = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSArray
+                let instruction : NSArray =  presentation.valueForKey(StringUtil.instruction) as! NSArray
+                let person : NSArray = presentation.valueForKey(StringUtil.person) as! NSArray
                 
-                self.presentations = Presentation.iterateJSONArray(presentations, persons: persons)
-                print(presentationJSONData)
+                self.presentations = Presentation.iterateJSONArray(presentation, instruction: instruction, person: person)
             }
-        })
+        }
         task.resume()
         
         openPresentation.removeAll()
@@ -115,7 +115,7 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
         presentation = openPresentation[ indexPath.row ]
         
         let doubtTabBar  = DoubtTabBarViewController()
-        doubtTabBar.discipline = discipline
+        doubtTabBar.instruction = instruction
         doubtTabBar.presentation = presentation
         
         self.navigationController?.pushViewController(doubtTabBar, animated: true)
@@ -127,7 +127,7 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
             UIAlertControllerStyle.Alert)
         
         let okAction: UIAlertAction = UIAlertAction(title: StringUtil.confirm, style: .Destructive) { action -> Void in
-            let request = Server.postResquestNotSendCookie(Server.presentationURL+"\(self.discipline.id)" + Server.presentaion_bar + "\(id)" + Server.close)
+            let request = Server.postResquestNotSendCookie(Server.presentationURL+"\(self.instruction.id)" + Server.presentaion_bar + "\(id)" + Server.close)
             
             let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
                 data, response, error in

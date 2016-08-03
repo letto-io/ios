@@ -12,8 +12,8 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
 
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
-    var discipline = Discipline()
-    var disciplines = Array<Discipline>()
+    var instruction = Instruction()
+    var instructions = Array<Instruction>()
 
     func tableViews() {
         tableView.delegate = self
@@ -54,39 +54,34 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func getInstruction() {
-        let url = Server.getRequest(Server.disciplineURL)
+        let request = Server.getRequestNew(Server.url + Server.instructions)
 
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                   let disciplineJSONData =  try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-               
-                if (disciplineJSONData.valueForKey(StringUtil.error) != nil) {
-                    return
-                } else {
-                    let disciplines: NSArray =  disciplineJSONData.valueForKey(StringUtil.lectures) as! NSArray
-                    let events: NSArray = disciplines.valueForKey(StringUtil.event) as! NSArray
+                let instruction = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSArray
+                let lecture: NSArray =  instruction.valueForKey(StringUtil.lecture) as! NSArray
+                let event: NSArray = instruction.valueForKey(StringUtil.event) as! NSArray
                     
-                    self.disciplines = Discipline.iterateJSONArray(disciplines, events: events)
-                }
-                print(disciplineJSONData)
+                self.instructions = Instruction.iterateJSONArray(instruction, lecture: lecture, event: event)
             }
-        })
+        }
         task.resume()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return disciplines.count;
+        return instructions.count;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cellIdentifier, forIndexPath: indexPath) as! DisciplineTableViewCell
-        let disc = disciplines[ indexPath.row ]
+        let disc = instructions[ indexPath.row ]
         
-        cell.nameLabel.text = disc.name
+        cell.nameLabel.text = disc.lecture.name
         cell.startDateLabel.text = StringUtil.start + DateUtil.date(disc.startDate)
-        cell.classeLabel.text = StringUtil.turma + (String(disc.classe))
+        cell.classeLabel.text = StringUtil.turma + (String(disc.classNumber))
         
         let imageBook = ImageUtil.imageDiscipline
         cell.bookImageView.image = imageBook
@@ -96,10 +91,10 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        discipline = disciplines[ indexPath.row ]
+        instruction = instructions[ indexPath.row ]
         
         let presentationTabBar = PresentationsTabBarController()
-        presentationTabBar.discipline = discipline
+        presentationTabBar.instruction = instruction
     
         self.navigationController?.pushViewController(presentationTabBar, animated: true)
     }

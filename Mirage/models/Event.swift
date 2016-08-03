@@ -10,7 +10,8 @@ import Foundation
 
 class Event: NSObject {
     
-    var name: String = ""
-    var code: String = ""
-    
+    var id = Int()
+    var name = String()
+    var code = String()
+    var workload = String()
 }

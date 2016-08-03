@@ -15,7 +15,7 @@ protocol AddNewPresentationDelegate {
 class CreateNewPresentationViewController: UIViewController {
     
     @IBOutlet weak var nameTextField: UITextField!
-    var discipline = Discipline()
+    var instruction = Instruction()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +56,7 @@ class CreateNewPresentationViewController: UIViewController {
             ]
             
             if NSJSONSerialization.isValidJSONObject(JSONObject) {
-                let request = Server.postRequestParseJSON(Server.presentationURL+"\(self.discipline.id)" + Server.presentaion, JSONObject: JSONObject)
+                let request = Server.postRequestParseJSON(Server.presentationURL+"\(self.instruction.id)" + Server.presentaion, JSONObject: JSONObject)
 
                 let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
                     data, response, error in

@@ -14,40 +14,16 @@ class DoubtTableViewCell: UITableViewCell {
     @IBOutlet weak var textDoubtLabel: UILabel!
     @IBOutlet weak var hourLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
-    @IBOutlet weak var understandButton: UIButton!
     @IBOutlet weak var closeDoubt: UIButton!
-    @IBOutlet weak var understandLabel: UILabel!
     @IBOutlet weak var countLikesLabel: UILabel!
-    var isChecked = Bool()
-    
+    @IBOutlet weak var answerImageView: UIImageView!
+   
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
     }
-
-    
-    @IBAction func understandButtonPressed(sender: AnyObject) {
-        // Images
-        let checkedImage = ImageUtil.imageCheckBoxMarkedButtonWhite
-        let uncheckedImage = ImageUtil.imageCheckBoxButtonWhite
-        
-        if isChecked == true {
-            isChecked = false
-            self.understandButton.tintColor = UIColor.grayColor()
-        } else {
-            isChecked = true
-            self.understandButton.tintColor = ColorUtil.orangeColor
-        }
-        
-        if isChecked == true {
-            self.understandButton.setImage(checkedImage, forState: .Normal)
-        } else {
-            self.understandButton.setImage(uncheckedImage, forState: .Normal)
-        }
-        
-    }
-    
+   
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

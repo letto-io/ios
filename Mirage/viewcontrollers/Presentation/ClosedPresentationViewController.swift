@@ -12,7 +12,7 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
     
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
-    var discipline = Discipline()
+    var instruction = Instruction()
     var presentation = Presentation()
     var presentations = Array<Presentation>()
     var closedPresentations = Array<Presentation>()
@@ -46,20 +46,20 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
     }
     
     func getPresentation() {
-        let url = Server.getRequest(Server.presentationURL+"\(discipline.id)" + Server.presentaion)
-    
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
+        let request = Server.getRequestNew(Server.url + Server.instructions + "\(instruction.id)" + Server.presentations)
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                let presentationJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-                let presentations : NSArray =  presentationJSONData.valueForKey(StringUtil.presentations) as! NSArray
-                let persons : NSArray = presentations.valueForKey(StringUtil.person) as! NSArray
-                    
-                self.presentations = Presentation.iterateJSONArray(presentations, persons: persons)
-                print(presentationJSONData)
+                let presentation = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSArray
+                let instruction : NSArray =  presentation.valueForKey(StringUtil.instruction) as! NSArray
+                let person : NSArray = presentation.valueForKey(StringUtil.person) as! NSArray
+                
+                self.presentations = Presentation.iterateJSONArray(presentation, instruction: instruction, person: person)
             }
-        })
+        }
         task.resume()
         
         closedPresentations.removeAll()
@@ -95,7 +95,7 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
         presentation = closedPresentations[ indexPath.row ]
         
         let doubtTabBar  = DoubtTabBarViewController()
-        doubtTabBar.discipline = discipline
+        doubtTabBar.instruction = instruction
         doubtTabBar.presentation = presentation
     
         self.navigationController?.pushViewController(doubtTabBar, animated: true)

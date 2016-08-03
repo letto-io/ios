@@ -12,7 +12,7 @@ class OpenDoubtViewController: UIViewController, UITableViewDelegate, UITableVie
 
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
-    var discipline = Discipline()
+    var instruction = Instruction()
     var presentation = Presentation()
     var doubt = Doubt()
     var doubts  = Array<Doubt>()
@@ -47,7 +47,7 @@ class OpenDoubtViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func getDoubt() {
-        let url = Server.getRequest(Server.presentationURL+"\(discipline.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt)
+        let url = Server.getRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt)
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
             if (error != nil) {
@@ -106,12 +106,9 @@ class OpenDoubtViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.textDoubtLabel.text = doubt.text
         cell.hourLabel.text = DateUtil.hour(doubt.createdat)
         cell.countLikesLabel.text = String(doubt.likes)
-        cell.understandLabel.text = StringUtil.entendi
         
         cell.likeButton.setImage(ImageUtil.imageLikeButton, forState: .Normal)
         cell.likeButton.tintColor = ColorUtil.orangeColor
-        cell.understandButton.setImage(ImageUtil.imageCheckBoxButtonWhite, forState: .Normal)
-        cell.understandButton.tintColor = UIColor.grayColor()
         
         //passagem de id para url de like na dúvida
         cell.likeButton.tag = openDoubts[ indexPath.row ].id
@@ -131,7 +128,7 @@ class OpenDoubtViewController: UIViewController, UITableViewDelegate, UITableVie
         doubt = openDoubts[ indexPath.row ]
         
         let doubtsResponse = DoubtsResponseTabBarViewController()
-        doubtsResponse.discipline = discipline
+        doubtsResponse.instruction = instruction
         doubtsResponse.presentation = presentation
         doubtsResponse.doubt = doubt
         
@@ -139,7 +136,7 @@ class OpenDoubtViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func likeButtonPressed(sender: UIButton) {
-        let request = Server.postResquestNotSendCookie(Server.presentationURL+"\(discipline.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(sender.tag)" + Server.like)
+        let request = Server.postResquestNotSendCookie(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(sender.tag)" + Server.like)
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
             if error != nil {
@@ -171,7 +168,7 @@ class OpenDoubtViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func deleteLikeButtonPressed(sender: UIButton) {
-        let request = Server.deleteRequest(Server.presentationURL+"\(discipline.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(sender.tag)" + Server.like)
+        let request = Server.deleteRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(sender.tag)" + Server.like)
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
             if error != nil {

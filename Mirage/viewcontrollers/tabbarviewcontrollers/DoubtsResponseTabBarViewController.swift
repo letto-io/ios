@@ -12,87 +12,167 @@ import MediaPlayer
 import AVFoundation
 import MobileCoreServices
 
-
-class DoubtsResponseTabBarViewController: UITabBarController, UITabBarControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    var discipline = Discipline()
+class DoubtsResponseTabBarViewController: UITabBarController, UITabBarControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
+    var instruction = Instruction()
     var presentation = Presentation()
     var doubt = Doubt()
-    var icon1: UITabBarItem!
-    var icon2: UITabBarItem!
-    var icon3: UITabBarItem!
-    var icon4: UITabBarItem!
     
-    let imagePicker: UIImagePickerController! = UIImagePickerController()
-    let saveFileName = "/test.mp4"
-    var image = UIImageView()
+    let imagePicker = UIImagePickerController()
+    var image: UIImage!
+    var videoData: NSData!
+    var audioData: NSData!
+    var audioRecorder: AVAudioRecorder!
+    var audioPlayer : AVAudioPlayer!
+    
+    let recordSettings = [AVSampleRateKey : NSNumber(float: Float(44100.0)),
+                          AVFormatIDKey : NSNumber(int: Int32(kAudioFormatMPEG4AAC)),
+                          AVNumberOfChannelsKey : NSNumber(int: 1),
+                          AVEncoderAudioQualityKey : NSNumber(int: Int32(AVAudioQuality.Medium.rawValue))]
+    
+    var indexContribution = Int()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(AVAudioSessionCategoryPlayAndRecord)
+            try audioRecorder = AVAudioRecorder(URL: self.directoryURL()!,
+                                                settings: recordSettings)
+            audioRecorder.prepareToRecord()
+        } catch {
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
         self.navigationItem.title = doubt.text
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style:.Plain, target:nil, action:nil)
 
-        let item1  = TextDoubtReponseViewController()
-        item1.discipline = discipline
-        item1.presentation = presentation
-        item1.doubt = doubt
-        item1.getDoubtResponse()
+        let item1 = self.textDoubtResponse()
+        let item2 = self.audioDoubtResponse()
+        let item3 = self.videoDoubtResponse()
+        let item4 = self.attachmentDoubtResponse()
         
-        let item2 = AudioDoubtResponseViewController()
-        item2.discipline = discipline
-        item2.presentation = presentation
-        item2.doubt = doubt
-        item2.getDoubtResponse()
-        
-        let item3 = VideoDoubtResponseViewController()
-        item3.discipline = discipline
-        item3.presentation = presentation
-        item3.doubt = doubt
-        item3.getDoubtResponse()
-        
-        let item4 = AttachmentDoubtResponseViewController()
-        item4.discipline = discipline
-        item4.presentation = presentation
-        item4.doubt = doubt
-        item4.getDoubtResponse()
-        
-        icon1 = UITabBarItem(title: StringUtil.Texto, image: ImageUtil.imageTextBlack, selectedImage: ImageUtil.imageTextWhite)
+        let icon1 = UITabBarItem(title: StringUtil.Texto, image: ImageUtil.imageTextBlack, selectedImage: ImageUtil.imageTextWhite)
         item1.tabBarItem = icon1
-        icon2 = UITabBarItem(title: StringUtil.Audio, image: ImageUtil.imageAudioBlack, selectedImage: ImageUtil.imageAudioWhite)
+        let icon2 = UITabBarItem(title: StringUtil.Audio, image: ImageUtil.imageAudioBlack, selectedImage: ImageUtil.imageAudioWhite)
         item2.tabBarItem = icon2
-        icon3 = UITabBarItem(title: StringUtil.Video, image: ImageUtil.imageVideoBlack, selectedImage: ImageUtil.imageVideoWhite)
+        let icon3 = UITabBarItem(title: StringUtil.Video, image: ImageUtil.imageVideoBlack, selectedImage: ImageUtil.imageVideoWhite)
         item3.tabBarItem = icon3
-        icon4 = UITabBarItem(title: StringUtil.Anexo, image: ImageUtil.imageAttachment, selectedImage: ImageUtil.imageAttachment)
+        let icon4 = UITabBarItem(title: StringUtil.Anexo, image: ImageUtil.imageAttachment, selectedImage: ImageUtil.imageAttachment)
         item4.tabBarItem = icon4
         
         let controllers = [item1, item2, item3, item4]  //array of the root view controllers displayed by the tab bar interface
         self.viewControllers = controllers
         
-        if discipline.profile == 2 {
-            let newContribution = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(DoubtsResponseTabBarViewController.newContributionAlert))
-            newContribution.tintColor = ColorUtil.orangeColor
-            
-            self.navigationItem.setRightBarButtonItems([newContribution], animated: true)
+        contributionButtonTapped(0)
+    }
+    
+    //Delegate methods
+    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+        if viewController.nibName == StringUtil.textDoubtReponseViewController {
+            contributionButtonTapped(0)
+        } else if viewController.nibName == StringUtil.AudioDoubtResponseViewController {
+            contributionButtonTapped(1)
+        } else if viewController.nibName == StringUtil.VideoDoubtResponseViewController {
+            contributionButtonTapped(2)
+        } else if viewController.nibName == StringUtil.AttachmentDoubtResponseViewController {
+            contributionButtonTapped(3)
         }
         
+        return true
+    }
+    
+    func contributionButtonTapped(index: Int) {
+//        if discipline.profile == 2 {
+//            if index == 0 {
+//                let newContribution = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(DoubtsResponseTabBarViewController.showNewTextContribution))
+//                newContribution.tintColor = ColorUtil.orangeColor
+//                
+//                self.navigationItem.setRightBarButtonItems([newContribution], animated: true)
+//            } else if index == 1 {
+//                let newContribution = UIBarButtonItem(image: ImageUtil.imageAudioDoubtResponse, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DoubtsResponseTabBarViewController.newAudioContributionAlert))
+//                newContribution.tintColor = ColorUtil.orangeColor
+//                
+//                self.navigationItem.setRightBarButtonItems([newContribution], animated: true)
+//            } else if index == 2 {
+//                let newContribution = UIBarButtonItem(image: ImageUtil.imageVideoDoubtResponse, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DoubtsResponseTabBarViewController.recordVideo))
+//                newContribution.tintColor = ColorUtil.orangeColor
+//                
+//                self.navigationItem.setRightBarButtonItems([newContribution], animated: true)
+//            } else if index == 3 || index == 4 {
+//                let newContribution = UIBarButtonItem(image: ImageUtil.imageAttachmentDoubtResponse, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(DoubtsResponseTabBarViewController.newAttachmentContributionAlert))
+//                newContribution.tintColor = ColorUtil.orangeColor
+//                
+//                self.navigationItem.setRightBarButtonItems([newContribution], animated: true)
+//            }
+//        }
+    }
+    
+    func textDoubtResponse() -> TextDoubtReponseViewController {
+        let item1 = TextDoubtReponseViewController()
+        item1.instruction = instruction
+        item1.presentation = presentation
+        item1.doubt = doubt
+        item1.getDoubtResponse()
         
+        return item1
+    }
+    
+    func audioDoubtResponse() -> AudioDoubtResponseViewController {
+        let item2 = AudioDoubtResponseViewController()
+        item2.instruction = instruction
+        item2.presentation = presentation
+        item2.doubt = doubt
+        item2.getDoubtResponse()
         
-//        let playVideo = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Play, target: self, action: #selector(DoubtsResponseTabBarViewController.playVideo))
-//        playVideo.tintColor = ColorUtil.orangeColor
-//        
-//        let newContrbution = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(DoubtsResponseTabBarViewController.UploadRequest))
-//        newVideoContrbution.tintColor = ColorUtil.orangeColor
+        return item2
+    }
+    
+    func videoDoubtResponse() -> VideoDoubtResponseViewController {
+        let item3 = VideoDoubtResponseViewController()
+        item3.instruction = instruction
+        item3.presentation = presentation
+        item3.doubt = doubt
+        item3.getDoubtResponse()
         
+        return item3
+    }
+    
+    func attachmentDoubtResponse() -> AttachmentDoubtResponseViewController {
+        let item4 = AttachmentDoubtResponseViewController()
+        item4.instruction = instruction
+        item4.presentation = presentation
+        item4.doubt = doubt
+        item4.getDoubtResponse()
         
+        return item4
+    }
+    
+    func showNewTextContribution() {
+        self.indexContribution = 0
+        let newTextResponse = CreateNewTextDoubtResponseViewController()
+        
+        self.navigationController?.pushViewController(newTextResponse, animated: true)
+    }
+    
+    func recordAudio(){
+        self.indexContribution = 1
+        if !audioRecorder.recording {
+            let audioSession = AVAudioSession.sharedInstance()
+            do {
+                try audioSession.setActive(true)
+                audioRecorder.record()
+            } catch {
+            }
+        }
     }
     
     func recordVideo() {
+        self.indexContribution = 2
         if (UIImagePickerController.isSourceTypeAvailable(.Camera)) {
             if UIImagePickerController.availableCaptureModesForCameraDevice(.Rear) != nil {
-                
                 imagePicker.sourceType = .Camera
                 imagePicker.mediaTypes = [kUTTypeMovie as String]
                 imagePicker.allowsEditing = false
@@ -100,66 +180,121 @@ class DoubtsResponseTabBarViewController: UITabBarController, UITabBarController
                 
                 presentViewController(imagePicker, animated: true, completion: {})
             } else {
-                postAlert("Rear camera doesn't exist", message: "Application cannot access the camera.")
+                self.presentViewController(DefaultViewController.alertMessage(StringUtil.cameraNotAccess), animated: true, completion: nil)
             }
         } else {
-            postAlert("Camera inaccessable", message: "Application cannot access the camera.")
+            self.presentViewController(DefaultViewController.alertMessage(StringUtil.cameraNotAccess), animated: true, completion: nil)
         }
     }
     
-    func playVideo(sender: AnyObject) {
-        print("Play a video")
+    func openAttachment() {
+        self.indexContribution = 3
+    }
+    
+    func selectPicture() {
+        self.indexContribution = 4
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
         
-        // Find the video in the app's document directory
-        let paths = NSSearchPathForDirectoriesInDomains(
-            NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-        let documentsDirectory: AnyObject = paths[0]
-        let dataPath = documentsDirectory.stringByAppendingPathComponent(saveFileName)
-        let videoAsset = (AVAsset(URL: NSURL(fileURLWithPath: dataPath)))
-        let playerItem = AVPlayerItem(asset: videoAsset)
+        self.presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    func openCamera() {
+        self.indexContribution = 4
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.Camera;
+            imagePicker.allowsEditing = false
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        } else {
+            self.presentViewController(DefaultViewController.alertMessage(StringUtil.cameraNotAccess), animated: true, completion: nil)
+        }
+    }
+    
+    func playAudio() {
+        if !audioRecorder.recording {
+            self.audioPlayer = try! AVAudioPlayer(contentsOfURL: audioRecorder.url)
+            self.audioPlayer.prepareToPlay()
+            self.audioPlayer.delegate = self
+            self.audioPlayer.play()
+        }
+    }
+    
+    func directoryURL() -> NSURL? {
+        let fileManager = NSFileManager.defaultManager()
+        let urls = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+        let documentDirectory = urls[0] as NSURL
+        let soundURL = documentDirectory.URLByAppendingPathComponent("sound.3gpp")
+        return soundURL
+    }
+    
+//    func playVideo(sender: AnyObject) {
+//        // Find the video in the app's document directory
+//        let paths = NSSearchPathForDirectoriesInDomains(
+//            NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+//        let documentsDirectory: AnyObject = paths[0]
+//        let dataPath = documentsDirectory.stringByAppendingPathComponent(saveFileName)
+//        let videoAsset = (AVAsset(URL: NSURL(fileURLWithPath: dataPath)))
+//        let playerItem = AVPlayerItem(asset: videoAsset)
+//        
+//        // Play the video
+//        let player = AVPlayer(playerItem: playerItem)
+//        let playerViewController = AVPlayerViewController()
+//        playerViewController.player = player
+//        
+//        self.presentViewController(playerViewController, animated: true) {
+//            playerViewController.player!.play()
+//        }
+//    }
+    
+    func stopRecordingAudio(){
+        audioRecorder.stop()
+        let audioSession = AVAudioSession.sharedInstance()
         
-        // Play the video
-        let player = AVPlayer(playerItem: playerItem)
-        let playerViewController = AVPlayerViewController()
-        playerViewController.player = player
-        
-        self.presentViewController(playerViewController, animated: true) {
-            playerViewController.player!.play()
+        do {
+            try audioSession.setActive(false)
+            audioData = NSData(contentsOfURL: audioRecorder.url)
+            self.imputFileName()
+        } catch {
         }
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        print("Got a video")
-        
         if let pickedVideo:NSURL = (info[UIImagePickerControllerMediaURL] as? NSURL) {
             // Save video to the main photo album
             let selectorToCall = #selector(DoubtsResponseTabBarViewController.videoWasSavedSuccessfully(_:didFinishSavingWithError:context:))
             UISaveVideoAtPathToSavedPhotosAlbum(pickedVideo.relativePath!, self, selectorToCall, nil)
             
             // Save the video to the app directory so we can play it later
-            let videoData = NSData(contentsOfURL: pickedVideo)
-            let paths = NSSearchPathForDirectoriesInDomains(
-                NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-            let documentsDirectory: AnyObject = paths[0]
-            let dataPath = documentsDirectory.stringByAppendingPathComponent(saveFileName)
-            videoData?.writeToFile(dataPath, atomically: false)
+            videoData = NSData(contentsOfURL: pickedVideo)
+//            let paths = NSSearchPathForDirectoriesInDomains(
+//                NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+//            let documentsDirectory: AnyObject = paths[0]
+//            let dataPath = documentsDirectory.stringByAppendingPathComponent(saveFileName)
+//            videoData?.writeToFile(dataPath, atomically: false)
+            
+            dismissViewControllerAnimated(true, completion: nil)
+            imputFileName()
         }
         
-        imagePicker.dismissViewControllerAnimated(true, completion: {
-            // Anything you want to happen when the user saves an video
-        })
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            image = pickedImage
+            
+            dismissViewControllerAnimated(true, completion: nil)
+            imputFileName()
+        }
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
-        print("User canceled image")
         dismissViewControllerAnimated(true, completion: {
-            // Anything you want to happen when the user selects cancel
+            self.contributionButtonTapped(self.indexContribution)
         })
     }
     
     // Any tasks you want to perform after recording a video
     func videoWasSavedSuccessfully(video: String, didFinishSavingWithError error: NSError!, context: UnsafeMutablePointer<()>){
-        print("Video saved")
         if let theError = error {
             print("An error happened while saving the video = \(theError)")
         } else {
@@ -169,44 +304,8 @@ class DoubtsResponseTabBarViewController: UITabBarController, UITabBarController
         }
     }
     
-    func postAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message,
-                                      preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
-    
-    func selectPicture() {
-        
-        let ImagePicker = UIImagePickerController()
-        ImagePicker.delegate = self
-        ImagePicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        
-        self.presentViewController(ImagePicker, animated: true, completion: nil)
-        
-    }
-    
-    func UploadRequest() {
-        let url = NSURL(string: "http://ws-edupanel.herokuapp.com/controller/instruction/5/presentation/108/doubt/86/contribution")
-        let request = NSMutableURLRequest(URL: url!)
-        let image_data = UIImagePNGRepresentation(ImageUtil.imageAllBlack)
-        
-        
-        let fname = "test.png"
-        let mimetype = "video/mp4"
-        
-        let boundary:String = "------WebKitFormBoundaryasdas543wfsdfs5453533d3sdfsf3"
-        let contentType = "multipart/form-data; boundary=\(boundary)"
-        request.HTTPMethod = "POST"
-        request.setValue(contentType, forHTTPHeaderField: "Content-Type")
-        let body = NSMutableData()
-        body.appendData(NSString(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
-        body.appendData(NSString(format: "Content-Disposition: form-data; name=\"file\"; filename=\"\(fname)\"\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
-        body.appendData(NSString(format:"Content-Type: \(mimetype)\r\n\r\n").dataUsingEncoding(NSUTF8StringEncoding)!)
-        body.appendData(image_data!)
-        body.appendData(NSString(format: "\r\n--%@\r\n", boundary).dataUsingEncoding(NSUTF8StringEncoding)!)
-
-        request.HTTPBody = body
+    func uploadImageRequest(fname: String) {
+        let request  = Server.uploadRequestImagePNG(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(doubt.id)" + Server.contribution, fname: fname, image: image)
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
             let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
@@ -216,26 +315,96 @@ class DoubtsResponseTabBarViewController: UITabBarController, UITabBarController
         task.resume()
     }
     
-    //exibe mensagens de alerta
-    func newContributionAlert() {
+    func uploadVideoRequest(fname: String) {
+        let request  = Server.uploadRequestVideoMP4(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(doubt.id)" + Server.contribution, fname: fname, videoData: videoData)
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+            let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            print(dataString)
+        }
+        
+        task.resume()
+    }
+    
+    func uploadAudioRequest(fname: String) {
+        let request  = Server.uploadRequestAudiom4a(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(doubt.id)" + Server.contribution, fname: fname, audioRecorder: audioData)
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+            let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            print(dataString)
+        }
+        
+        task.resume()
+    }
+
+    
+    func imputFileName() {
+        let alertController = UIAlertController(title: StringUtil.fileName, message: StringUtil.fileNameEmpty, preferredStyle: .Alert)
+        
+        alertController.addTextFieldWithConfigurationHandler { (textField) in
+            textField.placeholder = StringUtil.name
+        }
+        
+        let confirmAction = UIAlertAction(title: StringUtil.confirm, style: .Default) { (_) in
+            let field = alertController.textFields![0] as UITextField
+            
+            if self.indexContribution == 2 {
+                self.uploadVideoRequest(field.text!)
+            } else if self.indexContribution == 3 || self.indexContribution == 4 {
+                self.uploadImageRequest(field.text!)
+            } else if self.indexContribution == 1 {
+                self.uploadAudioRequest(field.text!)
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: StringUtil.cancel, style: .Cancel) { (_) in }
+        
+        alertController.addAction(confirmAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func newAudioContributionAlert() {
+        let myAlert = UIAlertController(title: StringUtil.newContribution, message: "", preferredStyle: UIAlertControllerStyle.Alert)
+
+        let startRecordAudio = UIAlertAction(title: StringUtil.Anexo, style: .Default) { action -> Void in
+            self.recordAudio()
+        }
+        
+        let stopRecordAudio = UIAlertAction(title: StringUtil.Galeria, style: .Default) { action -> Void in
+            self.stopRecordingAudio()
+        }
+        
+        let playAudio = UIAlertAction(title: StringUtil.Galeria, style: .Default) { action -> Void in
+            self.playAudio()
+        }
+        
+        let cancelAction = UIAlertAction(title: StringUtil.cancel, style: UIAlertActionStyle.Destructive, handler: nil)
+        
+        
+        let start = ImageUtil.imageAttachment
+        startRecordAudio.setValue(start, forKey: StringUtil.image)
+        
+        let stop = ImageUtil.imageBlack
+        stopRecordAudio.setValue(stop, forKey: StringUtil.image)
+        
+        let play = ImageUtil.imageBlack
+        playAudio.setValue(play, forKey: StringUtil.image)
+        
+        myAlert.addAction(startRecordAudio)
+        myAlert.addAction(stopRecordAudio)
+        myAlert.addAction(playAudio)
+        myAlert.addAction(cancelAction)
+        
+        self.presentViewController(myAlert, animated: true, completion: nil)
+    }
+    
+    func newAttachmentContributionAlert() {
         let myAlert = UIAlertController(title: StringUtil.newContribution, message: "", preferredStyle: UIAlertControllerStyle.Alert)
         
-        let textContribution = UIAlertAction(title: StringUtil.Texto, style: .Default) { action -> Void in
-            let newTextResponse = CreateNewTextDoubtResponseViewController()
-            
-            self.navigationController?.pushViewController(newTextResponse, animated: true)
-        }
-        
-        let audioContribution = UIAlertAction(title: StringUtil.Audio, style: .Default) { action -> Void in
-            
-        }
-        
-        let videoContribution = UIAlertAction(title: StringUtil.Video, style: .Default) { action -> Void in
-            self.recordVideo()
-        }
-        
         let attachmentContribution = UIAlertAction(title: StringUtil.Anexo, style: .Default) { action -> Void in
-            
+            self.openAttachment()
         }
         
         let galeryContribution = UIAlertAction(title: StringUtil.Galeria, style: .Default) { action -> Void in
@@ -243,19 +412,11 @@ class DoubtsResponseTabBarViewController: UITabBarController, UITabBarController
         }
         
         let pictureContribution = UIAlertAction(title: StringUtil.Foto, style: .Default) { action -> Void in
-            
+            self.openCamera()
         }
         
         let cancelAction = UIAlertAction(title: StringUtil.cancel, style: UIAlertActionStyle.Destructive, handler: nil)
         
-        let text = ImageUtil.imageTextBlack
-        textContribution.setValue(text, forKey: StringUtil.image)
-        
-        let audio = ImageUtil.imageAudioBlack
-        audioContribution.setValue(audio, forKey: StringUtil.image)
-        
-        let video = ImageUtil.imageVideoBlack
-        videoContribution.setValue(video, forKey: StringUtil.image)
         
         let attachment = ImageUtil.imageAttachment
         attachmentContribution.setValue(attachment, forKey: StringUtil.image)
@@ -266,9 +427,6 @@ class DoubtsResponseTabBarViewController: UITabBarController, UITabBarController
         let picture = ImageUtil.imageCameraBlack
         pictureContribution.setValue(picture, forKey: StringUtil.image)
         
-        myAlert.addAction(textContribution)
-        myAlert.addAction(audioContribution)
-        myAlert.addAction(videoContribution)
         myAlert.addAction(attachmentContribution)
         myAlert.addAction(galeryContribution)
         myAlert.addAction(pictureContribution)

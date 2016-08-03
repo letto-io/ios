@@ -16,7 +16,7 @@ class CreateNewDoubtViewController: UIViewController {
 
     @IBOutlet weak var doubtTextField: UITextField!
     @IBOutlet weak var anonymousButton: UIButton!
-    var discipline = Discipline()
+    var instruction = Instruction()
     var presentation = Presentation()
     var isChecked = Bool()
     
@@ -53,7 +53,7 @@ class CreateNewDoubtViewController: UIViewController {
             ]
             
             if NSJSONSerialization.isValidJSONObject(JSONObject) {
-                let request = Server.postRequestParseJSON(Server.presentationURL+"\(self.discipline.id)" + Server.presentaion_bar + "\(self.presentation.id)" + Server.doubt, JSONObject: JSONObject)
+                let request = Server.postRequestParseJSON(Server.presentationURL+"\(self.instruction.id)" + Server.presentaion_bar + "\(self.presentation.id)" + Server.doubt, JSONObject: JSONObject)
                 
                 let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
                     if error != nil {

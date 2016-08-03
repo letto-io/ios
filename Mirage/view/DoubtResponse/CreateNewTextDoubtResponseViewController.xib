@@ -30,7 +30,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="200" id="1uP-za-OOL"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
             </subviews>

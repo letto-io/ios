@@ -12,10 +12,11 @@ class DoubtViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
-    var discipline = Discipline()
+    var instruction = Instruction()
     var presentation = Presentation()
     var doubt = Doubt()
     var doubts = Array<Doubt>()
+    var orderedDoubts = Array<Doubt>()
     
     func tableViews() {
         tableView.delegate = self
@@ -46,7 +47,7 @@ class DoubtViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
    func getDoubt() {
-        let url = Server.getRequest(Server.presentationURL+"\(discipline.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt)
+        let url = Server.getRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt)
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
             if (error != nil) {
@@ -60,7 +61,7 @@ class DoubtViewController: UIViewController, UITableViewDelegate, UITableViewDat
                         if doubtJSONData.valueForKey(StringUtil.doubts)?.count == 0 {
                             return
                         } else {
-                            let doubts =  doubtJSONData.valueForKey(StringUtil.doubts) as! NSDictionary
+                            let doubts = doubtJSONData.valueForKey(StringUtil.doubts) as! NSDictionary
                             let keys = doubts.allKeys
                             
                             self.doubts = Doubt.iterateJSONArray(doubts, keys: keys)
@@ -71,17 +72,26 @@ class DoubtViewController: UIViewController, UITableViewDelegate, UITableViewDat
         })
         task.resume()
     
-        self.doubts.sortInPlace({ $0.createdat > $1.createdat })
+        orderedDoubts.removeAll()
+
+        var auxDoubt = Array<Doubt>()
+
+        for i in 0 ..< doubts.count {
+            var j = 0
+            auxDoubt.insert(doubts[i], atIndex: j)
+            j += 1
+        }
+        orderedDoubts = auxDoubt.sort({ $0.createdat > $1.createdat })
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return doubts.count
+        return orderedDoubts.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cellIdentifier, forIndexPath: indexPath) as! DoubtTableViewCell
         
-        let doubt = doubts[ indexPath.row ]
+        let doubt = orderedDoubts[ indexPath.row ]
         
         if doubt.anonymous == false {
             cell.nameLabel.text = doubt.person.name
@@ -94,15 +104,20 @@ class DoubtViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.likeButton.setImage(ImageUtil.imageLikeButton, forState: .Normal)
         cell.likeButton.tintColor = ColorUtil.orangeColor
         
-        if discipline.profile == 0 {
-            cell.understandLabel.text = StringUtil.entendi
-            cell.understandButton.setImage(ImageUtil.imageCheckBoxButtonWhite, forState: .Normal)
-            cell.understandButton.tintColor = UIColor.grayColor()
-        } else if discipline.profile == 2 {
-            //cell.likeButton.enabled = false
-            cell.understandLabel.text = ""
-            cell.closeDoubt.setImage(ImageUtil.imageCloseDoubt, forState: .Normal)
-            cell.closeDoubt.tintColor = UIColor.grayColor()
+//        if discipline.profile == 2 {
+//            cell.likeButton.enabled = false
+//            if doubt.status == 2 {
+//                cell.closeDoubt.setImage(ImageUtil.imageCloseDoubt, forState: .Normal)
+//            } else {
+//                cell.closeDoubt.setImage(ImageUtil.imageOpenDoubt, forState: .Normal)
+//            }
+//            cell.closeDoubt.tintColor = UIColor.grayColor()
+//        }
+        
+        if doubt.contributions >= 1 {
+            let imageAnswer = ImageUtil.imageAnswer
+            cell.answerImageView.image = imageAnswer
+            cell.answerImageView.tintColor = UIColor.grayColor()
         }
         
         //passagem de id para url de like na dúvida
@@ -120,10 +135,10 @@ class DoubtViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        doubt = doubts[ indexPath.row ]
+        doubt = orderedDoubts[ indexPath.row ]
         
         let doubtsResponse = DoubtsResponseTabBarViewController()
-        doubtsResponse.discipline = discipline
+        doubtsResponse.instruction = instruction
         doubtsResponse.presentation = presentation
         doubtsResponse.doubt = doubt
     
@@ -131,7 +146,7 @@ class DoubtViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func likeButtonPressed(sender: UIButton) {
-        let request = Server.postResquestNotSendCookie(Server.presentationURL+"\(discipline.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(sender.tag)" + Server.like)
+        let request = Server.postResquestNotSendCookie(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(sender.tag)" + Server.like)
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
             if error != nil {
@@ -163,7 +178,7 @@ class DoubtViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func deleteLikeButtonPressed(sender: UIButton) {
-        let request = Server.deleteRequest(Server.presentationURL+"\(discipline.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(sender.tag)" + Server.like)
+        let request = Server.deleteRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(sender.tag)" + Server.like)
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
             if error != nil {
