@@ -106,7 +106,7 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
         let present = openPresentation[ indexPath.row ]
         
         cell.subjectLabel.text = present.subject
-        cell.dateLabel.text = DateUtil.date1(present.createdat)
+        cell.dateLabel.text = DateUtil.dateAndHour(present.created_at)
         
         return cell
     }

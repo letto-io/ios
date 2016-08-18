@@ -14,7 +14,7 @@ class AttachmentDoubtResponseViewController: UIViewController, UITableViewDelega
     var refreshControl: UIRefreshControl!
     var instruction = Instruction()
     var presentation = Presentation()
-    var doubt = Doubt()
+    var question = Question()
     var attachmentContributions = Array<Contributions>()
     var contributions = Array<Contributions>()
     
@@ -47,7 +47,7 @@ class AttachmentDoubtResponseViewController: UIViewController, UITableViewDelega
     }
     
     func getDoubtResponse() {
-        let url = Server.getRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(doubt.id)" + Server.contribution)
+        let url = Server.getRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(question.id)" + Server.contribution)
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
             if (error != nil) {

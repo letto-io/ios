@@ -14,9 +14,9 @@ class RankingDoubtViewController: UIViewController, UITableViewDelegate, UITable
     var refreshControl: UIRefreshControl!
     var instruction = Instruction()
     var presentation = Presentation()
-    var doubt = Doubt()
-    var doubts  = Array<Doubt>()
-    var orderedDoubts = Array<Doubt>()
+    var question = Question()
+    var questions  = Array<Question>()
+    var orderedQuestions = Array<Question>()
     
     func tableViews() {
         tableView.delegate = self
@@ -32,7 +32,7 @@ class RankingDoubtViewController: UIViewController, UITableViewDelegate, UITable
         
         refreshControl = UIRefreshControl()
         DefaultViewController.refreshControl(refreshControl, tableView: tableView)
-        refreshControl.addTarget(self, action: #selector(DoubtViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(QuestionViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -47,53 +47,44 @@ class RankingDoubtViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func getDoubt() {
-        let url = Server.getRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt)
+        let request = Server.getRequestNew(Server.url + Server.presentations + "\(presentation.id)" + Server.questions)
         
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                let doubtJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                let question = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSArray
+                let presentation = question.valueForKey(StringUtil.presentation) as! NSArray
+                let answer = question.valueForKey(StringUtil.answers) as! NSArray
+                let person = question.valueForKey(StringUtil.person) as! NSArray
                 
-                if (doubtJSONData.valueForKey(StringUtil.error) != nil) {
-                    return
-                } else {
-                    if doubtJSONData.valueForKey(StringUtil.doubts)?.count == 0 {
-                        return
-                    } else {
-                        let doubts =  doubtJSONData.valueForKey(StringUtil.doubts) as! NSDictionary
-                        let keys = doubts.allKeys
-                        
-                        self.doubts = Doubt.iterateJSONArray(doubts, keys: keys)
-                    }
-                }
-                print(doubtJSONData)
+                self.questions = Question.iterateJSONArray(question, presentation: presentation, person: person)
             }
-        })
-    
+        }
         task.resume()
         
-        orderedDoubts.removeAll()
+        orderedQuestions.removeAll()
         
-        var auxDoubt = Array<Doubt>()
+        var auxDoubt = Array<Question>()
         
-        for i in 0 ..< doubts.count {
+        for i in 0 ..< questions.count {
             var j = 0
-            auxDoubt.insert(doubts[i], atIndex: j)
+            auxDoubt.insert(questions[i], atIndex: j)
             j += 1
         }
-        orderedDoubts = auxDoubt.sort({ $0.likes > $1.likes })
+        //orderedDoubts = auxDoubt.sort({ $0.likes > $1.likes })
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return orderedDoubts.count
+        return orderedQuestions.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cellIdentifier, forIndexPath: indexPath) as! DoubtTableViewCell
         
-        let doubt = orderedDoubts[ indexPath.row ]
+        let doubt = orderedQuestions[ indexPath.row ]
         
         if doubt.anonymous == false {
             cell.nameLabel.text = doubt.person.name
@@ -102,33 +93,33 @@ class RankingDoubtViewController: UIViewController, UITableViewDelegate, UITable
         }
         
         cell.textDoubtLabel.text = doubt.text
-        cell.hourLabel.text = DateUtil.hour(doubt.createdat)
-        cell.countLikesLabel.text = String(doubt.likes)
+        //cell.hourLabel.text = DateUtil.hour(doubt.createdat)
+        //cell.countLikesLabel.text = String(doubt.likes)
         
         cell.likeButton.setImage(ImageUtil.imageLikeButton, forState: .Normal)
         cell.likeButton.tintColor = ColorUtil.orangeColor
         
         //passagem de id para url de like na dúvida
-        cell.likeButton.tag = doubts[ indexPath.row ].id
+        cell.likeButton.tag = questions[ indexPath.row ].id
         
-        if doubt.like == false {
-            cell.likeButton.addTarget(self, action: #selector(DoubtViewController.likeButtonPressed), forControlEvents: .TouchUpInside)
-            cell.likeButton.setImage(ImageUtil.imageLikeButton, forState: .Normal)
-            cell.likeButton.tintColor = UIColor.grayColor()
-        } else {
-            cell.likeButton.addTarget(self, action: #selector(DoubtViewController.deleteLikeButtonPressed), forControlEvents: .TouchUpInside)
-        }
+//        if doubt.like == false {
+//            cell.likeButton.addTarget(self, action: #selector(DoubtViewController.likeButtonPressed), forControlEvents: .TouchUpInside)
+//            cell.likeButton.setImage(ImageUtil.imageLikeButton, forState: .Normal)
+//            cell.likeButton.tintColor = UIColor.grayColor()
+//        } else {
+//            cell.likeButton.addTarget(self, action: #selector(DoubtViewController.deleteLikeButtonPressed), forControlEvents: .TouchUpInside)
+//        }
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        doubt = orderedDoubts[ indexPath.row ]
+        question = orderedQuestions[ indexPath.row ]
         
         let doubtsResponse = DoubtsResponseTabBarViewController()
         doubtsResponse.instruction = instruction
         doubtsResponse.presentation = presentation
-        doubtsResponse.doubt = doubt
+        doubtsResponse.question = question
         
         self.navigationController?.pushViewController(doubtsResponse, animated: true)
     }

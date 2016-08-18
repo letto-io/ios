@@ -17,12 +17,12 @@ class DateUtil {
         let date = dateFormatter.dateFromString(date)
         
         dateFormatter.dateFormat = "dd/MM/yyyy"
-        let newDate = dateFormatter.stringFromDate(date!)
+        let newDate = dateFormatter.stringFromDate(date!)   
         
         return newDate
     }
     
-    static func date1(date: String) -> String {
+    static func dateAndHour(date: String) -> String {
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
@@ -37,10 +37,10 @@ class DateUtil {
     static func hour(date: String) -> String {
         
         let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
         let date = dateFormatter.dateFromString(date)
         
-        dateFormatter.dateFormat = "HH:mm:ss"
+        dateFormatter.dateFormat = "dd/MM - HH:mm"
         let newDate = dateFormatter.stringFromDate(date!)
         
         return newDate

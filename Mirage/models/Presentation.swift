@@ -12,7 +12,7 @@ class Presentation: NSObject {
     
     var id = Int()
     var status = Int()
-    var createdat = String()
+    var created_at = String()
     var subject = String()
     var instruction = Instruction()
     var person = Person()
@@ -26,9 +26,9 @@ class Presentation: NSObject {
             
             for _ in 0 ..< instruction.count {
                 present.instruction.id = instruction[i].valueForKey(StringUtil.id) as! Int
-                present.instruction.classNumber = instruction[i].valueForKey(StringUtil.class_number) as! Int
-                present.instruction.startDate = instruction[i].valueForKey(StringUtil.start_date) as! String
-                present.instruction.endDate = instruction[i].valueForKey(StringUtil.end_date) as! String
+                present.instruction.class_number = instruction[i].valueForKey(StringUtil.class_number) as! Int
+                present.instruction.start_date = instruction[i].valueForKey(StringUtil.start_date) as! String
+                present.instruction.end_date = instruction[i].valueForKey(StringUtil.end_date) as! String
             }
             
             for _ in 0 ..< person.count {
@@ -37,7 +37,7 @@ class Presentation: NSObject {
             }
             
             present.id = presentation[i].valueForKey(StringUtil.id) as! Int
-            present.createdat = presentation[i].valueForKey(StringUtil.created_at) as! String
+            present.created_at = presentation[i].valueForKey(StringUtil.created_at) as! String
             present.status = presentation[i].valueForKey(StringUtil.status) as! Int
             present.subject = presentation[i].valueForKey(StringUtil.subject) as! String
             

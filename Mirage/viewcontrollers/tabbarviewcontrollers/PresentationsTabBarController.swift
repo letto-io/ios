@@ -10,7 +10,7 @@ import UIKit
 
 class PresentationsTabBarController: UITabBarController, UITabBarControllerDelegate, AddNewPresentationDelegate {
     var instruction = Instruction()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
@@ -30,17 +30,18 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
         
         let controllers = [item1, item2]  //array of the root view controllers displayed by the tab bar interface
         self.viewControllers = controllers
+    
         
         //verifica se é um perfil de professor para criar novas apresentações
-//        if discipline.profile == 2 {
-//            let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(OpenPresentationViewController.longPress(_:)))
-//            self.view.addGestureRecognizer(longPressRecognizer)
-//            
-//            let newPresentationButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(PresentationsTabBarController.showNewPresentation))
-//            newPresentationButton.tintColor = ColorUtil.orangeColor
-//            
-//            self.navigationItem.setRightBarButtonItem(newPresentationButton, animated: true)
-//        }
+        if instruction.profile == 1 {
+            let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(OpenPresentationViewController.longPress(_:)))
+            self.view.addGestureRecognizer(longPressRecognizer)
+            
+            let newPresentationButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(PresentationsTabBarController.showNewPresentation))
+            newPresentationButton.tintColor = ColorUtil.orangeColor
+            
+            self.navigationItem.setRightBarButtonItem(newPresentationButton, animated: true)
+        }
     }
     
     func openPresentation() -> OpenPresentationViewController {
@@ -69,7 +70,6 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
     
     //Delegate methods
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-        print(viewController.nibName)
         return true;
     }
     

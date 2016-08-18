@@ -86,7 +86,7 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
         let present = closedPresentations[ indexPath.row ]
         
         cell.subjectLabel.text = present.subject
-        cell.dateLabel.text = DateUtil.date1(present.createdat)
+        cell.dateLabel.text = DateUtil.dateAndHour(present.created_at)
         
         return cell
     }

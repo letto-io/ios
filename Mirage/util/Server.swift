@@ -10,11 +10,14 @@ import Foundation
 
 class Server {
     
-    static let url = "http://rws-edupanel.herokuapp.com"
+    static let url = "http://ws-edupanel.herokuapp.com"
     
     static let session = "/session"
     static let instructions = "/instructions/"
     static let presentations = "/presentations/"
+    static let questions = "/questions"
+    static let profile = "/profile"
+    static let person = "/person"
     
     
     
@@ -47,6 +50,36 @@ class Server {
         return request
     }
     
+    static func postRequestParseJSONSendToken(url: String, JSONObject: AnyObject) -> NSMutableURLRequest {
+        let request: NSMutableURLRequest = NSMutableURLRequest()
+        let url = url
+        
+        request.URL = NSURL(string: url)
+        request.HTTPMethod = StringUtil.httpPOST
+        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
+        request.addValue(Server.token, forHTTPHeaderField: StringUtil.sessionToken)
+        request.setValue(StringUtil.httpApplication, forHTTPHeaderField: StringUtil.httpHeader)
+        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(JSONObject, options:  NSJSONWritingOptions(rawValue:0))
+        
+        return request
+    }
+    
+    static func postRequestParseJSON(url: String, JSONObject: AnyObject) -> NSMutableURLRequest {
+        let request: NSMutableURLRequest = NSMutableURLRequest()
+        let url = url
+        
+        request.URL = NSURL(string: url)
+        request.HTTPMethod = StringUtil.httpPOST
+        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
+        request.setValue(StringUtil.httpApplication, forHTTPHeaderField: StringUtil.httpHeader)
+        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(JSONObject, options:  NSJSONWritingOptions(rawValue:0))
+        
+        return request
+    }
+    
+    
+    //-------------------------------------------------------------------------------------------------------------------------------------------
+    
     static func getRequest(url: String) -> NSURL {
         let request: NSMutableURLRequest = NSMutableURLRequest()
         let urlPath = url
@@ -74,18 +107,7 @@ class Server {
         return request
     }
     
-    static func postRequestParseJSON(url: String, JSONObject: AnyObject) -> NSMutableURLRequest {
-        let request: NSMutableURLRequest = NSMutableURLRequest()
-        let url = url
     
-        request.URL = NSURL(string: url)
-        request.HTTPMethod = StringUtil.httpPOST
-        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
-        request.setValue(StringUtil.httpApplication, forHTTPHeaderField: StringUtil.httpHeader)
-        request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(JSONObject, options:  NSJSONWritingOptions(rawValue:0))
-        
-        return request
-    }
     
     static func deleteRequest(url: String) -> NSMutableURLRequest {
         let request: NSMutableURLRequest = NSMutableURLRequest()

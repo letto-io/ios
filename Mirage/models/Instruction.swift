@@ -11,12 +11,12 @@ import Foundation
 class Instruction: NSObject {
     
     var id = Int()
-    var classNumber = Int()
-    var startDate = String()
-    var endDate = String()
+    var class_number = Int()
+    var start_date = String()
+    var end_date = String()
+    var profile = Int()
     var event = Event()
     var lecture = Lecture()
-    
     
     static func iterateJSONArray(instruction: NSArray, lecture: NSArray, event: NSArray) -> Array<Instruction> {
         var instructions = Array<Instruction>()
@@ -40,9 +40,10 @@ class Instruction: NSObject {
             }
             
             instruct.id = instruction[i].valueForKey(StringUtil.id) as! Int
-            instruct.startDate = instruction[i].valueForKey(StringUtil.start_date) as! String
-            instruct.endDate = instruction[i].valueForKey(StringUtil.end_date) as! String
-            instruct.classNumber = instruction[i].valueForKey(StringUtil.class_number) as! Int
+            instruct.start_date = instruction[i].valueForKey(StringUtil.start_date) as! String
+            instruct.end_date = instruction[i].valueForKey(StringUtil.end_date) as! String
+            instruct.class_number = instruction[i].valueForKey(StringUtil.class_number) as! Int
+            instruct.profile = instruction[i].valueForKey(StringUtil.profile) as! Int
             
             instructions.insert(instruct, atIndex: i)
         }

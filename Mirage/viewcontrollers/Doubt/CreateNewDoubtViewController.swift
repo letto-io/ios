@@ -53,7 +53,7 @@ class CreateNewDoubtViewController: UIViewController {
             ]
             
             if NSJSONSerialization.isValidJSONObject(JSONObject) {
-                let request = Server.postRequestParseJSON(Server.presentationURL+"\(self.instruction.id)" + Server.presentaion_bar + "\(self.presentation.id)" + Server.doubt, JSONObject: JSONObject)
+                let request = Server.postRequestParseJSONSendToken(Server.url + Server.presentations + "\(self.presentation.id)" + Server.questions, JSONObject: JSONObject)
                 
                 let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
                     if error != nil {
@@ -78,7 +78,6 @@ class CreateNewDoubtViewController: UIViewController {
                                 })
                             }
                         }
-                        print(response)
                     }
                 }
                 task.resume()

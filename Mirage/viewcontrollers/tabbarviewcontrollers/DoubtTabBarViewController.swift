@@ -12,7 +12,7 @@ class DoubtTabBarViewController: UITabBarController, UITabBarControllerDelegate,
     
     var instruction = Instruction()
     var presentation = Presentation()
-    var doubts = Array<Doubt>()
+    var questions = Array<Question>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,16 +42,16 @@ class DoubtTabBarViewController: UITabBarController, UITabBarControllerDelegate,
         self.viewControllers = controllers
         
         //verifica se é um perfil de aluno para postar novas duvidas
-//        if discipline.profile == 0 {
-//            let newDoubtButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(DoubtTabBarViewController.showNewDoubt))
-//            newDoubtButton.tintColor = ColorUtil.orangeColor
-//            
-//            self.navigationItem.setRightBarButtonItem(newDoubtButton, animated: true)
-//        }
+        if instruction.profile == 0 {
+            let newDoubtButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(DoubtTabBarViewController.showNewDoubt))
+            newDoubtButton.tintColor = ColorUtil.orangeColor
+            
+            self.navigationItem.setRightBarButtonItem(newDoubtButton, animated: true)
+        }
     }
     
-    func doubt() -> DoubtViewController {
-        let item1 = DoubtViewController()
+    func doubt() -> QuestionViewController {
+        let item1 = QuestionViewController()
         item1.instruction = instruction
         item1.presentation = presentation
         item1.getDoubt()
@@ -59,8 +59,8 @@ class DoubtTabBarViewController: UITabBarController, UITabBarControllerDelegate,
         return item1
     }
     
-    func openDoubt() -> OpenDoubtViewController {
-        let item2 = OpenDoubtViewController()
+    func openDoubt() -> OpenQuestionViewController {
+        let item2 = OpenQuestionViewController()
         item2.instruction = instruction
         item2.presentation = presentation
         item2.getDoubt()
@@ -68,8 +68,8 @@ class DoubtTabBarViewController: UITabBarController, UITabBarControllerDelegate,
         return item2
     }
     
-    func closedDoubt() -> ClosedDoubtViewController {
-        let item3 = ClosedDoubtViewController()
+    func closedDoubt() -> ClosedQuestionViewController {
+        let item3 = ClosedQuestionViewController()
         item3.instruction = instruction
         item3.presentation = presentation
         item3.getDoubt()

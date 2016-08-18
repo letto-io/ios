@@ -16,17 +16,24 @@ class MenuTableViewController: UITableViewController {
     @IBOutlet weak var imageViewExit: UIImageView!
     @IBOutlet weak var optionsLabel: UILabel!
     
-    var email = String()
+    static var person = Person()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userNameLabel.text = "User Name"
-        loginLabel.text = "email@email.com"
+        
+        userNameLabel.text = MenuTableViewController.person.name
+        loginLabel.text = MenuTableViewController.person.user.email
         optionsLabel.text = "Opções"
         exitLabel.text = "Sair"
         
         imageViewExit.image = ImageUtil.imageExitButton
         imageViewExit.tintColor = UIColor.lightGrayColor()
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        userNameLabel.text = MenuTableViewController.person.name
+        loginLabel.text = MenuTableViewController.person.user.email
     }
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -38,8 +45,6 @@ class MenuTableViewController: UITableViewController {
     }
 
     @IBAction func exitButton(sender: AnyObject) {
-        let cookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-        var cookies = cookieStorage.cookies! as [NSHTTPCookie]
-        cookies.removeAll(keepCapacity: true)
+        Server.token.removeAll()
     }
 }

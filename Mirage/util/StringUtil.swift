@@ -6,7 +6,7 @@ class StringUtil {
     static let pullToRefresh = "Puxe para atualizar"
     
     //SegueIdentifier storyboard
-    static let disciplineView = "disciplineView"
+    static let instructionView = "instructionView"
     
     //AlertView
     static let message = "Mensagem"
@@ -51,8 +51,8 @@ class StringUtil {
         static let jsText = "text"
         static let jsAnonymous = "anonymous"
     
-    //DisciplinesViewController.swift
-        static let disciplineViewController = "DisciplinesViewController"
+    //InstructionViewController
+        static let InstructionViewController = "InstructionViewController"
         static let titleDiscipline = "Disciplinas"
         static let lectures = "lectures"
         static let lecture = "lecture"
@@ -102,16 +102,22 @@ class StringUtil {
         static let msgNewPresentationConfirm = "Deseja confimar?"
     
     
-    //DoubtViewController.swift
-        static let doubtViewController = "DoubtViewController"
-        static let openDoubtViewController = "OpenDoubtViewController"
-        static let closedDoubtViewController = "ClosedDoubtViewController"
+    //QuestionViewController
+        static let QuestionViewController = "QuestionViewController"
+        static let OpenQuestionViewController = "OpenQuestionViewController"
+        static let ClosedQuestionViewController = "ClosedQuestionViewController"
         static let rankingDoubtViewController = "RankingDoubtViewController"
         static let msgNoDoubt = "Sem dúvidas na apresentação"
-        static let doubts = "doubts"
+        static let answers = "answers"
+        static let accepted = "accepted"
+        static let upvotes = "upvootes"
+        static let downvotes = "downvotes"
+        static let my_vote = "my_vote"
+        static let answered = "answered"
+        static let has_answer = "has_answer"
         static let contributions = "contributions"
         static let likes = "likes"
-        static let presentationid = "presentationid"
+        static let presentation = "presentation"
         static let text = "text"
         static let anonymous = "anonymous"
         static let like = "like"
@@ -176,6 +182,8 @@ class StringUtil {
     static let created_at = "created_at"
     static let token = "token"
     static let user_id = "user_id"
+    static let user = "user"
+    static let email = "email"
         
         
     

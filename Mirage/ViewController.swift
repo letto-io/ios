@@ -12,7 +12,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var userField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
-    var login: Login!
+    var login = Login()
+    var person = Person()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +65,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
                             Server.token = self.login.token
                             
                             dispatch_async(dispatch_get_main_queue(), {
-                                self.performSegueWithIdentifier(StringUtil.disciplineView, sender: self)
+                                self.getPerson()
+                                self.performSegueWithIdentifier(StringUtil.instructionView, sender: self)
                             })
                         }
                     }
@@ -73,6 +75,26 @@ class ViewController: UIViewController, UITextFieldDelegate {
         task.resume()
     }
     }
+    
+    func getPerson() {
+        let request = Server.getRequestNew(Server.url + Server.person)
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
+            
+            do {
+                let person = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as! NSDictionary
+                let user = person.valueForKey(StringUtil.user) as! NSObject
+                
+                MenuTableViewController.person = Person.parsePersonJSON(person, user: user)
+                
+            } catch let error as NSError {
+                print(error.localizedDescription)
+            }
+        }
+        task.resume()
+    }
+
     
     //esconde teclado ao tocar em alguma parte da tela
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

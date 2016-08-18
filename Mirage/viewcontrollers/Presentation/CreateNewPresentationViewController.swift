@@ -56,7 +56,7 @@ class CreateNewPresentationViewController: UIViewController {
             ]
             
             if NSJSONSerialization.isValidJSONObject(JSONObject) {
-                let request = Server.postRequestParseJSON(Server.presentationURL+"\(self.instruction.id)" + Server.presentaion, JSONObject: JSONObject)
+                let request = Server.postRequestParseJSONSendToken(Server.url + Server.instructions + "\(self.instruction.id)" + Server.presentations, JSONObject: JSONObject)
 
                 let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
                     data, response, error in
@@ -83,7 +83,6 @@ class CreateNewPresentationViewController: UIViewController {
                                 })
                             }
                         }
-                        print(response)
                     }
                 }
                 task.resume()

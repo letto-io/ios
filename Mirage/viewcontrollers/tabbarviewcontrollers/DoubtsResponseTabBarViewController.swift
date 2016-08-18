@@ -15,7 +15,7 @@ import MobileCoreServices
 class DoubtsResponseTabBarViewController: UITabBarController, UITabBarControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     var instruction = Instruction()
     var presentation = Presentation()
-    var doubt = Doubt()
+    var question = Question()
     
     let imagePicker = UIImagePickerController()
     var image: UIImage!
@@ -46,7 +46,7 @@ class DoubtsResponseTabBarViewController: UITabBarController, UITabBarController
     }
 
     override func viewWillAppear(animated: Bool) {
-        self.navigationItem.title = doubt.text
+        self.navigationItem.title = question.text
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style:.Plain, target:nil, action:nil)
 
         let item1 = self.textDoubtResponse()
@@ -114,7 +114,7 @@ class DoubtsResponseTabBarViewController: UITabBarController, UITabBarController
         let item1 = TextDoubtReponseViewController()
         item1.instruction = instruction
         item1.presentation = presentation
-        item1.doubt = doubt
+        item1.question = question
         item1.getDoubtResponse()
         
         return item1
@@ -124,7 +124,7 @@ class DoubtsResponseTabBarViewController: UITabBarController, UITabBarController
         let item2 = AudioDoubtResponseViewController()
         item2.instruction = instruction
         item2.presentation = presentation
-        item2.doubt = doubt
+        item2.question = question
         item2.getDoubtResponse()
         
         return item2
@@ -134,7 +134,7 @@ class DoubtsResponseTabBarViewController: UITabBarController, UITabBarController
         let item3 = VideoDoubtResponseViewController()
         item3.instruction = instruction
         item3.presentation = presentation
-        item3.doubt = doubt
+        item3.question = question
         item3.getDoubtResponse()
         
         return item3
@@ -144,7 +144,7 @@ class DoubtsResponseTabBarViewController: UITabBarController, UITabBarController
         let item4 = AttachmentDoubtResponseViewController()
         item4.instruction = instruction
         item4.presentation = presentation
-        item4.doubt = doubt
+        item4.question = question
         item4.getDoubtResponse()
         
         return item4
@@ -305,7 +305,7 @@ class DoubtsResponseTabBarViewController: UITabBarController, UITabBarController
     }
     
     func uploadImageRequest(fname: String) {
-        let request  = Server.uploadRequestImagePNG(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(doubt.id)" + Server.contribution, fname: fname, image: image)
+        let request  = Server.uploadRequestImagePNG(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(question.id)" + Server.contribution, fname: fname, image: image)
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
             let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
@@ -316,7 +316,7 @@ class DoubtsResponseTabBarViewController: UITabBarController, UITabBarController
     }
     
     func uploadVideoRequest(fname: String) {
-        let request  = Server.uploadRequestVideoMP4(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(doubt.id)" + Server.contribution, fname: fname, videoData: videoData)
+        let request  = Server.uploadRequestVideoMP4(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(question.id)" + Server.contribution, fname: fname, videoData: videoData)
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
             let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)
@@ -327,7 +327,7 @@ class DoubtsResponseTabBarViewController: UITabBarController, UITabBarController
     }
     
     func uploadAudioRequest(fname: String) {
-        let request  = Server.uploadRequestAudiom4a(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(doubt.id)" + Server.contribution, fname: fname, audioRecorder: audioData)
+        let request  = Server.uploadRequestAudiom4a(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(question.id)" + Server.contribution, fname: fname, audioRecorder: audioData)
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
             let dataString = NSString(data: data!, encoding: NSUTF8StringEncoding)

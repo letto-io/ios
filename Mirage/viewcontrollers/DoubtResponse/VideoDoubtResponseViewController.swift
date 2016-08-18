@@ -18,7 +18,7 @@ class VideoDoubtResponseViewController: UIViewController, UITableViewDelegate, U
     var refreshControl: UIRefreshControl!
     var instruction = Instruction()
     var presentation = Presentation()
-    var doubt = Doubt()
+    var question = Question()
     var videoContributions = Array<Contributions>()
     var contributions = Array<Contributions>()
     var contribution = Contributions()
@@ -55,7 +55,7 @@ class VideoDoubtResponseViewController: UIViewController, UITableViewDelegate, U
     }
     
     func getDoubtResponse() {
-        let url = Server.getRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(doubt.id)" + Server.contribution)
+        let url = Server.getRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(question.id)" + Server.contribution)
         
         let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
             if (error != nil) {
@@ -93,7 +93,7 @@ class VideoDoubtResponseViewController: UIViewController, UITableViewDelegate, U
     }
     
     func downloadContribution(idMaterial: Int) {
-        let url = Server.getRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(doubt.id)" + Server.contribution_bar
+        let url = Server.getRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(question.id)" + Server.contribution_bar
             + "\(contribution.id)" + Server.materials_bar + "\(idMaterial)")
 
         

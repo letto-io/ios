@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class InstructionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
@@ -32,7 +32,7 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
         
         refreshControl = UIRefreshControl()
         DefaultViewController.refreshControl(refreshControl, tableView: tableView)
-        refreshControl.addTarget(self, action: #selector(DisciplinesViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(InstructionViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
         
         if self.revealViewController() != nil {
             let menuButton = UIBarButtonItem(image: ImageUtil.imageMenuButton, style: UIBarButtonItemStyle.Plain, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle))
@@ -80,8 +80,8 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
         let disc = instructions[ indexPath.row ]
         
         cell.nameLabel.text = disc.lecture.name
-        cell.startDateLabel.text = StringUtil.start + DateUtil.date(disc.startDate)
-        cell.classeLabel.text = StringUtil.turma + (String(disc.classNumber))
+        cell.startDateLabel.text = StringUtil.start + DateUtil.date(disc.start_date)
+        cell.classeLabel.text = StringUtil.turma + (String(disc.class_number))
         
         let imageBook = ImageUtil.imageDiscipline
         cell.bookImageView.image = imageBook
@@ -97,5 +97,13 @@ class DisciplinesViewController: UIViewController, UITableViewDelegate, UITableV
         presentationTabBar.instruction = instruction
     
         self.navigationController?.pushViewController(presentationTabBar, animated: true)
+    }
+    
+    init() {
+        super.init(nibName: StringUtil.InstructionViewController, bundle: nil)
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
     }
 }

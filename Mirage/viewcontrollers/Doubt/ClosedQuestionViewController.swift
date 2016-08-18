@@ -8,15 +8,15 @@
 
 import UIKit
 
-class ClosedDoubtViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ClosedQuestionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
     var instruction = Instruction()
     var presentation = Presentation()
-    var doubt = Doubt()
-    var doubts  = Array<Doubt>()
-    var closedDoubts  = Array<Doubt>()
+    var question = Question()
+    var questions  = Array<Question>()
+    var closedQuestions  = Array<Question>()
     
     func tableViews() {
         tableView.delegate = self
@@ -32,7 +32,7 @@ class ClosedDoubtViewController: UIViewController, UITableViewDelegate, UITableV
         
         refreshControl = UIRefreshControl()
         DefaultViewController.refreshControl(refreshControl, tableView: tableView)
-        refreshControl.addTarget(self, action: #selector(DoubtViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(ClosedQuestionViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -47,55 +47,45 @@ class ClosedDoubtViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func getDoubt() {
-        let url = Server.getRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt)
+        let request = Server.getRequestNew(Server.url + Server.presentations + "\(presentation.id)" + Server.questions)
         
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            data, response, error in
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                let doubtJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                let question = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSArray
+                let presentation = question.valueForKey(StringUtil.presentation) as! NSArray
+                let person = question.valueForKey(StringUtil.person) as! NSArray
                 
-                if (doubtJSONData.valueForKey(StringUtil.error) != nil) {
-                    return
-                } else {
-                    if doubtJSONData.valueForKey(StringUtil.doubts)?.count == 0 {
-                        return
-                    } else {
-                        let doubts =  doubtJSONData.valueForKey(StringUtil.doubts) as! NSDictionary
-                        let keys = doubts.allKeys
-                        
-                        self.doubts = Doubt.iterateJSONArray(doubts, keys: keys)
-                    }
-                }
-                print(doubtJSONData)
-            }
-        })
-    
-        task.resume()
-        
-        closedDoubts.removeAll()
-        
-        var auxDoubt = Array<Doubt>()
-        
-        for i in 0 ..< doubts.count {
-            var j = 0
-            
-            if doubts[i].status == 2 {
-                auxDoubt.insert(doubts[i], atIndex: j)
-                j += 1
+                self.questions = Question.iterateJSONArray(question, presentation: presentation, person: person)
             }
         }
-        closedDoubts = auxDoubt.reverse()
+        task.resume()
+        
+        closedQuestions.removeAll()
+        
+        var auxDoubt = Array<Question>()
+        
+        for i in 0 ..< questions.count {
+            var j = 0
+            
+//            if doubts[i].status == 2 {
+//                auxDoubt.insert(doubts[i], atIndex: j)
+//                j += 1
+//            }
+        }
+        closedQuestions = auxDoubt.reverse()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return closedDoubts.count
+        return closedQuestions.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cellIdentifier, forIndexPath: indexPath) as! DoubtTableViewCell
         
-        let doubt = closedDoubts[ indexPath.row ]
+        let doubt = closedQuestions[ indexPath.row ]
         
         if doubt.anonymous == false {
             cell.nameLabel.text = doubt.person.name
@@ -104,33 +94,33 @@ class ClosedDoubtViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         cell.textDoubtLabel.text = doubt.text
-        cell.hourLabel.text = DateUtil.hour(doubt.createdat)
-        cell.countLikesLabel.text = String(doubt.likes)
+        //cell.hourLabel.text = DateUtil.hour(doubt.createdat)
+        //cell.countLikesLabel.text = String(doubt.likes)
         
         cell.likeButton.setImage(ImageUtil.imageLikeButton, forState: .Normal)
         cell.likeButton.tintColor = ColorUtil.orangeColor
         
         //passagem de id para url de like na dúvida
-        cell.likeButton.tag = closedDoubts[ indexPath.row ].id
+        cell.likeButton.tag = closedQuestions[ indexPath.row ].id
         
-        if doubt.like == false {
-            cell.likeButton.addTarget(self, action: #selector(DoubtViewController.likeButtonPressed), forControlEvents: .TouchUpInside)
-            cell.likeButton.setImage(ImageUtil.imageLikeButton, forState: .Normal)
-            cell.likeButton.tintColor = UIColor.grayColor()
-        } else {
-            cell.likeButton.addTarget(self, action: #selector(DoubtViewController.deleteLikeButtonPressed), forControlEvents: .TouchUpInside)
-        }
+//        if doubt.like == false {
+//            cell.likeButton.addTarget(self, action: #selector(DoubtViewController.likeButtonPressed), forControlEvents: .TouchUpInside)
+//            cell.likeButton.setImage(ImageUtil.imageLikeButton, forState: .Normal)
+//            cell.likeButton.tintColor = UIColor.grayColor()
+//        } else {
+//            cell.likeButton.addTarget(self, action: #selector(DoubtViewController.deleteLikeButtonPressed), forControlEvents: .TouchUpInside)
+//        }
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        doubt = closedDoubts[ indexPath.row ]
+        question = closedQuestions[ indexPath.row ]
         
         let doubtsResponse = DoubtsResponseTabBarViewController()
         doubtsResponse.instruction = instruction
         doubtsResponse.presentation = presentation
-        doubtsResponse.doubt = doubt
+        doubtsResponse.question = question
         
         self.navigationController?.pushViewController(doubtsResponse, animated: true)
     }
@@ -200,7 +190,7 @@ class ClosedDoubtViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     init() {
-        super.init(nibName: StringUtil.closedDoubtViewController, bundle: nil)
+        super.init(nibName: StringUtil.ClosedQuestionViewController, bundle: nil)
     }
     
     required init(coder aDecoder: NSCoder) {

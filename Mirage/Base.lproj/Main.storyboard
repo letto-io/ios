@@ -94,17 +94,17 @@
                     <connections>
                         <outlet property="passwordField" destination="cIZ-0t-zAs" id="wsz-VP-wAw"/>
                         <outlet property="userField" destination="5nT-7n-eMs" id="ERw-ro-4lp"/>
-                        <segue destination="rOj-So-0Nh" kind="show" identifier="disciplineView" id="ihr-cC-IZm"/>
+                        <segue destination="rOj-So-0Nh" kind="show" identifier="instructionView" id="ihr-cC-IZm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="428.5" y="455.5"/>
         </scene>
-        <!--Disciplines View Controller-->
+        <!--Instruction View Controller-->
         <scene sceneID="JVJ-zg-6O8">
             <objects>
-                <viewController id="rOj-So-0Nh" customClass="DisciplinesViewController" customModule="Mirage" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="rOj-So-0Nh" customClass="InstructionViewController" customModule="Mirage" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qKP-gR-Rqm"/>
                         <viewControllerLayoutGuide type="bottom" id="rvB-Gs-IHR"/>
@@ -322,7 +322,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="78"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sIM-Vc-mhH">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sIM-Vc-mhH">
                                                     <rect key="frame" x="8" y="8" width="93" height="27"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="93" id="Gct-tM-k2r"/>
