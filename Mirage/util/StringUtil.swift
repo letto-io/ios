@@ -31,11 +31,11 @@ class StringUtil {
     static let error401 = "Erro 401"
     
     //nibNames cell
-    static let cellIdentifier = "cell"
-    static let disciplineCell = "DisciplineCell"
-    static let presentationCell = "PresentationCell"
-    static let doubtCell = "DoubtTableViewCell"
-    static let doubtResponseCell = "DoubtResponseTableViewCell"
+    static let cell = "cell"
+    static let InstructionCell = "InstructionCell"
+    static let PresentationCell = "PresentationCell"
+    static let QuestionCell = "QuestionCell"
+    static let AnswerCell = "AnswerCell"
     
     
     
@@ -77,7 +77,7 @@ class StringUtil {
         static let ranking = "RANKING"
     
     //DoubtTabBarController.swift
-        static let doubtTabBarViewController = "DoubtTabBarViewController"
+        static let QuestionsTabBarViewController = "QuestionsTabBarViewController"
         static let doubtTitle = "Dúvidas"
     
     //OpenPresentationViewController.swift e ClosedPresentationViewController.swift
@@ -94,7 +94,7 @@ class StringUtil {
     
     
     //CreateNewPresentationViewController.swift
-        static let createNewPresentationViewController = "CreateNewPresentationViewController"
+        static let CreatePresentationViewController = "CreatePresentationViewController"
         static let newPresentationTitle = "Nova Apresentação"
         static let msgSubjectRequired = "Tema é obrigatório"
         static let msgErrorRequest = "Não foi possível completar sua requisição!"
@@ -110,7 +110,7 @@ class StringUtil {
         static let msgNoDoubt = "Sem dúvidas na apresentação"
         static let answers = "answers"
         static let accepted = "accepted"
-        static let upvotes = "upvootes"
+        static let upvotes = "upvotes"
         static let downvotes = "downvotes"
         static let my_vote = "my_vote"
         static let answered = "answered"
@@ -124,6 +124,7 @@ class StringUtil {
         static let anonimo = "Anônimo"
         static let entendi = "ENTENDI"
         static let msgNotRankYourDoubt = "Você não pode ranquear sua propria dúvida!"
+        static let msgQuestionRanked = "Você já curtiu essa dúvida!"
     
     //RecoverPasswordViewController.swift
         static let msgEmailNotFound = "Email não encontrado"
@@ -135,7 +136,7 @@ class StringUtil {
         static let msgPasswordNotMatch = "Senhas não correspodem"
     
     //CreateNewDoubtViewController.swift
-        static let createNewDoubtViewController = "CreateNewDoubtViewController"
+        static let CreateQuestionViewController = "CreateQuestionViewController"
         static let newDoubtTitle = "Nova Dúvida"
         static let msgDoubtTextRequired = "Descreva sua dúvida"
         static let msgNewDoubtConfirm = "Deseja confimar?"

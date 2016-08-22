@@ -27,17 +27,17 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViews()
-        DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.presentationCell, view: view)
+        DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.PresentationCell, view: view)
         
         refreshControl = UIRefreshControl()
         DefaultViewController.refreshControl(refreshControl, tableView: tableView)
         refreshControl.addTarget(self, action: #selector(OpenPresentationViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
         
         //verifica se é um perfil de professor para fechar apresentações
-//        if discipline.profile == 2 {
-//            let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(OpenPresentationViewController.longPress(_:)))
-//            self.view.addGestureRecognizer(longPressRecognizer)
-//        }
+        if instruction.profile == 1 {
+            let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(OpenPresentationViewController.longPress(_:)))
+            self.view.addGestureRecognizer(longPressRecognizer)
+        }
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -102,7 +102,7 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cellIdentifier, forIndexPath: indexPath) as! PresentationTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cell, forIndexPath: indexPath) as! PresentationCell
         let present = openPresentation[ indexPath.row ]
         
         cell.subjectLabel.text = present.subject
@@ -114,11 +114,11 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         presentation = openPresentation[ indexPath.row ]
         
-        let doubtTabBar  = DoubtTabBarViewController()
-        doubtTabBar.instruction = instruction
-        doubtTabBar.presentation = presentation
+        let questionTabBar = QuestionsTabBarViewController()
+        questionTabBar.instruction = instruction
+        questionTabBar.presentation = presentation
         
-        self.navigationController?.pushViewController(doubtTabBar, animated: true)
+        self.navigationController?.pushViewController(questionTabBar, animated: true)
     }
     
     //exibe mensagens de alerta
@@ -127,7 +127,7 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
             UIAlertControllerStyle.Alert)
         
         let okAction: UIAlertAction = UIAlertAction(title: StringUtil.confirm, style: .Destructive) { action -> Void in
-            let request = Server.postResquestNotSendCookie(Server.presentationURL+"\(self.instruction.id)" + Server.presentaion_bar + "\(id)" + Server.close)
+            let request = Server.postRequestSendToken(Server.url + Server.presentations + "\(id)" + Server.close)
             
             let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
                 data, response, error in
@@ -141,28 +141,22 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
                         NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: response!.URL!, mainDocumentURL: nil)
                         
                         if httpResponse.statusCode == 404 {
-                            dispatch_async(dispatch_get_main_queue(), {
-                                
-                            })
+                            
                         } else if httpResponse.statusCode == 401 {
-                            dispatch_async(dispatch_get_main_queue(), {
-                                
-                                
-                            })
+                            
                         } else if httpResponse.statusCode == 200 {
                             dispatch_async(dispatch_get_main_queue(), {
-                                self.navigationController?.popViewControllerAnimated(true)
+                                self.viewDidAppear(true)
                             })
                         }
                     }
-                    print(response)
                 }
             }
             task.resume()
         }
         
         let cancelAction: UIAlertAction = UIAlertAction(title: StringUtil.cancel, style: .Cancel) { action -> Void in
-            print(StringUtil.cancel)
+
         }
         
         myAlert.addAction(okAction)

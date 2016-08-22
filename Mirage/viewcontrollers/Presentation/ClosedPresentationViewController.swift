@@ -26,7 +26,7 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.presentationCell, view: view)
+        DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.PresentationCell, view: view)
         
         refreshControl = UIRefreshControl()
         DefaultViewController.refreshControl(refreshControl, tableView: tableView)
@@ -82,7 +82,7 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cellIdentifier, forIndexPath: indexPath) as! PresentationTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cell, forIndexPath: indexPath) as! PresentationCell
         let present = closedPresentations[ indexPath.row ]
         
         cell.subjectLabel.text = present.subject
@@ -94,11 +94,11 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         presentation = closedPresentations[ indexPath.row ]
         
-        let doubtTabBar  = DoubtTabBarViewController()
-        doubtTabBar.instruction = instruction
-        doubtTabBar.presentation = presentation
+        let questionTabBar = QuestionsTabBarViewController()
+        questionTabBar.instruction = instruction
+        questionTabBar.presentation = presentation
     
-        self.navigationController?.pushViewController(doubtTabBar, animated: true)
+        self.navigationController?.pushViewController(questionTabBar, animated: true)
     }
     
     init() {

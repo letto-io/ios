@@ -53,6 +53,7 @@ class ImageUtil {
     static let imageCloseDoubt = UIImage(named: "lock-outline-white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     static let imageOpenDoubt = UIImage(named: "lock-open-outline-white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     static let imageAnswer = UIImage(named: "comment-black")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+    static let imageAnswered = UIImage(named: "answered-white")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
     
     //DoubtsResponseTabBarControllers
     static let imageAudioDoubtResponse = UIImage(named: "microphone-black")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)

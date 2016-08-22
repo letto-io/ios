@@ -15,9 +15,13 @@ class Server {
     static let session = "/session"
     static let instructions = "/instructions/"
     static let presentations = "/presentations/"
-    static let questions = "/questions"
+    static let questions = "/questions/"
     static let profile = "/profile"
     static let person = "/person"
+    static let close = "/close"
+    static let upvote = "/upvote"
+    
+    
     
     
     
@@ -25,7 +29,7 @@ class Server {
     static let presentaion_bar = "/presentation/"
     static let contribution_bar = "/contribution/"
     static let materials_bar = "/materials/"
-    static let close = "/close"
+    
     static let doubt = "/doubt"
     static let doubt_bar = "/doubt/"
     static let like = "/like"
@@ -73,6 +77,18 @@ class Server {
         request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
         request.setValue(StringUtil.httpApplication, forHTTPHeaderField: StringUtil.httpHeader)
         request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(JSONObject, options:  NSJSONWritingOptions(rawValue:0))
+        
+        return request
+    }
+    
+    static func postRequestSendToken(url: String) -> NSMutableURLRequest {
+        let request: NSMutableURLRequest = NSMutableURLRequest()
+        let url = url
+        
+        request.URL = NSURL(string: url)
+        request.HTTPMethod = StringUtil.httpPOST
+        request.cachePolicy = NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData
+        request.addValue(Server.token, forHTTPHeaderField: StringUtil.sessionToken)
         
         return request
     }

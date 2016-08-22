@@ -45,13 +45,7 @@ class Question: NSObject {
             qtn.answered = question[i].valueForKey(StringUtil.answered) as! Bool
             qtn.has_answer = question[i].valueForKey(StringUtil.has_answer) as! Bool
             qtn.created_at = question[i].valueForKey(StringUtil.created_at) as! String
-            
-            if question[i].upvotes == nil {
-                qtn.upvotes = 0
-            } else {
-                qtn.upvotes = question[i].valueForKey(StringUtil.upvotes) as! Int
-            }
-            
+            qtn.upvotes = question[i].valueForKey(StringUtil.upvotes) as! Int
             qtn.my_vote = question[i].valueForKey(StringUtil.my_vote) as! Int
            
             questions.insert(qtn, atIndex: i)

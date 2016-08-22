@@ -12,7 +12,7 @@ class DefaultViewController: UIViewController {
     
    static func refreshTableView(tableView: UITableView, cellNibName: String, view: UIView) -> UITableView {
         let nib = UINib(nibName: cellNibName , bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: StringUtil.cellIdentifier)
+        tableView.registerNib(nib, forCellReuseIdentifier: StringUtil.cell)
         view.addSubview(tableView)
         return tableView
     }

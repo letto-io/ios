@@ -31,13 +31,12 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
         let controllers = [item1, item2]  //array of the root view controllers displayed by the tab bar interface
         self.viewControllers = controllers
     
-        
         //verifica se é um perfil de professor para criar novas apresentações
         if instruction.profile == 1 {
             let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(OpenPresentationViewController.longPress(_:)))
             self.view.addGestureRecognizer(longPressRecognizer)
             
-            let newPresentationButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(PresentationsTabBarController.showNewPresentation))
+            let newPresentationButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(PresentationsTabBarController.createPresentation))
             newPresentationButton.tintColor = ColorUtil.orangeColor
             
             self.navigationItem.setRightBarButtonItem(newPresentationButton, animated: true)
@@ -61,8 +60,8 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
     }
     
     //cadastrar nova apresentação
-    func showNewPresentation() {
-        let newPresentation = CreateNewPresentationViewController(delegate: self)
+    func createPresentation() {
+        let newPresentation = CreatePresentationViewController(delegate: self)
         newPresentation.instruction = instruction
         
         self.navigationController?.pushViewController(newPresentation, animated: true)

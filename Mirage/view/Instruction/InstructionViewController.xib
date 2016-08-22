@@ -5,9 +5,8 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ClosedPresentationViewController" customModule="Mirage" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DisciplinesViewController" customModule="Mirage" customModuleProvider="target">
             <connections>
-                <outlet property="tableView" destination="my3-pI-aW2" id="DVh-km-54M"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,24 +15,24 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="my3-pI-aW2">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="608"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wLF-We-HHe">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <outlet property="dataSource" destination="i5M-Pr-FkT" id="AwF-ju-xUJ"/>
-                        <outlet property="delegate" destination="i5M-Pr-FkT" id="2hg-k7-erL"/>
+                        <outlet property="dataSource" destination="i5M-Pr-FkT" id="vw2-Bl-21S"/>
+                        <outlet property="delegate" destination="i5M-Pr-FkT" id="BVo-qg-B24"/>
                     </connections>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="my3-pI-aW2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="9A3-y6-VnZ"/>
-                <constraint firstItem="my3-pI-aW2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="YAo-4Z-Wsi"/>
-                <constraint firstAttribute="bottom" secondItem="my3-pI-aW2" secondAttribute="bottom" constant="59" id="gdl-Fz-KP2"/>
-                <constraint firstAttribute="trailing" secondItem="my3-pI-aW2" secondAttribute="trailing" id="hSx-2D-w6v"/>
+                <constraint firstAttribute="trailing" secondItem="wLF-We-HHe" secondAttribute="trailing" id="1IA-I3-Jqs"/>
+                <constraint firstItem="wLF-We-HHe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="MQM-MO-q3f"/>
+                <constraint firstItem="wLF-We-HHe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="rf1-J5-nlb"/>
+                <constraint firstAttribute="bottom" secondItem="wLF-We-HHe" secondAttribute="bottom" id="zUv-JD-EMz"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="611.5" y="102.5"/>
+            <point key="canvasLocation" x="1832.5" y="185.5"/>
         </view>
     </objects>
 </document>
