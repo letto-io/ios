@@ -10,38 +10,38 @@ import Foundation
 
 class DateUtil {
     
-    static func date(date: String) -> String {
+    static func date(_ date: String) -> String {
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        let date = dateFormatter.dateFromString(date)
+        let date = dateFormatter.date(from: date)
         
         dateFormatter.dateFormat = "dd/MM/yyyy"
-        let newDate = dateFormatter.stringFromDate(date!)   
+        let newDate = dateFormatter.string(from: date!)   
         
         return newDate
     }
     
-    static func dateAndHour(date: String) -> String {
+    static func dateAndHour(_ date: String) -> String {
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        let date = dateFormatter.dateFromString(date)
+        let date = dateFormatter.date(from: date)
         
         dateFormatter.dateFormat = "dd/MM/yyyy"
-        let newDate = dateFormatter.stringFromDate(date!)
+        let newDate = dateFormatter.string(from: date!)
         
         return newDate
     }
     
-    static func hour(date: String) -> String {
+    static func hour(_ date: String) -> String {
         
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-        let date = dateFormatter.dateFromString(date)
+        let date = dateFormatter.date(from: date)
         
         dateFormatter.dateFormat = "dd/MM - HH:mm"
-        let newDate = dateFormatter.stringFromDate(date!)
+        let newDate = dateFormatter.string(from: date!)
         
         return newDate
     }

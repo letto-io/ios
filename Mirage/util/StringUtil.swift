@@ -15,6 +15,7 @@ class StringUtil {
     static let confirm = "CONFIRMAR"
     static let cancel = "CANCELAR"
     static let edit = "EDITAR"
+    static let Menu = "Menu"
     
     //requisições HTTP
     static let httpPOST = "POST"
@@ -23,19 +24,23 @@ class StringUtil {
     static let httpApplication = "application/json"
     static let httpHeader = "Content-Type"
     static let set_Cookie = "Set-Cookie"
-     static let sessionToken = "x-session-token"
+    static let sessionToken = "x-session-token"
     static let key_Value = "key=value"
     static let value = "value"
     static let error = "error"
     static let error404 = "Erro 404"
     static let error401 = "Erro 401"
+    static let AllError = "Erro! Contate o Administrador"
     
     //nibNames cell
     static let cell = "cell"
     static let InstructionCell = "InstructionCell"
     static let PresentationCell = "PresentationCell"
     static let QuestionCell = "QuestionCell"
+    static let TextAnswerTableViewCell = "TextAnswerTableViewCell"
     static let AnswerCell = "AnswerCell"
+    static let MaterialTableViewCell = "MaterialTableViewCell"
+    static let MenuHeaderTableViewCell = "MenuHeaderTableViewCell"
     
     
     
@@ -53,6 +58,8 @@ class StringUtil {
     
     //InstructionViewController
         static let InstructionViewController = "InstructionViewController"
+        static let Material = "Material"
+        static let material = "material"
         static let titleDiscipline = "Disciplinas"
         static let lectures = "lectures"
         static let lecture = "lecture"
@@ -67,6 +74,12 @@ class StringUtil {
         static let profile  = "profile"
         static let turma = "Turma: "
         static let start = "Início: "
+    
+    //InstructionMaterialViewController
+    static let InstructionMaterialViewController = "InstructionMaterialViewController"
+    static let titleMaterial = "Materiais"
+    static let download = "Materiais"
+    static let upload = "Enviar materias"
     
     //PresentationsTabBarController.swift
         static let presentationsTabBarController = "PresentationsTabBarController"
@@ -137,10 +150,10 @@ class StringUtil {
     
     //CreateNewDoubtViewController.swift
         static let CreateQuestionViewController = "CreateQuestionViewController"
-        static let newDoubtTitle = "Nova Dúvida"
-        static let msgDoubtTextRequired = "Descreva sua dúvida"
-        static let msgNewDoubtConfirm = "Deseja confimar?"
-        static let msgNewDoubtSuccess = "Dúvida cadastrada com sucesso"
+        static let newQuestionTitle = "Nova Dúvida"
+        static let msgQuestionTextRequired = "Descreva sua dúvida"
+        static let msgNewQuestionConfirm = "Deseja confimar?"
+        static let msgNewQuestiontSuccess = "Dúvida cadastrada com sucesso"
     
     
     //DoubtsResponseTabBarViewController.swif
@@ -154,22 +167,22 @@ class StringUtil {
     static let galery = "galery"
     
     //TextDoubtReponseViewController.swift
-    static let textDoubtReponseViewController = "TextDoubtReponseViewController"
+    static let TextAnswerViewController = "TextAnswerViewController"
     static let mcmaterial = "mcmaterial"
-    static let mime = "mime"
+    
     static let msgNoContributions = "Não há contribuições"
     
     
     //AudioDoubtResponseViewController
-    static let AudioDoubtResponseViewController = "AudioDoubtResponseViewController"
+    static let AudioAnswerViewController = "AudioAnswerViewController"
     static let audio = "audio"
     
     //VideoDoubtResponseViewController
-    static let VideoDoubtResponseViewController = "VideoDoubtResponseViewController"
+    static let VideoAnswerViewController = "VideoAnswerViewController"
     static let video = "video"
     
     //AttachmentDoubtResponseViewController
-    static let AttachmentDoubtResponseViewController = "AttachmentDoubtResponseViewController"
+    static let AttachmentAnswerViewController = "AttachmentAnswerViewController"
     static let image = "image"
     static let applicationPdf = "application/pdf"
     static let Anexo = "Anexo"
@@ -185,7 +198,14 @@ class StringUtil {
     static let user_id = "user_id"
     static let user = "user"
     static let email = "email"
-        
+    
+    //Material
+    static let attachable_id = "attachable_id"
+    static let attachable_type = "attachable_type"
+    static let checked = "checked"
+    static let mime = "mime"
+    static let uploaded_at = "uploaded_at"
+    static let url = "url"
         
     
     

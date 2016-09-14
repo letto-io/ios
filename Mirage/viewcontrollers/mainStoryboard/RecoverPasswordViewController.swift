@@ -14,10 +14,11 @@ class RecoverPasswordViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         emailField.delegate = self
-        emailField.keyboardType = UIKeyboardType.ASCIICapable
+        emailField.keyboardType = UIKeyboardType.asciiCapable
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
         
-        let recoverPasswordButton = UIBarButtonItem(image: ImageUtil.imageSaveButton, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(RecoverPasswordViewController.sendButtonTapped))
-        self.navigationItem.setRightBarButtonItem(recoverPasswordButton, animated: true)
+        let saveDoubtButton = UIBarButtonItem(image: ImageUtil.imageSaveButton, style: UIBarButtonItemStyle.plain, target: self, action: #selector(RecoverPasswordViewController.sendButtonTapped))
+        self.navigationItem.setRightBarButton(saveDoubtButton, animated: true)
     }
     
     func sendButtonTapped() {
@@ -25,55 +26,60 @@ class RecoverPasswordViewController: UIViewController, UITextFieldDelegate {
         let email = emailField.text!
         
         if (email.isEmpty) {
-            self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgEmailRequired), animated: true, completion: nil)
+            self.present(DefaultViewController.alertMessage(StringUtil.msgEmailRequired), animated: true, completion: nil)
             return
         }
         
         let JSONObject: [String : AnyObject] = [
-            StringUtil.jsEmail : email,
+            StringUtil.jsEmail : email as AnyObject
         ]
         
-        if NSJSONSerialization.isValidJSONObject(JSONObject) {
-            let request = Server.postRequestParseJSON(Server.recoverPasswordURL, JSONObject: JSONObject)
+        if JSONSerialization.isValidJSONObject(JSONObject) {
+            let request = Server.postRequestParseJSON(Server.url + Server.recoverpassword, JSONObject: JSONObject as AnyObject)
             
-            let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+            let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
                 if error != nil {
                     print(error)
                     return
                 } else {
-                    if let httpResponse = response as? NSHTTPURLResponse, let fields = httpResponse.allHeaderFields as? [String : String] {
-                        let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(fields, forURL: response!.URL!)
-                        NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: response!.URL!, mainDocumentURL: nil)
-                        
+                    if let httpResponse = response as? HTTPURLResponse {
                             if httpResponse.statusCode == 404 {
-                                dispatch_async(dispatch_get_main_queue(), {
-                                    self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgEmailNotFound), animated: true, completion: nil)
+                                DispatchQueue.main.async(execute: {
+                                    self.present(DefaultViewController.alertMessage(StringUtil.msgEmailNotFound), animated: true, completion: nil)
                                 })
                             } else if httpResponse.statusCode == 401 {
-                                dispatch_async(dispatch_get_main_queue(), {
-                                    self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgInvalidEmail), animated: true, completion: nil)
+                                DispatchQueue.main.async(execute: {
+                                    self.present(DefaultViewController.alertMessage(StringUtil.msgInvalidEmail), animated: true, completion: nil)
                                 })
                             } else if httpResponse.statusCode == 200 {
-                                dispatch_async(dispatch_get_main_queue(), {
-                                    self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgSendEmail), animated: true, completion: nil)
+                                DispatchQueue.main.async(execute: {
+                                    self.present(DefaultViewController.alertMessagePushViewController(StringUtil.msgSendEmail, navigationController: self.navigationController!), animated: true, completion: nil)
                                 })
                             }
                         }
-                    print(response)
                 }
-            }
+            }) 
             task.resume()
         }
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         emailField.resignFirstResponder()
     }
     
     //chama função de login através do botão ir do teclado
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         emailField.resignFirstResponder()
         sendButtonTapped()
         return true;
     }
+    
+    override var shouldAutorotate : Bool {
+        return false
+    }
+    
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.portrait
+    }
 }
+

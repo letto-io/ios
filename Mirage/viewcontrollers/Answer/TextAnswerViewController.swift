@@ -15,91 +15,89 @@ class TextAnswerViewController: UIViewController, UITableViewDelegate, UITableVi
     var instruction = Instruction()
     var presentation = Presentation()
     var question = Question()
-    var textContributions = Array<Contributions>()
-    var contributions = Array<Contributions>()
-    
-    func tableViews() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        getDoubtResponse()
-        tableView.reloadData()
-    }
+    var textAnswers = Array<Answer>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViews()
-        DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.AnswerCell, view: view)
+        tableView.delegate = self
+        tableView.dataSource = self
+        getAnswers()
+        tableView.reloadData()
+        DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.TextAnswerTableViewCell, view: view)
         
         refreshControl = UIRefreshControl()
         DefaultViewController.refreshControl(refreshControl, tableView: tableView)
-        refreshControl.addTarget(self, action: #selector(TextAnswerViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(TextAnswerViewController.refresh), for: UIControlEvents.valueChanged)
     }
     
-    override func viewDidAppear(animated: Bool) {
-        tableViews()
+    override func viewDidAppear(_ animated: Bool) {
+        getAnswers()
     }
     
     // pull to refresh
     func refresh() {
-        getDoubtResponse()
+        getAnswers()
         refreshControl.endRefreshing()
-        tableView.reloadData()
     }
     
-    func getDoubtResponse() {
-        let url = Server.getRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(question.id)" + Server.contribution)
+    func getAnswers() {
+        let request = Server.getRequestNew(url: Server.url + Server.questions + "\(question.id)" + Server.answers)
         
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
+        let task = URLSession.shared.dataTask(with: request, completionHandler: {
+            data, response, error in
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                let doubtResponseJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                let answer = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! NSArray
                 
-                if (doubtResponseJSONData.valueForKey(StringUtil.error) != nil) {
-                    return
-                } else {
-                    let contributions : NSArray = doubtResponseJSONData.valueForKey(StringUtil.contributions) as! NSArray
-                    let mcmaterials : NSArray = contributions.valueForKey(StringUtil.mcmaterial) as! NSArray
-                    let persons : NSArray = contributions.valueForKey(StringUtil.person) as! NSArray
+                self.textAnswers = Answer.iterateJSONArray(answer)
+                
+                DispatchQueue.main.async(execute: {
+                    self.tableView.reloadData()
                     
-                    self.contributions = Contributions.iterateJSONArray(contributions, mcmaterials: mcmaterials, persons: persons)
-                }
-                print(doubtResponseJSONData)
+                })
             }
-        })
+        }) 
         task.resume()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return textAnswers.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! TextAnswerTableViewCell
         
-        textContributions.removeAll()
+        let answer = textAnswers[ (indexPath as NSIndexPath).row ]
         
-        var auxContributions = Array<Contributions>()
-        
-        for i in 0 ..< contributions.count {
-            var j = 0
-            
-            if contributions[i].text == "" {
-                auxContributions.insert(contributions[i], atIndex: j)
-                j += 1
-            }
+        if instruction.profile == 1 {
+            cell.upvoteButton.isEnabled = false
+            cell.downvoteButton.isEnabled = false
+            cell.acceptButton.isEnabled = false
         }
-        textContributions = auxContributions
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return textContributions.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cell, forIndexPath: indexPath) as! AnswerCell
         
-        let doubtResponse = textContributions[ indexPath.row ]
+        cell.textAnswerLabel.text = answer.text
+        cell.countVotesLabel.text = String(answer.upvotes)
         
-        cell.textName.text = doubtResponse.mcmaterial.name
+        cell.upvoteButton.setImage(ImageUtil.imageUpvote, for: UIControlState())
+        cell.upvoteButton.tintColor = UIColor.gray
+        
+        cell.downvoteButton.setImage(ImageUtil.imageDownvote, for: UIControlState())
+        cell.downvoteButton.tintColor = UIColor.gray
+        
+        cell.acceptButton.setImage(ImageUtil.imageAccept, for: UIControlState())
+        cell.acceptButton.tintColor = UIColor.gray
+        
+        if answer.accepted == true {
+            cell.acceptButton.setImage(ImageUtil.imageAccept, for: UIControlState())
+            cell.acceptButton.tintColor = UIColor.green
+        }
         
         return cell
     }
     
     init() {
-        super.init(nibName: StringUtil.textDoubtReponseViewController, bundle: nil)
+        super.init(nibName: StringUtil.TextAnswerViewController, bundle: nil)
     }
     
     required init(coder aDecoder: NSCoder) {

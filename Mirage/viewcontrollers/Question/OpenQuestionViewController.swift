@@ -18,74 +18,72 @@ class OpenQuestionViewController: UIViewController, UITableViewDelegate, UITable
     var questions  = Array<Question>()
     var openQuestions  = Array<Question>()
     
-    func tableViews() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         getDoubt()
-        tableView.reloadData()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableViews()
         DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.QuestionCell, view: view)
         
         refreshControl = UIRefreshControl()
         DefaultViewController.refreshControl(refreshControl, tableView: tableView)
-        refreshControl.addTarget(self, action: #selector(OpenQuestionViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(OpenQuestionViewController.refresh), for: UIControlEvents.valueChanged)
     }
     
-    override func viewDidAppear(animated: Bool) {
-        tableViews()
+    override func viewDidAppear(_ animated: Bool) {
+        getDoubt()
     }
     
     // pull to refresh
     func refresh() {
         getDoubt()
         refreshControl.endRefreshing()
-        tableView.reloadData()
     }
     
     func getDoubt() {
-        let request = Server.getRequestNew(Server.url + Server.presentations + "\(presentation.id)" + Server.questions)
+        let request = Server.getRequestNew(url: Server.url + Server.presentations + "\(presentation.id)" + Server.questions)
         
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+        let task = URLSession.shared.dataTask(with: request, completionHandler: {
             data, response, error in
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                let question = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSArray
-                let presentation = question.valueForKey(StringUtil.presentation) as! NSArray
-                let person = question.valueForKey(StringUtil.person) as! NSArray
+                let question = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! NSArray
+                let presentation = question.value(forKey: StringUtil.presentation) as! NSArray
+                let person = question.value(forKey: StringUtil.person) as! NSArray
                 
                 self.questions = Question.iterateJSONArray(question, presentation: presentation, person: person)
+                
+                self.openQuestions.removeAll()
+                
+                var auxQuestion = Array<Question>()
+                
+                for i in 0 ..< self.questions.count {
+                    var j = 0
+                    
+                    if self.questions[i].answered == false {
+                        auxQuestion.insert(self.questions[i], at: j)
+                        j += 1
+                    }
+                }
+                self.openQuestions = auxQuestion.sorted(by: { $0.created_at > $1.created_at })
+                
+                DispatchQueue.main.async(execute: {
+                    self.tableView.reloadData()
+                })
             }
-        }
+        }) 
         task.resume()
-        
-        openQuestions.removeAll()
-    
-        var auxQuestion = Array<Question>()
-        
-        for i in 0 ..< questions.count {
-            var j = 0
-            
-            if questions[i].answered == false {
-                auxQuestion.insert(questions[i], atIndex: j)
-                j += 1
-            }
-        }
-        openQuestions = auxQuestion.sort({ $0.created_at > $1.created_at })
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return openQuestions.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cell, forIndexPath: indexPath) as! QuestionCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! QuestionCell
         
-        let question = openQuestions[ indexPath.row ]
+        let question = openQuestions[ (indexPath as NSIndexPath).row ]
         
         if question.anonymous == false {
             cell.nameLabel.text = question.person.name
@@ -95,41 +93,41 @@ class OpenQuestionViewController: UIViewController, UITableViewDelegate, UITable
         cell.textDoubtLabel.text = question.text
         cell.hourLabel.text = DateUtil.hour(question.created_at)
         cell.countLikesLabel.text = String(question.upvotes)
-        cell.likeButton.setImage(ImageUtil.imageLikeButton, forState: .Normal)
+        cell.likeButton.setImage(ImageUtil.imageLikeButton, for: UIControlState())
         cell.likeButton.tintColor = ColorUtil.orangeColor
         
         if instruction.profile == 1 || question.answered == true {
-            cell.likeButton.enabled = false
+            cell.likeButton.isEnabled = false
         }
         
         if question.has_answer == true && question.answered == false {
             let imageAnswer = ImageUtil.imageAnswer
             cell.answerImageView.image = imageAnswer
-            cell.answerImageView.tintColor = UIColor.grayColor()
+            cell.answerImageView.tintColor = UIColor.gray
         } else if question.has_answer == true && question.answered == true {
             let imageAnswered = ImageUtil.imageAnswered
             cell.answerImageView.image = imageAnswered
-            cell.answerImageView.tintColor = UIColor.orangeColor()
+            cell.answerImageView.tintColor = UIColor.orange
         } else {
             cell.answerImageView.image = nil
         }
         
         //passagem de id para url de like na dúvida
-        cell.likeButton.tag = openQuestions[ indexPath.row ].id
+        cell.likeButton.tag = openQuestions[ (indexPath as NSIndexPath).row ].id
         
         if question.my_vote == 0 {
-            cell.likeButton.addTarget(self, action: #selector(OpenQuestionViewController.likeButtonPressed), forControlEvents: .TouchUpInside)
-            cell.likeButton.setImage(ImageUtil.imageLikeButton, forState: .Normal)
-            cell.likeButton.tintColor = UIColor.grayColor()
+            cell.likeButton.addTarget(self, action: #selector(OpenQuestionViewController.likeButtonPressed), for: .touchUpInside)
+            cell.likeButton.setImage(ImageUtil.imageLikeButton, for: UIControlState())
+            cell.likeButton.tintColor = UIColor.gray
         } else {
-            cell.likeButton.addTarget(self, action: #selector(OpenQuestionViewController.deleteLikeButtonPressed), forControlEvents: .TouchUpInside)
+            cell.likeButton.addTarget(self, action: #selector(OpenQuestionViewController.deleteLikeButtonPressed), for: .touchUpInside)
         }
         
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        question = openQuestions[ indexPath.row ]
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        question = openQuestions[ (indexPath as NSIndexPath).row ]
         
         let answer = AnswersTabBarViewController()
         answer.instruction = instruction
@@ -139,34 +137,34 @@ class OpenQuestionViewController: UIViewController, UITableViewDelegate, UITable
         self.navigationController?.pushViewController(answer, animated: true)
     }
     
-    func likeButtonPressed(sender: UIButton) {
+    func likeButtonPressed(_ sender: UIButton) {
         let request = Server.postRequestSendToken(Server.url + Server.questions + "\(sender.tag)" + Server.upvote)
         
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
             if error != nil {
                 print(error)
                 return
             } else {
-                if let httpResponse = response as? NSHTTPURLResponse {
+                if let httpResponse = response as? HTTPURLResponse {
                     if httpResponse.statusCode == 404 {
-                        dispatch_async(dispatch_get_main_queue(), {
-                            self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgErrorRequest), animated: true, completion: nil)
+                        DispatchQueue.main.async(execute: {
+                            self.present(DefaultViewController.alertMessage(StringUtil.msgErrorRequest), animated: true, completion: nil)
                         })
                     } else if httpResponse.statusCode == 200 {
-                        dispatch_async(dispatch_get_main_queue(), {
-                            self.viewDidAppear(true)
+                        DispatchQueue.main.async(execute: {
+                            self.getDoubt()
                         })
                     }
                 }
             }
-        }
+        }) 
         task.resume()
         
         self.viewDidAppear(true)
     }
     
     func deleteLikeButtonPressed() {
-        self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgQuestionRanked), animated: true, completion: nil)
+        self.present(DefaultViewController.alertMessage(StringUtil.msgQuestionRanked), animated: true, completion: nil)
     }
     
     init() {

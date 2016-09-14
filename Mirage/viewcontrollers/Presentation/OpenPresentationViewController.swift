@@ -17,21 +17,16 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
     var presentations = Array<Presentation>()
     var openPresentation = Array<Presentation>()
     
-    func tableViews() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         getPresentation()
-        tableView.reloadData()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableViews()
         DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.PresentationCell, view: view)
         
         refreshControl = UIRefreshControl()
         DefaultViewController.refreshControl(refreshControl, tableView: tableView)
-        refreshControl.addTarget(self, action: #selector(OpenPresentationViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(OpenPresentationViewController.refresh), for: UIControlEvents.valueChanged)
         
         //verifica se é um perfil de professor para fechar apresentações
         if instruction.profile == 1 {
@@ -40,18 +35,18 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
 
-    override func viewDidAppear(animated: Bool) {
-        tableViews()
+    override func viewDidAppear(_ animated: Bool) {
+        getPresentation()
     }
     
     //chama displayAlert para fechar apresentação
-    func longPress(longPressGestureRecognizer: UILongPressGestureRecognizer) {
-        if longPressGestureRecognizer.state == UIGestureRecognizerState.Began {
-            let touchPoint = longPressGestureRecognizer.locationInView(self.tableView)
+    func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
+        if longPressGestureRecognizer.state == UIGestureRecognizerState.began {
+            let touchPoint = longPressGestureRecognizer.location(in: self.tableView)
             
-            if let indexPah = tableView.indexPathForRowAtPoint(touchPoint) {
-                let id  = openPresentation[ indexPah.row ].id
-                let subject  = openPresentation[ indexPah.row ].subject
+            if let indexPah = tableView.indexPathForRow(at: touchPoint) {
+                let id  = openPresentation[ (indexPah as NSIndexPath).row ].id
+                let subject  = openPresentation[ (indexPah as NSIndexPath).row ].subject
                 
                 alertMessageClosedPresentation(StringUtil.msgClosePresentation, subject: subject, id: id)
             }
@@ -62,48 +57,51 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
     func refresh() {
         getPresentation()
         refreshControl.endRefreshing()
-        tableView.reloadData()
     }
     
     func getPresentation() {
-        let request = Server.getRequestNew(Server.url + Server.instructions + "\(instruction.id)" + Server.presentations)
+        let request = Server.getRequestNew(url: Server.url + Server.instructions + "\(instruction.id)" + Server.presentations)
         
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+        let task = URLSession.shared.dataTask(with: request, completionHandler: {
             data, response, error in
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                let presentation = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSArray
-                let instruction : NSArray =  presentation.valueForKey(StringUtil.instruction) as! NSArray
-                let person : NSArray = presentation.valueForKey(StringUtil.person) as! NSArray
+                let presentation = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! NSArray
+                let instruction : NSArray =  presentation.value(forKey: StringUtil.instruction) as! NSArray
+                let person : NSArray = presentation.value(forKey: StringUtil.person) as! NSArray
                 
                 self.presentations = Presentation.iterateJSONArray(presentation, instruction: instruction, person: person)
+                
+                self.openPresentation.removeAll()
+                
+                var auxPresent = Array<Presentation>()
+                
+                for i in 0 ..< self.presentations.count {
+                    var j = 0
+                    
+                    if self.presentations[i].status == 0 {
+                        auxPresent.insert(self.presentations[i], at: j)
+                        j += 1
+                    }
+                }
+                self.openPresentation = auxPresent.reversed()
+                
+                DispatchQueue.main.async(execute: {
+                    self.tableView.reloadData()
+                })
             }
-        }
+        }) 
         task.resume()
-        
-        openPresentation.removeAll()
-        
-        var auxPresent = Array<Presentation>()
-        
-        for i in 0 ..< presentations.count {
-            var j = 0
-            
-            if presentations[i].status == 0 {
-                auxPresent.insert(presentations[i], atIndex: j)
-                j += 1
-            }
-        }
-        openPresentation = auxPresent.reverse()
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return openPresentation.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cell, forIndexPath: indexPath) as! PresentationCell
-        let present = openPresentation[ indexPath.row ]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! PresentationCell
+        let present = openPresentation[ (indexPath as NSIndexPath).row ]
         
         cell.subjectLabel.text = present.subject
         cell.dateLabel.text = DateUtil.dateAndHour(present.created_at)
@@ -111,8 +109,8 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        presentation = openPresentation[ indexPath.row ]
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presentation = openPresentation[ (indexPath as NSIndexPath).row ]
         
         let questionTabBar = QuestionsTabBarViewController()
         questionTabBar.instruction = instruction
@@ -122,47 +120,45 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     //exibe mensagens de alerta
-    func alertMessageClosedPresentation(userMessage: String, subject: String, id: Int) {
+    func alertMessageClosedPresentation(_ userMessage: String, subject: String, id: Int) {
         let myAlert = UIAlertController(title: subject, message: userMessage, preferredStyle:
-            UIAlertControllerStyle.Alert)
+            UIAlertControllerStyle.alert)
         
-        let okAction: UIAlertAction = UIAlertAction(title: StringUtil.confirm, style: .Destructive) { action -> Void in
+        let okAction: UIAlertAction = UIAlertAction(title: StringUtil.confirm, style: .destructive) { action -> Void in
             let request = Server.postRequestSendToken(Server.url + Server.presentations + "\(id)" + Server.close)
             
-            let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+            let task = URLSession.shared.dataTask(with: request, completionHandler: {
                 data, response, error in
                 
                 if error != nil {
                     print(error)
                     return
                 } else {
-                    if let httpResponse = response as? NSHTTPURLResponse, let fields = httpResponse.allHeaderFields as? [String : String] {
-                        let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(fields, forURL: response!.URL!)
-                        NSHTTPCookieStorage.sharedHTTPCookieStorage().setCookies(cookies, forURL: response!.URL!, mainDocumentURL: nil)
+                    if let httpResponse = response as? HTTPURLResponse, let fields = httpResponse.allHeaderFields as? [String : String] {
+                        let cookies = HTTPCookie.cookies(withResponseHeaderFields: fields, for: response!.url!)
+                        HTTPCookieStorage.shared.setCookies(cookies, for: response!.url!, mainDocumentURL: nil)
                         
                         if httpResponse.statusCode == 404 {
                             
                         } else if httpResponse.statusCode == 401 {
                             
                         } else if httpResponse.statusCode == 200 {
-                            dispatch_async(dispatch_get_main_queue(), {
-                                self.viewDidAppear(true)
+                            DispatchQueue.main.async(execute: {
+                                self.getPresentation()
                             })
                         }
                     }
                 }
-            }
+            }) 
             task.resume()
         }
         
-        let cancelAction: UIAlertAction = UIAlertAction(title: StringUtil.cancel, style: .Cancel) { action -> Void in
-
-        }
+        let cancelAction = UIAlertAction(title: StringUtil.cancel, style: UIAlertActionStyle.cancel, handler: nil)
         
         myAlert.addAction(okAction)
         myAlert.addAction(cancelAction)
         
-        self.presentViewController(myAlert, animated: true, completion: nil)
+        self.present(myAlert, animated: true, completion: nil)
     }
     
     init() {

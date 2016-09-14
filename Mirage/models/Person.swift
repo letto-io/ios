@@ -12,26 +12,25 @@ class Person: NSObject {
     
     var id = Int()
     var name = String()
-    var user = User()
+    var email = String()
     var profile = Int()
     
-    static func parsePersonJSON(person: NSDictionary, user: NSObject) -> Person {
+    static func parsePersonJSON(_ person: NSDictionary) -> Person {
         let prsn = Person()
         
-        prsn.id = person.valueForKey(StringUtil.id) as! Int
-        prsn.name = person.valueForKey(StringUtil.name) as! String
-        prsn.user.id = user.valueForKey(StringUtil.id) as! Int
-        prsn.user.email = user.valueForKey(StringUtil.email) as! String
+        prsn.id = person.value(forKey: StringUtil.id) as! Int
+        prsn.name = person.value(forKey: StringUtil.name) as! String
+        prsn.email = person.value(forKey: StringUtil.email) as! String
         
         return prsn
     }
     
-    static func parseUserProfileJSON(profile: NSDictionary, person: NSObject) -> Person {
+    static func parseUserProfileJSON(_ profile: NSDictionary, person: NSObject) -> Person {
         let prsn = Person()
         
-        prsn.id = person.valueForKey(StringUtil.id) as! Int
-        prsn.name = person.valueForKey(StringUtil.name) as! String
-        prsn.profile = profile.valueForKey(StringUtil.profile) as! Int
+        prsn.id = person.value(forKey: StringUtil.id) as! Int
+        prsn.name = person.value(forKey: StringUtil.name) as! String
+        prsn.profile = profile.value(forKey: StringUtil.profile) as! Int
         
         return prsn
     }

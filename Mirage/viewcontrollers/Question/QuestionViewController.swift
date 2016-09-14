@@ -18,71 +18,61 @@ class QuestionViewController: UIViewController, UITableViewDelegate, UITableView
     var questions = Array<Question>()
     var orderedQuestions = Array<Question>()
     
-    func tableViews() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         getDoubt()
-        tableView.reloadData()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableViews()
         DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.QuestionCell, view: view)
         
         refreshControl = UIRefreshControl()
         DefaultViewController.refreshControl(refreshControl, tableView: tableView)
-        refreshControl.addTarget(self, action: #selector(QuestionViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(QuestionViewController.refresh), for: UIControlEvents.valueChanged)
     }
     
-    override func viewDidAppear(animated: Bool) {
-        tableViews()
+    override func viewDidAppear(_ animated: Bool) {
+        getDoubt()
     }
 
     // pull to refresh
     func refresh() {
         getDoubt()
         refreshControl.endRefreshing()
-        tableView.reloadData()
     }
     
    func getDoubt() {
-    let request = Server.getRequestNew(Server.url + Server.presentations + "\(presentation.id)" + Server.questions)
-        
-    let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
-        data, response, error in
-        if (error != nil) {
-            print(error!.localizedDescription)
-        } else {
-            let question = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSArray
-            let presentation = question.valueForKey(StringUtil.presentation) as! NSArray
-            let person = question.valueForKey(StringUtil.person) as! NSArray
+        let request = Server.getRequestNew(url: Server.url + Server.presentations + "\(presentation.id)" + Server.questions)
             
-            self.questions = Question.iterateJSONArray(question, presentation: presentation, person: person)
+        let task = URLSession.shared.dataTask(with: request) {
+            data, response, error in
+            if (error != nil) {
+                print(error!.localizedDescription)
+            } else {
+                let question = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! NSArray
+                let presentation = question.value(forKey: StringUtil.presentation) as! NSArray
+                let person = question.value(forKey: StringUtil.person) as! NSArray
+                
+                self.questions = Question.iterateJSONArray(question, presentation: presentation, person: person)
+                self.questions.sort(by: { $0.created_at > $1.created_at })
+
+                DispatchQueue.main.async(execute: {
+                    self.tableView.reloadData()
+                    
+                })
             }
         }
         task.resume()
     
-        orderedQuestions.removeAll()
-
-        var auxQuestion = Array<Question>()
-
-        for i in 0 ..< questions.count {
-            var j = 0
-            auxQuestion.insert(questions[i], atIndex: j)
-            j += 1
-        }
-        orderedQuestions = auxQuestion.sort({ $0.created_at > $1.created_at })
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return orderedQuestions.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return questions.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cell, forIndexPath: indexPath) as! QuestionCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! QuestionCell
         
-        let question = orderedQuestions[ indexPath.row ]
+        let question = questions[ (indexPath as NSIndexPath).row ]
         
         if question.anonymous == false {
             cell.nameLabel.text = question.person.name
@@ -92,41 +82,41 @@ class QuestionViewController: UIViewController, UITableViewDelegate, UITableView
         cell.textDoubtLabel.text = question.text
         cell.hourLabel.text = DateUtil.hour(question.created_at)
         cell.countLikesLabel.text = String(question.upvotes)
-        cell.likeButton.setImage(ImageUtil.imageLikeButton, forState: .Normal)
+        cell.likeButton.setImage(ImageUtil.imageLikeButton, for: UIControlState())
         cell.likeButton.tintColor = ColorUtil.orangeColor
         
         if instruction.profile == 1 {
-            cell.likeButton.enabled = false
+            cell.likeButton.isEnabled = false
         }
 
         if question.has_answer == true && question.answered == false{
             let imageAnswer = ImageUtil.imageAnswer
             cell.answerImageView.image = imageAnswer
-            cell.answerImageView.tintColor = UIColor.grayColor()
+            cell.answerImageView.tintColor = UIColor.gray
         } else if question.has_answer == true && question.answered == true {
             let imageAnswered = ImageUtil.imageAnswered
             cell.answerImageView.image = imageAnswered
-            cell.answerImageView.tintColor = UIColor.orangeColor()
+            cell.answerImageView.tintColor = UIColor.orange
         } else {
             cell.answerImageView.image = nil
         }
         
         //passagem de id para url de like na dúvida
-        cell.likeButton.tag = orderedQuestions[ indexPath.row ].id
+        cell.likeButton.tag = questions[ (indexPath as NSIndexPath).row ].id
         
         if question.my_vote == 0 {
-            cell.likeButton.addTarget(self, action: #selector(QuestionViewController.likeButtonPressed), forControlEvents: .TouchUpInside)
-            cell.likeButton.setImage(ImageUtil.imageLikeButton, forState: .Normal)
-            cell.likeButton.tintColor = UIColor.grayColor()
+            cell.likeButton.addTarget(self, action: #selector(QuestionViewController.likeButtonPressed), for: .touchUpInside)
+            cell.likeButton.setImage(ImageUtil.imageLikeButton, for: UIControlState())
+            cell.likeButton.tintColor = UIColor.gray
         } else {
-            cell.likeButton.addTarget(self, action: #selector(QuestionViewController.deleteLikeButtonPressed), forControlEvents: .TouchUpInside)
+            cell.likeButton.addTarget(self, action: #selector(QuestionViewController.deleteLikeButtonPressed), for: .touchUpInside)
         }
         
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        question = orderedQuestions[ indexPath.row ]
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        question = questions[ (indexPath as NSIndexPath).row ]
         
         let answer = AnswersTabBarViewController()
         answer.instruction = instruction
@@ -136,22 +126,22 @@ class QuestionViewController: UIViewController, UITableViewDelegate, UITableView
         self.navigationController?.pushViewController(answer, animated: true)
     }
     
-    func likeButtonPressed(sender: UIButton) {
+    func likeButtonPressed(_ sender: UIButton) {
         let request = Server.postRequestSendToken(Server.url + Server.questions + "\(sender.tag)" + Server.upvote)
         
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if error != nil {
                 print(error)
                 return
             } else {
-                if let httpResponse = response as? NSHTTPURLResponse {
+                if let httpResponse = response as? HTTPURLResponse {
                     if httpResponse.statusCode == 404 {
-                        dispatch_async(dispatch_get_main_queue(), {
-                            self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgErrorRequest), animated: true, completion: nil)
+                        DispatchQueue.main.async(execute: {
+                            self.present(DefaultViewController.alertMessage(StringUtil.msgErrorRequest), animated: true, completion: nil)
                         })
                     } else if httpResponse.statusCode == 200 {
-                        dispatch_async(dispatch_get_main_queue(), {
-                            self.viewDidAppear(true)
+                        DispatchQueue.main.async(execute: {
+                            self.getDoubt()
                         })
                     }
                 }
@@ -159,11 +149,10 @@ class QuestionViewController: UIViewController, UITableViewDelegate, UITableView
         }
         task.resume()
         
-        self.viewDidAppear(true)
     }
     
     func deleteLikeButtonPressed() {
-        self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgQuestionRanked), animated: true, completion: nil)
+        self.present(DefaultViewController.alertMessage(StringUtil.msgQuestionRanked), animated: true, completion: nil)
     }
     
     init() {

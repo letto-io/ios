@@ -19,34 +19,44 @@ class QuestionsTabBarViewController: UITabBarController, UITabBarControllerDeleg
         delegate = self
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = presentation.subject
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style:.Plain, target:nil, action:nil)
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style:.plain, target:nil, action:nil)
         
         let item1 = question()
-        let item2 = openQuestion()
-        let item3 = closedQuestion()
-        let item4 = rankingQuestion()
-        
+        let item2 = rankingQuestion()
+        let item3 = openQuestion()
+        let item4 = closedQuestion()
         
         let icon1 = UITabBarItem(title: StringUtil.all, image: ImageUtil.imageAllBlack, selectedImage: ImageUtil.imageAllWhite)
         item1.tabBarItem = icon1
-        let icon2 = UITabBarItem(title: StringUtil.open, image: ImageUtil.imageOpenBlack, selectedImage: ImageUtil.imageOpenWhite)
+        let icon2 = UITabBarItem(title: StringUtil.ranking, image: ImageUtil.imageRankingBlack, selectedImage: ImageUtil.imageRankingWhite)
         item2.tabBarItem = icon2
-        let icon3 = UITabBarItem(title: StringUtil.closed, image: ImageUtil.imageClosedBlack, selectedImage: ImageUtil.imageClosedWhite)
+        let icon3 = UITabBarItem(title: StringUtil.open, image: ImageUtil.imageOpenBlack, selectedImage: ImageUtil.imageOpenWhite)
         item3.tabBarItem = icon3
-        let icon4 = UITabBarItem(title: StringUtil.ranking, image: ImageUtil.imageRankingBlack, selectedImage: ImageUtil.imageRankingWhite)
+        let icon4 = UITabBarItem(title: StringUtil.closed, image: ImageUtil.imageClosedBlack, selectedImage: ImageUtil.imageClosedWhite)
         item4.tabBarItem = icon4
+        
         
         let controllers = [item1, item2, item3, item4]  //array of the root view controllers displayed by the tab bar interface
         self.viewControllers = controllers
         
-        //verifica se é um perfil de aluno para postar novas duvidas
-        if instruction.profile == 0 {
-            let newDoubtButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(QuestionsTabBarViewController.createQuestion))
-            newDoubtButton.tintColor = ColorUtil.orangeColor
+        //verifica se é um perfil de aluno para postar novas duvidas e se a apresentação esta aberta
+        if instruction.profile == 0 && presentation.status == 0 {
+            let studentMenuButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(QuestionsTabBarViewController.menuStudent))
+            studentMenuButton.tintColor = ColorUtil.orangeColor
             
-            self.navigationItem.setRightBarButtonItem(newDoubtButton, animated: true)
+            self.navigationItem.setRightBarButton(studentMenuButton, animated: true)
+        } else if instruction.profile == 0 && presentation.status == 1 {
+            let studentMenuButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(QuestionsTabBarViewController.menuStudentNotCreateQuestion))
+            studentMenuButton.tintColor = ColorUtil.orangeColor
+            
+            self.navigationItem.setRightBarButton(studentMenuButton, animated: true)
+        }else if instruction.profile == 1 {
+            let teacherMenuButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(QuestionsTabBarViewController.menuTeacher))
+            teacherMenuButton.tintColor = ColorUtil.orangeColor
+            
+            self.navigationItem.setRightBarButton(teacherMenuButton, animated: true)
         }
     }
     
@@ -54,16 +64,22 @@ class QuestionsTabBarViewController: UITabBarController, UITabBarControllerDeleg
         let item1 = QuestionViewController()
         item1.instruction = instruction
         item1.presentation = presentation
-        item1.getDoubt()
         
         return item1
+    }
+    
+    func rankingQuestion() -> RankingQuestionViewController {
+        let item4 = RankingQuestionViewController()
+        item4.instruction = instruction
+        item4.presentation = presentation
+        
+        return item4
     }
     
     func openQuestion() -> OpenQuestionViewController {
         let item2 = OpenQuestionViewController()
         item2.instruction = instruction
         item2.presentation = presentation
-        item2.getDoubt()
         
         return item2
     }
@@ -72,31 +88,87 @@ class QuestionsTabBarViewController: UITabBarController, UITabBarControllerDeleg
         let item3 = ClosedQuestionViewController()
         item3.instruction = instruction
         item3.presentation = presentation
-        item3.getDoubt()
         
         return item3
     }
     
-    func rankingQuestion() -> RankingQuestionViewController {
-        let item4 = RankingQuestionViewController()
-        item4.instruction = instruction
-        item4.presentation = presentation
-        item4.getDoubt()
+    func menuTeacher() {
+        let myAlert = UIAlertController(title: presentation.subject, message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
         
-        return item4
+        let downloadMaterialAction: UIAlertAction = UIAlertAction(title: StringUtil.download, style: .default) { action -> Void in
+            let material = PresentationMaterialViewController()
+            material.presentation = self.presentation
+            
+            self.navigationController?.pushViewController(material, animated: true)
+        }
+        
+        let uploadMaterialAction: UIAlertAction = UIAlertAction(title: StringUtil.upload, style: .default) { action -> Void in
+            
+        }
+        
+        
+        let cancelAction: UIAlertAction = UIAlertAction(title: StringUtil.cancel, style: .cancel) { action -> Void in
+            
+        }
+        
+        myAlert.addAction(downloadMaterialAction)
+        myAlert.addAction(uploadMaterialAction)
+        myAlert.addAction(cancelAction)
+        
+        self.present(myAlert, animated: true, completion: nil)
     }
     
-    //postar nova duvida
-    func createQuestion() {
-        let newDoubt = CreateQuestionViewController(delegate: self)
-        newDoubt.instruction = instruction
-        newDoubt.presentation = presentation
+    func menuStudent() {
+        let myAlert = UIAlertController(title: presentation.subject, message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
         
-        self.navigationController?.pushViewController(newDoubt, animated: true)
+        let createQuestionAction: UIAlertAction = UIAlertAction(title: StringUtil.newQuestionTitle, style: .default) { action -> Void in
+            let newDoubt = CreateQuestionViewController(delegate: self)
+            newDoubt.instruction = self.instruction
+            newDoubt.presentation = self.presentation
+            
+            self.navigationController?.pushViewController(newDoubt, animated: true)
+        }
+        
+        let downloadMaterialAction: UIAlertAction = UIAlertAction(title: StringUtil.download, style: .default) { action -> Void in
+            let material = PresentationMaterialViewController()
+            material.presentation = self.presentation
+            
+            self.navigationController?.pushViewController(material, animated: true)
+        }
+        
+        let cancelAction: UIAlertAction = UIAlertAction(title: StringUtil.cancel, style: .cancel) { action -> Void in
+            
+        }
+        
+        myAlert.addAction(createQuestionAction)
+        myAlert.addAction(downloadMaterialAction)
+        myAlert.addAction(cancelAction)
+        
+        self.present(myAlert, animated: true, completion: nil)
+    }
+    
+    func menuStudentNotCreateQuestion() {
+        let myAlert = UIAlertController(title: presentation.subject, message: "", preferredStyle: UIAlertControllerStyle.actionSheet)
+        
+        let downloadMaterialAction: UIAlertAction = UIAlertAction(title: StringUtil.download, style: .default) { action -> Void in
+            let material = PresentationMaterialViewController()
+            material.presentation = self.presentation
+            
+            self.navigationController?.pushViewController(material, animated: true)
+        }
+        
+        let cancelAction: UIAlertAction = UIAlertAction(title: StringUtil.cancel, style: .cancel) { action -> Void in
+            
+        }
+        
+        myAlert.addAction(downloadMaterialAction)
+        myAlert.addAction(cancelAction)
+        
+        self.present(myAlert, animated: true, completion: nil)
     }
 
     //Delegate methods
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         return true;
     }
     
@@ -107,5 +179,4 @@ class QuestionsTabBarViewController: UITabBarController, UITabBarControllerDeleg
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
-
 }

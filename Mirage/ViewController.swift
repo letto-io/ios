@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: ChildViewController, UITextFieldDelegate {
     
     @IBOutlet weak var userField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
@@ -18,11 +18,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         userField.delegate = self
-        userField.keyboardType = UIKeyboardType.ASCIICapable
+        userField.keyboardType = UIKeyboardType.asciiCapable
         passwordField.delegate = self
-        passwordField.keyboardType = UIKeyboardType.ASCIICapable
+        passwordField.keyboardType = UIKeyboardType.asciiCapable
         
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
     }
 
     @IBAction func loginButtonTapped() {
@@ -31,85 +31,79 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let password = passwordField.text!
         
         if (email.isEmpty && password.isEmpty) {
-            self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgEmailPasswordRequired), animated: true, completion: nil)
+            self.present(DefaultViewController.alertMessage(StringUtil.msgEmailPasswordRequired), animated: true, completion: nil)
             return
         } else if (email.isEmpty) {
-            self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgEmailRequired), animated: true, completion: nil)
+            self.present(DefaultViewController.alertMessage(StringUtil.msgEmailRequired), animated: true, completion: nil)
             return
         } else if (password.isEmpty) {
-            self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgPasswordRequired), animated: true, completion: nil)
+            self.present(DefaultViewController.alertMessage(StringUtil.msgPasswordRequired), animated: true, completion: nil)
             return
         }
         
         let JSONObject: [String : AnyObject] = [
-            StringUtil.jsEmail : email,
-            StringUtil.jsPassord : password
+            StringUtil.jsEmail : email as AnyObject,
+            StringUtil.jsPassord : password as AnyObject
         ]
         
-        if NSJSONSerialization.isValidJSONObject(JSONObject) {
-            let request  = Server.postRequestParseJSON(Server.url + Server.session, JSONObject: JSONObject)
-    
-            let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+        if JSONSerialization.isValidJSONObject(JSONObject) {
+            let request  = Server.postRequestParseJSON(Server.url + Server.session, JSONObject: JSONObject as AnyObject)
+
+            let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
                 if error != nil {
                     print(error)
                     return
                 } else {
-                    if let httpResponse = response as? NSHTTPURLResponse {
+                    if let httpResponse = response as? HTTPURLResponse {
                         if httpResponse.statusCode == 401 {
-                            dispatch_async(dispatch_get_main_queue(), {
-                                self.presentViewController(DefaultViewController.alertMessage(StringUtil.msgEmailPasswordIncorrect), animated: true, completion: nil)
+                            DispatchQueue.main.async(execute: {
+                                self.present(DefaultViewController.alertMessage(StringUtil.msgEmailPasswordIncorrect), animated: true, completion: nil)
                             })
                         } else if httpResponse.statusCode == 201 {
-                            let loginJSONData =  try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
-                            self.login = Login.iterateJSONArray(loginJSONData)
-                            Server.token = self.login.token
+                            let session =  try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary
+                            let person = session.value(forKey: StringUtil.person) as! NSDictionary
                             
-                            dispatch_async(dispatch_get_main_queue(), {
-                                self.getPerson()
-                                self.performSegueWithIdentifier(StringUtil.instructionView, sender: self)
+                            self.login = Login.iterateJSONArray(session, person: person)
+                            Server.token = self.login.token
+                            TableViewMenuController.person = Person.parsePersonJSON(person)
+                            
+                            DispatchQueue.main.async(execute: {
+                                self.performSegue(withIdentifier: StringUtil.instructionView, sender: self)
+                            })
+                        } else {
+                            DispatchQueue.main.async(execute: {
+                                self.present(DefaultViewController.alertMessage(StringUtil.AllError), animated: true, completion: nil)
                             })
                         }
                     }
             }
-        }
+        }) 
         task.resume()
     }
-    }
-    
-    func getPerson() {
-        let request = Server.getRequestNew(Server.url + Server.person)
-        
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
-            data, response, error in
-            
-            do {
-                let person = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as! NSDictionary
-                let user = person.valueForKey(StringUtil.user) as! NSObject
-                
-                MenuTableViewController.person = Person.parsePersonJSON(person, user: user)
-                
-            } catch let error as NSError {
-                print(error.localizedDescription)
-            }
-        }
-        task.resume()
     }
 
-    
     //esconde teclado ao tocar em alguma parte da tela
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         userField.resignFirstResponder()
         passwordField.resignFirstResponder()
     }
     
     //chama função de login através do botão ir do teclado
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        userField.resignFirstResponder()
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        passwordField.resignFirstResponder()
         
         if passwordField.becomeFirstResponder() {
             loginButtonTapped()
         }
         return true;
+    }
+    
+    override var shouldAutorotate : Bool {
+        return false
+    }
+    
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.portrait
     }
 }
 

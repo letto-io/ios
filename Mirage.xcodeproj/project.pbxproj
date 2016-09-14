@@ -28,26 +28,34 @@
 		85D8DABD1CD104780069C6CE /* PresentationsTabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 85D8DABC1CD104780069C6CE /* PresentationsTabBarController.xib */; };
 		85E1A75A1CB538960094F000 /* view in Resources */ = {isa = PBXBuildFile; fileRef = 85E1A7591CB538960094F000 /* view */; };
 		85E3488B1CE4BD5B00DCD6C1 /* ColorUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E3488A1CE4BD5B00DCD6C1 /* ColorUtil.swift */; };
-		85FC78811CF3385B001E2696 /* SWRevealViewController in Resources */ = {isa = PBXBuildFile; fileRef = 85FC78801CF3385B001E2696 /* SWRevealViewController */; };
-		85FC78851CF33881001E2696 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 85FC78841CF33881001E2696 /* SWRevealViewController.m */; };
 		B60321A81D14B386006FCCEB /* DefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60321A71D14B386006FCCEB /* DefaultViewController.swift */; };
-		B619D0831D0EF477001CE3A9 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B619D07F1D0EF477001CE3A9 /* MenuTableViewController.swift */; };
 		B619D0841D0EF477001CE3A9 /* RecoverPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B619D0801D0EF477001CE3A9 /* RecoverPasswordViewController.swift */; };
-		B619D0851D0EF477001CE3A9 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B619D0811D0EF477001CE3A9 /* RegisterViewController.swift */; };
 		B619D08D1D0EF489001CE3A9 /* ClosedPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B619D0871D0EF489001CE3A9 /* ClosedPresentationViewController.swift */; };
 		B619D08F1D0EF489001CE3A9 /* OpenPresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B619D0891D0EF489001CE3A9 /* OpenPresentationViewController.swift */; };
 		B619D0AA1D0EF4F8001CE3A9 /* ClosedPresentationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B619D09D1D0EF4F8001CE3A9 /* ClosedPresentationViewController.xib */; };
 		B619D0AC1D0EF4F8001CE3A9 /* OpenPresentationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B619D09F1D0EF4F8001CE3A9 /* OpenPresentationViewController.xib */; };
-		B619D0B21D0EF76F001CE3A9 /* PresentationsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B619D0AF1D0EF76F001CE3A9 /* PresentationsTabBarController.swift */; };
 		B62640B01D667F0D008AA819 /* QuestionsTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62640AF1D667F0D008AA819 /* QuestionsTabBarViewController.swift */; };
 		B62640B21D667F31008AA819 /* QuestionsTabBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B62640B11D667F31008AA819 /* QuestionsTabBarViewController.xib */; };
 		B64A66141D536CC500BB5F90 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64A66131D536CC500BB5F90 /* Answer.swift */; };
 		B64A66161D536CDD00BB5F90 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64A66151D536CDD00BB5F90 /* Question.swift */; };
 		B64C19521D5CA45200368876 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64C19511D5CA45200368876 /* User.swift */; };
+		B64D49731D74703100252A4D /* AnswerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64D49711D74703100252A4D /* AnswerTableViewCell.swift */; };
+		B64D49761D74705F00252A4D /* AnswerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B64D49751D74705F00252A4D /* AnswerTableViewCell.xib */; };
+		B64D49801D7473B900252A4D /* TextAnswerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B64D497E1D7473B900252A4D /* TextAnswerTableViewCell.xib */; };
+		B64D49821D74757E00252A4D /* TextAnswerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64D49811D74757E00252A4D /* TextAnswerTableViewCell.swift */; };
 		B65239B31D65DF0F00CA19A8 /* CreatePresentationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B65239B21D65DF0F00CA19A8 /* CreatePresentationViewController.xib */; };
 		B65239B51D65E06500CA19A8 /* CreatePresentationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65239B41D65E06500CA19A8 /* CreatePresentationViewController.swift */; };
+		B6592F961D7F23BB00E230C3 /* Swift-Slide-Menu in Resources */ = {isa = PBXBuildFile; fileRef = B6592F951D7F23BB00E230C3 /* Swift-Slide-Menu */; };
+		B6592FA41D7F240600E230C3 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6592F9F1D7F240600E230C3 /* BaseViewController.swift */; };
+		B6592FA51D7F240600E230C3 /* ChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6592FA01D7F240600E230C3 /* ChildViewController.swift */; };
+		B6592FA61D7F240600E230C3 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6592FA11D7F240600E230C3 /* MenuTableViewCell.swift */; };
+		B6592FA71D7F240600E230C3 /* TableViewMenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6592FA21D7F240600E230C3 /* TableViewMenuController.swift */; };
+		B6592FA81D7F240600E230C3 /* ZFRippleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6592FA31D7F240600E230C3 /* ZFRippleButton.swift */; };
+		B6592FBC1D7F3DD100E230C3 /* InstructionMaterialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6592FBA1D7F3DD100E230C3 /* InstructionMaterialViewController.swift */; };
+		B6592FBF1D7F3E0000E230C3 /* InstructionMaterialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6592FBE1D7F3E0000E230C3 /* InstructionMaterialViewController.xib */; };
+		B6592FC11D7F3F1700E230C3 /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6592FC01D7F3F1700E230C3 /* Material.swift */; };
+		B6592FCC1D7F4EE000E230C3 /* PresentationsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6592FCB1D7F4EE000E230C3 /* PresentationsTabBarController.swift */; };
 		B6719A0C1D08589000D882BC /* Contributions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6719A0B1D08589000D882BC /* Contributions.swift */; };
-		B6719A0E1D08591300D882BC /* MCMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6719A0D1D08591300D882BC /* MCMaterial.swift */; };
 		B675321D1D50D410006827BC /* Lecture.swift in Sources */ = {isa = PBXBuildFile; fileRef = B675321C1D50D410006827BC /* Lecture.swift */; };
 		B686217F1D52302400C49F24 /* Instruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B686217E1D52302400C49F24 /* Instruction.swift */; };
 		B6894CEA1D6B340A0066C626 /* AttachmentAnswerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6894CE51D6B340A0066C626 /* AttachmentAnswerViewController.xib */; };
@@ -62,7 +70,6 @@
 		B6894CF91D6B34420066C626 /* QuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6894CF41D6B34420066C626 /* QuestionViewController.xib */; };
 		B6894CFA1D6B34420066C626 /* RankingDoubtViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6894CF51D6B34420066C626 /* RankingDoubtViewController.xib */; };
 		B6894CFC1D6B34580066C626 /* AnswersTabBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6894CFB1D6B34580066C626 /* AnswersTabBarViewController.xib */; };
-		B6894CFF1D6B34700066C626 /* AnswerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6894CFD1D6B34700066C626 /* AnswerCell.xib */; };
 		B6894D001D6B34700066C626 /* InstructionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6894CFE1D6B34700066C626 /* InstructionCell.xib */; };
 		B6894D021D6B34790066C626 /* QuestionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6894D011D6B34790066C626 /* QuestionCell.xib */; };
 		B6894D081D6B34BB0066C626 /* AttachmentAnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6894D031D6B34BB0066C626 /* AttachmentAnswerViewController.swift */; };
@@ -77,11 +84,15 @@
 		B6894D171D6B35360066C626 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6894D121D6B35360066C626 /* QuestionViewController.swift */; };
 		B6894D181D6B35360066C626 /* RankingQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6894D131D6B35360066C626 /* RankingQuestionViewController.swift */; };
 		B6894D1A1D6B354D0066C626 /* AnswersTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6894D191D6B354D0066C626 /* AnswersTabBarViewController.swift */; };
-		B6894D1C1D6B358E0066C626 /* AnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6894D1B1D6B358E0066C626 /* AnswerCell.swift */; };
 		B6894D1E1D6B35920066C626 /* InstructionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6894D1D1D6B35920066C626 /* InstructionCell.swift */; };
 		B6894D201D6B35970066C626 /* PresentationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6894D1F1D6B35970066C626 /* PresentationCell.swift */; };
 		B6894D221D6B359A0066C626 /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6894D211D6B359A0066C626 /* QuestionCell.swift */; };
 		B6B61E671D4F702000DF9D2A /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6B61E661D4F702000DF9D2A /* Login.swift */; };
+		B6E8DEA01D808D0700AC6354 /* PresentationMaterialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E8DE9E1D808D0700AC6354 /* PresentationMaterialViewController.swift */; };
+		B6E8DEA31D808D4800AC6354 /* PresentationMaterialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6E8DEA21D808D4800AC6354 /* PresentationMaterialViewController.xib */; };
+		B6E8DEA51D80AB0D00AC6354 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E8DEA41D80AB0D00AC6354 /* NavigationViewController.swift */; };
+		B6EBAF781D7F6721000CA8C9 /* MaterialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6EBAF761D7F6721000CA8C9 /* MaterialTableViewCell.swift */; };
+		B6EBAF7B1D7F6769000CA8C9 /* MaterialTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6EBAF7A1D7F6769000CA8C9 /* MaterialTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,27 +141,34 @@
 		85D8DABC1CD104780069C6CE /* PresentationsTabBarController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PresentationsTabBarController.xib; path = Mirage/view/tabbarview/PresentationsTabBarController.xib; sourceTree = "<group>"; };
 		85E1A7591CB538960094F000 /* view */ = {isa = PBXFileReference; lastKnownFileType = folder; path = view; sourceTree = "<group>"; };
 		85E3488A1CE4BD5B00DCD6C1 /* ColorUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorUtil.swift; path = Mirage/util/ColorUtil.swift; sourceTree = "<group>"; };
-		85FC78801CF3385B001E2696 /* SWRevealViewController */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SWRevealViewController; sourceTree = "<group>"; };
-		85FC78831CF3387D001E2696 /* SWRevealViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = Mirage/SWRevealViewController/SWRevealViewController.h; sourceTree = "<group>"; };
-		85FC78841CF33881001E2696 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = Mirage/SWRevealViewController/SWRevealViewController.m; sourceTree = "<group>"; };
 		B60321A71D14B386006FCCEB /* DefaultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DefaultViewController.swift; path = Mirage/viewcontrollers/DefaultViewController.swift; sourceTree = "<group>"; };
-		B619D07F1D0EF477001CE3A9 /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuTableViewController.swift; path = Mirage/viewcontrollers/mainStoryboard/MenuTableViewController.swift; sourceTree = "<group>"; };
 		B619D0801D0EF477001CE3A9 /* RecoverPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RecoverPasswordViewController.swift; path = Mirage/viewcontrollers/mainStoryboard/RecoverPasswordViewController.swift; sourceTree = "<group>"; };
-		B619D0811D0EF477001CE3A9 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = Mirage/viewcontrollers/mainStoryboard/RegisterViewController.swift; sourceTree = "<group>"; };
 		B619D0871D0EF489001CE3A9 /* ClosedPresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClosedPresentationViewController.swift; path = Mirage/viewcontrollers/Presentation/ClosedPresentationViewController.swift; sourceTree = "<group>"; };
 		B619D0891D0EF489001CE3A9 /* OpenPresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OpenPresentationViewController.swift; path = Mirage/viewcontrollers/Presentation/OpenPresentationViewController.swift; sourceTree = "<group>"; };
 		B619D09D1D0EF4F8001CE3A9 /* ClosedPresentationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ClosedPresentationViewController.xib; path = Mirage/view/Presentation/ClosedPresentationViewController.xib; sourceTree = "<group>"; };
 		B619D09F1D0EF4F8001CE3A9 /* OpenPresentationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OpenPresentationViewController.xib; path = Mirage/view/Presentation/OpenPresentationViewController.xib; sourceTree = "<group>"; };
-		B619D0AF1D0EF76F001CE3A9 /* PresentationsTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentationsTabBarController.swift; path = Mirage/viewcontrollers/tabbarviewcontrollers/PresentationsTabBarController.swift; sourceTree = "<group>"; };
 		B62640AF1D667F0D008AA819 /* QuestionsTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuestionsTabBarViewController.swift; path = Mirage/viewcontrollers/tabbarviewcontrollers/QuestionsTabBarViewController.swift; sourceTree = "<group>"; };
 		B62640B11D667F31008AA819 /* QuestionsTabBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = QuestionsTabBarViewController.xib; path = Mirage/view/tabbarview/QuestionsTabBarViewController.xib; sourceTree = "<group>"; };
 		B64A66131D536CC500BB5F90 /* Answer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Answer.swift; path = Mirage/models/Answer.swift; sourceTree = "<group>"; };
 		B64A66151D536CDD00BB5F90 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Question.swift; path = Mirage/models/Question.swift; sourceTree = "<group>"; };
 		B64C19511D5CA45200368876 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Mirage/models/User.swift; sourceTree = "<group>"; };
+		B64D49711D74703100252A4D /* AnswerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnswerTableViewCell.swift; path = Mirage/viewcontrollers/tableviewcell/AnswerTableViewCell.swift; sourceTree = "<group>"; };
+		B64D49751D74705F00252A4D /* AnswerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AnswerTableViewCell.xib; path = Mirage/view/viewcell/AnswerTableViewCell.xib; sourceTree = "<group>"; };
+		B64D497E1D7473B900252A4D /* TextAnswerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TextAnswerTableViewCell.xib; path = Mirage/view/viewcell/TextAnswerTableViewCell.xib; sourceTree = "<group>"; };
+		B64D49811D74757E00252A4D /* TextAnswerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextAnswerTableViewCell.swift; path = Mirage/viewcontrollers/tableviewcell/TextAnswerTableViewCell.swift; sourceTree = "<group>"; };
 		B65239B21D65DF0F00CA19A8 /* CreatePresentationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CreatePresentationViewController.xib; path = Mirage/view/Presentation/CreatePresentationViewController.xib; sourceTree = "<group>"; };
 		B65239B41D65E06500CA19A8 /* CreatePresentationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreatePresentationViewController.swift; path = Mirage/viewcontrollers/Presentation/CreatePresentationViewController.swift; sourceTree = "<group>"; };
+		B6592F951D7F23BB00E230C3 /* Swift-Slide-Menu */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Swift-Slide-Menu"; sourceTree = "<group>"; };
+		B6592F9F1D7F240600E230C3 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = "Mirage/Swift-Slide-Menu/BaseViewController.swift"; sourceTree = "<group>"; };
+		B6592FA01D7F240600E230C3 /* ChildViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChildViewController.swift; path = "Mirage/Swift-Slide-Menu/ChildViewController.swift"; sourceTree = "<group>"; };
+		B6592FA11D7F240600E230C3 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuTableViewCell.swift; path = "Mirage/Swift-Slide-Menu/MenuTableViewCell.swift"; sourceTree = "<group>"; };
+		B6592FA21D7F240600E230C3 /* TableViewMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TableViewMenuController.swift; path = "Mirage/Swift-Slide-Menu/TableViewMenuController.swift"; sourceTree = "<group>"; };
+		B6592FA31D7F240600E230C3 /* ZFRippleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ZFRippleButton.swift; path = "Mirage/Swift-Slide-Menu/ZFRippleButton.swift"; sourceTree = "<group>"; };
+		B6592FBA1D7F3DD100E230C3 /* InstructionMaterialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstructionMaterialViewController.swift; path = Mirage/viewcontrollers/Instruction/InstructionMaterialViewController.swift; sourceTree = "<group>"; };
+		B6592FBE1D7F3E0000E230C3 /* InstructionMaterialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InstructionMaterialViewController.xib; path = Mirage/view/Instruction/InstructionMaterialViewController.xib; sourceTree = "<group>"; };
+		B6592FC01D7F3F1700E230C3 /* Material.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Material.swift; path = Mirage/models/Material.swift; sourceTree = "<group>"; };
+		B6592FCB1D7F4EE000E230C3 /* PresentationsTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentationsTabBarController.swift; path = Mirage/viewcontrollers/tabbarviewcontrollers/PresentationsTabBarController.swift; sourceTree = "<group>"; };
 		B6719A0B1D08589000D882BC /* Contributions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Contributions.swift; path = Mirage/models/Contributions.swift; sourceTree = "<group>"; };
-		B6719A0D1D08591300D882BC /* MCMaterial.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MCMaterial.swift; path = Mirage/models/MCMaterial.swift; sourceTree = "<group>"; };
 		B675321C1D50D410006827BC /* Lecture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Lecture.swift; path = Mirage/models/Lecture.swift; sourceTree = "<group>"; };
 		B686217E1D52302400C49F24 /* Instruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Instruction.swift; path = Mirage/models/Instruction.swift; sourceTree = "<group>"; };
 		B6894CE51D6B340A0066C626 /* AttachmentAnswerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AttachmentAnswerViewController.xib; path = Mirage/view/Answer/AttachmentAnswerViewController.xib; sourceTree = "<group>"; };
@@ -165,7 +183,6 @@
 		B6894CF41D6B34420066C626 /* QuestionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = QuestionViewController.xib; path = Mirage/view/Question/QuestionViewController.xib; sourceTree = "<group>"; };
 		B6894CF51D6B34420066C626 /* RankingDoubtViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RankingDoubtViewController.xib; path = Mirage/view/Question/RankingDoubtViewController.xib; sourceTree = "<group>"; };
 		B6894CFB1D6B34580066C626 /* AnswersTabBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AnswersTabBarViewController.xib; path = Mirage/view/tabbarview/AnswersTabBarViewController.xib; sourceTree = "<group>"; };
-		B6894CFD1D6B34700066C626 /* AnswerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AnswerCell.xib; path = Mirage/view/viewcell/AnswerCell.xib; sourceTree = "<group>"; };
 		B6894CFE1D6B34700066C626 /* InstructionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InstructionCell.xib; path = Mirage/view/viewcell/InstructionCell.xib; sourceTree = "<group>"; };
 		B6894D011D6B34790066C626 /* QuestionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = QuestionCell.xib; path = Mirage/view/viewcell/QuestionCell.xib; sourceTree = "<group>"; };
 		B6894D031D6B34BB0066C626 /* AttachmentAnswerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AttachmentAnswerViewController.swift; path = Mirage/viewcontrollers/Answer/AttachmentAnswerViewController.swift; sourceTree = "<group>"; };
@@ -180,11 +197,15 @@
 		B6894D121D6B35360066C626 /* QuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuestionViewController.swift; path = Mirage/viewcontrollers/Question/QuestionViewController.swift; sourceTree = "<group>"; };
 		B6894D131D6B35360066C626 /* RankingQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RankingQuestionViewController.swift; path = Mirage/viewcontrollers/Question/RankingQuestionViewController.swift; sourceTree = "<group>"; };
 		B6894D191D6B354D0066C626 /* AnswersTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnswersTabBarViewController.swift; path = Mirage/viewcontrollers/tabbarviewcontrollers/AnswersTabBarViewController.swift; sourceTree = "<group>"; };
-		B6894D1B1D6B358E0066C626 /* AnswerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnswerCell.swift; path = Mirage/viewcontrollers/tableviewcell/AnswerCell.swift; sourceTree = "<group>"; };
 		B6894D1D1D6B35920066C626 /* InstructionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstructionCell.swift; path = Mirage/viewcontrollers/tableviewcell/InstructionCell.swift; sourceTree = "<group>"; };
 		B6894D1F1D6B35970066C626 /* PresentationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentationCell.swift; path = Mirage/viewcontrollers/tableviewcell/PresentationCell.swift; sourceTree = "<group>"; };
 		B6894D211D6B359A0066C626 /* QuestionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuestionCell.swift; path = Mirage/viewcontrollers/tableviewcell/QuestionCell.swift; sourceTree = "<group>"; };
 		B6B61E661D4F702000DF9D2A /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Login.swift; path = Mirage/models/Login.swift; sourceTree = "<group>"; };
+		B6E8DE9E1D808D0700AC6354 /* PresentationMaterialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentationMaterialViewController.swift; path = Mirage/viewcontrollers/Presentation/PresentationMaterialViewController.swift; sourceTree = "<group>"; };
+		B6E8DEA21D808D4800AC6354 /* PresentationMaterialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PresentationMaterialViewController.xib; path = Mirage/view/Presentation/PresentationMaterialViewController.xib; sourceTree = "<group>"; };
+		B6E8DEA41D80AB0D00AC6354 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
+		B6EBAF761D7F6721000CA8C9 /* MaterialTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MaterialTableViewCell.swift; path = Mirage/viewcontrollers/tableviewcell/MaterialTableViewCell.swift; sourceTree = "<group>"; };
+		B6EBAF7A1D7F6769000CA8C9 /* MaterialTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MaterialTableViewCell.xib; path = Mirage/view/viewcell/MaterialTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,9 +242,11 @@
 				B6894CE81D6B340A0066C626 /* TextAnswerViewController.xib */,
 				B6894CE91D6B340A0066C626 /* VideoAnswerViewController.xib */,
 				B6894CEF1D6B34190066C626 /* InstructionViewController.xib */,
+				B6592FBE1D7F3E0000E230C3 /* InstructionMaterialViewController.xib */,
 				B619D09D1D0EF4F8001CE3A9 /* ClosedPresentationViewController.xib */,
 				B65239B21D65DF0F00CA19A8 /* CreatePresentationViewController.xib */,
 				B619D09F1D0EF4F8001CE3A9 /* OpenPresentationViewController.xib */,
+				B6E8DEA21D808D4800AC6354 /* PresentationMaterialViewController.xib */,
 				B6894CF11D6B34420066C626 /* ClosedQuestionViewController.xib */,
 				B6894CF21D6B34420066C626 /* CreateQuestionViewController.xib */,
 				B6894CF31D6B34420066C626 /* OpenQuestionViewController.xib */,
@@ -232,12 +255,12 @@
 				B6894CFB1D6B34580066C626 /* AnswersTabBarViewController.xib */,
 				85D8DABC1CD104780069C6CE /* PresentationsTabBarController.xib */,
 				B62640B11D667F31008AA819 /* QuestionsTabBarViewController.xib */,
-				B6894CFD1D6B34700066C626 /* AnswerCell.xib */,
+				B64D49751D74705F00252A4D /* AnswerTableViewCell.xib */,
+				B6EBAF7A1D7F6769000CA8C9 /* MaterialTableViewCell.xib */,
+				B64D497E1D7473B900252A4D /* TextAnswerTableViewCell.xib */,
 				B6894CFE1D6B34700066C626 /* InstructionCell.xib */,
 				85D3CF351CD102B10058CCFF /* PresentationCell.xib */,
 				B6894D011D6B34790066C626 /* QuestionCell.xib */,
-				85FC78831CF3387D001E2696 /* SWRevealViewController.h */,
-				85FC78841CF33881001E2696 /* SWRevealViewController.m */,
 				B6894D031D6B34BB0066C626 /* AttachmentAnswerViewController.swift */,
 				B6894D041D6B34BB0066C626 /* AudioAnswerViewController.swift */,
 				B6894D051D6B34BB0066C626 /* CreateAnswerViewController.swift */,
@@ -245,21 +268,23 @@
 				B6894D071D6B34BB0066C626 /* VideoAnswerViewController.swift */,
 				B60321A71D14B386006FCCEB /* DefaultViewController.swift */,
 				B6894D0D1D6B34D40066C626 /* InstructionViewController.swift */,
-				B619D07F1D0EF477001CE3A9 /* MenuTableViewController.swift */,
+				B6592FBA1D7F3DD100E230C3 /* InstructionMaterialViewController.swift */,
 				B619D0801D0EF477001CE3A9 /* RecoverPasswordViewController.swift */,
-				B619D0811D0EF477001CE3A9 /* RegisterViewController.swift */,
 				B619D0871D0EF489001CE3A9 /* ClosedPresentationViewController.swift */,
 				B65239B41D65E06500CA19A8 /* CreatePresentationViewController.swift */,
 				B619D0891D0EF489001CE3A9 /* OpenPresentationViewController.swift */,
+				B6E8DE9E1D808D0700AC6354 /* PresentationMaterialViewController.swift */,
 				B6894D0F1D6B35360066C626 /* ClosedQuestionViewController.swift */,
 				B6894D101D6B35360066C626 /* CreateQuestionViewController.swift */,
 				B6894D111D6B35360066C626 /* OpenQuestionViewController.swift */,
 				B6894D121D6B35360066C626 /* QuestionViewController.swift */,
 				B6894D131D6B35360066C626 /* RankingQuestionViewController.swift */,
 				B6894D191D6B354D0066C626 /* AnswersTabBarViewController.swift */,
-				B619D0AF1D0EF76F001CE3A9 /* PresentationsTabBarController.swift */,
+				B6592FCB1D7F4EE000E230C3 /* PresentationsTabBarController.swift */,
 				B62640AF1D667F0D008AA819 /* QuestionsTabBarViewController.swift */,
-				B6894D1B1D6B358E0066C626 /* AnswerCell.swift */,
+				B64D49711D74703100252A4D /* AnswerTableViewCell.swift */,
+				B6EBAF761D7F6721000CA8C9 /* MaterialTableViewCell.swift */,
+				B64D49811D74757E00252A4D /* TextAnswerTableViewCell.swift */,
 				B6894D1D1D6B35920066C626 /* InstructionCell.swift */,
 				B6894D1F1D6B35970066C626 /* PresentationCell.swift */,
 				B6894D211D6B359A0066C626 /* QuestionCell.swift */,
@@ -274,11 +299,16 @@
 				B686217E1D52302400C49F24 /* Instruction.swift */,
 				B675321C1D50D410006827BC /* Lecture.swift */,
 				B6B61E661D4F702000DF9D2A /* Login.swift */,
-				B6719A0D1D08591300D882BC /* MCMaterial.swift */,
+				B6592FC01D7F3F1700E230C3 /* Material.swift */,
 				859748301CABF6CD007A7481 /* Person.swift */,
 				859748321CAC173B007A7481 /* Presentation.swift */,
 				B64A66151D536CDD00BB5F90 /* Question.swift */,
 				B64C19511D5CA45200368876 /* User.swift */,
+				B6592F9F1D7F240600E230C3 /* BaseViewController.swift */,
+				B6592FA01D7F240600E230C3 /* ChildViewController.swift */,
+				B6592FA11D7F240600E230C3 /* MenuTableViewCell.swift */,
+				B6592FA21D7F240600E230C3 /* TableViewMenuController.swift */,
+				B6592FA31D7F240600E230C3 /* ZFRippleButton.swift */,
 				85BADF8B1C9054E6000B8989 /* Mirage */,
 				85BADFA01C9054E6000B8989 /* MirageTests */,
 				85BADFAB1C9054E6000B8989 /* MirageUITests */,
@@ -299,13 +329,14 @@
 		85BADF8B1C9054E6000B8989 /* Mirage */ = {
 			isa = PBXGroup;
 			children = (
-				85FC78801CF3385B001E2696 /* SWRevealViewController */,
+				B6592F951D7F23BB00E230C3 /* Swift-Slide-Menu */,
 				85E1A7591CB538960094F000 /* view */,
 				85BADFC71C9055A8000B8989 /* viewcontrollers */,
 				85BADFC51C90559A000B8989 /* util */,
 				85BADFC31C905593000B8989 /* models */,
 				85BADFBF1C905577000B8989 /* AppDelegate.swift */,
 				85BADFC11C90557C000B8989 /* ViewController.swift */,
+				B6E8DEA41D80AB0D00AC6354 /* NavigationViewController.swift */,
 				85BADFCB1C9056B8000B8989 /* Main.storyboard */,
 				8516A7ED1CF7775300168B25 /* Assets.xcassets */,
 				85BADFC91C9055BB000B8989 /* Info.plist */,
@@ -396,21 +427,24 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Siena Idea";
 				TargetAttributes = {
 					85BADF881C9054E6000B8989 = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = 7BG9GK9Z62;
+						DevelopmentTeam = MA49NRE9BA;
+						LastSwiftMigration = 0800;
 					};
 					85BADF9C1C9054E6000B8989 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 7BG9GK9Z62;
+						LastSwiftMigration = 0800;
 						TestTargetID = 85BADF881C9054E6000B8989;
 					};
 					85BADFA71C9054E6000B8989 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 7BG9GK9Z62;
+						LastSwiftMigration = 0800;
 						TestTargetID = 85BADF881C9054E6000B8989;
 					};
 				};
@@ -442,16 +476,20 @@
 			files = (
 				B6894CF81D6B34420066C626 /* OpenQuestionViewController.xib in Resources */,
 				8516A7EE1CF7775300168B25 /* Assets.xcassets in Resources */,
+				B6E8DEA31D808D4800AC6354 /* PresentationMaterialViewController.xib in Resources */,
+				B6592FBF1D7F3E0000E230C3 /* InstructionMaterialViewController.xib in Resources */,
+				B6EBAF7B1D7F6769000CA8C9 /* MaterialTableViewCell.xib in Resources */,
 				B6894CF91D6B34420066C626 /* QuestionViewController.xib in Resources */,
 				85BADFC81C9055A8000B8989 /* viewcontrollers in Resources */,
 				B6894CF71D6B34420066C626 /* CreateQuestionViewController.xib in Resources */,
+				B6592F961D7F23BB00E230C3 /* Swift-Slide-Menu in Resources */,
 				85D3CF361CD102B10058CCFF /* PresentationCell.xib in Resources */,
 				B6894D001D6B34700066C626 /* InstructionCell.xib in Resources */,
 				B6894CEC1D6B340A0066C626 /* CreateAnswerViewController.xib in Resources */,
+				B64D49801D7473B900252A4D /* TextAnswerTableViewCell.xib in Resources */,
 				B619D0AC1D0EF4F8001CE3A9 /* OpenPresentationViewController.xib in Resources */,
 				B6894CF61D6B34420066C626 /* ClosedQuestionViewController.xib in Resources */,
 				B65239B31D65DF0F00CA19A8 /* CreatePresentationViewController.xib in Resources */,
-				85FC78811CF3385B001E2696 /* SWRevealViewController in Resources */,
 				B6894CF01D6B34190066C626 /* InstructionViewController.xib in Resources */,
 				B6894CFC1D6B34580066C626 /* AnswersTabBarViewController.xib in Resources */,
 				B6894CEA1D6B340A0066C626 /* AttachmentAnswerViewController.xib in Resources */,
@@ -463,10 +501,10 @@
 				85E1A75A1CB538960094F000 /* view in Resources */,
 				B62640B21D667F31008AA819 /* QuestionsTabBarViewController.xib in Resources */,
 				85BADFCD1C9056B8000B8989 /* Main.storyboard in Resources */,
-				B6894CFF1D6B34700066C626 /* AnswerCell.xib in Resources */,
 				85BADFD01C9056BF000B8989 /* LaunchScreen.storyboard in Resources */,
 				B6894CFA1D6B34420066C626 /* RankingDoubtViewController.xib in Resources */,
 				B6894D021D6B34790066C626 /* QuestionCell.xib in Resources */,
+				B64D49761D74705F00252A4D /* AnswerTableViewCell.xib in Resources */,
 				B6894CEB1D6B340A0066C626 /* AudioAnswerViewController.xib in Resources */,
 				B6894CED1D6B340A0066C626 /* TextAnswerViewController.xib in Resources */,
 			);
@@ -495,46 +533,53 @@
 			files = (
 				B6894D171D6B35360066C626 /* QuestionViewController.swift in Sources */,
 				B64A66141D536CC500BB5F90 /* Answer.swift in Sources */,
-				B619D0831D0EF477001CE3A9 /* MenuTableViewController.swift in Sources */,
 				8516A7F01CF7C4F000168B25 /* StringUtil.swift in Sources */,
 				8575C0F31C9300E200FCAD85 /* Event.swift in Sources */,
+				B6E8DEA01D808D0700AC6354 /* PresentationMaterialViewController.swift in Sources */,
 				859748331CAC173B007A7481 /* Presentation.swift in Sources */,
+				B6E8DEA51D80AB0D00AC6354 /* NavigationViewController.swift in Sources */,
 				B6894D091D6B34BB0066C626 /* AudioAnswerViewController.swift in Sources */,
-				85FC78851CF33881001E2696 /* SWRevealViewController.m in Sources */,
 				859748311CABF6CD007A7481 /* Person.swift in Sources */,
 				B62640B01D667F0D008AA819 /* QuestionsTabBarViewController.swift in Sources */,
+				B6EBAF781D7F6721000CA8C9 /* MaterialTableViewCell.swift in Sources */,
 				B6894D201D6B35970066C626 /* PresentationCell.swift in Sources */,
 				B6894D0C1D6B34BB0066C626 /* VideoAnswerViewController.swift in Sources */,
 				B6894D141D6B35360066C626 /* ClosedQuestionViewController.swift in Sources */,
-				B6894D1C1D6B358E0066C626 /* AnswerCell.swift in Sources */,
+				B64D49731D74703100252A4D /* AnswerTableViewCell.swift in Sources */,
+				B6592FA81D7F240600E230C3 /* ZFRippleButton.swift in Sources */,
 				B619D0841D0EF477001CE3A9 /* RecoverPasswordViewController.swift in Sources */,
 				B619D08F1D0EF489001CE3A9 /* OpenPresentationViewController.swift in Sources */,
 				B6B61E671D4F702000DF9D2A /* Login.swift in Sources */,
+				B6592FBC1D7F3DD100E230C3 /* InstructionMaterialViewController.swift in Sources */,
 				B6894D0A1D6B34BB0066C626 /* CreateAnswerViewController.swift in Sources */,
 				B6894D181D6B35360066C626 /* RankingQuestionViewController.swift in Sources */,
 				B6894D0B1D6B34BB0066C626 /* TextAnswerViewController.swift in Sources */,
+				B6592FA61D7F240600E230C3 /* MenuTableViewCell.swift in Sources */,
 				85BADFD81C905710000B8989 /* Server.swift in Sources */,
 				B6894D1E1D6B35920066C626 /* InstructionCell.swift in Sources */,
 				B6894D081D6B34BB0066C626 /* AttachmentAnswerViewController.swift in Sources */,
 				B675321D1D50D410006827BC /* Lecture.swift in Sources */,
-				B619D0851D0EF477001CE3A9 /* RegisterViewController.swift in Sources */,
+				B6592FA51D7F240600E230C3 /* ChildViewController.swift in Sources */,
 				85C35F9D1CEDE47D008F0526 /* ImageUtil.swift in Sources */,
 				B686217F1D52302400C49F24 /* Instruction.swift in Sources */,
 				B619D08D1D0EF489001CE3A9 /* ClosedPresentationViewController.swift in Sources */,
+				B64D49821D74757E00252A4D /* TextAnswerTableViewCell.swift in Sources */,
 				85E3488B1CE4BD5B00DCD6C1 /* ColorUtil.swift in Sources */,
 				B6894D221D6B359A0066C626 /* QuestionCell.swift in Sources */,
 				852F5C2F1CFC7C49004178A8 /* DateUtil.swift in Sources */,
 				B64C19521D5CA45200368876 /* User.swift in Sources */,
 				B6894D0E1D6B34D40066C626 /* InstructionViewController.swift in Sources */,
-				B619D0B21D0EF76F001CE3A9 /* PresentationsTabBarController.swift in Sources */,
 				B6894D151D6B35360066C626 /* CreateQuestionViewController.swift in Sources */,
-				B6719A0E1D08591300D882BC /* MCMaterial.swift in Sources */,
 				B6719A0C1D08589000D882BC /* Contributions.swift in Sources */,
 				B60321A81D14B386006FCCEB /* DefaultViewController.swift in Sources */,
 				B6894D161D6B35360066C626 /* OpenQuestionViewController.swift in Sources */,
 				85BADFC21C90557C000B8989 /* ViewController.swift in Sources */,
+				B6592FA41D7F240600E230C3 /* BaseViewController.swift in Sources */,
+				B6592FC11D7F3F1700E230C3 /* Material.swift in Sources */,
+				B6592FA71D7F240600E230C3 /* TableViewMenuController.swift in Sources */,
 				B65239B51D65E06500CA19A8 /* CreatePresentationViewController.swift in Sources */,
 				B64A66161D536CDD00BB5F90 /* Question.swift in Sources */,
+				B6592FCC1D7F4EE000E230C3 /* PresentationsTabBarController.swift in Sources */,
 				B6894D1A1D6B354D0066C626 /* AnswersTabBarViewController.swift in Sources */,
 				85BADFC01C905577000B8989 /* AppDelegate.swift in Sources */,
 			);
@@ -604,8 +649,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -650,8 +697,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -672,6 +721,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -690,7 +740,8 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Mirage/Mirage-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -707,7 +758,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Mirage/Mirage-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -719,6 +771,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.sienaidea.MirageTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mirage.app/Mirage";
 			};
 			name = Debug;
@@ -731,6 +784,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.sienaidea.MirageTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Mirage.app/Mirage";
 			};
 			name = Release;
@@ -742,6 +796,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.sienaidea.MirageUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Mirage;
 				USES_XCTRUNNER = YES;
 			};
@@ -754,6 +809,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.sienaidea.MirageUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = Mirage;
 				USES_XCTRUNNER = YES;
 			};

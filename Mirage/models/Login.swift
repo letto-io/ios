@@ -13,16 +13,18 @@ class Login {
     var id = Int()
     var created_at = String()
     var token = String()
-    var userId = Int()
+    var person = Person()
     
-    static func iterateJSONArray(loginJSONData: NSDictionary) -> Login {
-        let login = Login()
+    static func iterateJSONArray(_ login: NSDictionary, person: NSDictionary) -> Login {
+        let lgn = Login()
         
-        login.created_at = loginJSONData.valueForKey(StringUtil.created_at) as! String
-        login.id = loginJSONData.valueForKey(StringUtil.login_id) as! Int
-        login.token = loginJSONData.valueForKey(StringUtil.token) as! String
-        login.userId = loginJSONData.valueForKey(StringUtil.user_id) as! Int
+        lgn.created_at = login.value(forKey: StringUtil.created_at) as! String
+        lgn.id = login.value(forKey: StringUtil.login_id) as! Int
+        lgn.token = login.value(forKey: StringUtil.token) as! String
+        lgn.person.id = person.value(forKey: StringUtil.id) as! Int
+        lgn.person.email = person.value(forKey: StringUtil.email) as! String
+        lgn.person.name = person.value(forKey: StringUtil.name) as! String
         
-        return login
+        return lgn
     }
 }

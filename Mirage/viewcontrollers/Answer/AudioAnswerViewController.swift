@@ -32,10 +32,10 @@ class AudioAnswerViewController: UIViewController, UITableViewDelegate, UITableV
         
         refreshControl = UIRefreshControl()
         DefaultViewController.refreshControl(refreshControl, tableView: tableView)
-        refreshControl.addTarget(self, action: #selector(AudioAnswerViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(AudioAnswerViewController.refresh), for: UIControlEvents.valueChanged)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         tableViews()
     }
     
@@ -47,26 +47,23 @@ class AudioAnswerViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func getDoubtResponse() {
-        let url = Server.getRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(question.id)" + Server.contribution)
+        let request = Server.getRequestNew(url: Server.url + Server.presentations + "\(presentation.id)" + Server.materials)
         
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
+        let task = URLSession.shared.dataTask(with: request) {
+            data, response, error in
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                let doubtResponseJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                let material = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! NSArray
                 
-                if (doubtResponseJSONData.valueForKey(StringUtil.error) != nil) {
-                    return
-                } else {
-                    let contributions : NSArray = doubtResponseJSONData.valueForKey(StringUtil.contributions) as! NSArray
-                    let mcmaterials : NSArray = contributions.valueForKey(StringUtil.mcmaterial) as! NSArray
-                    let persons : NSArray = contributions.valueForKey(StringUtil.person) as! NSArray
-                    
-                    self.contributions = Contributions.iterateJSONArray(contributions, mcmaterials: mcmaterials, persons: persons)
-                }
-                print(doubtResponseJSONData)
+                //print(material)
+                
+//                dispatch_async(dispatch_get_main_queue(), {
+//                    self.tableView.reloadData()
+//                    
+//                })
             }
-        })
+        }
         task.resume()
         
         audioContributions.removeAll()
@@ -76,30 +73,28 @@ class AudioAnswerViewController: UIViewController, UITableViewDelegate, UITableV
         for i in 0 ..< contributions.count {
             var j = 0
             
-            if contributions[i].mcmaterial.mime.containsString(StringUtil.audio) {
-                auxContributions.insert(contributions[i], atIndex: j)
-                j += 1
-            }
+//            if contributions[i].mcmaterial.mime.containsString(StringUtil.audio) {
+//                auxContributions.insert(contributions[i], atIndex: j)
+//                j += 1
+//            }
         }
         audioContributions = auxContributions
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return audioContributions.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cell, forIndexPath: indexPath) as! AnswerCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! AnswerTableViewCell
         
-        let doubtResponse = audioContributions[ indexPath.row ]
         
-        cell.textName.text = doubtResponse.mcmaterial.name
         
         return cell
     }
     
     init() {
-        super.init(nibName: StringUtil.AudioDoubtResponseViewController, bundle: nil)
+        super.init(nibName: StringUtil.AudioAnswerViewController, bundle: nil)
     }
     
     required init(coder aDecoder: NSCoder) {

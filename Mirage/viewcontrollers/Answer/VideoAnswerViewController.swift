@@ -40,10 +40,10 @@ class VideoAnswerViewController: UIViewController, UITableViewDelegate, UITableV
         
         refreshControl = UIRefreshControl()
         DefaultViewController.refreshControl(refreshControl, tableView: tableView)
-        refreshControl.addTarget(self, action: #selector(VideoAnswerViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(VideoAnswerViewController.refresh), for: UIControlEvents.valueChanged)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         tableViews()
     }
     
@@ -55,26 +55,23 @@ class VideoAnswerViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func getDoubtResponse() {
-        let url = Server.getRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(question.id)" + Server.contribution)
+        let request = Server.getRequestNew(url: Server.url + Server.presentations + "\(presentation.id)" + Server.materials)
         
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
+        let task = URLSession.shared.dataTask(with: request) {
+            data, response, error in
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                let doubtResponseJSONData = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSDictionary
+                let material = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! NSArray
                 
-                if (doubtResponseJSONData.valueForKey(StringUtil.error) != nil) {
-                    return
-                } else {
-                    let contributions : NSArray = doubtResponseJSONData.valueForKey(StringUtil.contributions) as! NSArray
-                    let mcmaterials : NSArray = contributions.valueForKey(StringUtil.mcmaterial) as! NSArray
-                    let persons : NSArray = contributions.valueForKey(StringUtil.person) as! NSArray
-                    
-                    self.contributions = Contributions.iterateJSONArray(contributions, mcmaterials: mcmaterials, persons: persons)
-                }
-                print(doubtResponseJSONData)
+                //print(material)
+                
+//                dispatch_async(dispatch_get_main_queue(), {
+//                    self.tableView.reloadData()
+//                    
+//                })
             }
-        })
+        }
         task.resume()
         
         videoContributions.removeAll()
@@ -84,20 +81,20 @@ class VideoAnswerViewController: UIViewController, UITableViewDelegate, UITableV
         for i in 0 ..< contributions.count {
             var j = 0
             
-            if contributions[i].mcmaterial.mime.containsString(StringUtil.video) {
-                auxContributions.insert(contributions[i], atIndex: j)
-                j += 1
-            }
+//            if contributions[i].mcmaterial.mime.containsString(StringUtil.video) {
+//                auxContributions.insert(contributions[i], atIndex: j)
+//                j += 1
+//            }
         }
         videoContributions = auxContributions
     }
     
-    func downloadContribution(idMaterial: Int) {
-        let url = Server.getRequest(Server.presentationURL+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(question.id)" + Server.contribution_bar
+    func downloadContribution(_ idMaterial: Int) {
+        let url = Server.getRequest(Server.url+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(question.id)" + Server.contribution_bar
             + "\(contribution.id)" + Server.materials_bar + "\(idMaterial)")
 
         
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url, completionHandler: {data, response, error -> Void in
+        let task = URLSession.shared.dataTask(with: url, completionHandler: {data, response, error -> Void in
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
@@ -108,53 +105,51 @@ class VideoAnswerViewController: UIViewController, UITableViewDelegate, UITableV
         })
         task.resume()
         
-        let video1 = NSURL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
-        let video = NSURL(string: "http://192.168.0.26:3000/system/materials/big_buck_bunny.mp4")
+        let video1 = URL(string: "https://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
+        let video = URL(string: "http://192.168.0.26:3000/system/materials/big_buck_bunny.mp4")
         
-        let videoPlayer = AVPlayer(URL: video1!)
+        let videoPlayer = AVPlayer(url: video1!)
         
         // Find the video in the app's document directory
         let paths = NSSearchPathForDirectoriesInDomains(
-            NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-        let documentsDirectory: AnyObject = paths[1]
-        let dataPath = documentsDirectory.stringByAppendingPathComponent(saveFileName)
-        let videoAsset = (AVAsset(URL: NSURL(fileURLWithPath: dataPath)))
-        let playerItem = AVPlayerItem(asset: videoAsset)
+            FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        let documentsDirectory: AnyObject = paths[1] as AnyObject
+        //let dataPath = documentsDirectory.appendingPathComponent(saveFileName)
+        //let videoAsset = (AVAsset(url: URL(fileURLWithPath: dataPath)))
+       // let playerItem = AVPlayerItem(asset: videoAsset)
         
         // Play the video
-        let player = AVPlayer(playerItem: playerItem)
-        let playerViewController = AVPlayerViewController()
-        playerViewController.player = player
+        //let player = AVPlayer(playerItem: playerItem)
+        //let playerViewController = AVPlayerViewController()
+        //playerViewController.player = player
         
-        self.presentViewController(playerViewController, animated: true) {
-            playerViewController.player!.play()
-        }
+        //self.present(playerViewController, animated: true) {
+       //     playerViewController.player!.play()
+       // }
         
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return videoContributions.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cell, forIndexPath: indexPath) as! AnswerCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! AnswerTableViewCell
         
-        let doubtResponse = videoContributions[ indexPath.row ]
         
-        cell.textName.text = doubtResponse.mcmaterial.name
         
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        contribution = contributions[ indexPath.row ]
-        downloadContribution(contribution.mcmaterial.id)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        contribution = contributions[ (indexPath as NSIndexPath).row ]
+        //downloadContribution(contribution.mcmaterial.id)
     }
     
     
     
     init() {
-        super.init(nibName: StringUtil.VideoDoubtResponseViewController, bundle: nil)
+        super.init(nibName: StringUtil.VideoAnswerViewController, bundle: nil)
     }
     
     required init(coder aDecoder: NSCoder) {

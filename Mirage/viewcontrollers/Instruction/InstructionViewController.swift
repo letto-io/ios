@@ -8,76 +8,66 @@
 
 import UIKit
 
-class InstructionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class InstructionViewController: ChildViewController, UITableViewDelegate, UITableViewDataSource {
+    
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
     var instruction = Instruction()
     var instructions = Array<Instruction>()
 
-    func tableViews() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        getInstruction()
-        tableView.reloadData()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = StringUtil.titleDiscipline
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.Plain, target:nil, action:nil)
-        
-        tableViews()
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
+        tableView.delegate = self
+        tableView.dataSource = self
+        getInstruction()
         DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.InstructionCell, view: view)
         
         refreshControl = UIRefreshControl()
         DefaultViewController.refreshControl(refreshControl, tableView: tableView)
-        refreshControl.addTarget(self, action: #selector(InstructionViewController.refresh), forControlEvents: UIControlEvents.ValueChanged)
-        
-        if self.revealViewController() != nil {
-            let menuButton = UIBarButtonItem(image: ImageUtil.imageMenuButton, style: UIBarButtonItemStyle.Plain, target: self.revealViewController(), action: #selector(SWRevealViewController.revealToggle))
-            
-            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-            self.navigationItem.setLeftBarButtonItem(menuButton, animated: true)
-        }
+        refreshControl.addTarget(self, action: #selector(InstructionViewController.refresh), for: UIControlEvents.valueChanged)
     }
     
-    override func viewDidAppear(animated: Bool) {
-        tableViews()
+    override func viewDidAppear(_ animated: Bool) {
+        getInstruction()
     }
     
     // pull to refresh
     func refresh() {
         getInstruction()
         refreshControl.endRefreshing()
-        tableView.reloadData()
     }
     
     func getInstruction() {
-        let request = Server.getRequestNew(Server.url + Server.instructions)
+        let request = Server.getRequestNew(url: Server.url + Server.instructions)
 
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
+        let task = URLSession.shared.dataTask(with: request, completionHandler: {
             data, response, error in
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                let instruction = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.AllowFragments) as! NSArray
-                let lecture: NSArray =  instruction.valueForKey(StringUtil.lecture) as! NSArray
-                let event: NSArray = instruction.valueForKey(StringUtil.event) as! NSArray
+                let instruction = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! NSArray
+                let lecture: NSArray =  instruction.value(forKey: StringUtil.lecture) as! NSArray
+                let event: NSArray = instruction.value(forKey: StringUtil.event) as! NSArray
                     
                 self.instructions = Instruction.iterateJSONArray(instruction, lecture: lecture, event: event)
+                
+                DispatchQueue.main.async(execute: {
+                    self.tableView.reloadData()
+                })
             }
-        }
+        }) 
         task.resume()
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return instructions.count;
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(StringUtil.cell, forIndexPath: indexPath) as! InstructionCell
-        let disc = instructions[ indexPath.row ]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! InstructionCell
+        let disc = instructions[ (indexPath as NSIndexPath).row ]
         
         cell.nameLabel.text = disc.lecture.name
         cell.startDateLabel.text = StringUtil.start + DateUtil.date(disc.start_date)
@@ -85,13 +75,13 @@ class InstructionViewController: UIViewController, UITableViewDelegate, UITableV
         
         let imageBook = ImageUtil.imageDiscipline
         cell.bookImageView.image = imageBook
-        cell.bookImageView.tintColor = UIColor.grayColor()
+        cell.bookImageView.tintColor = UIColor.gray
 
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        instruction = instructions[ indexPath.row ]
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        instruction = instructions[ (indexPath as NSIndexPath).row ]
         
         let presentationTabBar = PresentationsTabBarController()
         presentationTabBar.instruction = instruction
