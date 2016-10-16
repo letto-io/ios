@@ -13,6 +13,8 @@ class QuestionsTabBarViewController: UITabBarController, UITabBarControllerDeleg
     var instruction = Instruction()
     var presentation = Presentation()
     var questions = Array<Question>()
+    var teacherMenuButton = UIBarButtonItem()
+    var studentMenuButton = UIBarButtonItem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,17 +45,17 @@ class QuestionsTabBarViewController: UITabBarController, UITabBarControllerDeleg
         
         //verifica se é um perfil de aluno para postar novas duvidas e se a apresentação esta aberta
         if instruction.profile == 0 && presentation.status == 0 {
-            let studentMenuButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(QuestionsTabBarViewController.menuStudent))
+            studentMenuButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(QuestionsTabBarViewController.menuStudent))
             studentMenuButton.tintColor = ColorUtil.orangeColor
             
             self.navigationItem.setRightBarButton(studentMenuButton, animated: true)
         } else if instruction.profile == 0 && presentation.status == 1 {
-            let studentMenuButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(QuestionsTabBarViewController.menuStudentNotCreateQuestion))
+            studentMenuButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(QuestionsTabBarViewController.menuStudentNotCreateQuestion))
             studentMenuButton.tintColor = ColorUtil.orangeColor
             
             self.navigationItem.setRightBarButton(studentMenuButton, animated: true)
         }else if instruction.profile == 1 {
-            let teacherMenuButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(QuestionsTabBarViewController.menuTeacher))
+            teacherMenuButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(QuestionsTabBarViewController.menuTeacher))
             teacherMenuButton.tintColor = ColorUtil.orangeColor
             
             self.navigationItem.setRightBarButton(teacherMenuButton, animated: true)
@@ -115,6 +117,10 @@ class QuestionsTabBarViewController: UITabBarController, UITabBarControllerDeleg
         myAlert.addAction(uploadMaterialAction)
         myAlert.addAction(cancelAction)
         
+        if let popoverController = myAlert.popoverPresentationController {
+            popoverController.barButtonItem = teacherMenuButton
+        }
+        
         self.present(myAlert, animated: true, completion: nil)
     }
     
@@ -144,6 +150,10 @@ class QuestionsTabBarViewController: UITabBarController, UITabBarControllerDeleg
         myAlert.addAction(downloadMaterialAction)
         myAlert.addAction(cancelAction)
         
+        if let popoverController = myAlert.popoverPresentationController {
+            popoverController.barButtonItem = studentMenuButton
+        }
+        
         self.present(myAlert, animated: true, completion: nil)
     }
     
@@ -163,6 +173,10 @@ class QuestionsTabBarViewController: UITabBarController, UITabBarControllerDeleg
         
         myAlert.addAction(downloadMaterialAction)
         myAlert.addAction(cancelAction)
+        
+        if let popoverController = myAlert.popoverPresentationController {
+            popoverController.barButtonItem = studentMenuButton
+        }
         
         self.present(myAlert, animated: true, completion: nil)
     }

@@ -24,10 +24,10 @@ class PresentationMaterialViewController: UIViewController, UITableViewDelegate,
         tableView.delegate = self
         tableView.dataSource = self
         getPresentationMaterial()
-        DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.MaterialTableViewCell, view: view)
+        tableView = DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.MaterialTableViewCell, view: view)
         
         refreshControl = UIRefreshControl()
-        DefaultViewController.refreshControl(refreshControl, tableView: tableView)
+        refreshControl = DefaultViewController.refreshControl(refreshControl, tableView: tableView)
         refreshControl.addTarget(self, action: #selector(OpenPresentationViewController.refresh), for: UIControlEvents.valueChanged)
     }
     
@@ -42,7 +42,7 @@ class PresentationMaterialViewController: UIViewController, UITableViewDelegate,
     }
     
     func getPresentationMaterial() {
-        let request = Server.getRequestNew(url: Server.url + Server.presentations + "\(presentation.id)" + Server.materials)
+        let request = Server.getRequestNew(Server.url + Server.presentations + "\(presentation.id)" + Server.materials)
         
         let task = URLSession.shared.dataTask(with: request) {
             data, response, error in
@@ -64,41 +64,41 @@ class PresentationMaterialViewController: UIViewController, UITableViewDelegate,
         task.resume()
     }
     
-    func getMaterial() {
-        let request = Server.getRequestNew(url: Server.url + Server.materials + "\(material.id)")
+    func downloadMaterial(_ idMaterial: Int) {
+        let request = Server.getRequestNew(Server.url + Server.materials + "\(idMaterial)")
         
-        let task = URLSession.shared.dataTask(with: request) {
+        let task = URLSession.shared.dataTask(with: request, completionHandler: {
             data, response, error in
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                let download = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! NSDictionary
-                let url = download.value(forKey: StringUtil.url) as! String
-                let material  = download.value(forKey: StringUtil.material) as! NSDictionary
+                let pdfMaterial = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+                let url = pdfMaterial.value(forKey: StringUtil.url) as! String
+                let material  = pdfMaterial.value(forKey: StringUtil.material) as! NSDictionary
                 let name = material.value(forKey: StringUtil.name) as! String
-               
-                self.downloadMaterial(url, name: name)
-            }
-        }
-        task.resume()
-    }
-    
-    func downloadMaterial(_ url: String, name: String) {
-        let request = Server.getRequestMaterial(url)
-        
-        let task = URLSession.shared.dataTask(with: request) {
-            data, response, error in
-            if (error != nil) {
-                print(error!.localizedDescription)
-            } else {
-                let paths = NSSearchPathForDirectoriesInDomains(
-                    FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-                let documentsDirectory: AnyObject = paths[0] as AnyObject
-                //let dataPath = documentsDirectory.appendingPathComponent(name)
-                //try? data?.write(to: URL(fileURLWithPath: dataPath), options: [])
+                let mime = material.value(forKey: StringUtil.mime) as! String
                 
+                let request = Server.getRequestDownloadMaterial(url)
+                
+                let task = URLSession.shared.dataTask(with: request) {
+                    data, response, error in
+                    if (error != nil) {
+                        print(error!.localizedDescription)
+                    } else {
+                        DispatchQueue.main.async(execute: {
+                            DefaultViewController.saveDocumentDirectory(name, data!)
+                            
+                            if mime.contains(StringUtil.image) {
+                                DefaultViewController.pushImageViewController(name, self.navigationController!)
+                            } else if mime.contains(StringUtil.applicationPdf) {
+                                DefaultViewController.pushPDFViewController(name, self.navigationController!)
+                            }
+                        })
+                    }
+                }
+                task.resume()
             }
-        }
+        })
         task.resume()
     }
     
@@ -108,7 +108,7 @@ class PresentationMaterialViewController: UIViewController, UITableViewDelegate,
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! MaterialTableViewCell
-        let material = materials[ (indexPath as NSIndexPath).row ]
+        let material = materials[ indexPath.row ]
         
         cell.nameLabel.text = material.name
         
@@ -116,9 +116,19 @@ class PresentationMaterialViewController: UIViewController, UITableViewDelegate,
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        material = materials[ (indexPath as NSIndexPath).row ]
+        material = materials[ indexPath.row ]
         
-       getMaterial()
+        let fileManager = FileManager.default
+        let dataPath = (DefaultViewController.getDirectoryPath() as NSString).appendingPathComponent(material.name)
+        if fileManager.fileExists(atPath: dataPath){
+            if material.mime.contains(StringUtil.image) {
+                DefaultViewController.pushImageViewController(material.name, self.navigationController!)
+            } else if material.mime.contains(StringUtil.applicationPdf) {
+                DefaultViewController.pushPDFViewController(material.name, self.navigationController!)
+            }
+        } else {
+            downloadMaterial(material.id)
+        }
     }
     
     init() {

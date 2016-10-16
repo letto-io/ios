@@ -155,33 +155,43 @@ class TableViewMenuController: UIViewController, UITableViewDataSource, UITableV
         let view = UIView() // The width will be the same as the cell, and the height should be set in tableView:heightForRowAtIndexPath:
         let userNameLabel = UILabel()
         let userEmailLabel = UILabel()
-        let button   = UIButton(type: UIButtonType.system)
+        let button = UIButton(type: UIButtonType.system)
         
         userEmailLabel.text = TableViewMenuController.person.email
+        userEmailLabel.textColor = UIColor.white
         userNameLabel.text = TableViewMenuController.person.name
+        userNameLabel.textColor = UIColor.white
         button.setTitle("Sair", for: UIControlState())
+        button.setImage(ImageUtil.imageExitButton, for: UIControlState())
         button.addTarget(self, action: #selector(TableViewMenuController.exit), for: .touchUpInside)
+        button.tintColor = UIColor.black
         
         view.addSubview(userNameLabel)
         view.addSubview(userEmailLabel)
         view.addSubview(button)
-        view.backgroundColor = UIColor(red:0.00, green:0.67, blue:0.76, alpha:1.0)
+        view.backgroundColor = UIColor(hue: 0.5167, saturation: 1, brightness: 0.75, alpha: 1.0) /* #00acc1 */
         
         userNameLabel.translatesAutoresizingMaskIntoConstraints = false
         userEmailLabel.translatesAutoresizingMaskIntoConstraints = false
         button.translatesAutoresizingMaskIntoConstraints = false
         
-        let views = ["emailLabel": userEmailLabel, "nameLabel": userNameLabel, "button": button, "view": view]
+        let viewEmail = ["userEmailLabel": userEmailLabel, "view": view]
+        let viewName = ["userNameLabel": userNameLabel, "view": view]
+        let viewButton = ["button": button, "view": view]
         
-        let horizontallayoutContraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[emailLabel]-10-[nameLabel]-10-[button]-10-|", options: .alignAllTop, metrics: nil, views: views)
-        view.addConstraints(horizontallayoutContraints)
+        let horizontallayoutContraintsEmail = NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[userEmailLabel]-10-|", options: .alignAllTop, metrics: nil, views: viewEmail)
+        let horizontallayoutContraintsName = NSLayoutConstraint.constraints(withVisualFormat: "H:|-10-[userNameLabel]-10-|", options: .alignAllTop, metrics: nil, views: viewName)
+        let horizontallayoutContraintsButton = NSLayoutConstraint.constraints(withVisualFormat: "H:|-150-[button]-10-|", options: .alignAllTop, metrics: nil, views: viewButton)
         
-        let verticalLayoutContraintEmail = NSLayoutConstraint(item: userEmailLabel, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .topMargin, multiplier: 1, constant: 0)
-        let verticalLayoutContraintName = NSLayoutConstraint(item: userNameLabel, attribute: .centerY, relatedBy: .equal, toItem: userEmailLabel, attribute: .topMargin, multiplier: 1, constant: 0)
+        let verticalLayoutContraintEmail = NSLayoutConstraint(item: userEmailLabel, attribute: .centerY, relatedBy: .equal, toItem: button, attribute: .top, multiplier: 1, constant: 0)
+        let verticalLayoutContraintName = NSLayoutConstraint(item: userNameLabel, attribute: .centerY, relatedBy: .equal, toItem: userEmailLabel, attribute: .top, multiplier: 1, constant: 0)
         let verticalLayoutContraintButton = NSLayoutConstraint(item: button, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .bottomMargin, multiplier: 1, constant: 0)
         view.addConstraint(verticalLayoutContraintEmail)
         view.addConstraint(verticalLayoutContraintName)
         view.addConstraint(verticalLayoutContraintButton)
+        view.addConstraints(horizontallayoutContraintsEmail)
+        view.addConstraints(horizontallayoutContraintsName)
+        view.addConstraints(horizontallayoutContraintsButton)
         
         return view
     }
@@ -197,7 +207,7 @@ class TableViewMenuController: UIViewController, UITableViewDataSource, UITableV
                 if let httpResponse = response as? HTTPURLResponse {
                     if httpResponse.statusCode == 200 {
                         DispatchQueue.main.async(execute: {
-                            self.navigationController?.popToRootViewController(animated: true)
+                            self.navigationController!.popToRootViewController(animated: true)
                         })
                     } else {
                         DispatchQueue.main.async(execute: {

@@ -22,26 +22,26 @@ class ClosedQuestionViewController: UIViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        getDoubt()
-        DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.QuestionCell, view: view)
+        getQuestion()
+        tableView = DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.QuestionTableViewCell, view: view)
         
         refreshControl = UIRefreshControl()
-        DefaultViewController.refreshControl(refreshControl, tableView: tableView)
+        refreshControl = DefaultViewController.refreshControl(refreshControl, tableView: tableView)
         refreshControl.addTarget(self, action: #selector(ClosedQuestionViewController.refresh), for: UIControlEvents.valueChanged)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        getDoubt()
+        getQuestion()
     }
     
     // pull to refresh
     func refresh() {
-        getDoubt()
+        getQuestion()
         refreshControl.endRefreshing()
     }
     
-    func getDoubt() {
-        let request = Server.getRequestNew(url: Server.url + Server.presentations + "\(presentation.id)" + Server.questions)
+    func getQuestion() {
+        let request = Server.getRequestNew(Server.url + Server.presentations + "\(presentation.id)" + Server.questions)
         
         let task = URLSession.shared.dataTask(with: request, completionHandler: {
             data, response, error in
@@ -82,9 +82,9 @@ class ClosedQuestionViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! QuestionCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! QuestionTableViewCell
         
-        let question = closedQuestions[ (indexPath as NSIndexPath).row ]
+        let question = closedQuestions[ indexPath.row ]
         
         if question.anonymous == false {
             cell.nameLabel.text = question.person.name
@@ -128,7 +128,7 @@ class ClosedQuestionViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        question = closedQuestions[ (indexPath as NSIndexPath).row ]
+        question = closedQuestions[ indexPath.row ]
         
         let answer = AnswersTabBarViewController()
         answer.instruction = instruction
@@ -153,7 +153,7 @@ class ClosedQuestionViewController: UIViewController, UITableViewDelegate, UITab
                         })
                     } else if httpResponse.statusCode == 200 {
                         DispatchQueue.main.async(execute: {
-                            self.getDoubt()
+                            self.getQuestion()
                         })
                     }
                 }

@@ -22,26 +22,26 @@ class RankingQuestionViewController: UIViewController, UITableViewDelegate, UITa
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        getDoubt()
-        DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.QuestionCell, view: view)
+        getQuestion()
+        tableView = DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.QuestionTableViewCell, view: view)
         
         refreshControl = UIRefreshControl()
-        DefaultViewController.refreshControl(refreshControl, tableView: tableView)
+        refreshControl = DefaultViewController.refreshControl(refreshControl, tableView: tableView)
         refreshControl.addTarget(self, action: #selector(QuestionViewController.refresh), for: UIControlEvents.valueChanged)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        getDoubt()
+        getQuestion()
     }
     
     // pull to refresh
     func refresh() {
-        getDoubt()
+        getQuestion()
         refreshControl.endRefreshing()
     }
     
-    func getDoubt() {
-        let request = Server.getRequestNew(url: Server.url + Server.presentations + "\(presentation.id)" + Server.questions)
+    func getQuestion() {
+        let request = Server.getRequestNew(Server.url + Server.presentations + "\(presentation.id)" + Server.questions)
         
         let task = URLSession.shared.dataTask(with: request, completionHandler: {
             data, response, error in
@@ -79,9 +79,9 @@ class RankingQuestionViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! QuestionCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! QuestionTableViewCell
         
-        let question = orderedQuestions[ (indexPath as NSIndexPath).row ]
+        let question = orderedQuestions[ indexPath.row ]
         
         if question.anonymous == false {
             cell.nameLabel.text = question.person.name
@@ -111,7 +111,7 @@ class RankingQuestionViewController: UIViewController, UITableViewDelegate, UITa
         }
         
         //passagem de id para url de like na dúvida
-        cell.likeButton.tag = orderedQuestions[ (indexPath as NSIndexPath).row ].id
+        cell.likeButton.tag = orderedQuestions[ indexPath.row ].id
         
         if question.my_vote == 0 {
             cell.likeButton.addTarget(self, action: #selector(RankingQuestionViewController.likeButtonPressed), for: .touchUpInside)
@@ -125,7 +125,7 @@ class RankingQuestionViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        question = orderedQuestions[ (indexPath as NSIndexPath).row ]
+        question = orderedQuestions[ indexPath.row ]
         
         let answer = AnswersTabBarViewController()
         answer.instruction = instruction
@@ -150,7 +150,7 @@ class RankingQuestionViewController: UIViewController, UITableViewDelegate, UITa
                         })
                     } else if httpResponse.statusCode == 200 {
                         DispatchQueue.main.async(execute: {
-                            self.getDoubt()
+                            self.getQuestion()
                         })
                     }
                 }
@@ -166,7 +166,7 @@ class RankingQuestionViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     init() {
-        super.init(nibName: StringUtil.rankingDoubtViewController, bundle: nil)
+        super.init(nibName: StringUtil.RankingQuestionViewController, bundle: nil)
     }
     
     required init(coder aDecoder: NSCoder) {

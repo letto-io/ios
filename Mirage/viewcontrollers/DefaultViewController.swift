@@ -61,4 +61,78 @@ class DefaultViewController: BaseViewController {
         
         return myAlert
     }
+    
+    //salvar arquivos em diretorio local
+    static func saveDocumentDirectory(_ name: String, _ data: Data){
+        let fileManager = FileManager.default
+        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent(name)
+        if let image : UIImage = UIImage(data: data) {
+            let imageData = UIImageJPEGRepresentation(image, 0.5)
+            fileManager.createFile(atPath: paths as String, contents: imageData, attributes: nil)
+        } else {
+            fileManager.createFile(atPath: paths as String, contents: data, attributes: nil)
+        }
+    }
+    
+    //recuperar arquivo em diretorio
+    static func getDirectoryPath() -> String {
+        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+        let documentsDirectory = paths[0]
+        return documentsDirectory
+    }
+    
+    //cria diretorio
+    static func createDirectory(){
+        let fileManager = FileManager.default
+        let paths = (NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as NSString).appendingPathComponent("OddinDirectory")
+        if !fileManager.fileExists(atPath: paths){
+            try! fileManager.createDirectory(atPath: paths, withIntermediateDirectories: true, attributes: nil)
+        }else{
+            print("Already dictionary created.")
+        }
+    }
+    
+    //abre visualizador de imagem
+    static func pushImageViewController(_ name: String, _ navigationController: UINavigationController){
+        let fileManager = FileManager.default
+        let dataPath = (DefaultViewController.getDirectoryPath() as NSString).appendingPathComponent(name)
+        if fileManager.fileExists(atPath: dataPath){
+            let imageViewController = ImageViewController()
+            
+            imageViewController.imagePAth = dataPath
+            imageViewController.name = name
+            
+            navigationController.pushViewController(imageViewController, animated: true)
+        }else{
+            print("No Image")
+        }
+    }
+    
+    // abre visualizador de pdf
+    static func pushPDFViewController(_ name: String, _ navigationController: UINavigationController) {
+        let fileManager = FileManager.default
+        let dataPath = (DefaultViewController.getDirectoryPath() as NSString).appendingPathComponent(name)
+        if fileManager.fileExists(atPath: dataPath){
+            let pdf = PDFViewController()
+            pdf.name = name
+            pdf.dataPath = dataPath
+            
+            navigationController.pushViewController(pdf, animated: true)
+        }else{
+            print("No PDF")
+        }
+    }
+    
+    static func pushVideoPlayerViewController(_ name: String, _ mime: String, _ navigationController: UINavigationController) {
+        let fileManager = FileManager.default
+        let dataPath = (DefaultViewController.getDirectoryPath() as NSString).appendingPathComponent(name)
+        if fileManager.fileExists(atPath: dataPath){
+            let videoPlayer = VideoPlayerViewController()
+            videoPlayer.name = name
+            videoPlayer.dataPath = dataPath
+            videoPlayer.mime = mime
+            
+            navigationController.pushViewController(videoPlayer, animated: true)
+        }
+    }
 }

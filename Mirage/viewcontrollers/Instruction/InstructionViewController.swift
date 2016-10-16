@@ -11,7 +11,7 @@ import UIKit
 class InstructionViewController: ChildViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
-    var refreshControl: UIRefreshControl!
+    var refreshControl = UIRefreshControl()
     var instruction = Instruction()
     var instructions = Array<Instruction>()
 
@@ -21,26 +21,19 @@ class InstructionViewController: ChildViewController, UITableViewDelegate, UITab
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title:"", style:.plain, target:nil, action:nil)
         tableView.delegate = self
         tableView.dataSource = self
-        getInstruction()
-        DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.InstructionCell, view: view)
+        tableView = DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.InstructionTableViewCell, view: view)
         
-        refreshControl = UIRefreshControl()
-        DefaultViewController.refreshControl(refreshControl, tableView: tableView)
-        refreshControl.addTarget(self, action: #selector(InstructionViewController.refresh), for: UIControlEvents.valueChanged)
+        refreshControl = DefaultViewController.refreshControl(refreshControl, tableView: tableView)
+        refreshControl.addTarget(self, action: #selector(InstructionViewController.getInstruction), for: UIControlEvents.valueChanged)
+        refreshControl.beginRefreshing()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         getInstruction()
     }
     
-    // pull to refresh
-    func refresh() {
-        getInstruction()
-        refreshControl.endRefreshing()
-    }
-    
     func getInstruction() {
-        let request = Server.getRequestNew(url: Server.url + Server.instructions)
+        let request = Server.getRequestNew(Server.url + Server.instructions)
 
         let task = URLSession.shared.dataTask(with: request, completionHandler: {
             data, response, error in
@@ -54,6 +47,7 @@ class InstructionViewController: ChildViewController, UITableViewDelegate, UITab
                 self.instructions = Instruction.iterateJSONArray(instruction, lecture: lecture, event: event)
                 
                 DispatchQueue.main.async(execute: {
+                    self.refreshControl.endRefreshing()
                     self.tableView.reloadData()
                 })
             }
@@ -66,7 +60,7 @@ class InstructionViewController: ChildViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! InstructionCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! InstructionTableViewCell
         let disc = instructions[ (indexPath as NSIndexPath).row ]
         
         cell.nameLabel.text = disc.lecture.name

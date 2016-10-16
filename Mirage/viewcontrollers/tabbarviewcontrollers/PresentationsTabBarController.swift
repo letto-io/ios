@@ -10,6 +10,8 @@ import UIKit
 
 class PresentationsTabBarController: UITabBarController, UITabBarControllerDelegate, AddNewPresentationDelegate {
     var instruction = Instruction()
+    var teacherMenuButton = UIBarButtonItem()
+    var studentMenuButton = UIBarButtonItem()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,12 +35,12 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
     
         //verifica se é um perfil de professor para criar novas apresentações
         if instruction.profile == 1 {
-            let teacherMenuButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(PresentationsTabBarController.menuTeacher))
+            teacherMenuButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(PresentationsTabBarController.menuTeacher))
             teacherMenuButton.tintColor = ColorUtil.orangeColor
             
             self.navigationItem.setRightBarButton(teacherMenuButton, animated: true)
         } else if instruction.profile == 0 {
-            let studentMenuButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(PresentationsTabBarController.menuStudent))
+            studentMenuButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(PresentationsTabBarController.menuStudent))
             studentMenuButton.tintColor = ColorUtil.orangeColor
             
             self.navigationItem.setRightBarButton(studentMenuButton, animated: true)
@@ -91,6 +93,10 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
         myAlert.addAction(uploadMaterialAction)
         myAlert.addAction(cancelAction)
         
+        if let popoverController = myAlert.popoverPresentationController {
+            popoverController.barButtonItem = teacherMenuButton
+        }
+        
         self.present(myAlert, animated: true, completion: nil)
     }
     
@@ -111,6 +117,11 @@ class PresentationsTabBarController: UITabBarController, UITabBarControllerDeleg
         
         myAlert.addAction(downloadMaterialAction)
         myAlert.addAction(cancelAction)
+        
+        
+        if let popoverController = myAlert.popoverPresentationController {
+            popoverController.barButtonItem = studentMenuButton
+        }
         
         self.present(myAlert, animated: true, completion: nil)
     }

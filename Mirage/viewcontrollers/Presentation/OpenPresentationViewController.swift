@@ -22,10 +22,10 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
         tableView.delegate = self
         tableView.dataSource = self
         getPresentation()
-        DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.PresentationCell, view: view)
+        tableView = DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.PresentationTableViewCell, view: view)
         
         refreshControl = UIRefreshControl()
-        DefaultViewController.refreshControl(refreshControl, tableView: tableView)
+        refreshControl = DefaultViewController.refreshControl(refreshControl, tableView: tableView)
         refreshControl.addTarget(self, action: #selector(OpenPresentationViewController.refresh), for: UIControlEvents.valueChanged)
         
         //verifica se é um perfil de professor para fechar apresentações
@@ -60,7 +60,7 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func getPresentation() {
-        let request = Server.getRequestNew(url: Server.url + Server.instructions + "\(instruction.id)" + Server.presentations)
+        let request = Server.getRequestNew(Server.url + Server.instructions + "\(instruction.id)" + Server.presentations)
         
         let task = URLSession.shared.dataTask(with: request, completionHandler: {
             data, response, error in
@@ -100,8 +100,8 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! PresentationCell
-        let present = openPresentation[ (indexPath as NSIndexPath).row ]
+        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! PresentationTableViewCell
+        let present = openPresentation[ indexPath.row ]
         
         cell.subjectLabel.text = present.subject
         cell.dateLabel.text = DateUtil.dateAndHour(present.created_at)
@@ -110,7 +110,7 @@ class OpenPresentationViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presentation = openPresentation[ (indexPath as NSIndexPath).row ]
+        presentation = openPresentation[ indexPath.row ]
         
         let questionTabBar = QuestionsTabBarViewController()
         questionTabBar.instruction = instruction

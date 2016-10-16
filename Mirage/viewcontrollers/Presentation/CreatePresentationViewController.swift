@@ -56,7 +56,7 @@ class CreatePresentationViewController: UIViewController {
             ]
             
             if JSONSerialization.isValidJSONObject(JSONObject) {
-                let request = Server.postRequestParseJSONSendToken(Server.url + Server.instructions + "\(self.instruction.id)" + Server.presentations, JSONObject: JSONObject as AnyObject)
+                let request = Server.postRequestParseJSONSendToken(Server.url + Server.instructions + "\(self.instruction.id)" + Server.presentations, JSONObject as AnyObject)
 
                 let task = URLSession.shared.dataTask(with: request, completionHandler: {
                     data, response, error in
@@ -92,7 +92,7 @@ class CreatePresentationViewController: UIViewController {
         let editAction: UIAlertAction = UIAlertAction(title: StringUtil.edit, style: .destructive, handler: nil)
         
         let cancelAction: UIAlertAction = UIAlertAction(title: StringUtil.cancel, style: .cancel) { action -> Void in
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController!.popViewController(animated: true)
         }
         
         myAlert.addAction(okAction)
@@ -110,7 +110,7 @@ class CreatePresentationViewController: UIViewController {
         }
         
         let cancelAction: UIAlertAction = UIAlertAction(title: StringUtil.cancel, style: .cancel) { action -> Void in
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController!.popViewController(animated: true)
         }
         
         myAlert.addAction(okAction)

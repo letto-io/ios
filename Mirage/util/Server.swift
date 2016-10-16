@@ -42,7 +42,7 @@ class Server {
     
     static var token = String()
     
-    static func getRequestNew(url: String) -> URLRequest {
+    static func getRequestNew(_ url: String) -> URLRequest {
         let request: NSMutableURLRequest = NSMutableURLRequest()
         let url = url
         
@@ -55,7 +55,7 @@ class Server {
         return request as URLRequest
     }
     
-    static func getRequestMaterial(_ url: String) -> URLRequest {
+    static func getRequestDownloadMaterial(_ url: String) -> URLRequest {
         let request: NSMutableURLRequest = NSMutableURLRequest()
         let urlPath = url
         request.url = URL(string: urlPath)
@@ -66,7 +66,7 @@ class Server {
         return request as URLRequest
     }
     
-    static func postRequestParseJSONSendToken(_ url: String, JSONObject: AnyObject) -> URLRequest {
+    static func postRequestParseJSONSendToken(_ url: String, _ JSONObject: AnyObject) -> URLRequest {
         let request: NSMutableURLRequest = NSMutableURLRequest()
         let url = url
         
@@ -80,7 +80,7 @@ class Server {
         return request as URLRequest
     }
     
-    static func postRequestParseJSON(_ url: String, JSONObject: AnyObject) -> URLRequest {
+    static func postRequestParseJSON(_ url: String, _ JSONObject: AnyObject) -> URLRequest {
         let request: NSMutableURLRequest = NSMutableURLRequest()
         let url = url
         
@@ -184,7 +184,7 @@ class Server {
 //        return request
 //    }
     
-    static func uploadRequestVideoMP4(_ url: String, fname: String, videoData: Data) -> NSMutableURLRequest{
+    static func uploadRequestVideoMP4(_ url: String, _ fname: String, _ videoData: Data) -> NSMutableURLRequest{
         let request: NSMutableURLRequest = NSMutableURLRequest()
         let urlPath = url
         
@@ -236,7 +236,7 @@ class Server {
 //        return request
 //    }
     
-    static func uploadRequestAudiom4a(_ url: String, fname: String, audioRecorder: Data) -> NSMutableURLRequest{
+    static func uploadRequestAudiom4a(_ url: String, _ fname: String, _ audioRecorder: Data) -> NSMutableURLRequest{
         let request: NSMutableURLRequest = NSMutableURLRequest()
         let urlPath = url
         

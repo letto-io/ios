@@ -34,11 +34,11 @@ class StringUtil {
     
     //nibNames cell
     static let cell = "cell"
-    static let InstructionCell = "InstructionCell"
-    static let PresentationCell = "PresentationCell"
-    static let QuestionCell = "QuestionCell"
+    static let InstructionTableViewCell = "InstructionTableViewCell"
+    static let PresentationTableViewCell = "PresentationTableViewCell"
+    static let QuestionTableViewCell = "QuestionTableViewCell"
     static let TextAnswerTableViewCell = "TextAnswerTableViewCell"
-    static let AnswerCell = "AnswerCell"
+    static let AnswerTableViewCell = "AnswerTableViewCell"
     static let MaterialTableViewCell = "MaterialTableViewCell"
     static let MenuHeaderTableViewCell = "MenuHeaderTableViewCell"
     
@@ -119,7 +119,7 @@ class StringUtil {
         static let QuestionViewController = "QuestionViewController"
         static let OpenQuestionViewController = "OpenQuestionViewController"
         static let ClosedQuestionViewController = "ClosedQuestionViewController"
-        static let rankingDoubtViewController = "RankingDoubtViewController"
+        static let RankingQuestionViewController = "RankingQuestionViewController"
         static let msgNoDoubt = "Sem dúvidas na apresentação"
         static let answers = "answers"
         static let accepted = "accepted"
@@ -206,6 +206,10 @@ class StringUtil {
     static let mime = "mime"
     static let uploaded_at = "uploaded_at"
     static let url = "url"
+    static let key = "key"
+    static let answer = "answer"
+    static let materials = "materials"
+    static let applicationDOCX = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
         
     
     

@@ -24,13 +24,13 @@ class CreateQuestionViewController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.title = StringUtil.newQuestionTitle
         
-        let saveDoubtButton = UIBarButtonItem(image: ImageUtil.imageSaveButton, style: UIBarButtonItemStyle.plain, target: self, action: #selector(CreateQuestionViewController.saveNewDoubt))
+        let saveDoubtButton = UIBarButtonItem(image: ImageUtil.imageSaveButton, style: UIBarButtonItemStyle.plain, target: self, action: #selector(CreateQuestionViewController.saveNewQuestion))
         self.navigationItem.setRightBarButton(saveDoubtButton, animated: true)
         self.anonymousButton.setImage(ImageUtil.imageCheckBoxButtonWhite, for: UIControlState())
         self.anonymousButton.tintColor = UIColor.gray
     }
     
-    func saveNewDoubt() {
+    func saveNewQuestion() {
         // Compose a query string
         let text = questionTextView.text!
         let anonymous = isChecked
@@ -39,11 +39,11 @@ class CreateQuestionViewController: UIViewController {
             self.present(DefaultViewController.alertMessage(StringUtil.msgQuestionTextRequired), animated: true, completion: nil)
             return
         } else {
-            alertMessageSaveNewDoubt(StringUtil.msgNewQuestionConfirm, text: text, anonymous: anonymous)
+            alertMessageSaveNewQuestion(StringUtil.msgNewQuestionConfirm, text: text, anonymous: anonymous)
         }
     }
     
-    func alertMessageSaveNewDoubt(_ userMessage: String, text: String, anonymous: Bool) {
+    func alertMessageSaveNewQuestion(_ userMessage: String, text: String, anonymous: Bool) {
         let myAlert = UIAlertController(title: text, message: userMessage, preferredStyle: UIAlertControllerStyle.alert)
         
         let okAction: UIAlertAction = UIAlertAction(title: StringUtil.confirm, style: .destructive) { action -> Void in
@@ -53,7 +53,7 @@ class CreateQuestionViewController: UIViewController {
             ]
             
             if JSONSerialization.isValidJSONObject(JSONObject) {
-                let request = Server.postRequestParseJSONSendToken(Server.url + Server.presentations + "\(self.presentation.id)" + Server.questions, JSONObject: JSONObject as AnyObject)
+                let request = Server.postRequestParseJSONSendToken(Server.url + Server.presentations + "\(self.presentation.id)" + Server.questions, JSONObject as AnyObject)
                 
                 let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
                     if error != nil {
@@ -137,7 +137,7 @@ class CreateQuestionViewController: UIViewController {
     var delegate:AddNewDoubtDelegate?
     init(delegate:AddNewDoubtDelegate) {
         self.delegate = delegate
-        super.init(nibName: "CreateQuestionViewController", bundle: nil)
+        super.init(nibName: StringUtil.CreateQuestionViewController, bundle: nil)
     }
     
     required init(coder aDecoder: NSCoder) {

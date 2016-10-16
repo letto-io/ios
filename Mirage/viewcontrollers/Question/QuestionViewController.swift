@@ -22,26 +22,27 @@ class QuestionViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        getDoubt()
-        DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.QuestionCell, view: view)
+        getQuestion()
+        tableView = DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.QuestionTableViewCell, view: view)
         
         refreshControl = UIRefreshControl()
-        DefaultViewController.refreshControl(refreshControl, tableView: tableView)
+        refreshControl = DefaultViewController.refreshControl(refreshControl, tableView: tableView)
         refreshControl.addTarget(self, action: #selector(QuestionViewController.refresh), for: UIControlEvents.valueChanged)
+        refreshControl.beginRefreshing()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        getDoubt()
+        getQuestion()
     }
 
     // pull to refresh
     func refresh() {
-        getDoubt()
+        getQuestion()
         refreshControl.endRefreshing()
     }
     
-   func getDoubt() {
-        let request = Server.getRequestNew(url: Server.url + Server.presentations + "\(presentation.id)" + Server.questions)
+    func getQuestion() {
+        let request = Server.getRequestNew(Server.url + Server.presentations + "\(presentation.id)" + Server.questions)
             
         let task = URLSession.shared.dataTask(with: request) {
             data, response, error in
@@ -57,12 +58,11 @@ class QuestionViewController: UIViewController, UITableViewDelegate, UITableView
 
                 DispatchQueue.main.async(execute: {
                     self.tableView.reloadData()
-                    
+                    self.refreshControl.endRefreshing()
                 })
             }
         }
         task.resume()
-    
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -70,9 +70,9 @@ class QuestionViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! QuestionCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! QuestionTableViewCell
         
-        let question = questions[ (indexPath as NSIndexPath).row ]
+        let question = questions[ indexPath.row ]
         
         if question.anonymous == false {
             cell.nameLabel.text = question.person.name
@@ -102,7 +102,7 @@ class QuestionViewController: UIViewController, UITableViewDelegate, UITableView
         }
         
         //passagem de id para url de like na dúvida
-        cell.likeButton.tag = questions[ (indexPath as NSIndexPath).row ].id
+        cell.likeButton.tag = questions[ indexPath.row ].id
         
         if question.my_vote == 0 {
             cell.likeButton.addTarget(self, action: #selector(QuestionViewController.likeButtonPressed), for: .touchUpInside)
@@ -116,7 +116,7 @@ class QuestionViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        question = questions[ (indexPath as NSIndexPath).row ]
+        question = questions[ indexPath.row ]
         
         let answer = AnswersTabBarViewController()
         answer.instruction = instruction
@@ -141,7 +141,7 @@ class QuestionViewController: UIViewController, UITableViewDelegate, UITableView
                         })
                     } else if httpResponse.statusCode == 200 {
                         DispatchQueue.main.async(execute: {
-                            self.getDoubt()
+                            self.getQuestion()
                         })
                     }
                 }

@@ -47,7 +47,7 @@ class ViewController: ChildViewController, UITextFieldDelegate {
         ]
         
         if JSONSerialization.isValidJSONObject(JSONObject) {
-            let request  = Server.postRequestParseJSON(Server.url + Server.session, JSONObject: JSONObject as AnyObject)
+            let request  = Server.postRequestParseJSON(Server.url + Server.session, JSONObject as AnyObject)
 
             let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
                 if error != nil {

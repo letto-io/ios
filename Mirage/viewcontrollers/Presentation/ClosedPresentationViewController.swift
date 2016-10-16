@@ -22,10 +22,10 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
         tableView.delegate = self
         tableView.dataSource = self
         getPresentation()
-        DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.PresentationCell, view: view)
+        tableView = DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.PresentationTableViewCell, view: view)
         
         refreshControl = UIRefreshControl()
-        DefaultViewController.refreshControl(refreshControl, tableView: tableView)
+        refreshControl = DefaultViewController.refreshControl(refreshControl, tableView: tableView)
         refreshControl.addTarget(self, action: #selector(ClosedPresentationViewController.refresh), for: UIControlEvents.valueChanged)
     }
     
@@ -40,7 +40,7 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
     }
     
     func getPresentation() {
-        let request = Server.getRequestNew(url: Server.url + Server.instructions + "\(instruction.id)" + Server.presentations)
+        let request = Server.getRequestNew(Server.url + Server.instructions + "\(instruction.id)" + Server.presentations)
         
         let task = URLSession.shared.dataTask(with: request, completionHandler: {
             data, response, error in
@@ -80,8 +80,8 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! PresentationCell
-        let present = closedPresentations[ (indexPath as NSIndexPath).row ]
+        let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! PresentationTableViewCell
+        let present = closedPresentations[ indexPath.row ]
         
         cell.subjectLabel.text = present.subject
         cell.dateLabel.text = DateUtil.dateAndHour(present.created_at)
@@ -90,7 +90,7 @@ class ClosedPresentationViewController: UIViewController, UITableViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presentation = closedPresentations[ (indexPath as NSIndexPath).row ]
+        presentation = closedPresentations[ indexPath.row ]
         
         let questionTabBar = QuestionsTabBarViewController()
         questionTabBar.instruction = instruction

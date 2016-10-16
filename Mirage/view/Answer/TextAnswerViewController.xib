@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TextDoubtReponseViewController" customModule="Mirage" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TextAnswerViewController" customModule="Mirage" customModuleProvider="target">
             <connections>
                 <outlet property="tableView" destination="em5-5y-D0g" id="L7S-90-SOG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -17,22 +18,20 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="100" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="em5-5y-D0g">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="421"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="i5M-Pr-FkT" id="2qV-Hu-4HJ"/>
                         <outlet property="delegate" destination="i5M-Pr-FkT" id="PTp-Zv-F6l"/>
                     </connections>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="em5-5y-D0g" secondAttribute="trailing" id="7SI-Js-cmH"/>
                 <constraint firstItem="em5-5y-D0g" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="BII-Eo-ZRg"/>
                 <constraint firstItem="em5-5y-D0g" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="c98-22-aJM"/>
                 <constraint firstAttribute="bottom" secondItem="em5-5y-D0g" secondAttribute="bottom" constant="59" id="dRX-gs-5JI"/>
             </constraints>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="907.5" y="284.5"/>
         </view>
     </objects>

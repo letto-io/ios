@@ -7,90 +7,136 @@
 //
 
 import UIKit
+import AVKit
+import MediaPlayer
+import AVFoundation
+import MobileCoreServices
 
-class AudioAnswerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AudioAnswerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AVAudioPlayerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
     var instruction = Instruction()
     var presentation = Presentation()
     var question = Question()
-    var audioContributions = Array<Contributions>()
-    var contributions = Array<Contributions>()
-    
-    func tableViews() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        getDoubtResponse()
-        tableView.reloadData()
-    }
+    var materialAnswers = Array<Material>()
+    var audioMaterialAnswers = Array<Material>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableViews()
-        DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.AnswerCell, view: view)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView = DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.AnswerTableViewCell, view: view)
         
         refreshControl = UIRefreshControl()
-        DefaultViewController.refreshControl(refreshControl, tableView: tableView)
+        refreshControl = DefaultViewController.refreshControl(refreshControl, tableView: tableView)
         refreshControl.addTarget(self, action: #selector(AudioAnswerViewController.refresh), for: UIControlEvents.valueChanged)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        tableViews()
+        getAnswer()
     }
     
     // pull to refresh
     func refresh() {
-        getDoubtResponse()
+        getAnswer()
         refreshControl.endRefreshing()
-        tableView.reloadData()
     }
     
-    func getDoubtResponse() {
-        let request = Server.getRequestNew(url: Server.url + Server.presentations + "\(presentation.id)" + Server.materials)
+    func getAnswer() {
+        let request = Server.getRequestNew(Server.url + Server.questions + "\(question.id)" + Server.answers)
         
-        let task = URLSession.shared.dataTask(with: request) {
+        let task = URLSession.shared.dataTask(with: request, completionHandler: {
             data, response, error in
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                let material = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! NSArray
+                let answerMaterial = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
                 
-                //print(material)
+                self.materialAnswers = Material.iterateJSONArray(answerMaterial)
                 
-//                dispatch_async(dispatch_get_main_queue(), {
-//                    self.tableView.reloadData()
-//                    
-//                })
+                self.audioMaterialAnswers.removeAll()
+                
+                var auxMaterial = Array<Material>()
+                
+                for i in 0 ..< self.materialAnswers.count {
+                    var j = 0
+                    
+                    if self.materialAnswers[i].mime.contains(StringUtil.audio) {
+                        auxMaterial.insert(self.materialAnswers[i], at: j)
+                        j += 1
+                    }
+                }
+                self.audioMaterialAnswers = auxMaterial
+                
+                DispatchQueue.main.async(execute: {
+                    self.tableView.reloadData()
+                })
             }
-        }
+        })
         task.resume()
+    }
+    
+    func downloadAudio(_ idMaterial: Int) {
+        let request = Server.getRequestNew(Server.url + Server.materials + "\(idMaterial)")
         
-        audioContributions.removeAll()
-        
-        var auxContributions = Array<Contributions>()
-        
-        for i in 0 ..< contributions.count {
-            var j = 0
-            
-//            if contributions[i].mcmaterial.mime.containsString(StringUtil.audio) {
-//                auxContributions.insert(contributions[i], atIndex: j)
-//                j += 1
-//            }
-        }
-        audioContributions = auxContributions
+        let task = URLSession.shared.dataTask(with: request, completionHandler: {
+            data, response, error in
+            if (error != nil) {
+                print(error!.localizedDescription)
+            } else {
+                let pdfMaterial = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+                let url = pdfMaterial.value(forKey: StringUtil.url) as! String
+                let material  = pdfMaterial.value(forKey: StringUtil.material) as! NSDictionary
+                let name = material.value(forKey: StringUtil.name) as! String
+                let mime = material.value(forKey: StringUtil.mime) as! String
+                
+                let request = Server.getRequestDownloadMaterial(url)
+                
+                let task = URLSession.shared.dataTask(with: request) {
+                    data, response, error in
+                    if (error != nil) {
+                        print(error!.localizedDescription)
+                    } else {
+                        DispatchQueue.main.async(execute: {
+                            DefaultViewController.saveDocumentDirectory(name, data!)
+                            
+                            if mime.contains(StringUtil.audio) {
+                                DefaultViewController.pushVideoPlayerViewController(name, mime, self.navigationController!)
+                            }
+                        })
+                    }
+                }
+                task.resume()
+            }
+        })
+        task.resume()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return audioContributions.count
+        return audioMaterialAnswers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! AnswerTableViewCell
         
+        let material = audioMaterialAnswers[ indexPath.row ]
         
+        cell.nameLabel.text = material.name
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let audio = audioMaterialAnswers[ indexPath.row ]
+        
+        let fileManager = FileManager.default
+        let dataPath = (DefaultViewController.getDirectoryPath() as NSString).appendingPathComponent(audio.name)
+        if fileManager.fileExists(atPath: dataPath) {
+            DefaultViewController.pushVideoPlayerViewController(audio.name, audio.mime, self.navigationController!)
+        } else {
+            downloadAudio(audio.id)
+        }
     }
     
     init() {

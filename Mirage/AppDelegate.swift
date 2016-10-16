@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        // Set navigation bar tint / background colour
+        // Set navigation bar tint / background color
         UINavigationBar.appearance().barTintColor = UIColor(hue: 0.5167, saturation: 1, brightness: 0.75, alpha: 1.0) /* #00acc1 */
         UINavigationBar.appearance().tintColor = UIColor.white
         

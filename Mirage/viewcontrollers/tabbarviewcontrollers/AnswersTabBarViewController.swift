@@ -229,8 +229,8 @@ class AnswersTabBarViewController: UITabBarController, UITabBarControllerDelegat
 //    func playVideo(sender: AnyObject) {
 //        // Find the video in the app's document directory
 //        let paths = NSSearchPathForDirectoriesInDomains(
-//            NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-//        let documentsDirectory: AnyObject = paths[0]
+//            FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+//        let documentsDirectory: AnyObject = paths[0] as AnyObject
 //        let dataPath = documentsDirectory.stringByAppendingPathComponent(saveFileName)
 //        let videoAsset = (AVAsset(URL: NSURL(fileURLWithPath: dataPath)))
 //        let playerItem = AVPlayerItem(asset: videoAsset)
@@ -240,7 +240,7 @@ class AnswersTabBarViewController: UITabBarController, UITabBarControllerDelegat
 //        let playerViewController = AVPlayerViewController()
 //        playerViewController.player = player
 //        
-//        self.presentViewController(playerViewController, animated: true) {
+//        self.present(playerViewController, animated: true) {
 //            playerViewController.player!.play()
 //        }
 //    }
@@ -312,7 +312,7 @@ class AnswersTabBarViewController: UITabBarController, UITabBarControllerDelegat
 //    }
     
     func uploadVideoRequest(_ fname: String) {
-        let request  = Server.uploadRequestVideoMP4(Server.url+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(question.id)" + Server.contribution, fname: fname, videoData: videoData)
+        let request  = Server.uploadRequestVideoMP4(Server.url+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(question.id)" + Server.contribution, fname, videoData)
         
         //let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
          //   let dataString = NSString(data: data!, encoding: String.Encoding.utf8)
@@ -323,7 +323,7 @@ class AnswersTabBarViewController: UITabBarController, UITabBarControllerDelegat
     }
     
     func uploadAudioRequest(_ fname: String) {
-        let request  = Server.uploadRequestAudiom4a(Server.url+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(question.id)" + Server.contribution, fname: fname, audioRecorder: audioData)
+        let request  = Server.uploadRequestAudiom4a(Server.url+"\(instruction.id)" + Server.presentaion_bar + "\(presentation.id)" + Server.doubt_bar + "\(question.id)" + Server.contribution, fname, audioData)
         
         //let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
        //     let dataString = NSString(data: data!, encoding: String.Encoding.utf8)
@@ -427,6 +427,10 @@ class AnswersTabBarViewController: UITabBarController, UITabBarControllerDelegat
         myAlert.addAction(galeryContribution)
         myAlert.addAction(pictureContribution)
         myAlert.addAction(cancelAction)
+        
+//        if let popoverController = myAlert.popoverPresentationController {
+//            popoverController.barButtonItem = ""
+//        }
         
         self.present(myAlert, animated: true, completion: nil)
     }

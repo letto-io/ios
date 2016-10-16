@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PresentationCell: UITableViewCell {
+class PresentationTableViewCell: UITableViewCell {
     
     @IBOutlet weak var subjectLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!

@@ -6,9 +6,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AttachmentAnswerViewController" customModule="Mirage" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImageViewController" customModule="Mirage" customModuleProvider="target">
             <connections>
-                <outlet property="tableView" destination="t01-8Q-9Pz" id="w0C-4b-cyH"/>
+                <outlet property="imageView" destination="Vel-Dd-QTu" id="UK0-la-uzm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,18 +17,16 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="t01-8Q-9Pz">
-                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                </tableView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vel-Dd-QTu"/>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="t01-8Q-9Pz" secondAttribute="bottom" constant="59" id="Qkz-o6-SQf"/>
-                <constraint firstAttribute="trailing" secondItem="t01-8Q-9Pz" secondAttribute="trailing" id="UrY-uu-TbC"/>
-                <constraint firstItem="t01-8Q-9Pz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="c6r-I3-aRO"/>
-                <constraint firstItem="t01-8Q-9Pz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ocg-os-mex"/>
+                <constraint firstItem="Vel-Dd-QTu" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GbO-3r-tGv"/>
+                <constraint firstAttribute="trailing" secondItem="Vel-Dd-QTu" secondAttribute="trailing" id="PHI-tM-HBu"/>
+                <constraint firstAttribute="bottom" secondItem="Vel-Dd-QTu" secondAttribute="bottom" id="Uwa-P5-rE5"/>
+                <constraint firstItem="Vel-Dd-QTu" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XNi-QY-JOp"/>
             </constraints>
-            <point key="canvasLocation" x="558" y="239"/>
+            <point key="canvasLocation" x="-241" y="-49"/>
         </view>
     </objects>
 </document>

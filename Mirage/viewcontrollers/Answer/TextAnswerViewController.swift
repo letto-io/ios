@@ -21,27 +21,26 @@ class TextAnswerViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        getAnswers()
-        tableView.reloadData()
-        DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.TextAnswerTableViewCell, view: view)
+        getAnswer()
+        tableView = DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.TextAnswerTableViewCell, view: view)
         
         refreshControl = UIRefreshControl()
-        DefaultViewController.refreshControl(refreshControl, tableView: tableView)
+        refreshControl = DefaultViewController.refreshControl(refreshControl, tableView: tableView)
         refreshControl.addTarget(self, action: #selector(TextAnswerViewController.refresh), for: UIControlEvents.valueChanged)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        getAnswers()
+        getAnswer()
     }
     
     // pull to refresh
     func refresh() {
-        getAnswers()
+        getAnswer()
         refreshControl.endRefreshing()
     }
     
-    func getAnswers() {
-        let request = Server.getRequestNew(url: Server.url + Server.questions + "\(question.id)" + Server.answers)
+    func getAnswer() {
+        let request = Server.getRequestNew(Server.url + Server.questions + "\(question.id)" + Server.answers)
         
         let task = URLSession.shared.dataTask(with: request, completionHandler: {
             data, response, error in
@@ -54,7 +53,6 @@ class TextAnswerViewController: UIViewController, UITableViewDelegate, UITableVi
                 
                 DispatchQueue.main.async(execute: {
                     self.tableView.reloadData()
-                    
                 })
             }
         }) 

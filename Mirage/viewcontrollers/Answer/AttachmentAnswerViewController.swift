@@ -8,82 +8,140 @@
 
 import UIKit
 
-class AttachmentAnswerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AttachmentAnswerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     var refreshControl: UIRefreshControl!
     var instruction = Instruction()
     var presentation = Presentation()
     var question = Question()
-    var attachmentAnswers = Array<Answer>()
+    var materialAnswers = Array<Material>()
+    var attachmentMaterialAnswers = Array<Material>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        getAnswers()
-        tableView.reloadData()
-        DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.AnswerCell, view: view)
+        getAnswer()
+        tableView = DefaultViewController.refreshTableView(tableView, cellNibName: StringUtil.AnswerTableViewCell, view: view)
         
         refreshControl = UIRefreshControl()
-        DefaultViewController.refreshControl(refreshControl, tableView: tableView)
+        refreshControl = DefaultViewController.refreshControl(refreshControl, tableView: tableView)
         refreshControl.addTarget(self, action: #selector(AttachmentAnswerViewController.refresh), for: UIControlEvents.valueChanged)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        getAnswers()
+        getAnswer()
     }
     
     // pull to refresh
     func refresh() {
-        getAnswers()
+        getAnswer()
         refreshControl.endRefreshing()
-        tableView.reloadData()
     }
     
-    func getAnswers() {
-        let request = Server.getRequestNew(url: Server.url + Server.questions + "\(question.id)" + Server.answers)
+    func getAnswer() {
+        let request = Server.getRequestNew(Server.url + Server.questions + "\(question.id)" + Server.answers)
         
         let task = URLSession.shared.dataTask(with: request, completionHandler: {
             data, response, error in
             if (error != nil) {
                 print(error!.localizedDescription)
             } else {
-                print(response)
-                let material = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.allowFragments) as! NSArray
+                let answerMaterial = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
+    
+                self.materialAnswers = Material.iterateJSONArray(answerMaterial)
                 
-                print(material)
+                self.attachmentMaterialAnswers.removeAll()
                 
+                var auxMaterial = Array<Material>()
+                
+                for i in 0 ..< self.materialAnswers.count {
+                    var j = 0
+                    
+                    if self.materialAnswers[i].mime.contains(StringUtil.image) ||
+                        self.materialAnswers[i].mime.contains(StringUtil.applicationPdf) ||
+                        self.materialAnswers[i].mime.contains(StringUtil.applicationDOCX){
+                        auxMaterial.insert(self.materialAnswers[i], at: j)
+                        j += 1
+                    }
+                }
+                self.attachmentMaterialAnswers = auxMaterial
+                
+                DispatchQueue.main.async(execute: {
+                    self.tableView.reloadData()
+                })
             }
         }) 
         task.resume()
+    }
+    
+    func downloadAttachment(_ idMaterial: Int) {
+        let request = Server.getRequestNew(Server.url + Server.materials + "\(idMaterial)")
         
-//        attachmentAnswers.removeAll()
-//        
-//        var auxContributions = Array<Contributions>()
-//        
-//        for i in 0 ..< .count {
-//            var j = 0
-//            
-//            if contributions[i].mcmaterial.mime.containsString(StringUtil.image) ||
-//                contributions[i].mcmaterial.mime.containsString(StringUtil.applicationPdf) {
-//                auxContributions.insert(contributions[i], atIndex: j)
-//                j += 1
-//            }
-//        }
-//        attachmentAnswers = auxContributions
+        let task = URLSession.shared.dataTask(with: request, completionHandler: {
+            data, response, error in
+            if (error != nil) {
+                print(error!.localizedDescription)
+            } else {
+                let pdfMaterial = try! JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSDictionary
+                let url = pdfMaterial.value(forKey: StringUtil.url) as! String
+                let material  = pdfMaterial.value(forKey: StringUtil.material) as! NSDictionary
+                let name = material.value(forKey: StringUtil.name) as! String
+                let mime = material.value(forKey: StringUtil.mime) as! String
+                
+                let request = Server.getRequestDownloadMaterial(url)
+                
+                let task = URLSession.shared.dataTask(with: request) {
+                    data, response, error in
+                    if (error != nil) {
+                        print(error!.localizedDescription)
+                    } else {
+                        DispatchQueue.main.async(execute: {
+                            DefaultViewController.saveDocumentDirectory(name, data!)
+                            
+                            if mime.contains(StringUtil.image) {
+                                DefaultViewController.pushImageViewController(name, self.navigationController!)
+                            } else if mime.contains(StringUtil.applicationPdf) {
+                                DefaultViewController.pushPDFViewController(name, self.navigationController!)
+                            }
+                        })
+                    }
+                }
+                task.resume()
+            }
+        })
+        task.resume()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return attachmentAnswers.count
+        return attachmentMaterialAnswers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: StringUtil.cell, for: indexPath) as! AnswerTableViewCell
         
+        let material = attachmentMaterialAnswers[ indexPath.row ]
         
+        cell.nameLabel.text = material.name
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let attachment = attachmentMaterialAnswers[ indexPath.row ]
+        
+        let fileManager = FileManager.default
+        let dataPath = (DefaultViewController.getDirectoryPath() as NSString).appendingPathComponent(attachment.name)
+        if fileManager.fileExists(atPath: dataPath){
+            if attachment.mime.contains(StringUtil.image) {
+                DefaultViewController.pushImageViewController(attachment.name, self.navigationController!)
+            } else if attachment.mime.contains(StringUtil.applicationPdf) {
+                DefaultViewController.pushPDFViewController(attachment.name, self.navigationController!)
+            }
+        } else {
+            downloadAttachment(attachment.id)
+        }
     }
     
     init() {

@@ -41,7 +41,7 @@ class BaseViewController: UIViewController, SlideMenuDelegate {
         }
     }
     
-    func addSlideMenuButton(){
+    func addSlideMenuButton() {
         
         let navigationBarHeight: CGFloat = self.navigationController!.navigationBar.frame.height
         let btnShowMenu = ZFRippleButton()
@@ -70,9 +70,8 @@ class BaseViewController: UIViewController, SlideMenuDelegate {
         return defaultMenuImage;
     }
     
-    func onSlideMenuButtonPressed(_ sender : UIButton){
-        if (sender.tag == 10)
-        {
+    func onSlideMenuButtonPressed(_ sender : UIButton) {
+        if (sender.tag == 10) {
             // Menu is already displayed, no need to display it twice, otherwise we hide the menu
             sender.tag = 0;
             
@@ -100,7 +99,7 @@ class BaseViewController: UIViewController, SlideMenuDelegate {
     }
     
     //MARK: Functions for Container
-    func transitionBetweenTwoViews(_ subViewNew: UIViewController){
+    func transitionBetweenTwoViews(_ subViewNew: UIViewController) {
         
         //Add new view
         addChildViewController(subViewNew)
@@ -121,7 +120,7 @@ class BaseViewController: UIViewController, SlideMenuDelegate {
         print("After Remove: \(self.childViewControllers.description)")
     }
     
-    func createContainerView(){
+    func createContainerView() {
         //Create View
         let containerViews = UIView()
         containerViews.translatesAutoresizingMaskIntoConstraints = false
